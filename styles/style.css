@@ -1,0 +1,75 @@
+/*******************************************TAG SELECTORS**************************************/
+body{
+    background-color: #E9F8F9;
+    margin:0;
+}
+header{
+    background-color: #C0EEF2;
+    height:100px;
+}
+h1{
+    color: #181823;
+    position:absolute;
+    left:40%;
+}
+footer{
+    background-color: #537FE7;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+iframe{
+    height:540px;
+    width:720px;
+}
+nav{
+    background-color: #181823;
+    color:white;
+    height: 30px;
+    position: relative;
+}
+transcript{
+    position: absolute;
+    top:5px;
+    left:10px;
+}
+cast{
+    position: absolute;
+    top:5px;
+    left:340px;
+}
+awards{
+    position: absolute;
+    top:5px;
+    left:670px;
+}
+adaptation{
+    position: absolute;
+    top:5px;
+    left:1000px;
+}
+reviews{
+    position: absolute;
+    top:5px;
+    left:1330px;
+}
+
+
+
+
+
+
+
+
+/*******************************************CLASS SELECTORS**************************************/
+
+
+
+
+
+
+
+
+
+/*******************************************ID SELECTORS**************************************/
