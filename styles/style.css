@@ -1,11 +1,16 @@
 /*******************************************TAG SELECTORS**************************************/
+:root
+{
+    --main-color: #F6F4F3;
+    --secondary-color: #00487C;
+}
+
 body{
-    background-color: #E9F8F9;
+    background-color: var(--main-color);
     margin:0;
 }
 header{
-    background-color: #C0EEF2;
-    height:100px;
+    background-color: var(--secondary-color);
 }
 h1{
     color: #181823;
@@ -22,12 +27,6 @@ footer{
 iframe{
     height:540px;
     width:720px;
-}
-nav{
-    background-color: #181823;
-    color:white;
-    height: 30px;
-    position: relative;
 }
 transcript{
     position: absolute;
@@ -62,8 +61,38 @@ reviews{
 
 
 
+
 /*******************************************CLASS SELECTORS**************************************/
 
+.bold
+{
+    font-weight: bold;
+}
+
+.main-header
+{
+    background-color: var(--secondary-color);
+    padding-top: 30px;
+    color: var(--main-color);
+    text-align: center;
+    font-size: 128;
+    font-weight: bold;
+}
+.sub-header
+{
+    color: var(--main-color);
+}
+
+.navbar
+{
+    text-align: center;
+}
+
+.nav-item
+{
+    color: var(--main-color);
+    margin-left: 5px;
+}
 
 
 
