@@ -10,7 +10,8 @@ header{
 h1{
     color: #181823;
     position:absolute;
-    left:40%;
+    left:50vw;
+    transform: translateX(-50%);
 }
 footer{
     background-color: #537FE7;
@@ -37,27 +38,32 @@ a{
 transcript{
     position: absolute;
     top:5px;
-    left:10px;
+    left:10vw;
+    transform: translateX(-50%);
 }
 cast{
     position: absolute;
     top:5px;
-    left:340px;
+    left:30vw;
+    transform: translateX(-50%);
 }
 awards{
     position: absolute;
     top:5px;
-    left:670px;
+    left:50vw;
+    transform: translateX(-50%);
 }
 adaptation{
     position: absolute;
     top:5px;
-    left:1000px;
+    left:70vw;
+    transform: translateX(-50%);
 }
 reviews{
     position: absolute;
     top:5px;
-    left:1330px;
+    left:90vw;
+    transform: translateX(-50%);
 }
 
 
