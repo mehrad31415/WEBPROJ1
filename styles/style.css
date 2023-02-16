@@ -7,12 +7,6 @@ header{
     background-color: #C0EEF2;
     height:100px;
 }
-h1{
-    color: #181823;
-    position:absolute;
-    left:50vw;
-    transform: translateX(-50%);
-}
 footer{
     background-color: #537FE7;
     height: 100px;
@@ -30,9 +24,32 @@ nav{
     height: 30px;
     position: relative;
 }
+article{
+    color: #181823;
+    position:absolute;
+    border-style: solid;
+    width:55vw;
+    left:30vw;
+    transform: translateX(-50%);
+}
+section{
+    width: 100%;
+}
 a{
     color:white;
     text-decoration: none;
+}
+h1{
+    color: #181823;
+    position:absolute;
+    left:50vw;
+    transform: translateX(-50%);
+}
+h2{
+    color: #181823;
+    position:relative;
+    left:10%;
+    padding:1% 
 }
 
 transcript{
