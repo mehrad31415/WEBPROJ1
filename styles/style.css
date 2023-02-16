@@ -29,6 +29,11 @@ nav{
     height: 30px;
     position: relative;
 }
+a{
+    color:white;
+    text-decoration: none;
+}
+
 transcript{
     position: absolute;
     top:5px;
