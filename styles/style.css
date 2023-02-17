@@ -54,6 +54,11 @@ a{
     color:white;
     text-decoration: none;
 }
+intext_a{
+    color: #181823;
+    text-decoration: none;
+}
+
 h1{
     color: #181823;
     position:absolute;
@@ -72,42 +77,13 @@ h3{
     left:7%;
     padding:0%;
 }
+table, th, td{
+    
+    text-align: center;
+    border: 4px solid black;
+    border-collapse: collapse;
 
-transcript{
-    position: absolute;
-    top:5px;
-    left:10vw;
-    transform: translateX(-50%);
 }
-cast{
-    position: absolute;
-    top:5px;
-    left:30vw;
-    transform: translateX(-50%);
-}
-awards{
-    position: absolute;
-    top:5px;
-    left:50vw;
-    transform: translateX(-50%);
-}
-adaptation{
-    position: absolute;
-    top:5px;
-    left:70vw;
-    transform: translateX(-50%);
-}
-reviews{
-    position: absolute;
-    top:5px;
-    left:90vw;
-    transform: translateX(-50%);
-}
-
-
-
-
-
 
 
 
@@ -122,3 +98,33 @@ reviews{
 
 
 /*******************************************ID SELECTORS**************************************/
+#transcript{
+    position: absolute;
+    top:5px;
+    left:10vw;
+    transform: translateX(-50%);
+}
+#cast{
+    position: absolute;
+    top:5px;
+    left:30vw;
+    transform: translateX(-50%);
+}
+#awards{
+    position: absolute;
+    top:5px;
+    left:50vw;
+    transform: translateX(-50%);
+}
+#adaptation{
+    position: absolute;
+    top:5px;
+    left:70vw;
+    transform: translateX(-50%);
+}
+#reviews{
+    position: absolute;
+    top:5px;
+    left:90vw;
+    transform: translateX(-50%);
+}
