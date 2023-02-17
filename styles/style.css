@@ -49,6 +49,8 @@ article{
 }
 section{
     width: 100%;
+    text-align: justify;
+    text-justify: inter-word;
 }
 a{
     color:white;
@@ -63,7 +65,10 @@ h1{
     color: #181823;
     position:absolute;
     left:50vw;
-    transform: translateX(-50%);
+    transform: translate(-50%, -30%);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3em;
+    
 }
 h2{
     color: #181823;
@@ -78,12 +83,27 @@ h3{
     padding:0%;
 }
 table, th, td{
-    
     text-align: center;
     border: 4px solid black;
     border-collapse: collapse;
-
+    margin-bottom: 50px;
 }
+
+/* Image zoom effect */
+
+.img-hover-zoom {
+    
+    height: 100px;
+    overflow: hidden; 
+  }
+  
+  .img-hover-zoom img {
+    transition: transform .5s ease;
+  }
+  
+  .img-hover-zoom:hover img {
+    transform: scale(1.5);
+  }
 
 
 
