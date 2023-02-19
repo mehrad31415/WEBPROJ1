@@ -122,6 +122,15 @@ table, th, td{
     transform: scale(1.5);
   }
 
+/* cell colour */
+
+.tablenominated {
+    background-color: #ffcccc ;
+}
+.tablewon{
+background-color: #ccffb3;
+}
+
 
 
 /*******************************************CLASS SELECTORS**************************************/
