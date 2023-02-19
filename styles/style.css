@@ -1,181 +1,148 @@
 /*******************************************TAG SELECTORS**************************************/
-body{
-    background-color: #E9F8F9;
-    margin:0;
-}
-header{
-    background-color: #C0EEF2;
-    height:100px;
-}
-.footer{
+body {background-color: #E9F8F9; margin: 0;}
+
+header {background-color: #C0EEF2; height: 100px;}
+
+footer {
     position: fixed;
     padding: 10px 10px 0px 10px;
     bottom: 0;
     width: 100%;
     height: 40px;
     background-color: #537FE7;
- 
-}
-iframe{
-    height:540px;
-    width:50%;
-}
-.pdf_view{
-    width: 100%;
-    height: 1000px;
-    border-style: solid;
 }
 
-nav{
+iframe {height: 540px; width: 50%;}
+
+nav {
     background-color: #181823;
-    color:white;
+    color: white;
     height: 30px;
     position: relative;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-article{
+
+article {
     color: #181823;
-    position:absolute;
-    width:55vw;
-    left:30vw;
+    position: absolute;
+    width: 55vw;
+    left: 30vw;
     transform: translateX(-50%);
     padding-bottom: 50px;
 }
-.article_fullwidth{
-    color: #181823;
-    position:absolute;
-    width: 80vw;
-    left:50vw;
-    transform: translateX(-50%);
-    padding-bottom: 50px;
-}
-section{
+
+section {
     width: 100%;
     text-align: justify;
     text-justify: inter-word;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-aside{
+
+aside {
     color: #181823;
-    position:absolute;
-    width:37vw;
-    right:21vw;
+    position: absolute;
+    width: 37vw;
+    right: 21vw;
     transform: translateX(50%);
     padding-bottom: 50px;
 }
-a{
-    color:white;
-    text-decoration: none;
-}
-intext_a{
-    color: #181823;
-    text-decoration: none;
-}
 
-a:hover{
-    font-size: 1.1em;
-}
+a {color: white; text-decoration: none;}
 
-h1{
+a:hover {font-size: 1.1em;}
+
+h1 {
     color: #181823;
-    position:absolute;
-    left:50vw;
+    position: absolute;
+    left: 50vw;
     transform: translate(-50%, -30%);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 3em;
-    
 }
-h2{
+
+h2 {
     color: #181823;
-    position:relative;
-    left:3%;
-    padding:1%; 
+    position: relative;
+    left: 3%;
+    padding: 1%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-h3{
+
+h3 {
     color: #181823;
-    position:relative;
-    left:7%;
-    padding:0%;
+    position: relative;
+    left: 7%;
+    padding: 0%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-table, th, td{
+
+table, th, td {
     text-align: center;
     border: 4px solid black;
     border-collapse: collapse;
     margin-bottom: 50px;
 }
-
-/* Image zoom effect */
-
-.img-hover-zoom {
-    
-    height: 100px;
-    overflow: hidden; 
-  }
-  
-  .img-hover-zoom img {
-    transition: transform .5s ease;
-  }
-  
-  .img-hover-zoom:hover img {
-    transform: scale(1.5);
-  }
-
-/* cell colour */
-
-.tablenominated {
-    background-color: #ffcccc ;
-}
-.tablewon{
-background-color: #ccffb3;
-}
-
-
-
 /*******************************************CLASS SELECTORS**************************************/
+.pdf_view {
+    width: 100%;
+    height: 1000px;
+    border-style: solid;
+}
 
+.tablenominated {background-color: #ffcccc;}
 
+.tablewon {background-color: #ccffb3;}
 
+.img-hover-zoom {height: 100px; overflow: hidden;}
 
+.img-hover-zoom img {transition: transform .5s ease;}
 
+.img-hover-zoom:hover img {transform: scale(1.5);}
 
+.article_fullwidth {
+    color: #181823;
+    position: absolute;
+    width: 80vw;
+    left: 50vw;
+    transform: translateX(-50%);
+    padding-bottom: 50px;
+}
 
-
-
+.style_link {color: #181823; text-decoration: none;}
 /*******************************************ID SELECTORS**************************************/
-#transcript{
+#transcript {
     position: absolute;
-    top:5px;
-    left:10vw;
+    top: 5px;
+    left: 10vw;
     transform: translateX(-50%);
 }
-#cast{
-    position: absolute;
-    top:5px;
-    left:30vw;
-    transform: translateX(-50%);
-}
-#awards{
-    position: absolute;
-    top:5px;
-    left:50vw;
-    transform: translateX(-50%);
-}
-#adaptation{
-    position: absolute;
-    top:5px;
-    left:70vw;
-    transform: translateX(-50%);
-}
-#reviews{
-    position: absolute;
-    top:5px;
-    left:90vw;
-    transform: translateX(-50%);
-}
-#trailer {
-	position: relative;
-	width: 100%;
 
+#cast {
+    position: absolute;
+    top: 5px;
+    left: 30vw;
+    transform: translateX(-50%);
 }
+
+#awards {
+    position: absolute;
+    top: 5px;
+    left: 50vw;
+    transform: translateX(-50%);
+}
+
+#adaptation {
+    position: absolute;
+    top: 5px;
+    left: 70vw;
+    transform: translateX(-50%);
+}
+
+#reviews {
+    position: absolute;
+    top: 5px;
+    left: 90vw;
+    transform: translateX(-50%);
+}
+
+#trailer {position: relative; width: 100%;}
