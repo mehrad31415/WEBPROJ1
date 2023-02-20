@@ -1,5 +1,9 @@
 /*******************************************TAG SELECTORS**************************************/
-body {background-color: #E9F8F9; margin: 0;}
+body {
+    background-color: #E9F8F9; 
+    margin: 0;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
 header {background-color: #C0EEF2; height: 100px;}
 
@@ -11,8 +15,6 @@ footer {
     height: 40px;
     background-color: #537FE7;
 }
-
-iframe {height: 540px; width: 50%;}
 
 nav {
     background-color: #181823;
@@ -145,4 +147,4 @@ table, th, td {
     transform: translateX(-50%);
 }
 
-#trailer {position: relative; width: 100%;}
+#trailer {position: relative; width: 100%; aspect-ratio: 16/9;}
