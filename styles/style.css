@@ -1,18 +1,20 @@
 /*******************************************TAG SELECTORS**************************************/
 body {
-    background-color: #E9F8F9; 
+    background-color: #E9F8F9;
     margin: 0;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-header {background-color: #C0EEF2; height: 100px;}
+header {
+    background-color: #C0EEF2;
+    height: 100px;
+}
 
 footer {
     position: fixed;
-    padding: 10px 10px 0px 10px;
+    padding: 0 5vw 0;
     bottom: 0;
     width: 100%;
-    height: 40px;
     background-color: #537FE7;
 }
 
@@ -49,9 +51,14 @@ aside {
     padding-bottom: 50px;
 }
 
-a {color: white; text-decoration: none;}
+a {
+    color: white;
+    text-decoration: none;
+}
 
-a:hover {font-size: 1.1em;}
+a:hover {
+    font-size: 1.1em;
+}
 
 h1 {
     color: #181823;
@@ -78,12 +85,22 @@ h3 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-table, th, td {
+table,
+th,
+td {
     text-align: center;
     border: 4px solid black;
     border-collapse: collapse;
     margin-bottom: 50px;
 }
+
+form{
+    padding-left: 1vw;
+}
+textarea{
+    margin: 0.5vw;
+}
+
 /*******************************************CLASS SELECTORS**************************************/
 .pdf_view {
     width: 100%;
@@ -91,15 +108,26 @@ table, th, td {
     border-style: solid;
 }
 
-.tablenominated {background-color: #ffcccc;}
+.tablenominated {
+    background-color: #ffcccc;
+}
 
-.tablewon {background-color: #ccffb3;}
+.tablewon {
+    background-color: #ccffb3;
+}
 
-.img-hover-zoom {height: 100px; overflow: hidden;}
+.img-hover-zoom {
+    height: 100px;
+    overflow: hidden;
+}
 
-.img-hover-zoom img {transition: transform .5s ease;}
+.img-hover-zoom img {
+    transition: transform .5s ease;
+}
 
-.img-hover-zoom:hover img {transform: scale(1.5);}
+.img-hover-zoom:hover img {
+    transform: scale(1.5);
+}
 
 .article_fullwidth {
     color: #181823;
@@ -110,19 +138,33 @@ table, th, td {
     padding-bottom: 50px;
 }
 
-.style_link {color: #181823; text-decoration: none;}
+.style_link {
+    color: #181823;
+    text-decoration: none;
+}
+
+.contact{
+    margin-left: 1vw;
+}
 /*******************************************ID SELECTORS**************************************/
+#main {
+    position: absolute;
+    top: 5px;
+    left: 5vw;
+    transform: translateX(-50%);
+}
+
 #transcript {
     position: absolute;
     top: 5px;
-    left: 10vw;
+    left: 20vw;
     transform: translateX(-50%);
 }
 
 #cast {
     position: absolute;
     top: 5px;
-    left: 30vw;
+    left: 35vw;
     transform: translateX(-50%);
 }
 
@@ -136,15 +178,26 @@ table, th, td {
 #adaptation {
     position: absolute;
     top: 5px;
-    left: 70vw;
+    left: 65vw;
     transform: translateX(-50%);
 }
 
 #reviews {
     position: absolute;
     top: 5px;
-    left: 90vw;
+    left: 80vw;
     transform: translateX(-50%);
 }
 
-#trailer {position: relative; width: 100%; aspect-ratio: 16/9;}
+#contact {
+    position: absolute;
+    top: 5px;
+    left: 95vw;
+    transform: translateX(-50%);
+}
+
+#trailer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+}
