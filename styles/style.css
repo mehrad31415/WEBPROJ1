@@ -1,5 +1,6 @@
 /*******************************************TAG SELECTORS**************************************/
 body {
+    position: relative;
     background-color: #E9F8F9;
     margin: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -7,28 +8,37 @@ body {
 
 header {
     background-color: #C0EEF2;
-    height: 100px;
+    height: 14vh;
+    min-width: 100%;
+    width: fit-content;
+    white-space: nowrap;
 }
 
 footer {
-    position: fixed;
-    padding: 0 5vw 0;
+    position: absolute;
     bottom: 0;
-    width: 100%;
+    padding: 0.5vh 5vw;
+    margin-top: 3px;
     background-color: #537FE7;
+    bottom: 0;
+    min-width: 100%;
+    width: fit-content;
+    white-space: nowrap;
+    height: 7rem;            /* Footer height */
+    overflow: visible;
 }
 
 nav {
     background-color: #181823;
     color: white;
     height: 30px;
-    position: relative;
+    position: sticky;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 article {
     color: #181823;
-    position: absolute;
+    position: relative;
     width: 55vw;
     left: 30vw;
     transform: translateX(-50%);
@@ -44,11 +54,12 @@ section {
 
 aside {
     color: #181823;
-    position: absolute;
     width: 37vw;
-    right: 21vw;
-    transform: translateX(50%);
+    position: relative;
+    top: 0px;
     padding-bottom: 50px;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 a {
@@ -62,9 +73,8 @@ a:hover {
 
 h1 {
     color: #181823;
-    position: absolute;
-    left: 50vw;
-    transform: translate(-50%, -30%);
+    position: relative;
+    text-align: center;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 3em;
 }
@@ -131,7 +141,7 @@ textarea{
 
 .article_fullwidth {
     color: #181823;
-    position: absolute;
+    position: relative;
     width: 80vw;
     left: 50vw;
     transform: translateX(-50%);
@@ -200,4 +210,13 @@ textarea{
     position: relative;
     width: 100%;
     aspect-ratio: 16/9;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 7rem;    /* Footer height */
 }
