@@ -1,50 +1,60 @@
 /*******************************************TAG SELECTORS**************************************/
 body {
-    position: relative;
+    clear: both;
+    position: absolute;
     background-color: #E9F8F9;
     margin: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    min-height: 100vh;
+    height: fit-content;
+    min-width: 100vw;
+    width: fit-content;
 }
 
 header {
     background-color: #C0EEF2;
     position: relative;
     top: 0;
-    height: fit-content;
     min-height: 14vh;
+    height: fit-content;
     min-width: 100%;
     width: fit-content;
     white-space: nowrap;
+
+    
 }
 
 footer {
+    clear: both;
     position: absolute;
     bottom: 0;
-    padding: 0.5vh 5vw;
+    padding-top: 0.5vh;
+    padding-bottom: 1vh;
     background-color: #537FE7;
-    bottom: 0;
     min-width: 100%;
     width: fit-content;
+    min-height: 100px;
     height: fit-content;
-    min-height: 7rem;
     overflow: visible;
+    white-space: nowrap;
 }
 
 nav {
+    position: sticky;
     background-color: #181823;
     color: white;
     height: 30px;
-    position: sticky;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 article {
-    color: #181823;
+    float: left;
     position: relative;
-    width: 55vw;
-    left: 30vw;
-    transform: translateX(-50%);
-    padding-bottom: 50px;
+    color: #181823;
+    width: 54vw;
+    left: 3vw;
+    margin-bottom: 150px;
+    height: fit-content;
 }
 
 section {
@@ -55,13 +65,17 @@ section {
 }
 
 aside {
-    color: #181823;
-    width: 37vw;
+    float: right;
     position: relative;
-    top: 0px;
+    color: #181823;
+    width: 34vw;
+    right: 4vw;
+    top: 0;
     padding-bottom: 50px;
     text-align: justify;
     text-justify: inter-word;
+
+    margin-bottom: 100px;
 }
 
 a {
@@ -74,12 +88,15 @@ a:hover {
 }
 
 h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     color: #181823;
-    top: 50%;
-    transform: translateY(-50%);
     text-align: center;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 3em;
+    width: fit-content;
+    height: fit-content;
 }
 
 h2 {
@@ -104,7 +121,6 @@ td {
     text-align: center;
     border: 4px solid black;
     border-collapse: collapse;
-    margin-bottom: 50px;
 }
 
 form{
@@ -148,7 +164,6 @@ textarea{
     width: 80vw;
     left: 50vw;
     transform: translateX(-50%);
-    padding-bottom: 50px;
 }
 
 .style_link {
@@ -159,6 +174,7 @@ textarea{
 .contact{
     margin-left: 1vw;
 }
+
 /*******************************************ID SELECTORS**************************************/
 #main {
     position: absolute;
@@ -215,11 +231,8 @@ textarea{
     aspect-ratio: 16/9;
 }
 
-#page-container {
-    position: relative;
-    min-height: 100vh;
-}
-
-#content-wrap {
-    padding-bottom: 7rem;    /* Footer height */
+#footertext{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 5vw;
 }
