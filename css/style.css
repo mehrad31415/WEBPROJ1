@@ -1,81 +1,78 @@
 /*******************************************TAG SELECTORS**************************************/
 body {
-    clear: both;
-    position: absolute;
     background-color: #E9F8F9;
-    margin: 0;
+    clear: both;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    min-height: 100vh;
     height: fit-content;
+    margin: 0;
+    min-height: 100vh;
     min-width: 100vw;
+    position: absolute;
     width: fit-content;
 }
 
 header {
     background-color: #C0EEF2;
+    height: fit-content;
+    min-height: 14vh;
+    min-width: 100%;
     position: relative;
     top: 0;
-    min-height: 14vh;
-    height: fit-content;
-    min-width: 100%;
-    width: fit-content;
     white-space: nowrap;
-
-    
+    width: fit-content;
 }
 
 footer {
-    clear: both;
-    position: absolute;
+    background-color: #5BC0F8;
     bottom: 0;
-    padding-top: 0.5vh;
-    padding-bottom: 1vh;
-    background-color: #537FE7;
-    min-width: 100%;
-    width: fit-content;
-    min-height: 100px;
+    clear: both;
     height: fit-content;
+    min-height: 100px;
+    min-width: 100%;
     overflow: visible;
+    padding-bottom: 1vh;
+    padding-top: 0.5vh;
+    position: absolute;
     white-space: nowrap;
+    width: fit-content;
 }
 
 nav {
-    position: sticky;
-    background-color: #181823;
+    background-color: #567189;
     color: white;
-    height: 30px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 30px;
+    position: sticky;
 }
 
 article {
-    float: left;
-    position: relative;
     color: #181823;
-    width: 54vw;
+    float: left;
+    height: fit-content;
     left: 3vw;
     margin-bottom: 150px;
-    height: fit-content;
+    position: relative;
+    width: 54vw;
 }
 
 section {
-    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: justify;
     text-justify: inter-word;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
 }
 
 aside {
-    float: right;
-    position: relative;
     color: #181823;
-    width: 34vw;
-    right: 4vw;
-    top: 0;
+    float: right;
+    margin-bottom: 100px;
     padding-bottom: 50px;
+    position: relative;
+    right: 4vw;
     text-align: justify;
     text-justify: inter-word;
-
-    margin-bottom: 100px;
+    top: 0;
+    width: 34vw;
 }
 
 a {
@@ -85,56 +82,69 @@ a {
 
 a:hover {
     font-size: 1.1em;
+    color: #D5CEA3;
 }
 
 h1 {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #181823;
-    text-align: center;
+    color: #0A2647;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 3em;
-    width: fit-content;
     height: fit-content;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    transform: translateX(-50%);
+    width: fit-content;
 }
 
 h2 {
     color: #181823;
-    position: relative;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     left: 3%;
     padding: 1%;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: relative;
 }
 
 h3 {
     color: #181823;
-    position: relative;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     left: 7%;
     padding: 0%;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: relative;
 }
 
 table,
 th,
 td {
-    text-align: center;
-    border: 4px solid black;
     border-collapse: collapse;
+    border: 4px solid black;
+    text-align: center;
 }
 
-form{
+form {
     padding-left: 1vw;
 }
-textarea{
+textarea {
     margin: 0.5vw;
 }
-
+hr {
+    border-color: grey;
+    border-style: none;
+    border-top-style: dotted;
+    border-width: 0.5vw;
+    width: 90%;
+}
+span{
+    position: absolute;
+    right:1vw;
+    bottom:1.5vw;
+    font-size: 1vw;
+}
 /*******************************************CLASS SELECTORS**************************************/
 .pdf_view {
-    width: 100%;
-    height: 1000px;
     border-style: solid;
+    height: 1000px;
+    width: 100%;
 }
 
 .tablenominated {
@@ -160,14 +170,15 @@ textarea{
 
 .article_fullwidth {
     color: #181823;
-    position: relative;
-    width: 80vw;
     left: 50vw;
+    position: relative;
     transform: translateX(-50%);
+    width: 80%;
+    height: 80%;
 }
 
 .style_link {
-    color: #181823;
+    color: #567189;
     text-decoration: none;
 }
 
@@ -175,64 +186,90 @@ textarea{
     margin-left: 1vw;
 }
 
+.container{
+    margin:1vw;
+    position: relative;
+    left: 2vw;
+}
+.theme{
+    margin:1vw;
+    font-size: 2vw;
+}
+.user{
+    margin:1vw;
+    font-size: 1vw;
+}
+.opinion{
+    margin:1vw;
+}
+.reviewT{
+    position: relative;
+    left:3.5vw;
+}
 /*******************************************ID SELECTORS**************************************/
 #main {
-    position: absolute;
-    top: 5px;
     left: 5vw;
+    top: 5px;
     transform: translateX(-50%);
 }
 
 #transcript {
+    left: 20vw;
     position: absolute;
     top: 5px;
-    left: 20vw;
     transform: translateX(-50%);
 }
 
 #cast {
+    left: 35vw;
     position: absolute;
     top: 5px;
-    left: 35vw;
     transform: translateX(-50%);
 }
 
 #awards {
+    left: 50vw;
     position: absolute;
     top: 5px;
-    left: 50vw;
     transform: translateX(-50%);
 }
 
 #adaptation {
+    left: 65vw;
     position: absolute;
     top: 5px;
-    left: 65vw;
     transform: translateX(-50%);
 }
 
 #reviews {
+    left: 80vw;
     position: absolute;
     top: 5px;
-    left: 80vw;
     transform: translateX(-50%);
 }
 
 #contact {
+    left: 95vw;
     position: absolute;
     top: 5px;
-    left: 95vw;
     transform: translateX(-50%);
 }
 
 #trailer {
+    aspect-ratio: 16/9;
     position: relative;
     width: 100%;
-    aspect-ratio: 16/9;
 }
 
 #footertext{
-    width: fit-content;
     height: fit-content;
     margin-left: 5vw;
+    width: fit-content;
+}
+
+#film_frame{
+    margin: 2vw;
+    position:absolute;
+    transform: rotate(-30deg);
+    width:3vw;
 }
