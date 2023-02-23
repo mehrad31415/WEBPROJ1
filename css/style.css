@@ -208,6 +208,7 @@ span{
 }
 /*******************************************ID SELECTORS**************************************/
 #main {
+    position: absolute;
     left: 5vw;
     top: 5px;
     transform: translateX(-50%);
