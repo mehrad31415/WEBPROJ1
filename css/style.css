@@ -207,48 +207,48 @@ span{
 /*******************************************ID SELECTORS**************************************/
 #main {
     position: absolute;
-    left: 5vw;
+    left: 5%;
     top: 5px;
     transform: translateX(-50%);
 }
 
 #transcript {
-    left: 20vw;
+    left: 20%;
     position: absolute;
     top: 5px;
     transform: translateX(-50%);
 }
 
 #cast {
-    left: 35vw;
+    left: 35%;
     position: absolute;
     top: 5px;
     transform: translateX(-50%);
 }
 
 #awards {
-    left: 50vw;
+    left: 50%;
     position: absolute;
     top: 5px;
     transform: translateX(-50%);
 }
 
 #adaptation {
-    left: 65vw;
+    left: 65%;
     position: absolute;
     top: 5px;
     transform: translateX(-50%);
 }
 
 #reviews {
-    left: 80vw;
+    left: 80%;
     position: absolute;
     top: 5px;
     transform: translateX(-50%);
 }
 
 #contact {
-    left: 95vw;
+    left: 95%;
     position: absolute;
     top: 5px;
     transform: translateX(-50%);
