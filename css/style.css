@@ -3,7 +3,7 @@ body {
     position: absolute;
     min-height: 100vh;
     height: fit-content;
-    min-width: 100vw;
+    min-width: 100%;
     width: fit-content;
     background-color: #E9F8F9;
     clear: both;
@@ -24,18 +24,18 @@ header {
 }
 
 footer {
+    position: relative;
     background-color: #5BC0F8;
     bottom: 0;
     clear: both;
     height: fit-content;
     min-height: 100px;
+    width: fit-content;
     min-width: 100%;
     overflow: visible;
     padding-bottom: 1vh;
     padding-top: 0.5vh;
-    position: relative;
     white-space: nowrap;
-    width: fit-content;
 }
 
 nav {
@@ -51,12 +51,15 @@ nav {
 
 article {
     position: relative;
-    left: 50vw;
+    left: 50%;
     transform: translateX(-50%);
     width: 80%;
     height: fit-content;
     margin-bottom: 50px;
     color: #181823;
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 section {
@@ -69,14 +72,13 @@ section {
 aside {
     color: #181823;
     float: right;
-    margin-bottom: 100px;
     padding-bottom: 50px;
     position: relative;
-    right: 4vw;
+    right: 4%;
     text-align: justify;
     text-justify: inter-word;
     top: 0;
-    width: 34vw;
+    width: 34%;
 }
 
 a {
@@ -145,7 +147,7 @@ span{
     position: absolute;
     right:5vw;
     bottom:1.5vw;
-    font-size: 1rem;
+    font-size: .9rem;
 }
 /*******************************************CLASS SELECTORS**************************************/
 .pdf_view {
@@ -278,7 +280,7 @@ span{
 
 #article_withaside {
     float: left;
-    left: 3vw;
-    width: 54vw;
+    left: 3%;
+    width: 54%;
     transform: translateX(0);
 }
