@@ -1,7 +1,7 @@
 /*******************************************TAG SELECTORS**************************************/
 body {
     position: absolute;
-    min-height: 100vh;
+    min-height: 100%;
     height: fit-content;
     min-width: 100%;
     width: fit-content;
@@ -24,7 +24,7 @@ header {
 }
 
 footer {
-    position: relative;
+    position: absolute;
     background-color: #5BC0F8;
     bottom: 0;
     clear: both;
@@ -55,7 +55,7 @@ article {
     transform: translateX(-50%);
     width: 80%;
     height: fit-content;
-    margin-bottom: 50px;
+    padding-bottom: 175px;
     color: #181823;
     text-align: justify;
     text-justify: inter-word;
@@ -72,7 +72,7 @@ section {
 aside {
     color: #181823;
     float: right;
-    padding-bottom: 50px;
+    padding-bottom: 175px;
     position: relative;
     right: 4%;
     text-align: justify;
@@ -81,6 +81,8 @@ aside {
     width: 34%;
 }
 
+
+
 a {
     color: white;
     text-decoration: none;
@@ -88,7 +90,7 @@ a {
 
 a:hover {
     font-size: 1.1em;
-    color: #D5CEA3;
+    color: #5BC0F8;
 }
 
 h1 {
@@ -105,14 +107,17 @@ h1 {
 h2 {
     color: #181823;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2.5em;
     left: 3%;
     padding: 1%;
     position: relative;
+    text-transform: uppercase;
 }
 
 h3 {
     color: #181823;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2em;
     left: 7%;
     padding: 0%;
     position: relative;
@@ -129,6 +134,10 @@ td {
 table{
     width: 100%;
     min-height: 90vh;
+}
+
+thead{
+    font-size: 1.3em;
 }
 
 form {
@@ -151,7 +160,7 @@ span{
     font-size: .9rem;
 }
 /*******************************************CLASS SELECTORS**************************************/
-.pdf_view {
+.pdf-view {
     border-style: solid;
     height: 1000px;
     width: 100%;
@@ -178,9 +187,13 @@ span{
     transform: scale(1.5);
 }
 
-.style_link {
-    color: #567189;
+.style-link {
+    color: #324555;
     text-decoration: none;
+}
+
+.style-link:visited {
+    color:#8daecc;
 }
 
 .contact{
@@ -203,7 +216,7 @@ span{
 .opinion{
     margin:1vw;
 }
-.reviewT{
+.review{
     position: relative;
     left:3.5vw;
 }
@@ -285,4 +298,13 @@ span{
     left: 3%;
     width: 54%;
     transform: translateX(0);
+}
+
+#no-color-change{
+    color: white;
+}
+
+#main-h2{
+    text-align: center;
+    left: 0;
 }
