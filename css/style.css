@@ -33,8 +33,8 @@ footer {
     width: fit-content;
     min-width: 100%;
     overflow: visible;
-    padding-bottom: 1vh;
-    padding-top: 0.5vh;
+    padding-bottom: 1%;
+    padding-top: 0.5%;
     white-space: nowrap;
 }
 
@@ -99,7 +99,7 @@ h1 {
     transform: translate(50%,-100%);
     color: #0A2647;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 3rem;
+    font-size: min(3rem, 10vh);
 }
 
 h2 {
@@ -131,22 +131,22 @@ table{
 }
 
 form {
-    padding-left: 1vw;
+    padding-left: 1%;
 }
 textarea {
-    margin: 0.5vw;
+    margin: 0.5%;
 }
 hr {
     border-color: grey;
     border-style: none;
     border-top-style: dotted;
-    border-width: 0.5vw;
+    border-width: 0.5%;
     width: 90%;
 }
 span{
     position: absolute;
-    right:5vw;
-    bottom:1.5vw;
+    right:5%;
+    bottom:1rem;
     font-size: .9rem;
 }
 /*******************************************CLASS SELECTORS**************************************/
@@ -265,6 +265,7 @@ span{
 #footertext{
     height: fit-content;
     margin-left: 5vw;
+    margin-right: 5vw;
     width: fit-content;
 }
 
