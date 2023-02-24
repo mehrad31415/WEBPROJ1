@@ -1,6 +1,7 @@
 /*******************************************TAG SELECTORS**************************************/
 body {
     position: relative;
+    min-height: 100vh;
     height: fit-content;
     min-width: 100%;
     width: fit-content;
@@ -23,7 +24,7 @@ header {
 }
 
 footer {
-    position: absolute;
+    position: relative;
     background-color: #5BC0F8;
     clear: both;
     height: fit-content;
@@ -218,7 +219,9 @@ span{
 }
 
 .footer-margin{
+    clear: both;
     min-height: 100vh;
+    height: fit-content;
 }
 /*******************************************ID SELECTORS**************************************/
 #main {
