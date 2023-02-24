@@ -1,7 +1,6 @@
 /*******************************************TAG SELECTORS**************************************/
 body {
-    position: absolute;
-    min-height: 100%;
+    position: relative;
     height: fit-content;
     min-width: 100%;
     width: fit-content;
@@ -26,7 +25,6 @@ header {
 footer {
     position: absolute;
     background-color: #5BC0F8;
-    bottom: 0;
     clear: both;
     height: fit-content;
     min-height: 100px;
@@ -55,7 +53,7 @@ article {
     transform: translateX(-50%);
     width: 80%;
     height: fit-content;
-    padding-bottom: 175px;
+    padding-bottom: 50px;
     color: #181823;
     text-align: justify;
     text-justify: inter-word;
@@ -72,7 +70,7 @@ section {
 aside {
     color: #181823;
     float: right;
-    padding-bottom: 175px;
+    padding-bottom: 50px;
     position: relative;
     right: 4%;
     text-align: justify;
@@ -80,8 +78,6 @@ aside {
     top: 0;
     width: 34%;
 }
-
-
 
 a {
     color: white;
@@ -220,6 +216,10 @@ span{
     position: relative;
     left:3.5vw;
 }
+
+.footer-margin{
+    min-height: 100vh;
+}
 /*******************************************ID SELECTORS**************************************/
 #main {
     position: absolute;
@@ -307,4 +307,8 @@ span{
 #main-h2{
     text-align: center;
     left: 0;
+}
+
+/*#small-article{
+    min-height: vh;
 }
