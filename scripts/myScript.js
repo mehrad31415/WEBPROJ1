@@ -1,8 +1,44 @@
 //Javascript
 
+var path = window.location.pathname;
+var page = path.split("/").pop();
+
+{//setup info page
+    if (page == 'info.html'){       
+        document.body.setAttribute('class', 'body--fit-content body--background-color body--text-font')
+        infoDivContainer = document.createElement('div');
+        infoDivContainer.setAttribute('class', 'body__container');
+        document.body.insertBefore(infoDivContainer, document.body.firstChild);
+        infoNav = document.createElement('nav');
+        infoNav.setAttribute('class', 'nav');
+        infoHeader = document.createElement('header');
+        infoHeader.setAttribute('class', 'header--fit-content header--background-colour');
+        document.body.firstChild.appendChild(infoHeader);
+        document.body.firstChild.appendChild(infoNav);
+        document.getElementsByTagName('nav');
+        infoFooter = document.createElement('footer');
+        infoFooter.setAttribute('class', 'footer--positioning footer--fit-content footer--background-colour');
+        document.body.appendChild(infoFooter);
+    }
+        
+}
+
+var head = document.getElementsByTagName('head')[0];
+var body = document.getElementsByTagName('body')[0];
+var header = document.getElementsByTagName('header')[0];
+var footer = document.getElementsByTagName('footer')[0];
+var nav = document.getElementsByTagName('nav')[0];
+
+var path = window.location.pathname;
+var page = path.split("/").pop();
+
 //classes for info-page
     //movie (3: Erik)
-
+    class movie {
+        name;
+        year;
+        artistArray = [];
+    }
 
     //artist (1: Mehrad)
 
@@ -26,14 +62,10 @@
 
     //footer menu
 
-   
 
-//tooltip (3: Erik)
+
+{//tooltip (3: Erik)
 var tooltipArray = [];
-let body = document.getElementsByTagName('body')[0];
-let header = document.getElementsByTagName('header')[0];
-let footer = document.getElementsByTagName('footer')[0];
-let nav = document.getElementsByTagName('nav')[0];
 
 class tooltipInfo {
     name;
@@ -186,3 +218,10 @@ function tooltiphide(event){
         body.firstChild.remove();
     }
 }
+}
+
+//repeating elements
+head.innerHTML = '<meta charset="UTF-8"> <meta name="description" content="Main webpage of The 12 Angry Men"> <meta name="author" content="UTRECHT UNIVERSITY WEB TECHNOLOGY COURSE"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adding Favicon --> <link rel="icon" href="../files/icon/icon.ico"> <link rel="stylesheet" href="../css/style.css"> <!-- Font Embedding --> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap" rel="stylesheet"> <title>12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase() + '</title>';
+header.innerHTML = '<a href="home.html"><img src="../files/images/film-frame.png" alt="This is an image of a film frame sticker from twitter" class="film-frame"></a> <h1 class="h1--position h1--text-attributes">12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1) + '</h1>'
+nav.innerHTML = '<div class="nav__field"> <a href="home.html" class="link">Home</a> </div> <div class="nav__field"> <a href="transcripts.html" class="link">Transcript</a> </div> <div class="nav__field"> <a href="cast-members.html" class="link">Cast</a> </div> <div class="nav__field"> <a href="awards.html" class="link">Awards</a> </div> <div class="nav__field"> <a href="adaptations-and-parodies.html" class="link">Adaptations</a> </div> <div class="nav__field"> <a href="reviews.html" class="link">Reviews</a> </div> <div class="nav__field"> <a href="contact.html" class="link">Contact</a> </div> <div class="nav__field"> <a href="info.html" class="link">Info</a> </div>';
+footer.innerHTML = '<p class="footer__paragraph">This website has been created as part of the Web Technology course at Utrecht University.<br> This work has been carried out by three students, namely, Bogaert, L.P. van den (Lars), Riel, E.P.M. van (Erik), Haghshenas, M. (Mehrad).<br> Should you have any enquiries please <a href="contact.html"     class="footer__contact-link--no-colour-change">contact us.</a></p> <span class="footer__jump-top--position-absolute"><a href="#" class="footer__jump-top--no-colour-change">Click here to scroll to the top of the page.</a></span>'; 
