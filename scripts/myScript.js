@@ -214,7 +214,7 @@ function tooltiphide(event){
 }
 }
 
-//repeating elements
+{//repeating elements
 var head_lines = [];
 var header_lines = [];
 var nav_lines = [];
@@ -288,3 +288,4 @@ body.children[0].setAttribute('class', 'body__container');
 nav.setAttribute('class', 'nav');
 header.setAttribute('class', 'header--fit-content header--background-colour');
 footer.setAttribute('class', 'footer--positioning footer--fit-content footer--background-colour');
+}
