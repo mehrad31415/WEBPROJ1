@@ -231,19 +231,25 @@ head_lines.push(
     /* Font Embedding */ 
     '<link rel="preconnect" href="https://fonts.googleapis.com">',
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-    '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap" rel="stylesheet">',
-    '<title>12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase() + '</title>'
+    '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap" rel="stylesheet">'
 );
 
 header_lines.push(
     '<a href="home.html">',
-    '<img src="../files/images/film-frame.png" alt="This is an image of a film frame sticker from twitter" class="film-frame"></a>',
-    '<h1 class="h1--position h1--text-attributes">12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1) + '</h1>'
+    '<img src="../files/images/film-frame.png" alt="This is an image of a film frame sticker from twitter" class="film-frame"></a>'
 );
+
+if (page == 'index.html'){
+    head_lines.push('<title>12 ANGRY MEN | HOME</title>');
+    header_lines.push('<h1 class="h1--position h1--text-attributes">12 Angry Men</h1>');
+} else {
+    head_lines.push('<title>12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase() + '</title>');
+    header_lines.push('<h1 class="h1--position h1--text-attributes">12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1) + '</h1>');
+}
 
 nav_lines.push(
     '<div class="nav__field">',
-    '<a href="home.html" class="link">Home</a>',
+    '<a href="index.html" class="link">Home</a>',
     '</div>',
     '<div class="nav__field">',
     '<a href="transcripts.html" class="link">Transcript</a>',
