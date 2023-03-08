@@ -286,9 +286,9 @@ function tooltipshow(event){
 
 function tooltiphide(event){
     let body = document.getElementsByTagName('body')[0];
-    if (body.firstChild.getAttribute("name") == "tooltip")
+    if (body.children[0].getAttribute("name") == "tooltip")
     {
-        body.firstChild.remove();
+        body.children[0].remove();
     }
 }
 }
