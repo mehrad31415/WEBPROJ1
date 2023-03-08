@@ -1,7 +1,7 @@
 //Javascript
 
 var path = window.location.pathname;
-var page = path.split("/").pop();
+var page = path.split("/").pop(); console.log('page ='+ page);
 
 {//setup info page main elements
     if (page == 'info.html'){
@@ -48,7 +48,7 @@ var nav = document.getElementsByTagName('nav')[0];
         '<img src="../files/images/film-frame.png" alt="This is an image of a film frame sticker from twitter" class="film-frame"></a>'
     );
     
-    if (page == 'index.html'){
+    if (page == 'index.html' || page == ''){
         head_lines.push('<title>12 ANGRY MEN | HOME</title>');
         header_lines.push('<h1 class="h1--position h1--text-attributes">12 Angry Men</h1>');
     } else {
@@ -278,7 +278,7 @@ function tooltipshow(event){
     container.style.background = "#AECDD0";
     container.style.padding = "15px";
     container.style.zIndex= "100";
-    container.style.left = (10 + event.pageX) + "px";
+    container.style.left = (15 + event.pageX) + "px";
     container.style.top = (10 + event.pageY) + "px";
     container.style.borderRadius = "15px";
     container.style.border = "solid 2px"
