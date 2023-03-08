@@ -103,7 +103,7 @@ var nav = document.getElementsByTagName('nav')[0];
     nav.setAttribute('class', 'nav');
     header.setAttribute('class', 'header--fit-content header--background-colour');
     footer.setAttribute('class', 'footer--positioning footer--fit-content footer--background-colour');
-    }
+}
 
 //classes for info-page
     //movie (3: Erik)
