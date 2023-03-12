@@ -1,7 +1,9 @@
 //Javascript
 
-var path = window.location.pathname;
-var page = path.split("/").pop(); console.log('page ='+ page);
+const path = window.location.pathname;
+const page = path.split("/").pop(); console.log('page ='+ page);
+let tooltipArray = [];
+
 
 {//setup info page main elements
     if (page == 'info.html'){
@@ -14,20 +16,20 @@ var page = path.split("/").pop(); console.log('page ='+ page);
         infoFooter = document.createElement('footer');
         document.body.appendChild(infoFooter);
     }
-        
 }
 
-var head = document.getElementsByTagName('head')[0];
-var body = document.getElementsByTagName('body')[0];
-var header = document.getElementsByTagName('header')[0];
-var footer = document.getElementsByTagName('footer')[0];
-var nav = document.getElementsByTagName('nav')[0];
+const head = document.getElementsByTagName('head')[0];
+const body = document.getElementsByTagName('body')[0];
+const header = document.getElementsByTagName('header')[0];
+const footer = document.getElementsByTagName('footer')[0];
+const nav = document.getElementsByTagName('nav')[0];
+
 
 {//repeating elements
-    var head_lines = [];
-    var header_lines = [];
-    var nav_lines = [];
-    var footer_lines = [];
+    let head_lines = [];
+    let header_lines = [];
+    let nav_lines = [];
+    let footer_lines = [];
     
     head_lines.push( 
         '<meta charset="UTF-8">',
@@ -92,11 +94,11 @@ var nav = document.getElementsByTagName('nav')[0];
         '</span>'
     );
     
-    var head_string = '', header_string = '', nav_string = '', footer_string = '';
-    for (var i = 0; i < head_lines.length; i++) head_string += head_lines[i]; head.innerHTML = head_string;
-    for (var i = 0; i < header_lines.length; i++) header_string += header_lines[i]; header.innerHTML = header_string;
-    for (var i = 0; i < nav_lines.length; i++) nav_string += nav_lines[i];  nav.innerHTML = nav_string;
-    for (var i = 0; i < footer_lines.length; i++) footer_string += footer_lines[i];  footer.innerHTML = footer_string;
+    let head_string = '', header_string = '', nav_string = '', footer_string = '';
+    for (let i = 0; i < head_lines.length; i++) head_string += head_lines[i]; head.innerHTML = head_string;
+    for (let i = 0; i < header_lines.length; i++) header_string += header_lines[i]; header.innerHTML = header_string;
+    for (let i = 0; i < nav_lines.length; i++) nav_string += nav_lines[i];  nav.innerHTML = nav_string;
+    for (let i = 0; i < footer_lines.length; i++) footer_string += footer_lines[i];  footer.innerHTML = footer_string;
     
     body.setAttribute('class', 'body--fit-content body--background-color body--text-font');
     body.children[0].setAttribute('class', 'body__container');
@@ -106,130 +108,276 @@ var nav = document.getElementsByTagName('nav')[0];
 }
 
 //classes for info-page
-    //movie (3: Erik)
-    class movie {
+    //movie
+    class Movie {
         name;
         year;
         artistArray = [];
     }
 
-    //artist (1: Mehrad)
-
-
-        //director
-
-
-        //writer 
-
-
-        //actor
-
-
-//menus (2: Lars)
-    //header menu
-    
-    // all elements in the menu 
-
-    const elementNames = ["body", "header", "footer", "aside", "articles", "section"]; 
-
-
-    //footer menu
-
-
-
-{//tooltip (3: Erik)
-var tooltipArray = [];
-
-class tooltipInfo {
-    name;
-    year;
-    nodeArray = [];
-    
-    constructor(name, year){
-        this.name = name;
-        this.year = year;
-    }
-    addNodes(){
-        var args = arguments;
-        for(var i=0; i<args.length; i++){
-            this.nodeArray.push(args[i]);
+    //artist
+    class Artists {
+        role;
+        name;
+        yearBirth;
+        yearDeath;
+        infoArray = [];
+        link;
         
+        constructor(name, yearBirth, yearDeath, link){
+            this.name = name;
+            this.yearBirth = yearBirth;
+            this.yearDeath = yearDeath;
+            this.link = link;
+        }
+        addNodes(){
+            const args = arguments;
+            for(let i=0; i<args.length; i++){
+                this.infoArray.push(args[i]);
+            
+            }
+        }
+        toTooltip(){
+            let nodeArray = [];
+            for(let i = 0; i < 3; i++){
+                nodeArray.push(this.infoArray[i]);
+            }
+            tooltipArray.push({name: this.name, yearBirth: this.yearBirth, yearDeath: this.yearDeath, nodeArray: nodeArray});
         }
     }
-    inArray(){
-        tooltipArray.push(this);
-    }
-}
 
-{//add tooltip data
+    //director
+    class Director extends Artists{
+        constructor (name, yearBirth, yearDeath){
+            super(name, yearBirth, yearDeath);
+            this.role = "Director";
+        } 
+    }
+
+    //writer 
+    class Writer extends Artists{
+        constructor (name, yearBirth, yearDeath){
+            super(name, yearBirth, yearDeath);
+            this.role = "Writer";
+        }
+    }
+
+    //actor
+    class Actors extends Artists{
+        constructor (name, yearBirth, yearDeath){
+            super(name, yearBirth, yearDeath);
+            this.role = "Artists";
+        }
+    }
+
+{//add artist data
     //Martin Balsam
-    const martin_balsam = new tooltipInfo("Martin Balsam", "1919 - 1996");
+    const martin_balsam = new Actors(
+        "Martin Balsam",
+         1919,
+         1996, 
+         "https://en.wikipedia.org/wiki/Martin_Balsam");
     martin_balsam.addNodes("All the President's Men (1976)","Psycho (1960)","A Thousand (1965)");
-    martin_balsam.inArray();
+    martin_balsam.toTooltip();
 
     //John Fiedler
-    const john_fiedler = new tooltipInfo("John Fiedler", "1925 - 2005");
+    const john_fiedler = new Actors(
+        "John Fiedler", 
+        1925, 
+        2005, 
+        "https://nl.wikipedia.org/wiki/John_Fiedler");
     john_fiedler.addNodes("The Odd Couple (1965)","The Bob Newhart Show (1972)","Robin Hood (1973)");
-    john_fiedler.inArray();
+    john_fiedler.toTooltip();
 
     //Lee J. Cobb
-    const lee_j_cobb = new tooltipInfo("Lee J. Cobb", "1911 - 1976");
+    const lee_j_cobb = new Actors(
+        "Lee J. Cobb", 
+        1911, 
+        1976, 
+        "https://en.wikipedia.org/wiki/Lee_J._Cobb");
     lee_j_cobb.addNodes("On the Waterfront (1954)","Exodus (1960)","The Exorcist (1973)");
-    lee_j_cobb.inArray();
+    lee_j_cobb.toTooltip();
 
     //E. G. marshall
-    const e_g_marshall = new tooltipInfo("E. G. Marshall", "1914 - 1998");
+    const e_g_marshall = new Actors(
+        "E. G. Marshall", 
+        1914, 
+        1998, 
+        "https://en.wikipedia.org/wiki/E._G._Marshall");
     e_g_marshall.addNodes("Creepshow (1982)","National Lampoon's Cristmas Vacation (1989)","Nixon (1995)");
-    e_g_marshall.inArray();
+    e_g_marshall.toTooltip();
 
     //Jack Klugman
-    const jack_klugman = new tooltipInfo("Jack Klugman", "1922 - 2012");
+    const jack_klugman = new Actors(
+        "Jack Klugman", 
+        1922, 
+        2012, 
+        "https://en.wikipedia.org/wiki/Jack_Klugman");
     jack_klugman.addNodes("The Odd Couple (1970)","Quincy M.E. (1976)","Days of Wine and Roses (1962)");
-    jack_klugman.inArray();
+    jack_klugman.toTooltip();
 
     //Edward Binns
-    const edward_binns = new tooltipInfo("Edward Binns", "1916-1990");
+    const edward_binns = new Actors(
+        "Edward Binns", 
+        1916, 
+        1990, 
+        "https://en.wikipedia.org/wiki/Edward_Binns");
     edward_binns.addNodes("Patton (1970)","The Verdict (1982)","North by Northwest (1959)");
-    edward_binns.inArray();
+    edward_binns.toTooltip();
 
     //Jack Warden
-    const jack_warden = new tooltipInfo("Jack Warden", "1920 - 2006");
+    const jack_warden = new Actors(
+        "Jack Warden", 
+        1920, 
+        2006, 
+        "https://en.wikipedia.org/wiki/Jack_Warden");
     jack_warden.addNodes("... and justice for all (1979)","While You Where Sleeping (Saul)","Being There (1979)");
-    jack_warden.inArray();
+    jack_warden.toTooltip();
 
     //Henry Fonda
-    const henry_fonda = new tooltipInfo("Henry Fonda", "1905 - 1982");
+    const henry_fonda = new Actors(
+        "Henry Fonda", 
+        1905, 
+        1982,
+        "https://en.wikipedia.org/wiki/Henry_Fonda");
     henry_fonda.addNodes("On Golden Pond (1981)","The Grapes of Wrath (1940)","The Wrong Man (1956)");
-    henry_fonda.inArray();
+    henry_fonda.toTooltip();
 
     //Joseph Sweedney
-    const joseph_sweeney = new tooltipInfo("Joseph Sweeney", "1884 - 1963" );
+    const joseph_sweeney = new Actors(
+        "Joseph Sweeney", 
+        1884, 
+        1963, 
+        "https://en.wikipedia.org/wiki/Joseph_Sweeney_(actor)");
     joseph_sweeney.addNodes("The United States Steel Hour (1954)","Armstrong Circle Theatre (1951)","The Defenders (1961)");
-    joseph_sweeney.inArray();
+    joseph_sweeney.toTooltip();
 
     //Ed Begley
-    const ed_begley = new tooltipInfo("Ed Begley", "1901 - 1970");
+    const ed_begley = new Actors("Ed Begley", 
+    1901, 
+    1970, 
+    "https://en.wikipedia.org/wiki/Ed_Begley");
     ed_begley.addNodes("Sweet bird of Youth (1962)", "Hang 'Em High (1986)", "The Unsinkable Molly Brown (1964)");
-    ed_begley.inArray();
+    ed_begley.toTooltip();
 
     //George Voskovec
-    const george_voskovec = new tooltipInfo("George Voskovec", "1905 - 1981");
+    const george_voskovec = new Actors(
+        "George Voskovec", 
+        1905, 
+        1981, 
+        "https://en.wikipedia.org/wiki/George_Voskovec");
     george_voskovec.addNodes("Somewhere in Time (1980)","The iceman Cometh (1973)","Penize nebo zivot (1932)");
-    george_voskovec.inArray();
+    george_voskovec.toTooltip();
 
     //Robert Webber
-    const robert_webber = new tooltipInfo("Robert Webber", "1924 - 1989");
+    const robert_webber = new Actors(
+        "Robert Webber", 
+        1924, 
+        1989, 
+        "https://en.wikipedia.org/wiki/Robert_Webber");
     robert_webber.addNodes("The Dirty Dozen (1967)","Midway (1976)","Private Benjamin (1980)");
-    robert_webber.inArray();
+    robert_webber.toTooltip();
 
     //Rudy Bond
-    const rudy_bond = new tooltipInfo("Rudy Bond");
+    const rudy_bond = new Actors(
+        "Rudy Bond", 
+        1912, 
+        1982, 
+        "https://en.wikipedia.org/wiki/Rudy_Bond");
     rudy_bond.addNodes("Tramlijn (1951)","On the Waterfront (1954)","The Godfather (1972)");
-    rudy_bond.inArray();
+    rudy_bond.toTooltip();
 }
 
-var links = document.getElementsByTagName('a');
-for (var i = 0; i < links.length; i++) {
+//menus
+
+
+const SelectFooter = document.querySelector('footer');
+const SelectHeader = document.querySelector('header');
+
+const elementDropdown = document.createElement('select');
+const styleDropdown = document.createElement('select');
+const fontSizeInput = document.createElement('input');
+const colorInput = document.createElement('input');
+
+colorInput.type = 'color';
+
+footer.appendChild(elementDropdown);
+footer.appendChild(styleDropdown);
+
+//Element menu 
+// get all elements from DOM
+const elements = document.querySelectorAll('body, header, footer, aside, article, section');
+
+elements.forEach((element) => {
+    // get type of elemnt
+    const elementType = element.nodeName.toLowerCase();
+    
+    const option = document.createElement('option');
+    option.text = elementType;
+    elementDropdown.add(option);
+  });
+  
+  
+// font and size menu
+
+const styleOptions = [
+    { name: 'Font Size (px)', property: 'font-size' },
+    { name: 'Color', property: 'color' },
+  ];
+  
+  styleOptions.forEach((option) => {
+    const styleOption = document.createElement('option');
+    styleOption.text = option.name;
+    styleOption.value = option.property;
+    styleDropdown.add(styleOption);
+  });
+
+
+// Logic for switching the color or font size input  
+if (styleDropdown.value === 'font-size') {
+    footer.appendChild(fontSizeInput);
+} else {
+    footer.appendChild(colorInput);
+}
+
+styleDropdown.addEventListener('change', (event) => {
+    if (event.target.value === 'font-size') {
+        footer.removeChild(colorInput);
+        footer.appendChild(fontSizeInput);
+    } else {
+        footer.removeChild(fontSizeInput);
+        footer.appendChild(colorInput);
+    }
+});
+
+// font and size menu font input
+fontSizeInput.addEventListener('input', (event) => {
+    if (event.target.value < 8 || event.target.value > 24) {
+        return;
+    }
+    const element = document.querySelector(elementDropdown.value);
+    // find all children of element
+    const children = element.querySelectorAll('*');
+    // add font size to all children
+    children.forEach((child) => {
+        child.style.fontSize = event.target.value + 'px';
+    });
+});
+
+// font and size menu color input
+colorInput.addEventListener('change', (event) => {
+    const element = document.querySelector(elementDropdown.value);
+    // find all children of element
+    const children = element.querySelectorAll('*');
+    // add color to all children
+    children.forEach((child) => {
+        child.style.color = event.target.value;
+    });
+});
+{//tooltip
+
+const links = document.getElementsByTagName('a');
+for (let i = 0; i < links.length; i++) {
     links[i].addEventListener('mouseover', tooltipshow ,false);
     links[i].addEventListener('mouseout', tooltiphide ,false);
 }
@@ -243,14 +391,19 @@ function tooltipshow(event){
 
         let nodesTemp = [];
         let nameTemp = null;
-        let yearTemp = null;
+        let yearBirthTemp = null;
+        let yearDeathTemp = null;
         let urlTemp = event.target.parentElement.getAttribute("href");
         
-        var result = tooltipArray.find(obj => {
+        let result = tooltipArray.find(obj => {
             return obj.name.replace(/\s*|\t|\r|\n/gm, "") === event.target.textContent.replace(/\s*|\t|\r|\n/gm, "")
         })
-
-        if (result != undefined){nameTemp = result.name; nodesTemp = result.nodeArray; yearTemp = result.year}
+        if (result != undefined){
+            nameTemp = result.name; 
+            nodesTemp = result.nodeArray; 
+            yearBirthTemp = result.yearBirth;
+            yearDeathTemp = result.yearDeath;
+        }
 
         let text;
         
@@ -258,7 +411,10 @@ function tooltipshow(event){
             text = document.createTextNode("Go to: " + urlTemp);
             container.append(text);
         } else{
-            text1 = document.createTextNode(nameTemp + " (" + yearTemp + ") is also known for:");
+            text1 = nameTemp + " (" + yearBirthTemp;
+            if (yearDeathTemp != null) text1 += ' - ' + yearDeathTemp;
+            text1 += ") is also known for:";
+            document.createTextNode(text1)
             container.append(text1);
             list = document.createElement("ul");
             container.append(list);
