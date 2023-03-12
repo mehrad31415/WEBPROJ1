@@ -93,6 +93,7 @@ const nav = document.getElementsByTagName('nav')[0];
         'Click here to scroll to the top of the page.</a>',
         '</span>'
     );
+
     
     let head_string = '', header_string = '', nav_string = '', footer_string = '';
     for (let i = 0; i < head_lines.length; i++) head_string += head_lines[i]; head.innerHTML = head_string;
@@ -291,18 +292,25 @@ const nav = document.getElementsByTagName('nav')[0];
 //menus
 
 
-const SelectFooter = document.querySelector('footer');
-const SelectHeader = document.querySelector('header');
+const Footer = document.querySelector('footer');
+const Header = document.querySelector('header');
 
 const elementDropdown = document.createElement('select');
 const styleDropdown = document.createElement('select');
 const fontSizeInput = document.createElement('input');
 const colorInput = document.createElement('input');
 
+// Add the CSS elements
+elementDropdown.classList.add('select-dropdown');
+styleDropdown.classList.add('select-dropdown');
+fontSizeInput.classList.add('fontssize-box');
+
 colorInput.type = 'color';
 
 footer.appendChild(elementDropdown);
 footer.appendChild(styleDropdown);
+
+
 
 //Element menu 
 // get all elements from DOM
@@ -317,14 +325,17 @@ elements.forEach((element) => {
     elementDropdown.add(option);
   });
   
-  
+
 // font and size menu
 
 const styleOptions = [
     { name: 'Font Size (px)', property: 'font-size' },
     { name: 'Color', property: 'color' },
   ];
-  
+
+// Add the placeholder to the textbox
+  fontSizeInput.setAttribute('placeholder', 'Enter text size');
+
   styleOptions.forEach((option) => {
     const styleOption = document.createElement('option');
     styleOption.text = option.name;

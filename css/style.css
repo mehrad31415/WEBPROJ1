@@ -300,3 +300,32 @@ a:hover {
 .img-hover-zoom:hover img {
     transform: scale(1.5);
 }
+
+.select-dropdown {
+    display: inline-block;
+    padding: 0.5em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  .select-dropdown select {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1em;
+  }
+  
+  .select-dropdown select option {
+    font-size: 1em;
+  }
+  
+  .fontssize-box {
+    display: inline-block;
+    padding: 0.5em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
