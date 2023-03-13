@@ -111,9 +111,22 @@ const nav = document.getElementsByTagName('nav')[0];
 //classes for info-page
     //movie
     class Movie {
-        name;
-        year;
+        movieName;
+        movieYear;
         artistArray = [];
+
+        constructor (name, year){
+            this.movieName = name;
+            this.movieYear = year;
+        }
+        
+        addAllToPage(page){
+            const container = document.getElementsByClassName("body__container")[0];
+            const article = document.createElement("article");
+            container.appendChild(article);
+
+        }
+
     }
 
     //artist
@@ -145,6 +158,10 @@ const nav = document.getElementsByTagName('nav')[0];
             }
             tooltipArray.push({name: this.name, yearBirth: this.yearBirth, yearDeath: this.yearDeath, nodeArray: nodeArray});
         }
+
+        addToMovie(movie){
+            movie.artistArray.push(this);
+        }
     }
 
     //director
@@ -172,14 +189,19 @@ const nav = document.getElementsByTagName('nav')[0];
     }
 
 {//add artist data
+    //Movie 12 Angry Men
+    const angry_men = new Movie("12 Angry Men");
+    angry_men.addAllToPage();
+
     //Martin Balsam
     const martin_balsam = new Actors(
         "Martin Balsam",
-         1919,
-         1996, 
-         "https://en.wikipedia.org/wiki/Martin_Balsam");
+        1919,
+        1996, 
+        "https://en.wikipedia.org/wiki/Martin_Balsam");
     martin_balsam.addNodes("All the President's Men (1976)","Psycho (1960)","A Thousand (1965)");
     martin_balsam.toTooltip();
+    martin_balsam.addToMovie(angry_men);
 
     //John Fiedler
     const john_fiedler = new Actors(
@@ -189,6 +211,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://nl.wikipedia.org/wiki/John_Fiedler");
     john_fiedler.addNodes("The Odd Couple (1965)","The Bob Newhart Show (1972)","Robin Hood (1973)");
     john_fiedler.toTooltip();
+    john_fiedler.addToMovie(angry_men);
 
     //Lee J. Cobb
     const lee_j_cobb = new Actors(
@@ -198,6 +221,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/Lee_J._Cobb");
     lee_j_cobb.addNodes("On the Waterfront (1954)","Exodus (1960)","The Exorcist (1973)");
     lee_j_cobb.toTooltip();
+    lee_j_cobb.addToMovie(angry_men);
 
     //E. G. marshall
     const e_g_marshall = new Actors(
@@ -207,6 +231,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/E._G._Marshall");
     e_g_marshall.addNodes("Creepshow (1982)","National Lampoon's Cristmas Vacation (1989)","Nixon (1995)");
     e_g_marshall.toTooltip();
+    e_g_marshall.addToMovie(angry_men);
 
     //Jack Klugman
     const jack_klugman = new Actors(
@@ -216,6 +241,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/Jack_Klugman");
     jack_klugman.addNodes("The Odd Couple (1970)","Quincy M.E. (1976)","Days of Wine and Roses (1962)");
     jack_klugman.toTooltip();
+    jack_klugman.addToMovie(angry_men);
 
     //Edward Binns
     const edward_binns = new Actors(
@@ -225,6 +251,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/Edward_Binns");
     edward_binns.addNodes("Patton (1970)","The Verdict (1982)","North by Northwest (1959)");
     edward_binns.toTooltip();
+    edward_binns.addToMovie(angry_men);
 
     //Jack Warden
     const jack_warden = new Actors(
@@ -234,6 +261,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/Jack_Warden");
     jack_warden.addNodes("... and justice for all (1979)","While You Where Sleeping (Saul)","Being There (1979)");
     jack_warden.toTooltip();
+    jack_warden.addToMovie(angry_men);
 
     //Henry Fonda
     const henry_fonda = new Actors(
@@ -243,6 +271,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/Henry_Fonda");
     henry_fonda.addNodes("On Golden Pond (1981)","The Grapes of Wrath (1940)","The Wrong Man (1956)");
     henry_fonda.toTooltip();
+    henry_fonda.addToMovie(angry_men);
 
     //Joseph Sweedney
     const joseph_sweeney = new Actors(
@@ -252,6 +281,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/Joseph_Sweeney_(actor)");
     joseph_sweeney.addNodes("The United States Steel Hour (1954)","Armstrong Circle Theatre (1951)","The Defenders (1961)");
     joseph_sweeney.toTooltip();
+    joseph_sweeney.addToMovie(angry_men);
 
     //Ed Begley
     const ed_begley = new Actors("Ed Begley", 
@@ -260,6 +290,7 @@ const nav = document.getElementsByTagName('nav')[0];
     "https://en.wikipedia.org/wiki/Ed_Begley");
     ed_begley.addNodes("Sweet bird of Youth (1962)", "Hang 'Em High (1986)", "The Unsinkable Molly Brown (1964)");
     ed_begley.toTooltip();
+    ed_begley.addToMovie(angry_men);
 
     //George Voskovec
     const george_voskovec = new Actors(
@@ -269,6 +300,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/George_Voskovec");
     george_voskovec.addNodes("Somewhere in Time (1980)","The iceman Cometh (1973)","Penize nebo zivot (1932)");
     george_voskovec.toTooltip();
+    george_voskovec.addToMovie(angry_men);
 
     //Robert Webber
     const robert_webber = new Actors(
@@ -278,6 +310,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/Robert_Webber");
     robert_webber.addNodes("The Dirty Dozen (1967)","Midway (1976)","Private Benjamin (1980)");
     robert_webber.toTooltip();
+    robert_webber.addToMovie(angry_men);
 
     //Rudy Bond
     const rudy_bond = new Actors(
@@ -287,6 +320,7 @@ const nav = document.getElementsByTagName('nav')[0];
         "https://en.wikipedia.org/wiki/Rudy_Bond");
     rudy_bond.addNodes("Tramlijn (1951)","On the Waterfront (1954)","The Godfather (1972)");
     rudy_bond.toTooltip();
+    rudy_bond.addToMovie(angry_men);
 }
 
 //menus
@@ -385,6 +419,7 @@ colorInput.addEventListener('change', (event) => {
         child.style.color = event.target.value;
     });
 });
+
 {//tooltip
 
 const links = document.getElementsByTagName('a');
