@@ -46,11 +46,11 @@ const nav = document.getElementsByTagName('nav')[0];
     );
     
     header_lines.push(
-        '<a href="index.html">',
+        '<a href="home.html">',
         '<img src="../files/images/film-frame.png" alt="This is an image of a film frame sticker from twitter" class="film-frame"></a>'
     );
     
-    if (page == 'index.html' || page == ''){
+    if (page == 'home.html' || page == ''){
         head_lines.push('<title>12 ANGRY MEN | HOME</title>');
         header_lines.push('<h1 class="h1--position h1--text-attributes">12 Angry Men</h1>');
     } else {
@@ -60,7 +60,7 @@ const nav = document.getElementsByTagName('nav')[0];
     
     nav_lines.push(
         '<div class="nav__field">',
-        '<a href="index.html" class="link">Home</a>',
+        '<a href="home.html" class="link">Home</a>',
         '</div>',
         '<div class="nav__field">',
         '<a href="transcripts.html" class="link">Transcript</a>',
@@ -124,7 +124,12 @@ const nav = document.getElementsByTagName('nav')[0];
             const container = document.getElementsByClassName("body__container")[0];
             const article = document.createElement("article");
             container.appendChild(article);
-
+            article.setAttribute("class", "article-block");
+            const heading = document.createElement("h2");
+            article.appendChild(heading);
+            heading.setAttribute("class", "h2--position h2--text-attributes");
+            const headingText = document.createTextNode("Information");
+            heading.append(headingText);            
         }
 
     }
