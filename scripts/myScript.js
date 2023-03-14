@@ -26,86 +26,148 @@ const nav = document.getElementsByTagName('nav')[0];
 
 
 {//repeating elements
-    let head_lines = [];
-    let header_lines = [];
-    let nav_lines = [];
-    let footer_lines = [];
-    
-    head_lines.push( 
-        '<meta charset="UTF-8">',
-        '<meta name="description" content="Main webpage of The 12 Angry Men">', 
-        '<meta name="author" content="UTRECHT UNIVERSITY WEB TECHNOLOGY COURSE">', 
-        '<meta name="viewport" content="width=device-width, initial-scale=1.0">', 
-        /* Adding Favicon */ 
-        '<link rel="icon" href="../files/icon/icon.ico">', 
-        '<link rel="stylesheet" href="../css/style.css">',
-        /* Font Embedding */ 
-        '<link rel="preconnect" href="https://fonts.googleapis.com">',
-        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-        '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap" rel="stylesheet">'
-    );
-    
-    header_lines.push(
-        '<a href="home.html">',
-        '<img src="../files/images/film-frame.png" alt="This is an image of a film frame sticker from twitter" class="film-frame"></a>'
-    );
-    
-    if (page == 'home.html' || page == ''){
-        head_lines.push('<title>12 ANGRY MEN | HOME</title>');
-        header_lines.push('<h1 class="h1--position h1--text-attributes">12 Angry Men</h1>');
-    } else {
-        head_lines.push('<title>12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase() + '</title>');
-        header_lines.push('<h1 class="h1--position h1--text-attributes">12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1) + '</h1>');
-    }
-    
-    nav_lines.push(
-        '<div class="nav__field">',
-        '<a href="home.html" class="link">Home</a>',
-        '</div>',
-        '<div class="nav__field">',
-        '<a href="transcripts.html" class="link">Transcript</a>',
-        '</div>',
-        '<div class="nav__field">',
-        '<a href="cast-members.html" class="link">Cast</a>',
-        '</div>',
-        '<div class="nav__field">',
-        '<a href="awards.html" class="link">Awards</a>',
-        '</div>',
-        '<div class="nav__field">',
-        '<a href="adaptations-and-parodies.html" class="link">Adaptations</a>',
-        '</div>',
-        '<div class="nav__field">',
-        '<a href="reviews.html" class="link">Reviews</a>',
-        '</div> <div class="nav__field">',
-        '<a href="contact.html" class="link">Contact</a>',
-        '</div>',
-        '<div class="nav__field">',
-        '<a href="info.html" class="link">Info</a>',
-        '</div>'
-    );
-    
-    footer_lines.push(
-        '<p class="footer__paragraph">This website has been created as part of the Web Technology course at Utrecht University.',
-        '<br>This work has been carried out by three students, namely, Bogaert, L.P. van den (Lars), Riel, E.P.M. van (Erik), Haghshenas, M. (Mehrad).',
-        '<br> Should you have any enquiries please <a href="contact.html" class="footer__contact-link--no-colour-change">contact us.</a>',
-        '</p>',
-        '<span class="footer__jump-top--position-absolute"><a href="#" class="footer__jump-top--no-colour-change">',
-        'Click here to scroll to the top of the page.</a>',
-        '</span>'
-    );
-
-    
-    let head_string = '', header_string = '', nav_string = '', footer_string = '';
-    for (let i = 0; i < head_lines.length; i++) head_string += head_lines[i]; head.innerHTML = head_string;
-    for (let i = 0; i < header_lines.length; i++) header_string += header_lines[i]; header.innerHTML = header_string;
-    for (let i = 0; i < nav_lines.length; i++) nav_string += nav_lines[i];  nav.innerHTML = nav_string;
-    for (let i = 0; i < footer_lines.length; i++) footer_string += footer_lines[i];  footer.innerHTML = footer_string;
-    
+    //CLASSES
     body.setAttribute('class', 'body--fit-content body--background-color body--text-font');
     body.children[0].setAttribute('class', 'body__container');
     nav.setAttribute('class', 'nav');
     header.setAttribute('class', 'header--fit-content header--background-colour');
     footer.setAttribute('class', 'footer--positioning footer--fit-content footer--background-colour');
+
+    //HEAD
+    const charset = document.createElement('meta');
+    charset.setAttribute('charset', 'UTF-8');
+    const descr = document.createElement('meta');
+    descr.setAttribute('name', 'description');
+    const contentString = page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1) + " webpage of the movie '12 Angry Men'";
+    descr.setAttribute('content', contentString);
+    const author = document.createElement('meta');
+    author.setAttribute('name', 'author');
+    author.setAttribute('content', 'STUDENTS OF UTRECHT UNIVERSITY WEB TECHNOLOGY COURSE');
+    const viewp = document.createElement('meta');
+    viewp.setAttribute('name', 'viewport');
+    viewp.setAttribute('content', 'width=device-width, initial-scale=1.0');
+    const title = document.createElement('title');
+    title.innerHTML = '12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase();
+        //Adding Favicon
+    const icon = document.createElement('link');
+    icon.setAttribute('rel', 'icon');
+    icon.setAttribute('href', '../files/icon/icon.ico');
+    const styles = document.createElement('link');
+    styles.setAttribute('rel', 'stylesheet');
+    styles.setAttribute('href', '../css/style.css');
+        //Font Embedding
+    const font1 = document.createElement('link');
+    font1.setAttribute('rel', 'preconnect');
+    font1.setAttribute('href', 'https://fonts.googleapis.com');
+    const font2 = document.createElement('link');
+    font2.setAttribute('rel', 'preconnect');
+    font2.setAttribute('href', 'https://fonts.gstatic.com');
+    font2.setAttribute('crossorigin', '');
+    const font3 = document.createElement('link');
+    font3.setAttribute('rel', 'stylesheet');
+    font3.setAttribute('href', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap');
+
+    head.append(charset, descr, author, viewp, title, icon, styles, font1, font2, font3);
+
+    //HEADER
+    const imgLink = document.createElement('a');
+    imgLink.setAttribute('href', 'home.html');
+    const img = document.createElement('img');
+    img.setAttribute('src', '../files/images/film-frame.png');
+    img.setAttribute('alt', 'This is an image of a film frame sticker from twitter');
+    img.setAttribute('class', 'film-frame');
+    imgLink.append(img);
+    const h1 = document.createElement('h1');
+    h1.setAttribute('class', 'h1--position h1--text-attributes');
+    if (page == 'home.html' || page == ''){
+        h1.innerHTML = '12 Angry Men';
+    } else {
+        h1.innerHTML = '12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1);
+    }
+
+    header.append(imgLink, h1)
+
+    //NAVIGATION
+    const homeDiv = document.createElement('div');
+    homeDiv.setAttribute('class', 'nav__field');
+    const homeLink = document.createElement('a');
+    homeLink.setAttribute('class', 'link');
+    homeLink.setAttribute('href', 'home.html')
+    homeDiv.append(homeLink);
+    homeLink.innerHTML = 'Home';
+    const castDiv = document.createElement('div');
+    castDiv.setAttribute('class', 'nav__field');
+    const castLink = document.createElement('a');
+    castLink.setAttribute('class', 'link');
+    castLink.setAttribute('href', 'cast-members.html')
+    castDiv.append(castLink);
+    castLink.innerHTML = 'Cast';
+    const adapDiv = document.createElement('div');
+    adapDiv.setAttribute('class', 'nav__field');
+    const adapLink = document.createElement('a');
+    adapLink.setAttribute('class', 'link');
+    adapLink.setAttribute('href', 'adaptations-and-parodies.html')
+    adapDiv.append(adapLink);
+    adapLink.innerHTML = 'Adaptations';
+    const awarDiv = document.createElement('div');
+    awarDiv.setAttribute('class', 'nav__field');
+    const awarLink = document.createElement('a');
+    awarLink.setAttribute('class', 'link');
+    awarLink.setAttribute('href', 'awards.html')
+    awarDiv.append(awarLink);
+    awarLink.innerHTML = 'Awards';
+    const tranDiv = document.createElement('div');
+    tranDiv.setAttribute('class', 'nav__field');
+    const tranLink = document.createElement('a');
+    tranLink.setAttribute('class', 'link');
+    tranLink.setAttribute('href', 'transcripts.html')
+    tranDiv.append(tranLink);
+    tranLink.innerHTML = 'Transcripts';
+    const reviDiv = document.createElement('div');
+    reviDiv.setAttribute('class', 'nav__field');
+    const reviLink = document.createElement('a');
+    reviLink.setAttribute('class', 'link');
+    reviLink.setAttribute('href', 'reviews.html')
+    reviDiv.append(reviLink);
+    reviLink.innerHTML = 'Reviews';
+    const infoDiv = document.createElement('div');
+    infoDiv.setAttribute('class', 'nav__field');
+    const infoLink = document.createElement('a');
+    infoLink.setAttribute('class', 'link');
+    infoLink.setAttribute('href', 'info.html')
+    infoDiv.append(infoLink);
+    infoLink.innerHTML = 'Info';
+    const contDiv = document.createElement('div');
+    contDiv.setAttribute('class', 'nav__field');
+    const contLink = document.createElement('a');
+    contLink.setAttribute('class', 'link');
+    contLink.setAttribute('href', 'contact.html')
+    contDiv.append(contLink);
+    contLink.innerHTML = 'Contact';
+
+    nav.append(homeDiv, castDiv, adapDiv, awarDiv, tranDiv, reviDiv, infoDiv, contDiv);
+
+    //FOOTER
+    const parFooter = document.createElement('p');
+    parFooter.setAttribute('class', 'footer__paragraph');
+    parFooter.innerHTML = 'This website has been created as part of the Web Technology course at Utrecht University.';
+    parFooter.append(document.createElement('br'));
+    parFooter.innerHTML += 'This work has been carried out by three students, namely, Bogaert, L.P. van den (Lars), Riel, E.P.M. van (Erik), Haghshenas, M. (Mehrad).';
+    parFooter.append(document.createElement('br'));
+    parFooter.innerHTML += 'Should you have any enquiries please ';
+    const contact = document.createElement('a');
+    contact.setAttribute('class', 'footer__contact-link--no-colour-change');
+    contact.innerHTML = 'contact us';
+    parFooter.innerHTML += '.';
+    const spanFooter = document.createElement('span');
+    spanFooter.setAttribute('class', 'footer__jump-top--position-absolute');
+    const toTopLink = document.createElement('a');
+    toTopLink.setAttribute('href', '#');
+    toTopLink.setAttribute('class', 'footer__jump-top--no-colour-change');
+    toTopLink.innerHTML = 'Click here to scroll to the top of the page.';
+    spanFooter.append(toTopLink);
+
+    footer.append(parFooter, spanFooter);
 }
 
 //classes for info-page
