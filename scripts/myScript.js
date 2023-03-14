@@ -1,7 +1,7 @@
 //Javascript
 
 const path = window.location.pathname;
-const page = path.split("/").pop(); console.log('page ='+ page);
+const page = path.split("/").pop();
 let tooltipArray = [];
 
 
@@ -111,8 +111,10 @@ const nav = document.getElementsByTagName('nav')[0];
 //classes for info-page
     //movie
     class Movie {
-        movieName;
-        movieYear;
+        movieName = "placeholderName";
+        movieYear = "placeholderYear";
+        movieLink = "https://en.wikipedia.org/wiki/Main_Page";
+        movieAbout = "placeholderAbout";
         artistArray = [];
 
         constructor (name, year){
@@ -129,7 +131,68 @@ const nav = document.getElementsByTagName('nav')[0];
             article.appendChild(heading);
             heading.setAttribute("class", "h2--position h2--text-attributes");
             const headingText = document.createTextNode("Information");
-            heading.append(headingText);            
+            heading.append(headingText);  
+            const about = document.createElement("p");
+            article.appendChild(about);
+            const strongLink = document.createElement('STRONG');
+            about.appendChild(strongLink);
+            const link = document.createElement('a');
+            link.setAttribute("class", "link--decoration");
+            link.setAttribute("href", this.movieLink);
+            link.setAttribute("target", "_blank");
+            strongLink.appendChild(link);
+            link.innerHTML = this.movieName;
+            const aboutText = document.createTextNode(" is a movie from the year " + this.movieYear + ". " + this.movieAbout);
+            about.append(aboutText);
+            const para = document.createElement('p');
+            article.appendChild(para);
+            para.innerHTML = "Extended information about the artists that participated in this movie is listed below.";
+
+            const artistsSection = document.createElement('section');
+            article.appendChild(artistsSection);
+
+            const headingDirector = document.createElement("h3");
+            headingDirector.setAttribute('class', 'h3--position h3--attributes')
+            artistsSection.appendChild(headingDirector);
+            const hrDir = document.createElement('hr');
+            hrDir.setAttribute('class', 'hr--decoration');
+            headingDirector.innerHTML = 'Director(s)';
+            artistsSection.appendChild(hrDir);
+
+            for (let i=0; i< this.artistArray.length; i++){
+                if (this.artistArray[i].role == "director"){
+                    this.artistArray[i].createArtistInfo(this.artistArray[i], artistsSection);
+                }
+            }
+
+            const headingWriter = document.createElement("h3");
+            headingWriter.setAttribute('class', 'h3--position h3--attributes')
+            artistsSection.appendChild(headingWriter);
+            headingWriter.innerHTML = 'Writer(s)';
+            const hrWri = document.createElement('hr');
+            hrWri.setAttribute('class', 'hr--decoration');
+            artistsSection.appendChild(hrWri);
+
+            for (let i=0; i< this.artistArray.length; i++){
+                if (this.artistArray[i].role == "writer"){
+                    this.artistArray[i].createArtistInfo(this.artistArray[i], artistsSection);
+                }
+            }
+
+            const headingActor = document.createElement("h3");
+            headingActor.setAttribute('class', 'h3--position h3--attributes')
+            artistsSection.appendChild(headingActor);
+            headingActor.innerHTML = 'Actor(s)';
+            const hrAct = document.createElement('hr');
+            hrAct.setAttribute('class', 'hr--decoration');
+            artistsSection.appendChild(hrAct);
+
+            for (let i=0; i< this.artistArray.length; i++){
+                if (this.artistArray[i].role == "actor"){
+                    this.artistArray[i].createArtistInfo(this.artistArray[i], artistsSection);
+                }
+            }
+            
         }
 
     }
@@ -142,6 +205,7 @@ const nav = document.getElementsByTagName('nav')[0];
         yearDeath;
         infoArray = [];
         link;
+        info = "placeholderInfo";
         
         constructor(name, yearBirth, yearDeath, link){
             this.name = name;
@@ -167,43 +231,77 @@ const nav = document.getElementsByTagName('nav')[0];
         addToMovie(movie){
             movie.artistArray.push(this);
         }
+
+        createArtistInfo(item, section, aboutText){
+            let container = document.createElement('article');
+            container.setAttribute('class', 'container');
+            section.appendChild(container);
+
+            let strongTemp = document.createElement('STRONG');
+            container.appendChild(strongTemp);
+            let linkTemp = document.createElement('a');
+            linkTemp.setAttribute("class", "link--decoration");
+            linkTemp.setAttribute("href", item.link);
+            linkTemp.setAttribute("target", "_blank");
+            strongTemp.appendChild(linkTemp);
+            linkTemp.innerHTML = item.name;
+            let aboutTemp = document.createElement('p');
+            container.appendChild(aboutTemp);
+            aboutText = item.name + " is a";
+            if (item.role == 'actor') aboutText += "n";
+            aboutText += " " + item.role + " born in " + item.yearBirth;
+            if (item.yearDeath != null) aboutText += " and sadly passed away in " + item.yearDeath;
+            aboutText += ". " + item.info + " Some other projects of " + item.name + " are ";
+            for (let i = 0; i < item.infoArray.length - 1; i++){
+                aboutText += item.infoArray[i] + ", ";
+            } 
+            aboutText += item.infoArray[item.infoArray.length -1] + ".";
+            aboutTemp.append(document.createTextNode(aboutText));
+        }
     }
 
     //director
     class Director extends Artists{
-        constructor (name, yearBirth, yearDeath){
-            super(name, yearBirth, yearDeath);
-            this.role = "Director";
+        constructor (name, yearBirth, yearDeath, link){
+            super(name, yearBirth, yearDeath, link);
+            this.role = "director";
         } 
     }
 
     //writer 
     class Writer extends Artists{
-        constructor (name, yearBirth, yearDeath){
-            super(name, yearBirth, yearDeath);
-            this.role = "Writer";
+        constructor (name, yearBirth, yearDeath, link){
+            super(name, yearBirth, yearDeath, link);
+            this.role = "writer";
         }
     }
 
     //actor
     class Actors extends Artists{
-        constructor (name, yearBirth, yearDeath){
-            super(name, yearBirth, yearDeath);
-            this.role = "Artists";
+        constructor (name, yearBirth, yearDeath, link){
+            super(name, yearBirth, yearDeath, link);
+            this.role = "actor";
+        }
+
+        createArtistInfo(item, section, aboutText){
+            super.createArtistInfo(item, section);
+
         }
     }
 
-{//add artist data
+//add artist data
     //Movie 12 Angry Men
-    const angry_men = new Movie("12 Angry Men");
-    angry_men.addAllToPage();
-
+    const angry_men = new Movie("12 Angry Men", 1957);
+    angry_men.movieLink = "https://en.wikipedia.org/wiki/12_Angry_Men_(1957_film)";
+    angry_men.movieAbout = 'The play explores the deliberations of a jury of a homicide trial, in which a dozen "men with ties and a coat" decide the fate of a teenager accused of murdering his abusive father. At the beginning, they are nearly unanimous in concluding the youth is guilty. One man dissents, declaring him "not guilty", and he sows a seed of reasonable doubt.'
+    
     //Martin Balsam
     const martin_balsam = new Actors(
         "Martin Balsam",
         1919,
         1996, 
         "https://en.wikipedia.org/wiki/Martin_Balsam");
+    martin_balsam.info = "He had a prolific career in character roles in film, in theatre, and on television. An early member of the Actors Studio, he began his career on the New York stage, winning a Tony Award for Best Actor in a Play for Robert Anderson's You Know I Can't Hear You When the Water's Running (1968). He won the Academy Award for Best Supporting Actor for his performance in A Thousand Clowns (1965)."
     martin_balsam.addNodes("All the President's Men (1976)","Psycho (1960)","A Thousand (1965)");
     martin_balsam.toTooltip();
     martin_balsam.addToMovie(angry_men);
@@ -213,7 +311,8 @@ const nav = document.getElementsByTagName('nav')[0];
         "John Fiedler", 
         1925, 
         2005, 
-        "https://nl.wikipedia.org/wiki/John_Fiedler");
+        "https://en.wikipedia.org/wiki/John_Fiedler");
+    john_fiedler.info = "He had a prolific career in character roles in film, in theatre, and on television. An early member of the Actors Studio, he began his career on the New York stage, winning a Tony Award for Best Actor in a Play for Robert Anderson's You Know I Can't Hear You When the Water's Running (1968). He won the Academy Award for Best Supporting Actor for his performance in A Thousand Clowns (1965). Fiedler was born in Platteville, Wisconsin, a son of beer salesman Donald Fiedler and his wife Margaret (née Phelan). He was of German and Irish descent.";
     john_fiedler.addNodes("The Odd Couple (1965)","The Bob Newhart Show (1972)","Robin Hood (1973)");
     john_fiedler.toTooltip();
     john_fiedler.addToMovie(angry_men);
@@ -224,6 +323,7 @@ const nav = document.getElementsByTagName('nav')[0];
         1911, 
         1976, 
         "https://en.wikipedia.org/wiki/Lee_J._Cobb");
+    lee_j_cobb.info = "he is known both for film roles and his work on the Broadway stage, as well as for his television role as the star of the TV series The Virginian. He often played arrogant, intimidating and abrasive characters, but he also acted as respectable figures such as judges and police officers. Cobb was born in New York City, to a Jewish family of Russian and Romanian origin. He grew up in the Bronx, New York, on Wilkins Avenue, near Crotona Park. His parents were Benjamin (Benzion) Jacob, a compositor for a foreign-language newspaper, and Kate (Neilecht).";
     lee_j_cobb.addNodes("On the Waterfront (1954)","Exodus (1960)","The Exorcist (1973)");
     lee_j_cobb.toTooltip();
     lee_j_cobb.addToMovie(angry_men);
@@ -234,6 +334,7 @@ const nav = document.getElementsByTagName('nav')[0];
         1914, 
         1998, 
         "https://en.wikipedia.org/wiki/E._G._Marshall");
+    e_g_marshall.info = 'Marshall was born Everett Eugene Grunz[1] in Owatonna, Minnesota,[2] the son of Hazel Irene (née Cobb) and Charles G. Grunz. His paternal grandparents were German immigrants. During his life, he chose not to reveal what "E. G." stood for, saying that it stood for "Everybody'+ "'" +'s Guess." The U.S. Social Security Claims Index states that he was listed with the Social Security Administration in June 1937 as Everett Eugene Grunz, and in December 1975 as E.G. Marshall.';
     e_g_marshall.addNodes("Creepshow (1982)","National Lampoon's Cristmas Vacation (1989)","Nixon (1995)");
     e_g_marshall.toTooltip();
     e_g_marshall.addToMovie(angry_men);
@@ -244,6 +345,7 @@ const nav = document.getElementsByTagName('nav')[0];
         1922, 
         2012, 
         "https://en.wikipedia.org/wiki/Jack_Klugman");
+    jack_klugman.info = "Klugman was born in Philadelphia, the youngest of six children born to Rose, a hat maker, and Max Klugman, a house painter. His parents were Russian-Jewish immigrants. Klugman served in the United States Army during World War II."
     jack_klugman.addNodes("The Odd Couple (1970)","Quincy M.E. (1976)","Days of Wine and Roses (1962)");
     jack_klugman.toTooltip();
     jack_klugman.addToMovie(angry_men);
@@ -326,7 +428,8 @@ const nav = document.getElementsByTagName('nav')[0];
     rudy_bond.addNodes("Tramlijn (1951)","On the Waterfront (1954)","The Godfather (1972)");
     rudy_bond.toTooltip();
     rudy_bond.addToMovie(angry_men);
-}
+
+if (page == "info.html") angry_men.addAllToPage();
 
 //menus
 
@@ -444,7 +547,7 @@ function tooltipshow(event){
         let nameTemp = null;
         let yearBirthTemp = null;
         let yearDeathTemp = null;
-        let urlTemp = event.target.parentElement.getAttribute("href");
+        let urlTemp = event.target.closest('a').getAttribute("href");
         
         let result = tooltipArray.find(obj => {
             return obj.name.replace(/\s*|\t|\r|\n/gm, "") === event.target.textContent.replace(/\s*|\t|\r|\n/gm, "")
