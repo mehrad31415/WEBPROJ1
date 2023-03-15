@@ -5,18 +5,18 @@ const page = path.split("/").pop();
 let tooltipArray = [];
 
 
-{//setup info page main elements
-    if (page == 'info.html'){
-        infoDivContainer = document.createElement('div');
-        document.body.insertBefore(infoDivContainer, document.body.firstChild);
-        infoNav = document.createElement('nav');
-        infoHeader = document.createElement('header');
-        document.body.firstChild.appendChild(infoHeader);
-        document.body.firstChild.appendChild(infoNav);
-        infoFooter = document.createElement('footer');
-        document.body.appendChild(infoFooter);
-    }
+//setup info page main elements
+if (page == 'info.html'){
+    infoDivContainer = document.createElement('div');
+    document.body.insertBefore(infoDivContainer, document.body.firstChild);
+    infoNav = document.createElement('nav');
+    infoHeader = document.createElement('header');
+    document.body.firstChild.appendChild(infoHeader);
+    document.body.firstChild.appendChild(infoNav);
+    infoFooter = document.createElement('footer');
+    document.body.appendChild(infoFooter);
 }
+
 
 const head = document.getElementsByTagName('head')[0];
 const body = document.getElementsByTagName('body')[0];
@@ -47,7 +47,7 @@ const nav = document.getElementsByTagName('nav')[0];
     viewp.setAttribute('name', 'viewport');
     viewp.setAttribute('content', 'width=device-width, initial-scale=1.0');
     const title = document.createElement('title');
-    title.innerHTML = '12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase();
+    title.append(document.createTextNode('12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase()));
         //Adding Favicon
     const icon = document.createElement('link');
     icon.setAttribute('rel', 'icon');
@@ -80,9 +80,9 @@ const nav = document.getElementsByTagName('nav')[0];
     const h1 = document.createElement('h1');
     h1.setAttribute('class', 'h1--position h1--text-attributes');
     if (page == 'home.html' || page == ''){
-        h1.innerHTML = '12 Angry Men';
+        h1.append(document.createTextNode('12 Angry Men'));
     } else {
-        h1.innerHTML = '12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1);
+        h1.append(document.createTextNode('12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1)));
     }
 
     header.append(imgLink, h1)
@@ -94,77 +94,77 @@ const nav = document.getElementsByTagName('nav')[0];
     homeLink.setAttribute('class', 'link');
     homeLink.setAttribute('href', 'home.html')
     homeDiv.append(homeLink);
-    homeLink.innerHTML = 'Home';
+    homeLink.append(document.createTextNode('Home'));
     const castDiv = document.createElement('div');
     castDiv.setAttribute('class', 'nav__field');
     const castLink = document.createElement('a');
     castLink.setAttribute('class', 'link');
     castLink.setAttribute('href', 'cast-members.html')
     castDiv.append(castLink);
-    castLink.innerHTML = 'Cast';
+    castLink.append(document.createTextNode('Cast'));
     const adapDiv = document.createElement('div');
     adapDiv.setAttribute('class', 'nav__field');
     const adapLink = document.createElement('a');
     adapLink.setAttribute('class', 'link');
     adapLink.setAttribute('href', 'adaptations-and-parodies.html')
     adapDiv.append(adapLink);
-    adapLink.innerHTML = 'Adaptations';
+    adapLink.append(document.createTextNode('Adaptations'));
     const awarDiv = document.createElement('div');
     awarDiv.setAttribute('class', 'nav__field');
     const awarLink = document.createElement('a');
     awarLink.setAttribute('class', 'link');
     awarLink.setAttribute('href', 'awards.html')
     awarDiv.append(awarLink);
-    awarLink.innerHTML = 'Awards';
+    awarLink.append(document.createTextNode('Awards'));
     const tranDiv = document.createElement('div');
     tranDiv.setAttribute('class', 'nav__field');
     const tranLink = document.createElement('a');
     tranLink.setAttribute('class', 'link');
     tranLink.setAttribute('href', 'transcripts.html')
     tranDiv.append(tranLink);
-    tranLink.innerHTML = 'Transcripts';
+    tranLink.append(document.createTextNode('Transcripts'));
     const reviDiv = document.createElement('div');
     reviDiv.setAttribute('class', 'nav__field');
     const reviLink = document.createElement('a');
     reviLink.setAttribute('class', 'link');
     reviLink.setAttribute('href', 'reviews.html')
     reviDiv.append(reviLink);
-    reviLink.innerHTML = 'Reviews';
+    reviLink.append(document.createTextNode('Reviews'));
     const infoDiv = document.createElement('div');
     infoDiv.setAttribute('class', 'nav__field');
     const infoLink = document.createElement('a');
     infoLink.setAttribute('class', 'link');
     infoLink.setAttribute('href', 'info.html')
     infoDiv.append(infoLink);
-    infoLink.innerHTML = 'Info';
+    infoLink.append(document.createTextNode('Info'));
     const contDiv = document.createElement('div');
     contDiv.setAttribute('class', 'nav__field');
     const contLink = document.createElement('a');
     contLink.setAttribute('class', 'link');
     contLink.setAttribute('href', 'contact.html')
     contDiv.append(contLink);
-    contLink.innerHTML = 'Contact';
+    contLink.append(document.createTextNode('Contact'));
 
     nav.append(homeDiv, castDiv, adapDiv, awarDiv, tranDiv, reviDiv, infoDiv, contDiv);
 
     //FOOTER
     const parFooter = document.createElement('p');
     parFooter.setAttribute('class', 'footer__paragraph');
-    parFooter.innerHTML = 'This website has been created as part of the Web Technology course at Utrecht University.';
+    parFooter.append(document.createTextNode('This website has been created as part of the Web Technology course at Utrecht University.'));
     parFooter.append(document.createElement('br'));
-    parFooter.innerHTML += 'This work has been carried out by three students, namely, Bogaert, L.P. van den (Lars), Riel, E.P.M. van (Erik), Haghshenas, M. (Mehrad).';
+    parFooter.append(document.createTextNode('This work has been carried out by three students, namely, Bogaert, L.P. van den (Lars), Riel, E.P.M. van (Erik), Haghshenas, M. (Mehrad).'));
     parFooter.append(document.createElement('br'));
-    parFooter.innerHTML += 'Should you have any enquiries please ';
+    parFooter.append(document.createTextNode('Should you have any enquiries please '));
     const contact = document.createElement('a');
     contact.setAttribute('class', 'footer__contact-link--no-colour-change');
-    contact.innerHTML = 'contact us';
-    parFooter.innerHTML += '.';
+    contact.append(document.createTextNode('contact us'));
+    parFooter.append(document.createTextNode('.'));
     const spanFooter = document.createElement('span');
     spanFooter.setAttribute('class', 'footer__jump-top--position-absolute');
     const toTopLink = document.createElement('a');
     toTopLink.setAttribute('href', '#');
     toTopLink.setAttribute('class', 'footer__jump-top--no-colour-change');
-    toTopLink.innerHTML = 'Click here to scroll to the top of the page.';
+    toTopLink.append(document.createTextNode('Click here to scroll to the top of the page.'));
     spanFooter.append(toTopLink);
 
     footer.append(parFooter, spanFooter);
@@ -175,13 +175,18 @@ const nav = document.getElementsByTagName('nav')[0];
     class Movie {
         movieName = "placeholderName";
         movieYear = "placeholderYear";
-        movieLink = "https://en.wikipedia.org/wiki/Main_Page";
+        movieGenre = "placeholderGenre";
+        movieLink = "";
+        posterLink = "";
+        trailerLink = "";
         movieAbout = [];
+        moviePlot = [];
         artistArray = [];
 
-        constructor (name, year){
+        constructor (name, year, genre){
             this.movieName = name;
             this.movieYear = year;
+            this.movieGenre = genre;
         }
         
         addAllToPage(page){
@@ -203,17 +208,50 @@ const nav = document.getElementsByTagName('nav')[0];
             link.setAttribute("href", this.movieLink);
             link.setAttribute("target", "_blank");
             strongLink.appendChild(link);
-            link.innerHTML = this.movieName;
-            const aboutText = document.createTextNode(" is a movie from the year " + this.movieYear + ". ");
+            link.append(document.createTextNode(this.movieName));
+            const aboutText = document.createTextNode(" is a " + this.movieGenre + " movie from the year " + this.movieYear + ". The poster of the movie can be found on ");
+            about.append(aboutText);
+            const underlineLinkPoster = document.createElement('u');
+            about.appendChild(underlineLinkPoster);
+            const posterLinkTemp = document.createElement('a');
+            posterLinkTemp.setAttribute("class", "link--decoration");
+            posterLinkTemp.setAttribute("href", this.posterLink);
+            posterLinkTemp.setAttribute("target", "_blank");
+            underlineLinkPoster.appendChild(posterLinkTemp);
+            posterLinkTemp.append(document.createTextNode(this.posterLink.split('.')[1]));
+            about.append(document.createTextNode('. The trailer can either be found on the '));
+            const underlineLinkHomePage = document.createElement('u');
+            about.appendChild(underlineLinkHomePage);
+            const homePageLinkTemp = document.createElement('a');
+            homePageLinkTemp.setAttribute("class", "link--decoration");
+            homePageLinkTemp.setAttribute("href", 'home.html');
+            underlineLinkHomePage.appendChild(homePageLinkTemp);
+            homePageLinkTemp.append(document.createTextNode('home page'));
+            about.append(document.createTextNode(' of this website or on '));
+            const underlineLinkTrailer = document.createElement('u');
+            about.appendChild(underlineLinkTrailer);
+            const trailerLinkTemp = document.createElement('a');
+            trailerLinkTemp.setAttribute("class", "link--decoration");
+            trailerLinkTemp.setAttribute("href", this.trailerLink);
+            trailerLinkTemp.setAttribute("target", "_blank");
+            underlineLinkTrailer.appendChild(trailerLinkTemp);
+            trailerLinkTemp.append(document.createTextNode(this.trailerLink.split('.')[1]));
+            about.append(document.createTextNode('.'));
+
+
             for (let i = 0; i < this.movieAbout.length; i++){
                 const pAbout = document.createElement('p');
                 article.appendChild(pAbout);
-                pAbout.innerHTML = this.movieAbout[i];
+                pAbout.append(document.createTextNode(this.movieAbout[i]));
             }
-            about.append(aboutText);
+            for (let i = 0; i < this.moviePlot.length; i++){
+                const pPlot = document.createElement('p');
+                article.appendChild(pPlot);
+                pPlot.append(document.createTextNode(this.moviePlot[i]));
+            }
             const para = document.createElement('p');
             article.appendChild(para);
-            para.innerHTML = "Extended information about the artists that participated in this movie is listed below.";
+            para.append(document.createTextNode("Extended information about the artists that participated in this movie is listed below."));
 
             const artistsSection = document.createElement('section');
             article.appendChild(artistsSection);
@@ -223,7 +261,7 @@ const nav = document.getElementsByTagName('nav')[0];
             artistsSection.appendChild(headingDirector);
             const hrDir = document.createElement('hr');
             hrDir.setAttribute('class', 'hr--decoration');
-            headingDirector.innerHTML = 'Director(s)';
+            headingDirector.append(document.createTextNode('Director(s)'));
             artistsSection.appendChild(hrDir);
 
             for (let i=0; i< this.artistArray.length; i++){
@@ -235,7 +273,7 @@ const nav = document.getElementsByTagName('nav')[0];
             const headingWriter = document.createElement("h3");
             headingWriter.setAttribute('class', 'h3--position h3--attributes')
             artistsSection.appendChild(headingWriter);
-            headingWriter.innerHTML = 'Writer(s)';
+            headingWriter.append(document.createTextNode('Writer(s)'));
             const hrWri = document.createElement('hr');
             hrWri.setAttribute('class', 'hr--decoration');
             artistsSection.appendChild(hrWri);
@@ -249,7 +287,7 @@ const nav = document.getElementsByTagName('nav')[0];
             const headingActor = document.createElement("h3");
             headingActor.setAttribute('class', 'h3--position h3--attributes')
             artistsSection.appendChild(headingActor);
-            headingActor.innerHTML = 'Actor(s)';
+            headingActor.append(document.createTextNode('Actor(s)'));
             const hrAct = document.createElement('hr');
             hrAct.setAttribute('class', 'hr--decoration');
             artistsSection.appendChild(hrAct);
@@ -272,13 +310,17 @@ const nav = document.getElementsByTagName('nav')[0];
         yearDeath;
         infoArray = [];
         link;
-        info = "placeholderInfo";
+        info;
+        picture;
         
         constructor(name, yearBirth, yearDeath, link){
             this.name = name;
             this.yearBirth = yearBirth;
             this.yearDeath = yearDeath;
             this.link = link;
+            this.picture = "../files/images/" + name.replaceAll(" " , "_").replaceAll(".", "").toLowerCase() + ".jpg";
+            console.log(this.name);
+            console.log(this.picture);
         }
         addNodes(){
             const args = arguments;
@@ -304,6 +346,15 @@ const nav = document.getElementsByTagName('nav')[0];
             container.setAttribute('class', 'container');
             section.appendChild(container);
 
+            let imageDiv = document.createElement('div');
+            imageDiv.setAttribute('class', 'img-hover-zoom');
+            let image = document.createElement('img');
+            image.setAttribute('src', this.picture);
+            image.setAttribute('alt', 'this is a picture of ' + this.name);
+            image.setAttribute('height', '100');
+            imageDiv.style.width = "fit-content";
+            imageDiv.append(image);
+
             let strongTemp = document.createElement('STRONG');
             container.appendChild(strongTemp);
             let linkTemp = document.createElement('a');
@@ -311,7 +362,8 @@ const nav = document.getElementsByTagName('nav')[0];
             linkTemp.setAttribute("href", item.link);
             linkTemp.setAttribute("target", "_blank");
             strongTemp.appendChild(linkTemp);
-            linkTemp.innerHTML = item.name;
+            let imageBreak = document.createElement('br');
+            linkTemp.append(imageDiv, imageBreak, document.createTextNode(item.name));
             let aboutTemp = document.createElement('p');
             container.appendChild(aboutTemp);
             aboutText = item.name + " was a";
@@ -323,14 +375,14 @@ const nav = document.getElementsByTagName('nav')[0];
             for (let i = 0; i < item.infoArray.length - 1; i++){
                 let em = document.createElement("em");
                 aboutTemp.appendChild(em);
-                em.innerHTML = item.infoArray[i];
-                aboutTemp.innerHTML += ", ";
+                em.append(document.createTextNode(item.infoArray[i]));
+                aboutTemp.append(document.createTextNode(", "));
             } 
-            aboutTemp.innerHTML += "and ";
+            aboutTemp.append(document.createTextNode("and "));
             let emLast = document.createElement("em");
             aboutTemp.appendChild(emLast);
-            emLast.innerHTML = item.infoArray[item.infoArray.length -1]
-            aboutTemp.innerHTML += ".";
+            emLast.append(document.createTextNode(item.infoArray[item.infoArray.length -1]));
+            aboutTemp.append(document.createTextNode("."));
         }
     }
 
@@ -375,12 +427,24 @@ const nav = document.getElementsByTagName('nav')[0];
 
 //add data
     //Movie 12 Angry Men
-    const angry_men = new Movie("12 Angry Men", 1957);
+    const angry_men = new Movie("12 Angry Men", 1957, "courtroom drama");
     angry_men.movieLink = "https://en.wikipedia.org/wiki/12_Angry_Men_(1957_film)";
+    angry_men.posterLink = "https://en.wikipedia.org/wiki/12_Angry_Men_%281957_film%29#/media/File:12_Angry_Men_(1957_film_poster).jpg";
+    angry_men.trailerLink = "https://www.youtube.com/watch?v=TEN-2uTi2c0";
     angry_men.movieAbout = [
-        'The movie is an American courtroom drama film directed by Sidney Lumet, adapted from a 1954 teleplay of the same name by Reginald Rose. The film tells the story of a jury of 12 men as they deliberate the conviction or acquittal of a teenager charged with murder on the basis of reasonable doubt; disagreement and conflict among them force the jurors to question their morals and values. It stars Henry Fonda (who also produced the film with Reginald Rose), Lee J. Cobb, Ed Begley, E. G. Marshall, and Jack Warden.',
+        'The movie is an American film directed by Sidney Lumet, adapted from a 1954 teleplay of the same name by Reginald Rose. The film tells the story of a jury of 12 men as they deliberate the conviction or acquittal of a teenager charged with murder on the basis of reasonable doubt; disagreement and conflict among them force the jurors to question their morals and values. It stars Henry Fonda (who also produced the film with Reginald Rose), Lee J. Cobb, Ed Begley, E. G. Marshall, and Jack Warden.',
         '12 Angry Men explores many techniques of consensus-building and the difficulties encountered in the process among this group of men whose range of personalities adds to the intensity and conflict. The jury members are identified only by number; no names are revealed until an exchange of dialogue at the very end. The film forces the audience to evaluate their own self-image through observing the personalities, experiences, and actions of the jurors. The film is also notable for its almost exclusive use of one set, where all but three minutes of the film takes place.',
         'The film was selected as the second-best courtroom drama ever (after 1962'+"'"+'s To Kill a Mockingbird) by the American Film Institute for their AFI'+"'"+'s 10 Top 10 list. It is regarded by many as one of the greatest films ever made. In 2007, the film was selected for preservation in the United States National Film Registry by the Library of Congress as being "culturally, historically, or aesthetically significant".'
+    ];
+    angry_men.moviePlot = [
+        'In the sweltering jury room of the New York County Courthouse, a jury prepares to deliberate the case of an impoverished teenager accused of stabbing his abusive father to death. The judge instructs the Jury that if there is any reasonable doubt, the jurors are to return a verdict of not guilty; if found guilty, the defendant will receive a mandatory death sentence via the electric chair. The verdict must be unanimous.',
+        'At first, the case seems clear. A neighbor testified to witnessing the defendant stab his father from her window, through the windows of a passing elevated train. Another neighbor testified that he heard the defendant threaten to kill his father, and the father'+"'"+'s body hitting the ground; then, as he ran to his door, saw the defendant running down the stairs. The boy has a violent past; he had recently purchased a switchblade of the same type that was found, wiped of fingerprints, at the murder scene, but claimed he lost it.',
+        'In a preliminary vote, all jurors vote "guilty" except Juror 8, who believes that there should be some discussion before the verdict is made. He says he cannot vote "guilty" because reasonable doubt exists. With his first few arguments seemingly failing to convince any of the other jurors, Juror 8 suggests a secret ballot, from which he will abstain; if all the other jurors still vote guilty, he will acquiesce. The ballot reveals one "not guilty" vote. Juror 9 reveals that he changed his vote; he respects Juror 8'+"'"+'s motives, and agrees that there should be more discussion.',
+        'Juror 8 argues that the noise of the passing train would have obscured everything the second witness claimed to have overheard. Juror 5 changes his vote, followed by Juror 11. Jurors 5, 6, and 8 further question the second witness'+"'"+'s story. After looking at a diagram of the witness'+"'"+'s apartment and conducting an experiment, the jurors determine that it is impossible the disabled witness could have made it to the door in time. Juror 3, infuriated, argues with and tries to attack Juror 8. Jurors 2 and 6 change their votes; the jury is now evenly split.',
+        'Juror 4 doubts the defendant'+"'"+'s alibi based on the boy'+"'"+'s inability to recall specific details. Juror 8 tests Juror 4'+"'"+'s own memory to make a point. Jurors 2 and 5 point out the unlikelihood the boy made a stab wound angled downwards, as he was shorter than his father. Juror 7 changes his vote out of impatience rather than conviction, angering Juror 11. After another vote, Jurors 12 and 1 also change sides, leaving only three "guilty" votes.',
+        'Juror 10 begins a bigoted rant, causing Juror 4 to forbid him to speak for the remainder of the deliberation. When Juror 4 is pressed as to why he still maintains a guilty vote, he declares that the woman who saw the killing from across the street stands as solid evidence. Juror 12 reverts to a guilty vote.',
+        'After watching Juror 4 remove his glasses and rub the impressions they made on his nose, Juror 9 realizes that the first witness was constantly rubbing similar impressions on her own nose, indicating that she also was a habitual glasses wearer. He observes she also always dressed up in clothes befitting a younger woman, hence not wearing the glasses in court. Juror 8 remarks that the witness, who was trying to sleep when she saw the killing through her bedroom window, would not have had glasses on or the time to put them on, making her story questionable. Jurors 12, 10 and 4 all change their vote, leaving Juror 3 as the sole dissenter.',
+        'Juror 3 loudly tries to convince the others, revealing that his strained relationship with his own son makes him wish the defendant guilty. He breaks down in tears and changes his vote to "not guilty". As the others leave, Juror 8 graciously helps Juror 3 with his coat. The defendant is acquitted off-screen, and the jurors leave the courthouse. Jurors 8 and 9 stop to learn each other'+"'"+'s real names (Davis and McCardle, respectively), before parting.'
     ];
     
     //Sidney Lumet
@@ -673,6 +737,7 @@ for (let i = 0; i < links.length; i++) {
 function tooltipshow(event){
     let container = document.createElement("div");
     container.setAttribute("name", "tooltip");
+    container.setAttribute('class', 'tooltip')
 
     if (!header.contains(event.target) && !footer.contains(event.target) && !nav.contains(event.target)){
         body.insertBefore(container, body.firstChild);
@@ -715,19 +780,13 @@ function tooltipshow(event){
             text3 = document.createTextNode("Click to read more about " + nameTemp + " and go to: " );
             container.append(text3);
             container.appendChild(document.createElement('br'));
-            container.innerHTML += urlTemp;
+            container.append(document.createTextNode(urlTemp));
         }
     }
 
-    //tooltip style
-    container.style.position = "absolute";
-    container.style.background = "#AECDD0";
-    container.style.padding = "15px";
-    container.style.zIndex= "100";
-    container.style.left = (15 + event.pageX) + "px";
+    //tooltip-mouse position
+    container.style.left = Math.min((15 + event.pageX), (window.innerWidth - container.getBoundingClientRect().width)) + "px";
     container.style.top = (10 + event.pageY) + "px";
-    container.style.borderRadius = "15px";
-    container.style.border = "solid 2px"
 }
 
 function tooltiphide(event){

@@ -256,9 +256,14 @@ a:hover {
     white-space: nowrap;
 }
 
-.container__theme {
-    font-size: 2rem;
+.h4--position {
     margin: 1vw;
+}
+
+.h4--attributes {
+    color: #181823;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
 }
 
 .container__user {
@@ -284,8 +289,12 @@ a:hover {
 }
 
 .text-area--margin {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     margin-top: 1rem;
+}
+
+.contact--margin-bottom {
+    margin-bottom: 0.8rem;
 }
 
 .img-hover-zoom {
@@ -308,24 +317,52 @@ a:hover {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
-  }
-  
-  .select-dropdown select {
+}
+
+.select-dropdown select {
     width: 100%;
     border: none;
     outline: none;
     font-size: 1em;
-  }
-  
-  .select-dropdown select option {
+}
+
+.select-dropdown select option {
     font-size: 1em;
-  }
-  
-  .fontssize-box {
+}
+
+.fontssize-box {
     display: inline-block;
     padding: 0.5em;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
-  }
+}
+
+.adaptation-first-line--margin-left {
+    margin-left: 4rem;
+}
+
+.trailor-caption--text-decorated {
+    font-size: smaller;
+}
+
+.trailor-caption--position {
+    position: absolute;
+    left: 10.8rem;
+}
+
+.trailor-figure {
+    position: relative;
+}
+
+.tooltip{
+    position: absolute;
+    background: #AECDD0;
+    padding: 15px;
+    z-index: 100;
+    border-radius: 15px;
+    border: solid 2px;
+    max-width: 90vw;
+    overflow-wrap: break-word;
+}
