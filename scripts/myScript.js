@@ -187,9 +187,6 @@ class Movie {
         this.movieName = name;
         this.movieYear = year;
         this.movieGenre = genre;
-        this.movieName = "placeholderName";
-        this.movieYear = "placeholderYear";
-        this.movieGenre = "placeholderGenre";
         this.movieLink = "";
         this.posterLink = "";
         this.trailerLink = "";
@@ -205,7 +202,7 @@ class Movie {
         article.setAttribute("class", "article-block");
         const heading = document.createElement("h2");
         article.appendChild(heading);
-        heading.setAttribute("class", "h2--position h2--text-attributes");
+        heading.setAttribute("class", "h2--position h2--text-attributes line--width-full");
         const headingText = document.createTextNode("Information");
         heading.append(headingText);
         const about = document.createElement("p");

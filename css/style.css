@@ -35,7 +35,16 @@
 }
 
 .h1--position {
+    position: relative;
+    float: right;
     text-align: center;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.h1--width {
+    padding: 15px;
+    width: 74%;
 }
 
 .link--decoration {
@@ -63,6 +72,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 100%;
     margin-bottom: 1rem;
+    top: 0;
     position: sticky;
     text-align: center;
     z-index: 1;
@@ -110,6 +120,21 @@
     width: 80%;
 }
 
+.footer--positioning {
+    clear: both;
+    position: relative;
+
+}
+
+.footer--fit-content {
+    height: fit-content;
+    min-height: 100px;
+    min-width: 100%;
+    padding: 0.5% 0 1%;
+    white-space: nowrap;
+    width: fit-content;
+}
+
 .footer--background-colour {
     background-color: #5BC0F8;
     padding-top: 0.8rem;
@@ -145,10 +170,11 @@
 
 .movie-script {
     border-style: solid;
+    min-height: 75%;
     height: 800px;
     margin: 2vh auto 0;
     text-align: center;
-    width: 84vw;
+    width: 100%;
 }
 
 .article-block {
@@ -303,12 +329,6 @@
     width: 16%;
 }
 
-.h1--width {
-    float: left;
-    padding: 15px;
-    width: 74%;
-}
-
 .navigation-list--two-row {
     float: left;
     padding: 15px;
@@ -370,6 +390,8 @@
 
     .footer__jump-top--position-absolute {
         font-size: 80%;
+        line-height: 1.4rem;
+        float: right;
     }
 
     .body--text-font {
@@ -380,22 +402,32 @@
         line-height: 1.7rem;
     }
 
-    .footer__jump-top--position-absolute {
-        line-height: 1.4rem;
+    .figure{
+        margin: 0;
     }
-    .article-large{
-        position:relative;
-        left: 5vw;
-        bottom:115vh;
-    }
-    .aside-large{
-        position: relative;
-        left:7vh;
-    }
+    
     .index-large {
-        width:40% !important;
+        width: 40% !important;
         display: inline-block;
     }
+
+    .article-large{
+        float: left;
+        left: 4%;
+        position: sticky;
+        text-align: justify;
+        text-justify: inter-word;
+        width: 53% !important;
+        margin-top: 0;
+    }
+
+    .aside-large{
+        color: #181823;
+        float: right;
+        right: 4%;
+        width: 34% !important;
+    }
+
     .article{
         border:none;
     }
