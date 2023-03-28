@@ -59,7 +59,7 @@ function tooltipshow(event) {
     }
 
     //tooltip-mouse position
-    container.style.left = Math.min((15 + event.pageX), (window.innerWidth - container.getBoundingClientRect().width - body.getBoundingClientRect().left) - 15) + "px"; console.log(window.screenX);
+    container.style.left = Math.min((15 + event.pageX), (window.innerWidth - container.getBoundingClientRect().width - body.getBoundingClientRect().left) - 15) + "px";
     container.style.top = (10 + event.pageY) + "px";
 }
 
