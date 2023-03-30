@@ -2,14 +2,20 @@
 const http = require('node:http');
 const fs   = require('node:fs');
 const express = require ('express');
+const app    = express();
+const url     = require('url');
 
-const index = fs.readFileSync('html/index.html','utf-8');
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(index);
-    res.end();
+app.set('view engine', 'ejs');
+app.use(express.static("./public"));
+app.get('/info', (req, res) => {
+    const id = req.query.id;
+    console.log(id);
+    res.render('info', {ejsid: id});
 });
-
-
-server.listen(5001,'localhost');
+app.all("*", (req,res) => {
+    res.status(404).send("resource not found ... ");
+});
+app.listen(PORT=5001, (req, res) => {
+    console.log(`server is running on port ${PORT}...`);
+});
 
