@@ -1,9 +1,24 @@
 //Javascript
 
+let app = require('express') ();
+let url = require('url');
+let id = null
+
+app.get('/', function (req, res) {
+    var parsedUrl = url.parse(request.url, true); // true - query string as object 
+    var queryAsObject = parsedUrl.query; // to get the query string 
+    id = queryAsObject.id; // to get the target value
+}); 
+app.listen(5500, 'localhost');
+
+
+
+
 //classes for info-page
 //movie
 class Movie {
-    constructor(name, year, genre) {
+    constructor(id, name, year, genre) {
+        this.movieID = id;
         this.movieName = name;
         this.movieYear = year;
         this.movieGenre = genre;
@@ -248,7 +263,7 @@ class Actors extends Artists {
 
 //add data
 //Movie 12 Angry Men
-const angry_men = new Movie("12 Angry Men", 1957, "courtroom drama");
+const angry_men = new Movie(0, "12 Angry Men", 1957, "courtroom drama");
 angry_men.movieLink = "https://en.wikipedia.org/wiki/12_Angry_Men_(1957_film)";
 angry_men.posterLink = "https://en.wikipedia.org/wiki/12_Angry_Men_%281957_film%29#/media/File:12_Angry_Men_(1957_film_poster).jpg";
 angry_men.trailerLink = "https://www.youtube.com/watch?v=TEN-2uTi2c0";

@@ -83,6 +83,9 @@ const nav = document.getElementsByTagName('nav')[0];
     header.append(imgLink, h1);
 
     //NAVIGATION
+    const navList = document.createElement('ul');
+    navList.setAttribute('class', 'nav-list')
+    nav.append(navList);
     const homeList = document.createElement('li');
     homeList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
     const homeLink = document.createElement('a');
@@ -98,7 +101,7 @@ const nav = document.getElementsByTagName('nav')[0];
     contList.append(contLink);
     contLink.append(document.createTextNode('Contact'));
 
-    nav.append(homeList, contList);
+    navList.append(homeList, contList);
 
     //FOOTER
     const parFooter = document.createElement('p');

@@ -3,13 +3,31 @@
 const paginatedList = document.getElementById("paginated-list");
 
 //!! ADD PLACEHOLDERS JUST TO ILLUSTRATE THE PAGINATION. IN THIS PART WILL THE DATABASE BE IMPLEMENTED !!
-for (let i = 1; i < 51; i++){
-    let itemPag = document.createElement("li");
-    itemPag.setAttribute('class', 'paginated-item');
-    itemPag.append(document.createTextNode('Placeholder for Movie '), i);
-    paginatedList.append(itemPag);
+const itemAngryMen = document.createElement("li");
+itemAngryMen.setAttribute('class', 'paginated-item');
+const btnAngryMen = document.createElement("button");
+itemAngryMen.append(btnAngryMen);
+btnAngryMen.setAttribute('class', 'paginated-item__button');
+btnAngryMen.append(document.createTextNode('Placeholder for Movie 12 Angry Men'));
+paginatedList.append(itemAngryMen);
+btnAngryMen.addEventListener("click", function () {
+  window.location = "../html/info.html?id=0"
+});
+
+for (let i = 1; i < 50; i++){
+  const itemPag = document.createElement("li");
+  itemPag.setAttribute('class', 'paginated-item');
+  const btnPag = document.createElement("button");
+  itemPag.append(btnPag);
+  btnPag.setAttribute('class', 'paginated-item__button');
+  btnPag.append(document.createTextNode('Placeholder for Movie '+i));
+  paginatedList.append(itemPag);
+  btnPag.addEventListener("click", function () {
+    window.location = "../html/info.html?id="+i;
+  });
 }
 
+//Constants
 const paginationNumbers = document.getElementById("pagination-numbers");
 const listItems = paginatedList.querySelectorAll("li");
 const nextButton = document.getElementById("next-button");
