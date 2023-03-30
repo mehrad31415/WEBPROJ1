@@ -1,8 +1,12 @@
 //Javascript
 
+let movieArray = [];
+let id = 0;
+
+// HOW TO TEST REQUIRE???
+/*
 let app = require('express') ();
 let url = require('url');
-let id = null
 
 app.get('/', function (req, res) {
     var parsedUrl = url.parse(request.url, true); // true - query string as object 
@@ -10,8 +14,7 @@ app.get('/', function (req, res) {
     id = queryAsObject.id; // to get the target value
 }); 
 app.listen(5500, 'localhost');
-
-
+*/
 
 
 //classes for info-page
@@ -30,6 +33,10 @@ class Movie {
         this.artistArray = [];
     }
 
+    addToMovieArray(){
+        movieArray.push(this);
+    }
+
     addAllToPage() {
         const container = document.getElementsByClassName("body__container")[0];
         const article = document.createElement("article");
@@ -38,7 +45,7 @@ class Movie {
         const heading = document.createElement("h2");
         article.appendChild(heading);
         heading.setAttribute("class", "h2--position h2--text-attributes line--width-full");
-        const headingText = document.createTextNode("Information");
+        const headingText = document.createTextNode(this.movieName + " - Information");
         heading.append(headingText);
         const about = document.createElement("p");
         article.appendChild(about);
@@ -463,4 +470,19 @@ rudy_bond.addNodes("Tramlijn (1951)", "On the Waterfront (1954)", "The Godfather
 rudy_bond.toTooltip();
 rudy_bond.addToMovie(angry_men);
 
-if (page == "info.html") angry_men.addAllToPage();
+angry_men.addToMovieArray();
+
+if (page == "info.html") {
+    let movie = movieArray.find(obj => {
+        return obj.movieID === id;
+    });
+
+    movie.addAllToPage();
+} 
+
+if (id == 0) {
+    //<script src="../scripts/scriptAngryMen.js"></script>
+    const infoScript = document.createElement('script');
+    infoScript.setAttribute('src', '../scripts/scriptAngryMen.js');
+    body.append(infoScript);
+}

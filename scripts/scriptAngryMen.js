@@ -73,7 +73,7 @@ if (page == 'angry-men-home.html' || page == '') {
     infoList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
     const infoLink = document.createElement('a');
     infoLink.setAttribute('class', 'link');
-    infoLink.setAttribute('href', 'info.html');
+    infoLink.setAttribute('href', 'info.html?id=0');
     infoList.append(infoLink);
     infoLink.append(document.createTextNode('Info'));
 
