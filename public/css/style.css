@@ -80,6 +80,7 @@
 
 .nav__no-margin{
     margin-bottom: 0;
+    border-bottom: solid 5px #324555;
 }
 
 .nav__field {
@@ -337,6 +338,7 @@
     float: left;
     padding: 15px;
     width: 25%;
+
 }
 
 .line--width-full {
@@ -363,8 +365,6 @@
 
 .nav-list {
     margin: 0;
-    display: flex;
-    justify-content: space-evenly;
 }
 
 /* PAGINATION */
@@ -440,6 +440,11 @@
 
     .table2--width-low {
         display: none;
+    }
+
+    .nav-list{
+        display: flex;
+        justify-content: space-evenly;
     }
 }
 
