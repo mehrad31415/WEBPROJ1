@@ -9,7 +9,7 @@ const body = document.getElementsByTagName('body')[0];
 const header = document.getElementsByTagName('header')[0];
 const footer = document.getElementsByTagName('footer')[0];
 const nav = document.getElementsByTagName('nav')[0];
-
+let nav2 = null;
 
 //repeating elements
     //CLASSES
@@ -66,7 +66,7 @@ const nav = document.getElementsByTagName('nav')[0];
 
     //HEADER
     const imgLink = document.createElement('a');
-    imgLink.setAttribute('href', 'index.html');
+    imgLink.setAttribute('href', 'home');
     imgLink.setAttribute('class', 'film-frame--width');
     const img = document.createElement('img');
     img.setAttribute('src', '../files/images/film-frame.png');
@@ -90,14 +90,14 @@ const nav = document.getElementsByTagName('nav')[0];
     homeList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
     const homeLink = document.createElement('a');
     homeLink.setAttribute('class', 'link');
-    homeLink.setAttribute('href', 'index.html');
+    homeLink.setAttribute('href', 'home');
     homeList.append(homeLink);
     homeLink.append(document.createTextNode('Home'));
     const contList = document.createElement('li');
     contList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
     const contLink = document.createElement('a');
     contLink.setAttribute('class', 'link');
-    contLink.setAttribute('href', 'contact.html');
+    contLink.setAttribute('href', 'contact');
     contList.append(contLink);
     contLink.append(document.createTextNode('Contact'));
 

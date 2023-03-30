@@ -11,7 +11,7 @@ btnAngryMen.setAttribute('class', 'paginated-item__button');
 btnAngryMen.append(document.createTextNode('Placeholder for Movie 12 Angry Men'));
 paginatedList.append(itemAngryMen);
 btnAngryMen.addEventListener("click", function () {
-  window.location = "../html/info.html?id=0"
+  window.location = "plot-AM"
 });
 
 for (let i = 1; i < 50; i++){
@@ -23,7 +23,7 @@ for (let i = 1; i < 50; i++){
   btnPag.append(document.createTextNode('Placeholder for Movie '+i));
   paginatedList.append(itemPag);
   btnPag.addEventListener("click", function () {
-    window.location = "../html/info.html?id="+i;
+    window.location = "info.html?id="+i;
   });
 }
 

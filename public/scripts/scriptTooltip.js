@@ -10,8 +10,12 @@ function tooltipshow(event) {
     let container = document.createElement("div");
     container.setAttribute("name", "tooltip");
     container.setAttribute('class', 'tooltip');
-
-    if (!footer.contains(event.target) && !nav.contains(event.target)) {
+    
+    function checkNav2(){
+        if (nav2 == null) return false;
+        return nav2.contains(event.target);
+    }
+    if (!footer.contains(event.target) && !nav.contains(event.target) && !checkNav2() ) {
         body.insertBefore(container, body.firstChild);
 
         let nodesTemp = [];
