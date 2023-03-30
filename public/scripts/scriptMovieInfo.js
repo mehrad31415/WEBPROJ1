@@ -1,7 +1,8 @@
 //Javascript
 
 let movieArray = [];
-
+const id = ejsid;
+console.log('id = ' + id);
 
 //classes for info-page
 //movie
@@ -17,10 +18,6 @@ class Movie {
         this.movieAbout = [];
         this.moviePlot = [];
         this.artistArray = [];
-    }
-
-    addToMovieArray(){
-        movieArray.push(this);
     }
 
     addAllToPage() {
@@ -256,7 +253,7 @@ class Actors extends Artists {
 
 //add data
 //Movie 12 Angry Men
-const angry_men = new Movie("0", "12 Angry Men", 1957, "courtroom drama");
+const angry_men = new Movie(0, "12 Angry Men", 1957, "courtroom drama");
 angry_men.movieLink = "https://en.wikipedia.org/wiki/12_Angry_Men_(1957_film)";
 angry_men.posterLink = "https://en.wikipedia.org/wiki/12_Angry_Men_%281957_film%29#/media/File:12_Angry_Men_(1957_film_poster).jpg";
 angry_men.trailerLink = "https://www.youtube.com/watch?v=TEN-2uTi2c0";
@@ -456,11 +453,11 @@ rudy_bond.addNodes("Tramlijn (1951)", "On the Waterfront (1954)", "The Godfather
 rudy_bond.toTooltip();
 rudy_bond.addToMovie(angry_men);
 
-angry_men.addToMovieArray();
+movieArray.push(angry_men);
 
-if (page == "info.html") {
+if (page == "info") {
     let movie = movieArray.find(obj => {
-        return obj.movieID === id;
+        return '"' + obj.movieID +  '"' === id;
     });
 
     console.log(movie);
@@ -468,7 +465,7 @@ if (page == "info.html") {
     movie.addAllToPage();
 } 
 
-if (jsid == '"0"') {
+if (id == '"0"') {
     //<script src="../scripts/scriptAngryMen.js"></script>
     const infoScript = document.createElement('script');
     infoScript.setAttribute('src', '../scripts/scriptAngryMen.js');
