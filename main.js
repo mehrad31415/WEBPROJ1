@@ -12,8 +12,9 @@ if(!exists) {
 }
 const sqlite3   = require("sqlite3").verbose(); 
 const db        = new sqlite3.Database(file);
-let movieID = 0;
-let movie;
+let movieID = null;
+let movieArray = [];
+let artistArray = [];
 
 //DATABASE
 db.serialize(function() { 
@@ -56,7 +57,7 @@ db.serialize(function() {
             "https://www.youtube.com/watch?v=TEN-2uTi2c0",
             'The movie is an American film directed by Sidney Lumet, adapted from a 1954 teleplay of the same name by Reginald Rose. The film tells the story of a jury of 12 men as they deliberate the conviction or acquittal of a teenager charged with murder on the basis of reasonable doubt; disagreement and conflict among them force the jurors to question their morals and values. It stars Henry Fonda (who also produced the film with Reginald Rose), Lee J. Cobb, Ed Begley, E. G. Marshall, and Jack Warden.',
             'In the sweltering jury room of the New York County Courthouse, a jury prepares to deliberate the case of an impoverished teenager accused of stabbing his abusive father to death. The judge instructs the Jury that if there is any reasonable doubt, the jurors are to return a verdict of not guilty; if found guilty, the defendant will receive a mandatory death sentence via the electric chair. The verdict must be unanimous.'
-        )
+        );
         stmtMovie.run(
             1,
             "test", 
@@ -67,27 +68,88 @@ db.serialize(function() {
             "www.youtube.com",
             "this movie is about nothing",
             "this is a plotless movie"        
+        );
+
+        stmtArtist.run(
+            0, 
+            "director", 
+            "Sidney Lumet",
+            1924,
+            2011,
+            "https://en.wikipedia.org/wiki/Sidney_Lumet",
+            'Dog Day Afternoon (1975), Network (1976), The Verdict (1982), Prince of the City (1981)',
+            'Something'
+        );
+
+        stmtArtist.run(
+            0, 
+            "writer", 
+            "Reginald Rose",
+            1920,
+            2002,
+            "https://en.wikipedia.org/wiki/Reginald_Rose",
+            'Crime in the Streets (1956), The Porcelain Year (1950), Sacco-Vanzetti Story (1960), Black Monday (1962), Dear Friends (1968), This Agony, This Triumph (1972)',
+            'Something'
+        );
+
+        stmtArtist.run(
+            0,
+            "actor",
+            "Martin Balsam",
+            1919,
+            1996,
+            "https://en.wikipedia.org/wiki/Martin_Balsam",
+            'something (year), something (year), something (year)',
+            "Something"
         )
+
+        stmtArtist.run(
+            1,
+            "director",
+            "NoNameDirector",
+            1998,
+            null,
+            "www.wikipedia.org",
+            'something in (1999), and something in (2023), last thing was in (2050)',
+            "Not an interesting person"
+        )
+
+        stmtArtist.run(
+            1,
+            "writer",
+            "NoNameWriter",
+            1998,
+            null,
+            "www.wikipedia.org",
+            'something in (1999), and something in (2023), last thing was in (2050)',
+            "Not an interesting person"
+        )
+
+        stmtArtist.run(
+            1,
+            "actor",
+            "NoNameActor",
+            1998,
+            null,
+            "www.wikipedia.org",
+            'something in (1999), and something in (2023), last thing was in (2050)',
+            "Not an interesting person"
+        )
+
 
         stmtMovie.finalize();
         stmtArtist.finalize();
-        app.get('/info', (req, res) => {
-            movieID = req.query.id;
-        });
-        console.log("movieID = " + movieID)
-        if (movieID != null){
-            db.each("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot FROM Movie", function(err, row) { 
-                if (movieID == row.movieID){
-                    movie = {movieID: row.movieID, movieName: row.movieName, movieYear: row.movieYear, movieGenre: row.movieGenre, movieLink: row.movieLink, posterLink: row.posterLink, trailerLink: row.trailerLink, movieAbout: row.movieAbout, moviePlot: row.moviePlot};
-                    console.log(movie);
-                }
-            });
-        }
     }
+    db.each("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot FROM Movie", function(err, row) {
+        movieArray.push({movieID: row.movieID, movieName: row.movieName, movieYear: row.movieYear, movieGenre: row.movieGenre, movieLink: row.movieLink, posterLink: row.posterLink, trailerLink: row.trailerLink, movieAbout: row.movieAbout, moviePlot: row.moviePlot});
+    });
+    db.each("SELECT artistMovie, artistRole, artistName, artistYearBirth, artistYearDeath, artistLink, artistArray, artistInfo FROM Artist", function(err, row) {
+        artistArray.push({artistMovie: row.artistMovie, artistRole: row.artistRole, artistName: row.artistName, artistYearBirth: row.artistYearBirth, artistYearDeath: row.artistYearDeath, artistLink: row.artistLink, artistArray: row.artistArray, artistInfo: row.artistInfo});
+    });
 });
 db.close();
 
-//LINK EJS
+//LINK EJS PAGES
 app.set('view engine', 'ejs');
 app.use(express.static("./public"));
 app.get('/', (req, res) =>{
@@ -118,7 +180,19 @@ app.get('/transcripts-AM', (req, res) =>{
     res.render('transcripts')
 });
 app.get('/info', (req, res) => {
-    res.render('info', { ejsmovie: JSON.stringify(movie) });
+    movieID = req.query.id;
+    let movie = movieArray.find(obj => {
+        return obj.movieID == movieID;
+    });
+    let artists = [];
+    for (let i = 0; i < artistArray.length; i++){
+        if (artistArray[i].artistMovie == movieID) artists.push(artistArray[i]);
+    }
+    console.log(artists);
+    res.render('info', { 
+        ejsMovie: JSON.stringify(movie),
+        ejsArtists: JSON.stringify(artists)
+    });
 });
 
 app.all("*", (req,res) => {

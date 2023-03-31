@@ -1,8 +1,10 @@
 //Javascript
 
 let movieArray = [];
-let id = ejsmovie.movieID;
-console.log("ejsmovie = " + ejsmovie)
+movie = JSON.parse(ejsMovie);
+artists = JSON.parse(ejsArtists);
+console.log(artists);
+let id = movie.movieID;
 
 //classes for info-page
 //movie
@@ -273,192 +275,208 @@ class Actors extends Artists {
 //     'Juror 3 loudly tries to convince the others, revealing that his strained relationship with his own son makes him wish the defendant guilty. He breaks down in tears and changes his vote to "not guilty". As the others leave, Juror 8 graciously helps Juror 3 with his coat. The defendant is acquitted off-screen, and the jurors leave the courthouse. Jurors 8 and 9 stop to learn each other' + "'" + 's real names (Davis and McCardle, respectively), before parting.'
 // ];
 
-const currentMovie = new Movie(ejsmovie.movieID, ejsmovie.movieName, ejsmovie.movieYear, ejsmovie.movieGenre);
-currentMovie.movieLink = ejsmovie.movieLink;
-currentMovie.posterLink = ejsmovie.posterLink;
-currentMovie.trailerLink = ejsmovie.trailerLink;
-currentMovie.movieAbout = ejsmovie.movieAbout;
-currentMovie.moviePlot = ejsmovie.moviePlot;
+const currentMovie = new Movie(movie.movieID, movie.movieName, movie.movieYear, movie.movieGenre);
+currentMovie.movieLink = movie.movieLink;
+currentMovie.posterLink = movie.posterLink;
+currentMovie.trailerLink = movie.trailerLink;
+currentMovie.movieAbout.push(movie.movieAbout);
+currentMovie.moviePlot.push(movie.moviePlot);
 
-//Sidney Lumet
-const sidney_lumet = new Director(
-    "Sidney Lumet",
-    1924,
-    2011,
-    "https://en.wikipedia.org/wiki/Sidney_Lumet"
-);
-sidney_lumet.info = 'According to The Encyclopedia of Hollywood, Lumet was one of the most prolific filmmakers of the modern era, directing more than one movie a year on average since his directorial debut in 1957. Turner Classic Movies notes his "strong direction of actors", "vigorous storytelling" and the "social realism" in his best work. Film critic Roger Ebert described him as "one of the finest craftsmen and warmest humanitarians among all film directors". Lumet was also known as an "actor' + "'" + 's director", having worked with the best of them during his career, probably more than "any other director". Sean Connery, who acted in five of his films, considered him one of his favorite directors, and one who had that "vision thing".';
-sidney_lumet.addNodes("Dog Day Afternoon (1975)", "Network (1976)", "The Verdict (1982)", "Prince of the City (1981)");
-sidney_lumet.toTooltip();
-sidney_lumet.addToMovie(currentMovie);
+for (i = 0; i < artists.length; i++){
+    let artistTemp = new Artists(
+        artists[i].artistName,
+        artists[i].artistYearBirth,
+        artists[i].artistYearDeath,
+        artists[i].artistLink);
+    artistTemp.role = artists[i].artistRole;
+    artistTemp.info = artists[i].artistInfo;
+    arrayTemp = artists[i].artistArray.split(',');
+    for (i = 0; i < arrayTemp.length; i++){
+        artistTemp.infoArray.push(arrayTemp[i]);
+    }
+    console.log("artistTemp = " +artistTemp);
+    artistTemp.addToMovie(currentMovie);
+}
 
-//Reginald Rose
-const reginald_rose = new Writer(
-    "Reginald Rose",
-    1920,
-    2002,
-    "https://en.wikipedia.org/wiki/Reginald_Rose"
-);
-reginald_rose.info = 'Reginald Rose was born in Manhattan on December 10, 1920, the son of Alice (née Obendorfer) and William Rose, a lawyer. Rose attended Townsend Harris High School and briefly attended City College (now part of the City University of New York). He served in the U.S. Army during World War II, from 1942-46, where he was promoted to first lieutenant. Rose began trying to write when he was 15 years old and living in Harlem, but he said, "I didn' + "'" + 't make it until I was 30." In the interim, he worked as an ad agency' + "'" + 's copywriter, a publicist for Warner Bros, a window washer, a clerk, and a counselor at a camp.';
-reginald_rose.addNodes("Crime in the Streets (1956)", "The Porcelain Year (1950)", "Sacco-Vanzetti Story (1960)", "Black Monday (1962)", "Dear Friends (1968)", "This Agony, This Triumph (1972)");
-reginald_rose.toTooltip();
-reginald_rose.addToMovie(currentMovie);
+// //Sidney Lumet
+// const sidney_lumet = new Director(
+//     "Sidney Lumet",
+//     1924,
+//     2011,
+//     "https://en.wikipedia.org/wiki/Sidney_Lumet"
+// );
+// sidney_lumet.info = 'According to The Encyclopedia of Hollywood, Lumet was one of the most prolific filmmakers of the modern era, directing more than one movie a year on average since his directorial debut in 1957. Turner Classic Movies notes his "strong direction of actors", "vigorous storytelling" and the "social realism" in his best work. Film critic Roger Ebert described him as "one of the finest craftsmen and warmest humanitarians among all film directors". Lumet was also known as an "actor' + "'" + 's director", having worked with the best of them during his career, probably more than "any other director". Sean Connery, who acted in five of his films, considered him one of his favorite directors, and one who had that "vision thing".';
+// sidney_lumet.addNodes("Dog Day Afternoon (1975)", "Network (1976)", "The Verdict (1982)", "Prince of the City (1981)");
+// sidney_lumet.toTooltip();
+// sidney_lumet.addToMovie(currentMovie);
 
-//Martin Balsam
-const martin_balsam = new Actors(
-    "Martin Balsam",
-    1919,
-    1996,
-    "https://en.wikipedia.org/wiki/Martin_Balsam"
-);
-martin_balsam.info = "He had a prolific career in character roles in film, in theatre, and on television. An early member of the Actors Studio, he began his career on the New York stage, winning a Tony Award for Best Actor in a Play for Robert Anderson's You Know I Can't Hear You When the Water's Running (1968). He won the Academy Award for Best Supporting Actor for his performance in A Thousand Clowns (1965).";
-martin_balsam.addNodes("All the President's Men (1976)", "Psycho (1960)", "A Thousand (1965)", "You Know I Can't Hear You When the Water's Running (1968)", "Breakfast at Tiffany's (1961)", "The Carpetbaggers (1964)");
-martin_balsam.toTooltip();
-martin_balsam.addToMovie(currentMovie);
+// //Reginald Rose
+// const reginald_rose = new Writer(
+//     "Reginald Rose",
+//     1920,
+//     2002,
+//     "https://en.wikipedia.org/wiki/Reginald_Rose"
+// );
+// reginald_rose.info = 'Reginald Rose was born in Manhattan on December 10, 1920, the son of Alice (née Obendorfer) and William Rose, a lawyer. Rose attended Townsend Harris High School and briefly attended City College (now part of the City University of New York). He served in the U.S. Army during World War II, from 1942-46, where he was promoted to first lieutenant. Rose began trying to write when he was 15 years old and living in Harlem, but he said, "I didn' + "'" + 't make it until I was 30." In the interim, he worked as an ad agency' + "'" + 's copywriter, a publicist for Warner Bros, a window washer, a clerk, and a counselor at a camp.';
+// reginald_rose.addNodes("Crime in the Streets (1956)", "The Porcelain Year (1950)", "Sacco-Vanzetti Story (1960)", "Black Monday (1962)", "Dear Friends (1968)", "This Agony, This Triumph (1972)");
+// reginald_rose.toTooltip();
+// reginald_rose.addToMovie(currentMovie);
 
-//John Fiedler
-const john_fiedler = new Actors(
-    "John Fiedler",
-    1925,
-    2005,
-    "https://en.wikipedia.org/wiki/John_Fiedler"
-);
-john_fiedler.info = "He had a prolific career in character roles in film, in theatre, and on television. An early member of the Actors Studio, he began his career on the New York stage, winning a Tony Award for Best Actor in a Play for Robert Anderson's You Know I Can't Hear You When the Water's Running (1968). He won the Academy Award for Best Supporting Actor for his performance in A Thousand Clowns (1965). Fiedler was born in Platteville, Wisconsin, a son of beer salesman Donald Fiedler and his wife Margaret (née Phelan). He was of German and Irish descent.";
-john_fiedler.addNodes("The Odd Couple (1965)", "The Bob Newhart Show (1972)", "Robin Hood (1973)", "A Raisin in the Sun (1961)");
-john_fiedler.toTooltip();
-john_fiedler.addToMovie(currentMovie);
+// //Martin Balsam
+// const martin_balsam = new Actors(
+//     "Martin Balsam",
+//     1919,
+//     1996,
+//     "https://en.wikipedia.org/wiki/Martin_Balsam"
+// );
+// martin_balsam.info = "He had a prolific career in character roles in film, in theatre, and on television. An early member of the Actors Studio, he began his career on the New York stage, winning a Tony Award for Best Actor in a Play for Robert Anderson's You Know I Can't Hear You When the Water's Running (1968). He won the Academy Award for Best Supporting Actor for his performance in A Thousand Clowns (1965).";
+// martin_balsam.addNodes("All the President's Men (1976)", "Psycho (1960)", "A Thousand (1965)", "You Know I Can't Hear You When the Water's Running (1968)", "Breakfast at Tiffany's (1961)", "The Carpetbaggers (1964)");
+// martin_balsam.toTooltip();
+// martin_balsam.addToMovie(currentMovie);
 
-//Lee J. Cobb
-const lee_j_cobb = new Actors(
-    "Lee J. Cobb",
-    1911,
-    1976,
-    "https://en.wikipedia.org/wiki/Lee_J._Cobb"
-);
-lee_j_cobb.info = "he is known both for film roles and his work on the Broadway stage, as well as for his television role as the star of the TV series The Virginian. He often played arrogant, intimidating and abrasive characters, but he also acted as respectable figures such as judges and police officers. Cobb was born in New York City, to a Jewish family of Russian and Romanian origin. He grew up in the Bronx, New York, on Wilkins Avenue, near Crotona Park. His parents were Benjamin (Benzion) Jacob, a compositor for a foreign-language newspaper, and Kate (Neilecht).";
-lee_j_cobb.addNodes("On the Waterfront (1954)", "Exodus (1960)", "The Exorcist (1973)", "On the Waterfront (1954)", "The Brothers Karamazov (1958)", "Man of the West (1958)", "Exodus (1960)", "How the West Was Won (1962)", "Our Man Flint (1966)");
-lee_j_cobb.toTooltip();
-lee_j_cobb.addToMovie(currentMovie);
+// //John Fiedler
+// const john_fiedler = new Actors(
+//     "John Fiedler",
+//     1925,
+//     2005,
+//     "https://en.wikipedia.org/wiki/John_Fiedler"
+// );
+// john_fiedler.info = "He had a prolific career in character roles in film, in theatre, and on television. An early member of the Actors Studio, he began his career on the New York stage, winning a Tony Award for Best Actor in a Play for Robert Anderson's You Know I Can't Hear You When the Water's Running (1968). He won the Academy Award for Best Supporting Actor for his performance in A Thousand Clowns (1965). Fiedler was born in Platteville, Wisconsin, a son of beer salesman Donald Fiedler and his wife Margaret (née Phelan). He was of German and Irish descent.";
+// john_fiedler.addNodes("The Odd Couple (1965)", "The Bob Newhart Show (1972)", "Robin Hood (1973)", "A Raisin in the Sun (1961)");
+// john_fiedler.toTooltip();
+// john_fiedler.addToMovie(currentMovie);
 
-//E. G. marshall
-const e_g_marshall = new Actors(
-    "E. G. Marshall",
-    1914,
-    1998,
-    "https://en.wikipedia.org/wiki/E._G._Marshall"
-);
-e_g_marshall.info = 'Marshall was born Everett Eugene Grunz[1] in Owatonna, Minnesota,[2] the son of Hazel Irene (née Cobb) and Charles G. Grunz. His paternal grandparents were German immigrants. During his life, he chose not to reveal what "E. G." stood for, saying that it stood for "Everybody' + "'" + 's Guess." The U.S. Social Security Claims Index states that he was listed with the Social Security Administration in June 1937 as Everett Eugene Grunz, and in December 1975 as E.G. Marshall.';
-e_g_marshall.addNodes("Creepshow (1982)", "National Lampoon's Cristmas Vacation (1989)", "Nixon (1995)", "Superman II (1980)");
-e_g_marshall.toTooltip();
-e_g_marshall.addToMovie(currentMovie);
+// //Lee J. Cobb
+// const lee_j_cobb = new Actors(
+//     "Lee J. Cobb",
+//     1911,
+//     1976,
+//     "https://en.wikipedia.org/wiki/Lee_J._Cobb"
+// );
+// lee_j_cobb.info = "he is known both for film roles and his work on the Broadway stage, as well as for his television role as the star of the TV series The Virginian. He often played arrogant, intimidating and abrasive characters, but he also acted as respectable figures such as judges and police officers. Cobb was born in New York City, to a Jewish family of Russian and Romanian origin. He grew up in the Bronx, New York, on Wilkins Avenue, near Crotona Park. His parents were Benjamin (Benzion) Jacob, a compositor for a foreign-language newspaper, and Kate (Neilecht).";
+// lee_j_cobb.addNodes("On the Waterfront (1954)", "Exodus (1960)", "The Exorcist (1973)", "On the Waterfront (1954)", "The Brothers Karamazov (1958)", "Man of the West (1958)", "Exodus (1960)", "How the West Was Won (1962)", "Our Man Flint (1966)");
+// lee_j_cobb.toTooltip();
+// lee_j_cobb.addToMovie(currentMovie);
 
-//Jack Klugman
-const jack_klugman = new Actors(
-    "Jack Klugman",
-    1922,
-    2012,
-    "https://en.wikipedia.org/wiki/Jack_Klugman"
-);
-jack_klugman.info = "Klugman was born in Philadelphia, the youngest of six children born to Rose, a hat maker, and Max Klugman, a house painter. His parents were Russian-Jewish immigrants. Klugman served in the United States Army during World War II.";
-jack_klugman.addNodes("The Odd Couple (1970)", "Quincy M.E. (1976)", "Days of Wine and Roses (1962)");
-jack_klugman.toTooltip();
-jack_klugman.addToMovie(currentMovie);
+// //E. G. marshall
+// const e_g_marshall = new Actors(
+//     "E. G. Marshall",
+//     1914,
+//     1998,
+//     "https://en.wikipedia.org/wiki/E._G._Marshall"
+// );
+// e_g_marshall.info = 'Marshall was born Everett Eugene Grunz[1] in Owatonna, Minnesota,[2] the son of Hazel Irene (née Cobb) and Charles G. Grunz. His paternal grandparents were German immigrants. During his life, he chose not to reveal what "E. G." stood for, saying that it stood for "Everybody' + "'" + 's Guess." The U.S. Social Security Claims Index states that he was listed with the Social Security Administration in June 1937 as Everett Eugene Grunz, and in December 1975 as E.G. Marshall.';
+// e_g_marshall.addNodes("Creepshow (1982)", "National Lampoon's Cristmas Vacation (1989)", "Nixon (1995)", "Superman II (1980)");
+// e_g_marshall.toTooltip();
+// e_g_marshall.addToMovie(currentMovie);
 
-//Edward Binns
-const edward_binns = new Actors(
-    "Edward Binns",
-    1916,
-    1990,
-    "https://en.wikipedia.org/wiki/Edward_Binns"
-);
-edward_binns.info = "He had a wide-spanning career in film and television, often portraying competent, hard working and purposeful characters in his various roles. Binns was born in Philadelphia, Pennsylvania, the son of Esther (née Bracken) and Edward Thomas Binns. His family were Quakers. He graduated from the Pennsylvania State University in 1937.";
-edward_binns.addNodes("Patton (1970)", "The Verdict (1982)", "North by Northwest (1959)", "Judgment at Nuremberg (1961)", "Fail Safe (1964)", "The Americanization of Emily (1964)");
-edward_binns.toTooltip();
-edward_binns.addToMovie(currentMovie);
+// //Jack Klugman
+// const jack_klugman = new Actors(
+//     "Jack Klugman",
+//     1922,
+//     2012,
+//     "https://en.wikipedia.org/wiki/Jack_Klugman"
+// );
+// jack_klugman.info = "Klugman was born in Philadelphia, the youngest of six children born to Rose, a hat maker, and Max Klugman, a house painter. His parents were Russian-Jewish immigrants. Klugman served in the United States Army during World War II.";
+// jack_klugman.addNodes("The Odd Couple (1970)", "Quincy M.E. (1976)", "Days of Wine and Roses (1962)");
+// jack_klugman.toTooltip();
+// jack_klugman.addToMovie(currentMovie);
 
-//Jack Warden
-const jack_warden = new Actors(
-    "Jack Warden",
-    1920,
-    2006,
-    "https://en.wikipedia.org/wiki/Jack_Warden"
-);
-jack_warden.info = "Warden was born in Newark, New Jersey, the son of Laura M. (née Costello) and John Warden Lebzelter, who was an engineer and technician. He was of Pennsylvania Dutch (German) and Irish ancestry. Raised in Louisville, Kentucky, he was expelled from high school for fighting and eventually fought as a professional boxer under the name Johnny Costello. He fought in 13 bouts as a welterweight, but earned little money.";
-jack_warden.addNodes("... and justice for all (1979)", "While You Where Sleeping (Saul)", "Being There (1979)", "Heaven Can Wait (1978)", "Shampoo (1975)");
-jack_warden.toTooltip();
-jack_warden.addToMovie(currentMovie);
+// //Edward Binns
+// const edward_binns = new Actors(
+//     "Edward Binns",
+//     1916,
+//     1990,
+//     "https://en.wikipedia.org/wiki/Edward_Binns"
+// );
+// edward_binns.info = "He had a wide-spanning career in film and television, often portraying competent, hard working and purposeful characters in his various roles. Binns was born in Philadelphia, Pennsylvania, the son of Esther (née Bracken) and Edward Thomas Binns. His family were Quakers. He graduated from the Pennsylvania State University in 1937.";
+// edward_binns.addNodes("Patton (1970)", "The Verdict (1982)", "North by Northwest (1959)", "Judgment at Nuremberg (1961)", "Fail Safe (1964)", "The Americanization of Emily (1964)");
+// edward_binns.toTooltip();
+// edward_binns.addToMovie(currentMovie);
 
-//Henry Fonda
-const henry_fonda = new Actors(
-    "Henry Fonda",
-    1905,
-    1982,
-    "https://en.wikipedia.org/wiki/Henry_Fonda"
-);
-henry_fonda.info = "He had a career that spanned five decades on Broadway and in Hollywood. He cultivated an everyman screen image in several films considered to be classics. Born and raised in Nebraska, Fonda made his mark early as a Broadway actor and made his Hollywood film debut in 1935. Born in Grand Island, Nebraska, on May 16, 1905, Henry Jaynes Fonda was the son of printer William Brace Fonda, and his wife, Herberta (Jaynes). The family moved to Omaha, Nebraska, in 1906.";
-henry_fonda.addNodes("The Grapes of Wrath (1940)", "On Golden Pond (1981)", "The Grapes of Wrath (1940)", "The Wrong Man (1956)", "Jezebel (1938)", "Jesse James (1939)", "Young Mr. Lincoln (1939)");
-henry_fonda.toTooltip();
-henry_fonda.addToMovie(currentMovie);
+// //Jack Warden
+// const jack_warden = new Actors(
+//     "Jack Warden",
+//     1920,
+//     2006,
+//     "https://en.wikipedia.org/wiki/Jack_Warden"
+// );
+// jack_warden.info = "Warden was born in Newark, New Jersey, the son of Laura M. (née Costello) and John Warden Lebzelter, who was an engineer and technician. He was of Pennsylvania Dutch (German) and Irish ancestry. Raised in Louisville, Kentucky, he was expelled from high school for fighting and eventually fought as a professional boxer under the name Johnny Costello. He fought in 13 bouts as a welterweight, but earned little money.";
+// jack_warden.addNodes("... and justice for all (1979)", "While You Where Sleeping (Saul)", "Being There (1979)", "Heaven Can Wait (1978)", "Shampoo (1975)");
+// jack_warden.toTooltip();
+// jack_warden.addToMovie(currentMovie);
 
-//Joseph Sweedney
-const joseph_sweeney = new Actors(
-    "Joseph Sweeney",
-    1884,
-    1963,
-    "https://en.wikipedia.org/wiki/Joseph_Sweeney_(actor)"
-);
-joseph_sweeney.info = "He worked in stage productions, television and movies. Born in Philadelphia, Sweeney debuted on stage in stock theater with a company in Norwich, Connecticut. He had a successful career as a stage performer. Sweeney kept acting until his death, appearing in numerous television shows, including at least twelve during the last year of his life. He died on November 25, 1963, at the age of 79.";
-joseph_sweeney.addNodes("The United States Steel Hour (1954)", "Armstrong Circle Theatre (1951)", "The Defenders (1961)");
-joseph_sweeney.toTooltip();
-joseph_sweeney.addToMovie(currentMovie);
+// //Henry Fonda
+// const henry_fonda = new Actors(
+//     "Henry Fonda",
+//     1905,
+//     1982,
+//     "https://en.wikipedia.org/wiki/Henry_Fonda"
+// );
+// henry_fonda.info = "He had a career that spanned five decades on Broadway and in Hollywood. He cultivated an everyman screen image in several films considered to be classics. Born and raised in Nebraska, Fonda made his mark early as a Broadway actor and made his Hollywood film debut in 1935. Born in Grand Island, Nebraska, on May 16, 1905, Henry Jaynes Fonda was the son of printer William Brace Fonda, and his wife, Herberta (Jaynes). The family moved to Omaha, Nebraska, in 1906.";
+// henry_fonda.addNodes("The Grapes of Wrath (1940)", "On Golden Pond (1981)", "The Grapes of Wrath (1940)", "The Wrong Man (1956)", "Jezebel (1938)", "Jesse James (1939)", "Young Mr. Lincoln (1939)");
+// henry_fonda.toTooltip();
+// henry_fonda.addToMovie(currentMovie);
 
-//Ed Begley
-const ed_begley = new Actors(
-    "Ed Begley",
-    1901,
-    1970,
-    "https://en.wikipedia.org/wiki/Ed_Begley"
-);
-ed_begley.info = 'He won an Academy Award for Best Supporting Actor for his performance in the film Sweet Bird of Youth (1962). Begley was born in Hartford, Connecticut, to two Irish immigrants, Hannah (née Clifford) and Michael Joseph Begley. After he dropped out of school as a fifth-grader, Begley ran away from home several times, going to work for "carnivals, fairs, and small circuses". Later he sold brushes, delivered milk, and served four years in the United States Navy during World War I.';
-ed_begley.addNodes("Sweet bird of Youth (1962)", "Hang 'Em High (1986)", "The Unsinkable Molly Brown (1964)");
-ed_begley.toTooltip();
-ed_begley.addToMovie(currentMovie);
+// //Joseph Sweedney
+// const joseph_sweeney = new Actors(
+//     "Joseph Sweeney",
+//     1884,
+//     1963,
+//     "https://en.wikipedia.org/wiki/Joseph_Sweeney_(actor)"
+// );
+// joseph_sweeney.info = "He worked in stage productions, television and movies. Born in Philadelphia, Sweeney debuted on stage in stock theater with a company in Norwich, Connecticut. He had a successful career as a stage performer. Sweeney kept acting until his death, appearing in numerous television shows, including at least twelve during the last year of his life. He died on November 25, 1963, at the age of 79.";
+// joseph_sweeney.addNodes("The United States Steel Hour (1954)", "Armstrong Circle Theatre (1951)", "The Defenders (1961)");
+// joseph_sweeney.toTooltip();
+// joseph_sweeney.addToMovie(currentMovie);
 
-//George Voskovec
-const george_voskovec = new Actors(
-    "George Voskovec",
-    1905,
-    1981,
-    "https://en.wikipedia.org/wiki/George_Voskovec"
-);
-george_voskovec.info = "Jiří Voskovec (Czech pronunciation: ['jɪr̝i: 'voskovɛts] (listen)), born Jiří Wachsmann and known in the United States as George Voskovec (June 19, 1905 - July 1, 1981) was a Czech actor, writer, dramatist, and director who became an American citizen in 1955. Throughout much of his career he was associated with actor and playwright Jan Werich.";
-george_voskovec.addNodes("Somewhere in Time (1980)", "The iceman Cometh (1973)", "Penize nebo zivot (1932)");
-george_voskovec.toTooltip();
-george_voskovec.addToMovie(currentMovie);
+// //Ed Begley
+// const ed_begley = new Actors(
+//     "Ed Begley",
+//     1901,
+//     1970,
+//     "https://en.wikipedia.org/wiki/Ed_Begley"
+// );
+// ed_begley.info = 'He won an Academy Award for Best Supporting Actor for his performance in the film Sweet Bird of Youth (1962). Begley was born in Hartford, Connecticut, to two Irish immigrants, Hannah (née Clifford) and Michael Joseph Begley. After he dropped out of school as a fifth-grader, Begley ran away from home several times, going to work for "carnivals, fairs, and small circuses". Later he sold brushes, delivered milk, and served four years in the United States Navy during World War I.';
+// ed_begley.addNodes("Sweet bird of Youth (1962)", "Hang 'Em High (1986)", "The Unsinkable Molly Brown (1964)");
+// ed_begley.toTooltip();
+// ed_begley.addToMovie(currentMovie);
 
-//Robert Webber
-const robert_webber = new Actors(
-    "Robert Webber",
-    1924,
-    1989,
-    "https://en.wikipedia.org/wiki/Robert_Webber"
-);
-robert_webber.info = "Webber was the son of Robert Webber, who was a merchant seaman. He graduated from Oakland Technical High School. Webber enlisted in the United States Marine Corps in 1943 during World War II, serving in the 1st Marine Amphibious Corps and later in the 6th Marine Division as a 776-Radio Operator (Low Speed) in Guam and Okinawa. Webber was discharged in 1945 as a private first class and was awarded the Navy Combat Action Ribbon, the Navy Presidential Unit Citation, the American Campaign Medal, the Asiatic-Pacific Campaign Medal and the World War II Victory Medal.";
-robert_webber.addNodes("The Dirty Dozen (1967)", "Midway (1976)", "Private Benjamin (1980)");
-robert_webber.toTooltip();
-robert_webber.addToMovie(currentMovie);
+// //George Voskovec
+// const george_voskovec = new Actors(
+//     "George Voskovec",
+//     1905,
+//     1981,
+//     "https://en.wikipedia.org/wiki/George_Voskovec"
+// );
+// george_voskovec.info = "Jiří Voskovec (Czech pronunciation: ['jɪr̝i: 'voskovɛts] (listen)), born Jiří Wachsmann and known in the United States as George Voskovec (June 19, 1905 - July 1, 1981) was a Czech actor, writer, dramatist, and director who became an American citizen in 1955. Throughout much of his career he was associated with actor and playwright Jan Werich.";
+// george_voskovec.addNodes("Somewhere in Time (1980)", "The iceman Cometh (1973)", "Penize nebo zivot (1932)");
+// george_voskovec.toTooltip();
+// george_voskovec.addToMovie(currentMovie);
 
-//Rudy Bond
-const rudy_bond = new Actors(
-    "Rudy Bond",
-    1912,
-    1982,
-    "https://en.wikipedia.org/wiki/Rudy_Bond"
-);
-rudy_bond.info = "He was active from 1947 until his death. His work spanned Broadway, films and television. Bond was born in Philadelphia, Pennsylvania, the second youngest of five children. He was raised in urban Philadelphia by his mother. He was educated in Philadelphia schools, and eventually received a BA degree from Central High, the only school in the nation certificated to grant such degrees. Bond was introduced to the world of acting at the age of 16. He was playing basketball with a group of friends when Julie Sutton, the director of a city amateur acting group (Neighborhood Players, which performed in the same building as the basketball area) approached the group and asked if anybody wanted to be in an upcoming play. He volunteered, and acted in several plays before leaving Philadelphia to join the United States Army. He spent four years in the army, was wounded while serving in World War II, and returned to Philadelphia upon his discharge.";
-rudy_bond.addNodes("Tramlijn (1951)", "On the Waterfront (1954)", "The Godfather (1972)");
-rudy_bond.toTooltip();
-rudy_bond.addToMovie(currentMovie);
+// //Robert Webber
+// const robert_webber = new Actors(
+//     "Robert Webber",
+//     1924,
+//     1989,
+//     "https://en.wikipedia.org/wiki/Robert_Webber"
+// );
+// robert_webber.info = "Webber was the son of Robert Webber, who was a merchant seaman. He graduated from Oakland Technical High School. Webber enlisted in the United States Marine Corps in 1943 during World War II, serving in the 1st Marine Amphibious Corps and later in the 6th Marine Division as a 776-Radio Operator (Low Speed) in Guam and Okinawa. Webber was discharged in 1945 as a private first class and was awarded the Navy Combat Action Ribbon, the Navy Presidential Unit Citation, the American Campaign Medal, the Asiatic-Pacific Campaign Medal and the World War II Victory Medal.";
+// robert_webber.addNodes("The Dirty Dozen (1967)", "Midway (1976)", "Private Benjamin (1980)");
+// robert_webber.toTooltip();
+// robert_webber.addToMovie(currentMovie);
+
+// //Rudy Bond
+// const rudy_bond = new Actors(
+//     "Rudy Bond",
+//     1912,
+//     1982,
+//     "https://en.wikipedia.org/wiki/Rudy_Bond"
+// );
+// rudy_bond.info = "He was active from 1947 until his death. His work spanned Broadway, films and television. Bond was born in Philadelphia, Pennsylvania, the second youngest of five children. He was raised in urban Philadelphia by his mother. He was educated in Philadelphia schools, and eventually received a BA degree from Central High, the only school in the nation certificated to grant such degrees. Bond was introduced to the world of acting at the age of 16. He was playing basketball with a group of friends when Julie Sutton, the director of a city amateur acting group (Neighborhood Players, which performed in the same building as the basketball area) approached the group and asked if anybody wanted to be in an upcoming play. He volunteered, and acted in several plays before leaving Philadelphia to join the United States Army. He spent four years in the army, was wounded while serving in World War II, and returned to Philadelphia upon his discharge.";
+// rudy_bond.addNodes("Tramlijn (1951)", "On the Waterfront (1954)", "The Godfather (1972)");
+// rudy_bond.toTooltip();
+// rudy_bond.addToMovie(currentMovie);
 
 movieArray.push(currentMovie);
 
@@ -466,6 +484,7 @@ if (page == "info") {
     let movie = movieArray.find(obj => {
         return obj.movieID == id;
     });
+    console.log(currentMovie.artistArray);
     // console.log(currentMovie.movieID == id)
     // console.log("movieID = " + currentMovie.movieID);
     // console.log("id = " + id)
