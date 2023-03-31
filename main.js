@@ -4,6 +4,7 @@ const fs        = require('node:fs');
 const express   = require ('express');
 const app       = express();
 const url       = require('url');
+const { json } = require('body-parser');
 const file      = "movieHouse.db"; 
 const exists    = fs.existsSync(file);
 if(!exists) {
@@ -11,11 +12,14 @@ if(!exists) {
 }
 const sqlite3   = require("sqlite3").verbose(); 
 const db        = new sqlite3.Database(file);
+let movieID = 0;
+let movie;
 
 //DATABASE
 db.serialize(function() { 
     if(!exists) { 
         db.run("CREATE TABLE Movie ("
+            +"movieID INTEGER, "
             +"movieName TEXT, "
             +"movieYear INTEGER, "
             +"movieGenre TEXT, "
@@ -39,10 +43,11 @@ db.serialize(function() {
             +")"
         )
         
-        const stmtMovie = db.prepare("INSERT INTO Movie (movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        const stmtMovie = db.prepare("INSERT INTO Movie (movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         const stmtArtist = db.prepare("INSERT INTO Artist (artistMovie, artistRole, artistName, artistYearBirth, artistYearDeath, artistLink, artistArray, artistInfo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
         stmtMovie.run(
+            0,
             "12 Angry Men",
             1957,
             "courtroom drama",
@@ -53,6 +58,7 @@ db.serialize(function() {
             'In the sweltering jury room of the New York County Courthouse, a jury prepares to deliberate the case of an impoverished teenager accused of stabbing his abusive father to death. The judge instructs the Jury that if there is any reasonable doubt, the jurors are to return a verdict of not guilty; if found guilty, the defendant will receive a mandatory death sentence via the electric chair. The verdict must be unanimous.'
         )
         stmtMovie.run(
+            1,
             "test", 
             2000, 
             "testgenre",
@@ -65,11 +71,21 @@ db.serialize(function() {
 
         stmtMovie.finalize();
         stmtArtist.finalize();
-        db.each("SELECT rowid FROM Movie", function(err, row) { 
-            console.log("movieName = " + row.rowid);
+        app.get('/info', (req, res) => {
+            movieID = req.query.id;
         });
+        console.log("movieID = " + movieID)
+        if (movieID != null){
+            db.each("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot FROM Movie", function(err, row) { 
+                if (movieID == row.movieID){
+                    movie = {movieID: row.movieID, movieName: row.movieName, movieYear: row.movieYear, movieGenre: row.movieGenre, movieLink: row.movieLink, posterLink: row.posterLink, trailerLink: row.trailerLink, movieAbout: row.movieAbout, moviePlot: row.moviePlot};
+                    console.log(movie);
+                }
+            });
+        }
     }
 });
+db.close();
 
 //LINK EJS
 app.set('view engine', 'ejs');
@@ -102,15 +118,8 @@ app.get('/transcripts-AM', (req, res) =>{
     res.render('transcripts')
 });
 app.get('/info', (req, res) => {
-    const id = req.query.id;
-    res.render('info', {
-        ejsid: id,
-        testvalue: 28
-    });
+    res.render('info', { ejsmovie: JSON.stringify(movie) });
 });
-
-
-db.close();
 
 app.all("*", (req,res) => {
     res.status(404).send("resource not found ... ");
