@@ -1,8 +1,7 @@
 //Javascript
 
 let movieArray = [];
-const id = ejsid;
-console.log('id = ' + id);
+console.log(testvalue);
 
 //classes for info-page
 //movie
@@ -457,15 +456,17 @@ movieArray.push(angry_men);
 
 if (page == "info") {
     let movie = movieArray.find(obj => {
-        return '"' + obj.movieID +  '"' === id;
+        return obj.movieID == id;
     });
-
+    console.log(angry_men.movieID == id)
+    console.log("movieID = " + angry_men.movieID);
+    console.log("id = " + id)
     console.log(movie);
 
     movie.addAllToPage();
 } 
 
-if (id == '"0"') {
+if (id == 0) {
     //<script src="../scripts/scriptAngryMen.js"></script>
     const infoScript = document.createElement('script');
     infoScript.setAttribute('src', '../scripts/scriptAngryMen.js');
