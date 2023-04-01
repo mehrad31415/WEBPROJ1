@@ -3,6 +3,9 @@
 let movieArray = [];
 movie = JSON.parse(ejsMovie);
 artists = JSON.parse(ejsArtists);
+console.log("ejsArtists = ")
+console.log(ejsArtists);
+console.log("artists = ")
 console.log(artists);
 let id = movie.movieID;
 
@@ -52,15 +55,19 @@ class Movie {
         posterLinkTemp.setAttribute("target", "_blank");
         underlineLinkPoster.appendChild(posterLinkTemp);
         posterLinkTemp.append(document.createTextNode(this.posterLink.split('.')[1]));
-        about.append(document.createTextNode('. The trailer can either be found on the '));
-        const underlineLinkHomePage = document.createElement('u');
-        about.appendChild(underlineLinkHomePage);
-        const homePageLinkTemp = document.createElement('a');
-        homePageLinkTemp.setAttribute("class", "link--decoration");
-        homePageLinkTemp.setAttribute("href", 'home.html');
-        underlineLinkHomePage.appendChild(homePageLinkTemp);
-        homePageLinkTemp.append(document.createTextNode('home page'));
-        about.append(document.createTextNode(' of this website or on '));
+        about.append(document.createTextNode('. The trailer can '));
+        if (id == 0) about.append(document.createTextNode('either '));
+        about.append(document.createTextNode('be found on the '));
+        if (id == 0){
+            const underlineLinkHomePage = document.createElement('u');
+            about.appendChild(underlineLinkHomePage);
+            const homePageLinkTemp = document.createElement('a');
+            homePageLinkTemp.setAttribute("class", "link--decoration");
+            homePageLinkTemp.setAttribute("href", 'plot-AM');
+            underlineLinkHomePage.appendChild(homePageLinkTemp);
+            homePageLinkTemp.append(document.createTextNode('home page'));
+            about.append(document.createTextNode(' of this website or on '));
+        }
         const underlineLinkTrailer = document.createElement('u');
         about.appendChild(underlineLinkTrailer);
         const trailerLinkTemp = document.createElement('a');
@@ -282,8 +289,9 @@ currentMovie.trailerLink = movie.trailerLink;
 currentMovie.movieAbout.push(movie.movieAbout);
 currentMovie.moviePlot.push(movie.moviePlot);
 
-for (i = 0; i < artists.length; i++){
-    let artistTemp = new Artists(
+let count = 0 //for testing
+for (let i = 0; i < artists.length; i++){
+    const artistTemp = new Artists(
         artists[i].artistName,
         artists[i].artistYearBirth,
         artists[i].artistYearDeath,
@@ -291,12 +299,14 @@ for (i = 0; i < artists.length; i++){
     artistTemp.role = artists[i].artistRole;
     artistTemp.info = artists[i].artistInfo;
     arrayTemp = artists[i].artistArray.split(',');
-    for (i = 0; i < arrayTemp.length; i++){
-        artistTemp.infoArray.push(arrayTemp[i]);
+    for (let j = 0; j < arrayTemp.length; j++){
+        artistTemp.infoArray.push(arrayTemp[j]);
     }
-    console.log("artistTemp = " +artistTemp);
+    count++;
     artistTemp.addToMovie(currentMovie);
 }
+console.log("artists.length = " + artists.length);
+console.log("count = " + count);
 
 // //Sidney Lumet
 // const sidney_lumet = new Director(
@@ -484,6 +494,7 @@ if (page == "info") {
     let movie = movieArray.find(obj => {
         return obj.movieID == id;
     });
+    console.log("currentMovie.artistArray = ")
     console.log(currentMovie.artistArray);
     // console.log(currentMovie.movieID == id)
     // console.log("movieID = " + currentMovie.movieID);
