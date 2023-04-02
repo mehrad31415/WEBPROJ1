@@ -146,11 +146,17 @@ db.serialize(function() {
 //LINK EJS PAGES
 app.set('view engine', 'ejs');
 app.use(express.static("./public"));
-app.get('/', (req, res) =>{
-    res.render('index')
+app.get(('/'), async (req, res) =>{
+    const movieAll = await getAllMovies(db);
+    res.render('index', {
+        ejsMovieAll: JSON.stringify(movieAll)
+    })
 });
-app.get('/home', (req, res) =>{
-res.render('index')
+app.get('/home', async (req, res) =>{
+    const movieAll = await getAllMovies(db);
+    res.render('index', {
+        ejsMovieAll: JSON.stringify(movieAll)
+    })
 });
 app.get('/adaptations-AM', (req, res) =>{
 res.render('adaptations-and-parodies')
@@ -223,4 +229,18 @@ async function getArtistsByID(db, id) {
 
     return artists;
 }
- 
+
+async function getAllMovies(db) {
+    let movieAll = [];
+    movieAll = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot "
+        + "FROM Movie", (err, row) => {
+            arr.push(row);
+            if (err) reject(err);
+            resolve(arr);
+        });
+    });
+
+    return movieAll;
+}
