@@ -140,15 +140,15 @@ db.serialize(function() {
         stmtMovie.finalize();
         stmtArtist.finalize();
     }
-    
-    
-    db.each("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot FROM Movie", function(err, row) {
-         movieArray.push({movieID: row.movieID, movieName: row.movieName, movieYear: row.movieYear, movieGenre: row.movieGenre, movieLink: row.movieLink, posterLink: row.posterLink, trailerLink: row.trailerLink, movieAbout: row.movieAbout, moviePlot: row.moviePlot});
-    });
+
+    // db.each("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot FROM Movie", function(err, row) {
+    //      movieArray.push({movieID: row.movieID, movieName: row.movieName, movieYear: row.movieYear, movieGenre: row.movieGenre, movieLink: row.movieLink, posterLink: row.posterLink, trailerLink: row.trailerLink, movieAbout: row.movieAbout, moviePlot: row.moviePlot});
+    // });
     db.each("SELECT artistMovie, artistRole, artistName, artistYearBirth, artistYearDeath, artistLink, artistArray, artistInfo FROM Artist", function(err, row) {
         artistArray.push({artistMovie: row.artistMovie, artistRole: row.artistRole, artistName: row.artistName, artistYearBirth: row.artistYearBirth, artistYearDeath: row.artistYearDeath, artistLink: row.artistLink, artistArray: row.artistArray, artistInfo: row.artistInfo});
     });
 });
+
 
 //LINK EJS PAGES
 app.set('view engine', 'ejs');
@@ -182,35 +182,25 @@ app.get('/transcripts-AM', (req, res) =>{
 });
 app.get('/info', (req, res) => {
     movieID = req.query.id;
-
-    // let movie
-    // db.get("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot "
-    // + "FROM Movie WHERE MovieID= ?", movieID, function(err, row) {
-    //     movie = {
-    //         movieID: row.movieID, 
-    //         movieName: row.movieName, 
-    //         movieYear: row.movieYear, 
-    //         movieGenre: row.movieGenre, 
-    //         movieLink: row.movieLink, 
-    //         posterLink: row.posterLink, 
-    //         trailerLink: row.trailerLink, 
-    //         movieAbout: row.movieAbout, 
-    //         moviePlot: row.moviePlot
-    //     };
-        
-    //     console.log('working');
-    // });
-
-    // db.close();
-
-    let movie = movieArray.find(obj => {
-        return obj.movieID == movieID;
+    let movie = db.serialize(function () {
+        db.get("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot "
+        + "FROM Movie WHERE MovieID= ?", movieID, (err, row) => {
+            return row;
+        });
     });
+    console.log("movie = ");
+    console.log(movie); // results in movie = Database {}
+
+
+    // let movie = movieArray.find(obj => {
+    //     return obj.movieID == movieID;
+    // });
     let artists = [];
     for (let i = 0; i < artistArray.length; i++){
         if (artistArray[i].artistMovie == movieID) artists.push(artistArray[i]);
     }
-    res.render('info', { 
+
+    res.render('info', {
         ejsMovie: JSON.stringify(movie),
         ejsArtists: JSON.stringify(artists)
     });
@@ -222,4 +212,4 @@ app.all("*", (req,res) => {
 app.listen(PORT=5001, (req, res) => {
     console.log(`server is running on port ${PORT}...`);
 });
-
+db.close();
