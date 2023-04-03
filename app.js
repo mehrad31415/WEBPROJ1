@@ -140,24 +140,23 @@ db.serialize(function() {
         stmtMovie.finalize();
         stmtArtist.finalize();
     }
-
-    // db.each("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot FROM Movie", function(err, row) {
-    //      movieArray.push({movieID: row.movieID, movieName: row.movieName, movieYear: row.movieYear, movieGenre: row.movieGenre, movieLink: row.movieLink, posterLink: row.posterLink, trailerLink: row.trailerLink, movieAbout: row.movieAbout, moviePlot: row.moviePlot});
-    // });
-    db.each("SELECT artistMovie, artistRole, artistName, artistYearBirth, artistYearDeath, artistLink, artistArray, artistInfo FROM Artist", function(err, row) {
-        artistArray.push({artistMovie: row.artistMovie, artistRole: row.artistRole, artistName: row.artistName, artistYearBirth: row.artistYearBirth, artistYearDeath: row.artistYearDeath, artistLink: row.artistLink, artistArray: row.artistArray, artistInfo: row.artistInfo});
-    });
 });
 
 
 //LINK EJS PAGES
 app.set('view engine', 'ejs');
 app.use(express.static("./public"));
-app.get('/', (req, res) =>{
-    res.render('index')
+app.get(('/'), async (req, res) =>{
+    const movieAll = await getAllMovies(db);
+    res.render('index', {
+        ejsMovieAll: JSON.stringify(movieAll)
+    })
 });
-app.get('/home', (req, res) =>{
-res.render('index')
+app.get('/home', async (req, res) =>{
+    const movieAll = await getAllMovies(db);
+    res.render('index', {
+        ejsMovieAll: JSON.stringify(movieAll)
+    })
 });
 app.get('/adaptations-AM', (req, res) =>{
 res.render('adaptations-and-parodies')
@@ -168,8 +167,11 @@ app.get('/plot-AM', (req, res) =>{
 app.get('/awards-AM', (req, res) =>{
     res.render('awards')
 });
-app.get('/cast-AM', (req, res) =>{
-res.render('cast-members')
+app.get('/cast-AM', async (req, res) =>{
+    const artists = await getArtistsByID(db,0);
+    res.render('cast-members', {
+        ejsArtists: JSON.stringify(artists)
+    })
 });
 app.get('/contact', (req, res) =>{
 res.render('contact')
@@ -180,25 +182,10 @@ app.get('/reviews-AM', (req, res) =>{
 app.get('/transcripts-AM', (req, res) =>{
     res.render('transcripts')
 });
-app.get('/info', (req, res) => {
+app.get('/info', async (req, res) => {
     movieID = req.query.id;
-    let movie = db.serialize(function () {
-        db.get("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot "
-        + "FROM Movie WHERE MovieID= ?", movieID, (err, row) => {
-            return row;
-        });
-    });
-    console.log("movie = ");
-    console.log(movie); // results in movie = Database {}
-
-
-    // let movie = movieArray.find(obj => {
-    //     return obj.movieID == movieID;
-    // });
-    let artists = [];
-    for (let i = 0; i < artistArray.length; i++){
-        if (artistArray[i].artistMovie == movieID) artists.push(artistArray[i]);
-    }
+    const movie = await getMovieByID(db, movieID);
+    const artists = await getArtistsByID(db,movieID);
 
     res.render('info', {
         ejsMovie: JSON.stringify(movie),
@@ -212,4 +199,48 @@ app.all("*", (req,res) => {
 app.listen(PORT=5001, (req, res) => {
     console.log(`server is running on port ${PORT}...`);
 });
-db.close();
+
+async (db) => { await db.close();};
+
+async function getMovieByID(db, id) {
+    const movie =  new Promise((resolve, reject) => {
+        
+        db.get("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot "
+        + "FROM Movie WHERE MovieID= ?", id, (err, row) => {
+            if (err) reject(err);
+            resolve(row);
+        });
+    });
+
+    return movie;
+}
+
+async function getArtistsByID(db, id) {
+    let artists = [];
+    artists = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT artistMovie, artistRole, artistName, artistYearBirth, artistYearDeath, artistLink, artistArray, artistInfo "
+        + "FROM Artist WHERE artistMovie= ?", id, (err, row) => {
+            arr.push(row);
+            if (err) reject(err);
+            resolve(arr);
+        });
+    });
+
+    return artists;
+}
+
+async function getAllMovies(db) {
+    let movieAll = [];
+    movieAll = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT movieID, movieName, movieYear, movieGenre, movieLink, posterLink, trailerLink, movieAbout, moviePlot "
+        + "FROM Movie", (err, row) => {
+            arr.push(row);
+            if (err) reject(err);
+            resolve(arr);
+        });
+    });
+
+    return movieAll;
+}
