@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 
 // movies
-const angry_men = require('./movies/12-angry-men');
+const angry_men = require('./tables/movies/12-angry-men');
 
 // creating the database connection.
 const db = new sqlite3.Database('./database/movie.db', (err) => {
