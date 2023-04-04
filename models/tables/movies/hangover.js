@@ -1,4 +1,5 @@
-const movie_id = 4;
+// hangover attributes
+const movieId = 4;
 
 const title = "The Hangover";
 
@@ -27,7 +28,7 @@ They travel back to Caesars Palace where they find a dazed and badly sunburned D
 const about = `The Hangover is a 2009 American comedy film directed by Todd Phillips, co-produced with Daniel Goldberg, and written by Jon Lucas and Scott Moore. It is the first installment in The Hangover trilogy. The film stars Bradley Cooper, Ed Helms, Zach Galifianakis, Heather Graham, Justin Bartha, Ken Jeong, and Jeffrey Tambor. It tells the story of Phil Wenneck (Cooper), Stu Price (Helms), Alan Garner (Galifianakis), and Doug Billings (Bartha), who travel to Las Vegas for a bachelor party to celebrate Doug's impending marriage. However, Phil, Stu, and Alan wake up with Doug missing and no memory of the previous night's events, and must find the groom before the wedding can take place.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

@@ -1,4 +1,5 @@
-const movie_id = 9;
+// silence of the lambs attributes
+const movieId = 9;
 
 const title = "The Silence of the Lambs";
 
@@ -27,7 +28,7 @@ At the FBI Academy graduation party, Starling receives a phone call from Lecter,
 const about = `The Silence of the Lambs is a 1991 American psychological horror film[3][4] directed by Jonathan Demme and written by Ted Tally, adapted from Thomas Harris's 1988 novel. It stars Jodie Foster as Clarice Starling, a young FBI trainee who is hunting a serial killer named "Buffalo Bill" (Ted Levine), who skins his female victims. To catch him, she seeks the advice of the imprisoned Dr. Hannibal Lecter (Anthony Hopkins), a brilliant psychiatrist and cannibalistic serial killer. The film also features performances from Scott Glenn, Anthony Heald, and Kasi Lemmons.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

@@ -1,4 +1,5 @@
-const movie_id = 15;
+// lord of the rings attributes
+const movieId = 15;
 
 const title = "The Lord of the Rings: The Fellowship of the Ring";
 
@@ -27,7 +28,7 @@ The Fellowship travels by river to Parth Galen. Frodo wanders off and is confron
 const about = `The Lord of the Rings: The Fellowship of the Ring is a 2001 epic fantasy adventure film directed by Peter Jackson from a screenplay by Fran Walsh, Philippa Boyens, and Jackson, based on 1954's The Fellowship of the Ring, the first volume of the novel The Lord of the Rings by J. R. R. Tolkien. The film is the first installment in The Lord of the Rings trilogy. It features an ensemble cast including Elijah Wood, Ian McKellen, Liv Tyler, Viggo Mortensen, Sean Astin, Cate Blanchett, John Rhys-Davies, Billy Boyd, Dominic Monaghan, Orlando Bloom, Christopher Lee, Hugo Weaving, Sean Bean, Ian Holm, and Andy Serkis.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

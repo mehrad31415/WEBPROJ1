@@ -1,4 +1,5 @@
-const movie_id = 7;
+// la la land attributes
+const movieId = 7;
 
 const title = "La La Land";
 
@@ -29,7 +30,7 @@ Five years later, Mia is a famous actress and married to another man, with whom 
 const about = `La La Land is a 2016 American romantic musical film written and directed by Damien Chazelle. The film stars Ryan Gosling and Emma Stone as a struggling jazz pianist and an aspiring actress, respectively, who meet and fall in love while pursuing their dreams in Los Angeles. John Legend, Rosemarie DeWitt, Finn Wittrock, and J. K. Simmons appear in supporting roles.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

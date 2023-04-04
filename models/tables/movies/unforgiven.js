@@ -1,4 +1,5 @@
-const movie_id = 11;
+// unforgiven attributes
+const movieId = 11;
 
 const title = "Unforgiven";
 
@@ -29,7 +30,7 @@ A closing title card states that Will's mother-in-law found his farm abandoned y
 const about = `Unforgiven is a 1992 American Western film starring, directed, and produced by Clint Eastwood, and written by David Webb Peoples. The film tells the story of William Munny, an aging outlaw and killer who takes on one more job, years after he had turned to farming. The film co-stars Gene Hackman, Morgan Freeman, and Richard Harris.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

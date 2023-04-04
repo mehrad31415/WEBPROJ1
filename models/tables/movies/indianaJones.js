@@ -1,4 +1,5 @@
-const movie_id = 10;
+// indiana jones attributes
+const movieId = 10;
 
 const title = "Indiana Jones and the Raiders of the Lost Ark";
 
@@ -25,7 +26,7 @@ Back in Washington, D.C., the United States government rewards Jones for securin
 const about = `Raiders of the Lost Ark[a] is a 1981 American action-adventure film directed by Steven Spielberg and written by Lawrence Kasdan, based on a story by George Lucas and Philip Kaufman. Set in 1936, the film stars Harrison Ford as Indiana Jones, a globetrotting archaeologist vying with Nazi German forces to recover the long-lost Ark of the Covenant which is said to make an army invincible. Teaming up with his tough former romantic interest Marion Ravenwood (Karen Allen), Jones races to stop rival archaeologist Dr. René Belloq (Paul Freeman) from guiding the Nazis to the Ark and its power.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

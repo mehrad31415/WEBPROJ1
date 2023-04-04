@@ -1,4 +1,5 @@
-const movie_id = 0;
+// 12 angry men attributes.
+const movieId = 0;
 
 const title    = "12 Angry Men";
 
@@ -26,7 +27,7 @@ const about    = 'The movie is an American film directed by Sidney Lumet, adapte
                   ' The film was selected as the second-best courtroom drama ever (after 1962\'s To Kill a Mockingbird) by the American Film Institute for their AFI\s 10 Top 10 list. It is regarded by many as one of the greatest films ever made. In 2007, the film was selected for preservation in the United States National Film Registry by the Library of Congress as being "culturally, historically, or aesthetically significant".';
 
 module.exports = {
-    movie_id, 
+    movieId, 
     title,
     genre,
     year,

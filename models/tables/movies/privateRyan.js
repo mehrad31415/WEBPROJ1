@@ -1,4 +1,5 @@
-const movie_id = 12;
+// private ryan attributes
+const movieId = 12;
 
 const title = "Saving Private Ryan";
 
@@ -25,7 +26,7 @@ Decades later, an elderly Ryan and his family visits Miller's grave at the Norma
 const about = `Saving Private Ryan is a 1998 American epic war film directed by Steven Spielberg and written by Robert Rodat. Set in 1944 in France during World War II, it follows a group of soldiers, led by Captain John Miller (Tom Hanks), on their mission to extricate Private James Ryan (Matt Damon) from the war after his three brothers are killed in battle. The cast also includes Edward Burns, Tom Sizemore, Barry Pepper, Giovanni Ribisi, Vin Diesel, Adam Goldberg, and Jeremy Davies.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

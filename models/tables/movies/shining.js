@@ -1,4 +1,5 @@
-const movie_id = 5;
+// shining attributes
+const movieId = 5;
 
 const title = "The Shining";
 
@@ -27,7 +28,7 @@ In a photograph in the hotel hallway, Jack is pictured standing amidst a crowd o
 const about = `The Shining is a 1980 psychological horror film produced and directed by Stanley Kubrick and co-written with novelist Diane Johnson. The film is based on Stephen King's 1977 novel of the same name and stars Jack Nicholson, Shelley Duvall, Scatman Crothers, and Danny Lloyd. The film's central character is Jack Torrance (Nicholson), an aspiring writer and recovering alcoholic who accepts a position as the off-season caretaker of the isolated historic Overlook Hotel in the Colorado Rockies, with his wife, Wendy Torrance (Duvall), and young son, Danny Torrance (Lloyd). Danny is gifted with psychic abilities named "shining". After a winter storm leaves the Torrances snowbound, Jack's sanity deteriorates due to the influence of the supernatural forces that inhabit the hotel.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

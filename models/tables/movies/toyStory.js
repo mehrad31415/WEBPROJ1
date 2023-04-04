@@ -1,4 +1,5 @@
-const movie_id = 16;
+// toy story attributes
+const movieId = 16;
 
 const title = "Toy Story";
 
@@ -27,7 +28,7 @@ At Christmas, in the new house, Sarge and his men spy on the gift-opening again 
 const about = `Toy Story is a 1995 American computer-animated comedy film directed by John Lasseter (in his feature directorial debut), produced by Pixar Animation Studios and released by Walt Disney Pictures. The first installment in the Toy Story franchise, it was the first entirely computer-animated feature film, as well as the first feature film from Pixar. It was written by Joss Whedon, Andrew Stanton, Joel Cohen, and Alec Sokolow from a story by Lasseter, Stanton, Pete Docter, and Joe Ranft. The film features music by Randy Newman, was produced by Bonnie Arnold and Ralph Guggenheim, and was executive-produced by Steve Jobs and Edwin Catmull. The film features the voices of Tom Hanks, Tim Allen, Don Rickles, Jim Varney, Wallace Shawn, John Ratzenberger, Annie Potts, R. Lee Ermey, John Morris, Laurie Metcalf, and Erik von Detten.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

@@ -1,4 +1,5 @@
-const movie_id = 17;
+// blackfish attributes.
+const movieId = 17;
 
 const title = "Blackfish";
 
@@ -19,7 +20,7 @@ The film premiered at the 2013 Sundance Film Festival on January 19, 2013, and w
 const about = `Blackfish is a 2013 American documentary film directed by Gabriela Cowperthwaite. It concerns Tilikum, an orca held by SeaWorld and the controversy over captive orcas. The film premiered at the 2013 Sundance Film Festival on January 19, 2013, and was picked up by Magnolia Pictures and CNN Films for wider release. It was nominated for the BAFTA Award for Best Documentary.[4]`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

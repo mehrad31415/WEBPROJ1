@@ -1,4 +1,5 @@
-const movie_id = 6;
+// blade runner attributes.
+const movieId = 6;
 
 const title = "Blade Runner 2049";
 
@@ -27,7 +28,7 @@ Luv takes Deckard to Wallace Corporation headquarters to meet Wallace. Wallace o
 const about = `Blade Runner 2049 is a 2017 American epic neo-noir science fiction film directed by Denis Villeneuve and written by Hampton Fancher and Michael Green.[10] A sequel to the 1982 film Blade Runner, the film stars Ryan Gosling and Harrison Ford, with Ana de Armas, Sylvia Hoeks, Robin Wright, Mackenzie Davis, Dave Bautista, and Jared Leto in supporting roles. Ford and Edward James Olmos reprise their roles from the original film. Gosling plays K, a Nexus-9 replicant "blade runner" who uncovers a secret that threatens to destabilize society and the course of civilization.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

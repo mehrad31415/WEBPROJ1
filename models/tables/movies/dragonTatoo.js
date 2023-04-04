@@ -1,4 +1,5 @@
-const movie_id = 19;
+// dragon tatoo attributes
+const movieId = 19;
 
 const title = "The Girl with the Dragon Tattoo";
 
@@ -33,7 +34,7 @@ On her way to give Blomkvist a Christmas present, Salander sees him and his marr
 const about = `The Girl with the Dragon Tattoo is a 2011 neo-noir psychological thriller film based on the 2005 novel by Swedish writer Stieg Larsson. It was directed by David Fincher with a screenplay by Steven Zaillian. Starring Daniel Craig as journalist Mikael Blomkvist and Rooney Mara as Lisbeth Salander, it tells the story of Blomkvist's investigation to find out what happened to a girl from a wealthy family who disappeared 40 years ago. He recruits the help of Salander, a computer hacker.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

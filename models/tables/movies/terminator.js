@@ -1,4 +1,5 @@
-const movie_id = 2;
+// terminator attributes
+const movieId = 2;
 
 const title = "Terminator 2: Judgment Day";
 
@@ -25,7 +26,7 @@ Sarah and John split up to escape while the T-1000 mangles the T-800 and briefly
 const about = `Terminator 2: Judgment Day[a] is a 1991 American science-fiction action film directed by James Cameron, who co-wrote the script with William Wisher. Starring Arnold Schwarzenegger, Linda Hamilton, Robert Patrick, and Edward Furlong, it is the sequel to The Terminator (1984) and is the second installment in the Terminator franchise. In the film, the malevolent artificial intelligence Skynet sends a Terminator—a highly advanced killing machine—back in time to 1995 to kill the future leader of the human resistance John Connor, when he is a child. The resistance sends back a less-advanced, reprogrammed Terminator to protect Connor and ensure the future of humanity.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

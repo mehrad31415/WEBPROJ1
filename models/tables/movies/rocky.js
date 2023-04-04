@@ -1,4 +1,5 @@
-const movie_id = 18;
+// rocky attributes
+const movieId = 18;
 
 const title = "Rocky";
 
@@ -27,7 +28,7 @@ After the fight, the sportscasters and the audience go wild. Jergens announces o
 const about = `Rocky is a 1976 American sports drama film directed by John G. Avildsen and written by and starring Sylvester Stallone. It is the first installment in the Rocky franchise and also stars Talia Shire, Burt Young, Carl Weathers, and Burgess Meredith. In the film, Rocky Balboa (Stallone), a poor small-time club fighter and loanshark debt collector, gets an unlikely shot at the world heavyweight championship held by Apollo Creed (Weathers).`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

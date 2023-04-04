@@ -1,4 +1,5 @@
-const movie_id = 14;
+// schindlers's list attributes
+const movieId = 14;
 
 const title = "Schindler's List";
 
@@ -27,7 +28,7 @@ An epilogue reveals that Göth was convicted of crimes against humanity and exec
 const about = `Schindler's List is a 1993 American epic historical drama film directed and produced by Steven Spielberg and written by Steven Zaillian. It is based on the 1982 novel Schindler's Ark by Australian novelist Thomas Keneally. The film follows Oskar Schindler, a German industrialist who saved more than a thousand mostly Polish-Jewish refugees from the Holocaust by employing them in his factories during World War II. It stars Liam Neeson as Schindler, Ralph Fiennes as SS officer Amon Göth, and Ben Kingsley as Schindler's Jewish accountant Itzhak Stern.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

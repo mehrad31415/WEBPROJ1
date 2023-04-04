@@ -1,4 +1,5 @@
-const movie_id = 13;
+// theory of everything attributes
+const movieId = 13;
 
 const title = "The Theory of Everything";
 
@@ -23,7 +24,7 @@ Stephen invites Jane to meet Queen Elizabeth II with him when being made a membe
 const about = `The Theory of Everything is a 2014 biographical romantic drama film[6] directed by James Marsh. Set at the University of Cambridge, it details the life of the theoretical physicist Stephen Hawking. It was adapted by Anthony McCarten from the 2007 memoir Travelling to Infinity: My Life with Stephen by Jane Hawking, which deals with her relationship with her ex-husband Stephen Hawking, his diagnosis of amyotrophic lateral sclerosis (ALS), and his success in the field of physics.[7] The film stars Eddie Redmayne[1][2] and Felicity Jones,[1][2] with Charlie Cox, Emily Watson, Simon McBurney, Christian McKay, Harry Lloyd, and David Thewlis featured in supporting roles.[1] The film had its world premiere at the 2014 Toronto International Film Festival[2] on 7 November 2014. It had its UK premiere on 1 January 2015.[1]`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

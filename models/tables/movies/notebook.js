@@ -1,4 +1,5 @@
-const movie_id = 3;
+// notebook attributes
+const movieId = 3;
 
 const title = "The Notebook";
 
@@ -27,7 +28,7 @@ In the present, the elderly woman listening to the story is revealed to be Allie
 const about = `The Notebook is a 2004 American romantic drama film directed by Nick Cassavetes, with a screenplay by Jeremy Leven and Jan Sardi, based on the 1996 novel of the same name by Nicholas Sparks. The film stars Ryan Gosling and Rachel McAdams as a young couple who fall in love in the 1940s. Their story is read from a notebook in the present day by an elderly man, telling the tale to a fellow nursing home resident.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,

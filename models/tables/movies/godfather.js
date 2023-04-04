@@ -1,4 +1,5 @@
-const movie_id = 8;
+// godfather attributes.
+const movieId = 8;
 
 const title = "The Godfather";
 
@@ -25,7 +26,7 @@ In 1955, Vito dies of a heart attack while playing with his grandchild. At Vito'
 const about = `The Godfather is a 1972 American crime film[2] directed by Francis Ford Coppola, who co-wrote the screenplay with Mario Puzo, based on Puzo's best-selling 1969 novel of the same title. The film stars Marlon Brando, Al Pacino, James Caan, Richard Castellano, Robert Duvall, Sterling Hayden, John Marley, Richard Conte, and Diane Keaton. It is the first installment in The Godfather trilogy, chronicling the Corleone family under patriarch Vito Corleone (Brando) from 1945 to 1955. It focuses on the transformation of his youngest son, Michael Corleone (Pacino), from reluctant family outsider to ruthless mafia boss.`;
 
 module.exports = {
-    movie_id,
+    movieId,
     title,
     genre,
     year,
