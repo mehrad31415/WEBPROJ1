@@ -12,6 +12,10 @@ if(!exists) {
 }
 const sqlite3   = require("sqlite3").verbose(); 
 const db        = new sqlite3.Database(file);
+// logger added
+const morgan = require('morgan')
+app.use(morgan('dev'));
+
 let movieID = null;
 let movieArray = [];
 let artistArray = [];
