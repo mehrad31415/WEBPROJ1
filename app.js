@@ -199,7 +199,7 @@ app.get('/info', async (req, res) => {
 app.get('/tickets', (req, res) =>{
     res.render('tickets');
     movieID = req.query.id;
-    timeSlot = req.query.timeSlot;
+    day = req.query.day;
 });
 app.get('/login', (req, res) =>{
     res.render('login');
