@@ -93,7 +93,7 @@ let artistArray = [];
 //             2002,
 //             "https://en.wikipedia.org/wiki/Reginald_Rose",
 //             'Crime in the Streets (1956), The Porcelain Year (1950), Sacco-Vanzetti Story (1960), Black Monday (1962), Dear Friends (1968), This Agony, This Triumph (1972)',
-//             'Something'
+//             'Something about the actor'
 //         );
 
 //         stmtArtist.run(

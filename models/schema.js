@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-
+const path    = require('node:path');
 // movies
 const angryMen = require('./tables/movies/12AngryMen');
 const blackFish = require('./tables/movies/blackfish');
@@ -22,7 +22,7 @@ const theoryOfEverything = require('./tables/movies/theoryOfEverything');
 const toyStory = require('./tables/movies/toyStory');
 const unforgiven = require('./tables/movies/unforgiven');
 
-// user
+// users
 const userOne = require('./tables/users/userOne');
 const userTwo = require('./tables/users/userTwo');
 const userThree = require('./tables/users/userThree');
@@ -41,8 +41,12 @@ const orderEight = require('./tables/orders/orderEight');
 const orderNine = require('./tables/orders/orderNine');
 const orderTen = require('./tables/orders/orderTen');
 
+// schedule
+
+// artists
+
 // creating the database connection.
-const db = new sqlite3.Database('./database/movie.db', (err) => {
+const db = new sqlite3.Database(path.resolve(__dirname, 'database/movie.db'), (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -109,7 +113,7 @@ db.serialize(() => {
         artist_id   INTEGER        PRIMARY KEY      ,
         name        VARCHAR(255)   NOT NULL         ,
         birth       CHAR(4)        NOT NULL         ,
-        death       CHAR(4),
+        death       CHAR(4)                         ,
         link        VARCHAR(255)   NOT NULL UNIQUE  ,
         information VARCHAR(255)   NOT NULL UNIQUE  ,
         about       TEXT           NOT NULL         ,
