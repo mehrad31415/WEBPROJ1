@@ -201,8 +201,8 @@ app.get('/tickets', (req, res) =>{
     movieID = req.query.id;
     day = req.query.day;
 });
-app.get('/login', (req, res) =>{
-    res.render('login');
+app.get('/acount', (req, res) =>{
+    res.render('acount');
 });
 app.get('/redirect', (req, res) =>{
     const url = req.query.url;
@@ -211,7 +211,7 @@ app.get('/redirect', (req, res) =>{
 app.all("*", (req,res) => {
     res.status(404).send("resource not found ... ");
 });
-app.listen(PORT=5001, (req, res) => {
+app.listen(PORT=5500, HOSTNAME='127.0.0.1', (req, res) => {
     console.log(`server is running on port ${PORT}...`);
 });
 
@@ -233,7 +233,7 @@ async function getArtistsByID(db, id) {
     let artists = [];
     // artists = new Promise((resolve, reject) => {
     //     let arr = [];
-    //     db.each("SELECT artistMovie, artistRole, artistName, artistYearBirth, artistYearDeath, artistLink, artistArray, artistInfo "
+    //     db.each("SELECT movie_id AS artistMovie, role AS artistRole, name AS artistName, birth AS artistYearBirth, death AS artistYearDeath, link AS artistLink, information AS artistArray, about AS artistInfo "
     //     + "FROM Artist WHERE artistMovie= ?", id, (err, row) => {
     //         arr.push(row);
     //         if (err) reject(err);

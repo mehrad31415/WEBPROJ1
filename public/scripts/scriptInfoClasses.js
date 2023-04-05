@@ -13,6 +13,8 @@ class Movie {
     }
 
     addAllToPage() {
+        //Add purchase options
+            //if logged in...
         const dayDropdown = document.createElement('select');
         const timeDropdown = document.createElement('select');
         const purchaseBtn = document.createElement('button');
@@ -40,7 +42,9 @@ class Movie {
         purchaseBtn.append(document.createTextNode('GO!'));
 
         purchaseBtn.addEventListener("click", this.goToTickets.bind(null, this.movieID, dayDropdown.value, timeDropdown.value));
-        
+            //else: "please log in to purchase movietickets"
+
+
         container.appendChild(article);
         article.setAttribute("class", "article-block");
         const heading = document.createElement("h2");

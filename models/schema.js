@@ -112,6 +112,7 @@ db.serialize(() => {
         death       CHAR(4),
         link        VARCHAR(255)   NOT NULL UNIQUE  ,
         information VARCHAR(255)   NOT NULL UNIQUE  ,
+        about       TEXT           NOT NULL         ,
         role        VARCHAR(255)   NOT NULL         ,
         movie_id    INTEGER        NOT NULL         ,
         /* constraints */
