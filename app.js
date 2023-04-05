@@ -153,13 +153,13 @@ app.use(express.static("./public"));
 app.get(('/'), async (req, res) =>{
     const movieAll = await getAllMovies(db);
     res.render('index', {
-        ejsMovieAll: JSON.stringify(movieAll)
+        ejsMovieAll: JSON.stringify(movieAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
     })
 });
 app.get('/home', async (req, res) =>{
     const movieAll = await getAllMovies(db);
     res.render('index', {
-        ejsMovieAll: JSON.stringify(movieAll)
+        ejsMovieAll: JSON.stringify(movieAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
     })
 });
 app.get('/adaptations-AM', (req, res) =>{
@@ -192,8 +192,8 @@ app.get('/info', async (req, res) => {
     const artists = await getArtistsByID(db,movieID);
 
     res.render('info', {
-        ejsMovie: JSON.stringify(movie),
-        ejsArtists: JSON.stringify(artists)
+        ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???'),
+        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???')
     });
 });
 app.get('/tickets', (req, res) =>{
@@ -226,7 +226,6 @@ async function getMovieByID(db, id) {
             resolve(row);
         });
     });
-    console.log(movie);
     return movie;
 }
 

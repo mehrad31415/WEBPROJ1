@@ -9,8 +9,8 @@ const currentMovie = new Movie(movie.movieID, movie.movieName, movie.movieYear, 
 currentMovie.movieLink = movie.movieLink;
 currentMovie.posterLink = movie.posterLink;
 currentMovie.trailerLink = movie.trailerLink;
-currentMovie.movieAbout.push(movie.movieAbout);
-currentMovie.moviePlot.push(movie.moviePlot);
+currentMovie.movieAbout.push(movie.movieAbout.replaceAll('???', '"'));
+currentMovie.moviePlot.push(movie.moviePlot.replaceAll('???', '"'));
 
 for (let i = 0; i < artists.length; i++){
     const artistTemp = new Artists(
