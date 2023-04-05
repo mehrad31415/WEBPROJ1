@@ -190,10 +190,12 @@ app.get('/info', async (req, res) => {
     movieID = req.query.id;
     const movie = await getMovieByID(db, movieID);
     const artists = await getArtistsByID(db,movieID);
+    const schedule = await getScheduleDateTime(db,movieID);
 
     res.render('info', {
-        ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???'),
-        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???')
+        ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
+        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
+        ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@')
     });
 });
 app.get('/tickets', (req, res) =>{
@@ -250,6 +252,22 @@ async function getAllMovies(db) {
         let arr = [];
         db.each("SELECT movie_id AS movieID, title AS movieName, year AS movieYear "
         + "FROM Movie", (err, row) => { 
+            arr.push(row);
+            if (err) reject(err);
+            resolve(arr);
+        });
+        
+    });
+    return movieAll;
+}
+
+async function getScheduleDateTime(db, id) {
+    let schedule = [];
+    schedule = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT *"
+        + "FROM Schedule"
+        + "WHERE movie_id=" + id, (err, row) => { 
             arr.push(row);
             if (err) reject(err);
             resolve(arr);

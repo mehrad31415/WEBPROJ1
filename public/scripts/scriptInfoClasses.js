@@ -10,6 +10,7 @@ class Movie {
         this.movieAbout = [];
         this.moviePlot = [];
         this.artistArray = [];
+        this.movieSchedule = [];
     }
 
     addAllToPage() {

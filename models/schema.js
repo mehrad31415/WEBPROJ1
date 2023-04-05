@@ -59,6 +59,7 @@ db.serialize(() => {
     db.run(`DROP TABLE movie`);
     db.run(`DROP TABLE user`);
     db.run(`DROP TABLE ordering`);
+    db.run(`DROP Table schedule`);
     //
     // creating tables based on the schema in the database_model file.
     db.run(`CREATE TABLE IF NOT EXISTS movie (

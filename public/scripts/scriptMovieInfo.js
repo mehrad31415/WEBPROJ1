@@ -3,14 +3,18 @@
 let movieArray = [];
 const movie = JSON.parse(ejsMovie);
 const artists = JSON.parse(ejsArtists);
+const schedule = JSON.parse(ejsSchedule);
+console.log(schedule);
 let id = movie.movieID;
 
 const currentMovie = new Movie(movie.movieID, movie.movieName, movie.movieYear, movie.movieGenre);
 currentMovie.movieLink = movie.movieLink;
 currentMovie.posterLink = movie.posterLink;
 currentMovie.trailerLink = movie.trailerLink;
-currentMovie.movieAbout.push(movie.movieAbout.replaceAll('???', '"'));
-currentMovie.moviePlot.push(movie.moviePlot.replaceAll('???', '"'));
+currentMovie.movieAbout.push(movie.movieAbout.replaceAll('???', '"').replaceAll('@@@', '\n'));
+currentMovie.moviePlot.push(movie.moviePlot.replaceAll('???', '"').replaceAll('@@@', '\n'));
+
+
 
 for (let i = 0; i < artists.length; i++){
     const artistTemp = new Artists(
