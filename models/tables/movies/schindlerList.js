@@ -1,7 +1,7 @@
 // schindlers's list attributes
 const movieId = 14;
 
-const title = "Schindler's List";
+const title = "Schindlers List";
 
 const genre = "Historical";
 

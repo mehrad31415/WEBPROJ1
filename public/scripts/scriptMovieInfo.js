@@ -34,8 +34,6 @@ if (page == "info") {
     let movie = movieArray.find(obj => {
         return obj.movieID == id;
     });
-    console.log("currentMovie.artistArray = ")
-    console.log(currentMovie.artistArray);
     movie.addAllToPage();
 } 
 

@@ -4,31 +4,19 @@ movieAll = JSON.parse(ejsMovies);
 console.log(movieAll);
 const paginatedList = document.getElementById("paginated-list");
 
-//!! ADD PLACEHOLDERS JUST TO ILLUSTRATE THE PAGINATION. IN THIS PART WILL THE DATABASE BE IMPLEMENTED !!
-// const itemAngryMen = document.createElement("li");
-// itemAngryMen.setAttribute('class', 'paginated-item');
-// const btnAngryMen = document.createElement("button");
-// itemAngryMen.append(btnAngryMen);
-// btnAngryMen.setAttribute('class', 'paginated-item__button');
-// btnAngryMen.append(document.createTextNode('Placeholder for Movie 12 Angry Men'));
-// paginatedList.append(itemAngryMen);
-// btnAngryMen.addEventListener("click", function () {
-//   window.location = "plot-AM";
-// });
-
 for (let i = 0; i < movieAll.length; i++){
   const itemPag = document.createElement("li");
   itemPag.setAttribute('class', 'paginated-item');
   const btnPag = document.createElement("button");
   itemPag.append(btnPag);
   btnPag.setAttribute('class', 'paginated-item__button');
-  const imgPoster = document.createElement('img');
-  imgPoster.setAttribute('src', movieAll[i].posterLink);
-  imgPoster.setAttribute('alt', 'This is the poster of ' + movieAll[i].movieName + " ");
   btnPag.append(document.createTextNode(movieAll[i].movieName + " ("+ movieAll[i].movieYear +")."));
   paginatedList.append(itemPag);
+  let location;
+  if (movieAll[i].movieID == 0) location = 'plot-AM'; 
+  else location =  "info?id=" + movieAll[i].movieID;
   btnPag.addEventListener("click", function () {
-    window.location = "info?id=" + movieAll[i].movieID;
+    window.location = location;
   });
 }
 

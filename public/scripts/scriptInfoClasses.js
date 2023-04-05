@@ -13,8 +13,34 @@ class Movie {
     }
 
     addAllToPage() {
+        const dayDropdown = document.createElement('select');
+        const timeDropdown = document.createElement('select');
+        const purchaseBtn = document.createElement('button');
+        elementDropdown.classList.add('select-dropdown');
+        styleDropdown.classList.add('select-dropdown');
         const container = document.getElementsByClassName("body__container")[0];
         const article = document.createElement("article");
+        article.append(document.createTextNode('Purchase your tickets for ' + this.movieName + ' now:  '), dayDropdown, timeDropdown, purchaseBtn);
+        
+        const dayDropdownPlaceholder = document.createElement('option');
+        dayDropdownPlaceholder.append('Select a day');
+        dayDropdownPlaceholder.setAttribute('value', '');
+        dayDropdownPlaceholder.setAttribute('disabled', 'true');
+        dayDropdownPlaceholder.setAttribute('selected', 'true');
+        dayDropdown.append(dayDropdownPlaceholder);
+
+        const timeDropdownPlaceholder = document.createElement('option');
+        timeDropdownPlaceholder.append('Select a time');
+        timeDropdownPlaceholder.setAttribute('value', '');
+        timeDropdownPlaceholder.setAttribute('disabled', 'true');
+        timeDropdownPlaceholder.setAttribute('selected', 'true');
+        timeDropdown.append(timeDropdownPlaceholder);
+
+        timeDropdown.setAttribute('placeholder', 'Select a time');
+        purchaseBtn.append(document.createTextNode('GO!'));
+
+        purchaseBtn.addEventListener("click", this.goToTickets.bind(null, this.movieID, dayDropdown.value, timeDropdown.value));
+        
         container.appendChild(article);
         article.setAttribute("class", "article-block");
         const heading = document.createElement("h2");
@@ -28,7 +54,7 @@ class Movie {
         about.appendChild(strongLink);
         const link = document.createElement('a');
         link.setAttribute("class", "link--decoration");
-        link.setAttribute("href", this.movieLink);
+        link.setAttribute("href", "redirect?url=" + this.movieLink);
         link.setAttribute("target", "_blank");
         strongLink.appendChild(link);
         link.append(document.createTextNode(this.movieName));
@@ -38,7 +64,7 @@ class Movie {
         about.appendChild(underlineLinkPoster);
         const posterLinkTemp = document.createElement('a');
         posterLinkTemp.setAttribute("class", "link--decoration");
-        posterLinkTemp.setAttribute("href", this.posterLink);
+        posterLinkTemp.setAttribute("href", "redirect?url=" + this.posterLink);
         posterLinkTemp.setAttribute("target", "_blank");
         underlineLinkPoster.appendChild(posterLinkTemp);
         posterLinkTemp.append(document.createTextNode(this.posterLink.split('.')[1]));
@@ -59,7 +85,7 @@ class Movie {
         about.appendChild(underlineLinkTrailer);
         const trailerLinkTemp = document.createElement('a');
         trailerLinkTemp.setAttribute("class", "link--decoration");
-        trailerLinkTemp.setAttribute("href", this.trailerLink);
+        trailerLinkTemp.setAttribute("href", "redirect?url=" + this.trailerLink);
         trailerLinkTemp.setAttribute("target", "_blank");
         underlineLinkTrailer.appendChild(trailerLinkTemp);
         trailerLinkTemp.append(document.createTextNode(this.trailerLink.split('.')[1]));
@@ -127,6 +153,13 @@ class Movie {
 
     }
 
+    goToTickets(id, day, time) {
+        window.location =   'tickets' + 
+                            '?id=' + id +
+                            '&day=' + day +
+                            '&time=' + time;
+    }
+
 }
 
 //artist
@@ -166,7 +199,7 @@ class Artists {
 
         let linkTempPic = document.createElement('a');
         linkTempPic.setAttribute("class", "link--decoration");
-        linkTempPic.setAttribute("href", item.link);
+        linkTempPic.setAttribute("href", "redirect?url=" + item.link);
         linkTempPic.setAttribute("target", "_blank");
         let image = document.createElement('img');
         image.setAttribute('src', item.picture);
@@ -180,7 +213,7 @@ class Artists {
         container.append(linkTempPic, strongTemp);
         let linkTemp = document.createElement('a');
         linkTemp.setAttribute("class", "link--decoration");
-        linkTemp.setAttribute("href", item.link);
+        linkTemp.setAttribute("href", "redirect?url=" + item.link);
         linkTemp.setAttribute("target", "_blank");
         strongTemp.appendChild(linkTemp);
         let imageBreak = document.createElement('br');

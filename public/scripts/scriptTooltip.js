@@ -23,6 +23,7 @@ function tooltipshow(event) {
         let yearBirthTemp = null;
         let yearDeathTemp = null;
         let urlTemp = event.target.closest('a').getAttribute("href");
+        if (urlTemp.slice(0, -(urlTemp.length-13)) == 'redirect?url=') urlTemp = urlTemp.substring(13);
         if (urlTemp.split('.')[1] == 'html') urlTemp = urlTemp.split("-")[0].split(".")[0].charAt(0).toUpperCase() + urlTemp.split("-")[0].split(".")[0].slice(1);
         if (urlTemp == 'Index') urlTemp = 'Home';
 
