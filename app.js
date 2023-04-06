@@ -70,14 +70,17 @@ app.get('/info', async (req, res) => {
         ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@')
     });
 });
-app.get('/tickets', (req, res) =>{
-    movieID = req.query.id;
-    date = req.query.day;
-    time = req.query.time;
+app.get('/tickets', async (req, res) =>{
+    const movieID = req.query.id;
+    const date = req.query.date;
+    const time = req.query.time;
+    const schedule = await getScheduleDateTime(db,movieID);
+
     res.render('tickets', {
         ejsMovieID: movieID,
         ejsDate: date,
-        ejsTime: time
+        ejsTime: time,
+        ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@')
     });
 });
 app.get('/acount', (req, res) =>{
