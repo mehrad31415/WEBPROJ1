@@ -64,10 +64,9 @@ app.get('/info', async (req, res) => {
     const movie = await getMovieByID(db, movieID);
     const artists = await getArtistsByID(db,movieID);
     const schedule = await getScheduleDateTime(db,movieID);
-
     res.render('info', {
-        ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
-        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
+        ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
+        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[1\]|\[2\]|\[3\]|\[4\]||\[5\]|\[6\]|\[7\]|\[8\]|\[9\]/g, ''),
         ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@')
     });
 });
@@ -108,10 +107,21 @@ async function getArtistsByID(db, id) {
     let artists = [];
     artists = new Promise((resolve, reject) => {
         let arr = [];
-        db.each("SELECT artist_id AS artistID, movie_id AS artistMovie, role AS artistRole, name AS artistName, birth AS artistYearBirth, death AS artistYearDeath, link AS artistLink, information AS artistArray, about AS artistInfo "
-        + "FROM "
-        + "Movie JOIN Role ON Movie.movie_id = Role.movie_id "
-        + ") WHERE artistMovie= ?", id, (err, row) => {
+        db.each(
+            "SELECT Artist.artist_id AS artistID, "
+          + "movie_id AS artistMovie, "
+          + "role AS artistRole, "
+          + "name AS artistName, "
+          + "birth AS artistYearBirth, "
+          + "death AS artistYearDeath, "
+          + "link AS artistLink, "
+          + "information AS artistArray, "
+          + "about AS artistInfo "
+          + "FROM Artist "
+          + "JOIN Role "
+          + "ON Artist.artist_id = Role.artist_id "
+          + "WHERE artistMovie= ?"
+            , id, (err, row) => {
             arr.push(row);
             if (err) reject(err);
             resolve(arr);
