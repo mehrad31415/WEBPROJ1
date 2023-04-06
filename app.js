@@ -71,9 +71,14 @@ app.get('/info', async (req, res) => {
     });
 });
 app.get('/tickets', (req, res) =>{
-    res.render('tickets');
     movieID = req.query.id;
-    day = req.query.day;
+    date = req.query.day;
+    time = req.query.time;
+    res.render('tickets', {
+        ejsMovieID: movieID,
+        ejsDate: date,
+        ejsTime: time
+    });
 });
 app.get('/acount', (req, res) =>{
     res.render('acount');

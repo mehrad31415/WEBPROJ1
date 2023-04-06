@@ -3,7 +3,13 @@
 let movieArray = [];
 const movie = JSON.parse(ejsMovie);
 const artists = JSON.parse(ejsArtists);
-const schedule = JSON.parse(ejsSchedule);
+const stringSchedule = JSON.parse(ejsSchedule);
+const schedule = [];
+for (let i = 0; i < stringSchedule.length; i++){
+    schedule.push(new Date(stringSchedule[i].date.replace(' ', 'T')));
+}
+
+
 //console.log(artists);
 let id = movie.movieID;
 

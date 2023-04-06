@@ -1,14 +1,5 @@
 1 - website of a movie theatre that can sell tickets.
 
-5 - The movie description pages should be generated the same way
-the info.html was generated.
-that is we need to write it in the javascript.
-(not document.write(), not .innerHTML).
-such elements as <nav>,< header>, <footer> and <aside> 
-can still be a part of the file info.html, 
-but all the actual content of the page has to be 
-produced by JavaScript on the fly when the page is loaded. 
-
 7 - we should support registered users (RU) and anonymous users (AU).
 
 8 - Until logging in an AU should be able to browse through all pages.
@@ -70,21 +61,6 @@ processing a RU's order in progress.
 
 6 - JSON to exchange information
 
-7 - SQLITE:
-movies, users, orders, should be stored in an SQLite database 
-and accessed with the Node.JS using sqlite3 module. 
-When they are displayed, the information must come from the 
-database. When new users are registered and when existing 
-users authenticate or change their profile, the information 
-should be exchanged with a database. When a user makes an order, 
-the information should be added to the database.
-title (String), genre (String), year (Number), 
-director (Director), writer(s) - array of Writers, 
-stars - array of Actors 
-(you do not have to specify the entire cast), 
-poster (link to an image), trailer (link to a video), 
-plot (String).
-
 10 - Use template engines EJS
 
 11 - Make sure that your website is protected at least against 
@@ -144,3 +120,17 @@ can still be a part of the file info.html,
 but all the actual content of the page has to be 
 produced by JavaScript on the fly when the page is loaded.
 9 - The list of movies should display up to 10 movies at once.
+7 - SQLITE:
+movies, users, orders, should be stored in an SQLite database 
+and accessed with the Node.JS using sqlite3 module. 
+When they are displayed, the information must come from the 
+database. When new users are registered and when existing 
+users authenticate or change their profile, the information 
+should be exchanged with a database. When a user makes an order, 
+the information should be added to the database.
+title (String), genre (String), year (Number), 
+director (Director), writer(s) - array of Writers, 
+stars - array of Actors 
+(you do not have to specify the entire cast), 
+poster (link to an image), trailer (link to a video), 
+plot (String).

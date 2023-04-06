@@ -1,6 +1,12 @@
 /************************************************ONLY CLASS SELECTORS AS STRICT BEM RECOMMENDS******************************************/
 
 /* Extra small devices (phones, 600px and down) */
+.body__container {
+    clear: both;
+    height: fit-content;
+    min-height: 100vh;
+}
+
 .body--background-color {
     background-color: #E9F8F9;
     margin: 0;
@@ -450,12 +456,6 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    .body__container {
-        clear: both;
-        height: fit-content;
-        min-height: 100vh;
-    }
-
     .navigation-list--one-row {
         float: left;
         padding: 15px;

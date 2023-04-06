@@ -22,9 +22,9 @@ class Movie {
         article.append(document.createTextNode('Purchase your tickets for ' + this.movieName + ' now:  '));
         for (let i = 0; i < this.movieSchedule.length; i++){
             const purchaseBtn = document.createElement('button');
-            purchaseBtn.append(document.createTextNode(this.movieSchedule[i].date.slice(0, this.movieSchedule[i].date.length - 7)));
+            purchaseBtn.append(document.createTextNode(this.movieSchedule[i].toLocaleString()));
             article.append(purchaseBtn);
-            purchaseBtn.addEventListener("click", this.goToTickets.bind(null, this.movieID, this.movieSchedule[i].date));
+            purchaseBtn.addEventListener("click", this.goToTickets.bind(null, this.movieID, this.movieSchedule[i]));
         }
 
             //else: "please log in to purchase movietickets"
@@ -145,8 +145,8 @@ class Movie {
     goToTickets(id, dayTime) {
         window.location =   'tickets' + 
                             '?id=' + id +
-                            '&day=' + dayTime.slice(0, dayTime.length - 13) +
-                            '&time=' + dayTime.slice(11, dayTime.length - 7);
+                            '&date=' + dayTime.getFullYear() + '-' + (dayTime.getMonth()+1) + '-' + dayTime.getDate() +
+                            '&time=' + dayTime.getHours() + '-' + dayTime.getMinutes() + '-' + dayTime.getSeconds();
     }
 
 }

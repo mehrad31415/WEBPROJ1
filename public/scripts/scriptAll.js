@@ -145,82 +145,110 @@ colorInput.type = 'color';
 footer.appendChild(elementDropdown);
 footer.appendChild(styleDropdown);
 
-//Element menu 
-// get all elements from DOM
-const elements = document.querySelectorAll('body, header, footer, aside, article, section');
+//Log in Menu
 
-elements.forEach((element) => {
-    // get type of elemnt
-    const elementType = element.nodeName.toLowerCase();
+// !!!!!FROM CHATGPT:!!!!!
 
-    const option = document.createElement('option');
-    option.text = elementType;
-    elementDropdown.add(option);
-});
+// // //serverside:
 
-// font and size menu
+// const express = require('express');
+// const bodyParser = require('body-parser');
+// const cookieParser = require('cookie-parser');
+// const bcrypt = require('bcrypt');
+// const db = require('./db'); // assuming you have a separate file for your database connection
 
-const styleOptions = [{
-    name: 'Font-size (px)',
-    property: 'font-size'
-},
-{
-    name: 'Color',
-    property: 'color'
-},
-];
+// const app = express();
 
-// Add the placeholder to the textbox
-fontSizeInput.setAttribute('placeholder', 'Enter font-size');
+// app.use(bodyParser.json());
+// app.use(cookieParser());
 
+// app.post('/api/login', (req, res) => {
+//   const { email, password } = req.body;
 
-styleOptions.forEach((option) => {
-    const styleOption = document.createElement('option');
-    styleOption.text = option.name;
-    styleOption.value = option.property;
-    styleDropdown.add(styleOption);
-});
+//   // Query the database to check if the user exists
+//   db.query('SELECT * FROM users WHERE email = ?', [email], (error, results) => {
+//     if (error) {
+//       console.error('Error checking if user exists:', error);
+//       return res.status(500).json({ success: false, message: 'An error occurred while checking if the user exists.' });
+//     }
 
+//     if (results.length === 0) {
+//       // User does not exist
+//       return res.status(401).json({ success: false, message: 'Invalid email or password.' });
+//     }
 
-// Logic for switching the color or font size input  
-if (styleDropdown.value === 'font-size') {
-    footer.appendChild(fontSizeInput);
-} else {
-    footer.appendChild(colorInput);
-}
+//     // Compare the user's password hash with the provided password
+//     const user = results[0];
+//     bcrypt.compare(password, user.passwordHash, (error, isMatch) => {
+//       if (error) {
+//         console.error('Error comparing passwords:', error);
+//         return res.status(500).json({ success: false, message: 'An error occurred while authenticating the user.' });
+//       }
 
-styleDropdown.addEventListener('change', (event) => {
-    if (event.target.value === 'font-size') {
-        footer.removeChild(colorInput);
-        footer.appendChild(fontSizeInput);
-    } else {
-        footer.removeChild(fontSizeInput);
-        footer.appendChild(colorInput);
-    }
-});
+//       if (isMatch) {
+//         // Passwords match, login successful
 
-// font and size menu font input
-fontSizeInput.addEventListener('input', (event) => {
-    if (event.target.value < 8 || event.target.value > 24) {
-        return;
-    }
-    const element = document.querySelector(elementDropdown.value);
-    // find all children of element
-    const children = element.querySelectorAll('*');
-    // add font size to all children
-    children.forEach((child) => {
-        child.style.fontSize = event.target.value + 'px';
-    });
-});
+//         // Set a cookie to keep track of the user's email
+//         res.cookie('email', email, { sameSite: 'strict' });
 
-// font and size menu color input
-colorInput.addEventListener('change', (event) => {
-    const element = document.querySelector(elementDropdown.value);
-    // find all children of element
-    const children = element.querySelectorAll('*');
-    // add color to all children
-    children.forEach((child) => {
-        child.style.color = event.target.value;
-    });
-});
+//         // Set a cookie to keep track of the user's login status
+//         res.cookie('loggedIn', true, { sameSite: 'strict' });
 
+//         return res.status(200).json({ success: true, message: 'Login successful.' });
+//       } else {
+//         // Passwords do not match
+//         return res.status(401).json({ success: false, message: 'Invalid email or password.' });
+//       }
+//     });
+//   });
+// });
+
+// app.listen(3000, () => {
+//   console.log('Server started on port 3000');
+// });
+
+// // // html
+// <!DOCTYPE html>
+// <html>
+// <head>
+//   <title>Login</title>
+// </head>
+// <body>
+//   <h1>Login</h1>
+//   <form id="login-form">
+//     <label for="email">Email:</label>
+//     <input type="email" id="email" name="email" required>
+
+//     <br><br>
+
+//     <label for="password">Password:</label>
+//     <input type="password" id="password" name="password" required>
+
+//     <br><br>
+
+//     <button type="submit">Login</button>
+//   </form>
+
+//   <script src="login.js"></script>
+// </body>
+// </html>
+
+// userside javascript
+
+// // Assume you have a login form in your HTML with input fields with ids "email" and "password"
+// const emailInput = document.getElementById('email');
+// const passwordInput = document.getElementById('password');
+
+// // Add an event listener to your login form submit button
+// const loginForm = document.getElementById('login-form');
+// loginForm.addEventListener('submit', (event) => {
+//   event.preventDefault(); // Prevent the form from submitting
+
+//   const email = emailInput.value;
+//   const password = passwordInput.value;
+
+//   // Perform validation on the email and password fields if needed
+
+//   // Send a login request to your server with the email and password
+//   fetch('/api/login', {
+//     method: 'POST
