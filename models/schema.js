@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-const path    = require('node:path');
+const path = require('node:path');
 // movies
 const angryMen = require('./tables/movies/12AngryMen');
 const blackFish = require('./tables/movies/blackfish');
@@ -42,6 +42,20 @@ const orderNine = require('./tables/orders/orderNine');
 const orderTen = require('./tables/orders/orderTen');
 
 // schedule
+const schedule1 = require('./tables/schedule/schedule1');
+const schedule2 = require('./tables/schedule/schedule2');
+const schedule3 = require('./tables/schedule/schedule3');
+const schedule4 = require('./tables/schedule/schedule4');
+const schedule5 = require('./tables/schedule/schedule5');
+const schedule6 = require('./tables/schedule/schedule6');
+const schedule7 = require('./tables/schedule/schedule7');
+const schedule8 = require('./tables/schedule/schedule8');
+const schedule9 = require('./tables/schedule/schedule9');
+const schedule10 = require('./tables/schedule/schedule10');
+const schedule11 = require('./tables/schedule/schedule11');
+const schedule12 = require('./tables/schedule/schedule12');
+const schedule13 = require('./tables/schedule/schedule13');
+const schedule14 = require('./tables/schedule/schedule14');
 
 // artists
 
@@ -59,9 +73,10 @@ db.serialize(() => {
     db.run(`DROP TABLE movie`);
     db.run(`DROP TABLE user`);
     db.run(`DROP TABLE ordering`);
-    db.run(`DROP Table schedule`);
+    db.run(`DROP TABLE schedule`);
     //
     // creating tables based on the schema in the database_model file.
+    // table movie created
     db.run(`CREATE TABLE IF NOT EXISTS movie (
         movie_id    INTEGER         PRIMARY KEY  ,
         title       VARCHAR(255)    NOT NULL     ,
@@ -75,8 +90,13 @@ db.serialize(() => {
         /* constraints */
         UNIQUE(poster, trailer, link, plot, about)
     )`, (err) => {
-        if (err) { console.error(err); }
+        if (err) { 
+            console.error(err); 
+        } else {
+            console.log("table movie created...");
+        }
     });
+    // table schedule created
     db.run(`CREATE TABLE IF NOT EXISTS schedule(
         schedule_id INTEGER PRIMARY KEY,
         movie_id    INTEGER NOT NULL   ,
@@ -84,8 +104,13 @@ db.serialize(() => {
         /* constraints */
         FOREIGN KEY (movie_id) REFERENCES movie (movie_id) ON UPDATE CASCADE ON DELETE CASCADE
     )`, (err) => {
-        if (err) { console.error(err); }
+        if (err) { 
+            console.error(err); 
+        } else {
+            console.log("table schedule created...");
+        }
     });
+    // table user created
     db.run(`CREATE TABLE IF NOT EXISTS user (
         user_id          INTEGER        PRIMARY KEY     ,
         username         VARCHAR(255)   NOT NULL UNIQUE ,
@@ -96,8 +121,13 @@ db.serialize(() => {
         credit_card      CHAR(18)       NOT NULL        ,
         registered_date  TEXT           NOT NULL
     )`, (err) => {
-        if (err) { console.error(err); }
+        if (err) { 
+            console.error(err); 
+        } else {
+            console.log("table user created...");
+        }
     });
+    // table ordering created (order cannot be the name of a table as it is a keyword in sql, so we named it ordering)
     db.run(`CREATE TABLE IF NOT EXISTS ordering (
         order_id       INTEGER PRIMARY KEY                ,
         user_id        INTEGER NOT NULL                   ,
@@ -108,43 +138,43 @@ db.serialize(() => {
         FOREIGN KEY (user_id)  REFERENCES user(user_id)   ON UPDATE CASCADE ON DELETE CASCADE ,
         FOREIGN KEY (movie_id) REFERENCES movie(movie_id) ON UPDATE CASCADE ON DELETE CASCADE
     )`, (err) => {
-        if (err) { console.error(err); }
+        if (err) { 
+            console.error(err); 
+        } else {
+            console.log("table ordering created...");
+        }
     });
+    // table artist created
     db.run(`CREATE TABLE IF NOT EXISTS artist (
         artist_id   INTEGER        PRIMARY KEY      ,
         name        VARCHAR(255)   NOT NULL         ,
-        birth       CHAR(4)        NOT NULL         ,
+        birth       CHAR(4)                         ,
         death       CHAR(4)                         ,
         link        VARCHAR(255)   NOT NULL UNIQUE  ,
         information VARCHAR(255)   NOT NULL UNIQUE  ,
-        about       TEXT           NOT NULL         ,
-        role        VARCHAR(255)   NOT NULL         ,
-        movie_id    INTEGER        NOT NULL         ,
+        about       TEXT           NOT NULL         
+    )`, (err) => {
+        if (err) { 
+            console.error(err); 
+        } else {
+            console.log("table artist created...");
+        }
+    });
+    // table role created
+    db.run (`CREATE TABLE IF NOT EXISTS role (
+        role_id   INTEGER           PRIMARY KEY AUTOINCREMENT  ,
+        artist_id INTEGER           NOT NULL                   ,
+        movie_id  INTEGER           NOT NULL                   ,
+        role      VARCHAR (255)     NOT NULL                   ,
         /* constraints */
-        FOREIGN KEY (movie_id) REFERENCES movie(movie_id) ON UPDATE CASCADE ON DELETE SET NULL
+        FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON DELETE CASCADE ON UPDATE CASCADE ,
+        FOREIGN KEY (movie_id)  REFERENCES movie (movie_id)  ON DELETE CASCADE ON UPDATE CASCADE
     )`, (err) => {
-        if (err) { console.error(err); }
-    });
-    db.run(`CREATE TABLE IF NOT EXISTS actor (
-        artist_id   INTEGER       NOT NULL ,
-        movie       VARCHAR(255)  NOT NULL ,
-        FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
-    )`, (err) => {
-        if (err) { console.error(err); }
-    });
-    db.run(`CREATE TABLE IF NOT EXISTS director (
-        artist_id   INTEGER       NOT NULL ,
-        movie       VARCHAR(255)  NOT NULL ,
-        FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
-    )`, (err) => {
-        if (err) { console.error(err); }
-    });
-    db.run(`CREATE TABLE IF NOT EXISTS writer (
-        artist_id   INTEGER       NOT NULL ,
-        book        VARCHAR(255)           ,
-        FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
-    )`, (err) => {
-        if (err) { console.error(err); }
+        if (err) {
+            console.error(err.message);
+        } else {
+            console.log("table role created...");
+        }
     });
     db.serialize(() => {
         // inserting the data inside the movie table.
@@ -468,6 +498,136 @@ db.serialize(() => {
                 console.log(`A row has been inserted to the ordering table...`);
             }
         });
+        // inserting the data inside the schedule table.
+        // schedule one.
+        params = [schedule1.scheduleId, schedule1.movieId, schedule1.date];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule two.
+        params = [schedule2.scheduleId, schedule2.movieId, schedule2.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule three.
+        params = [schedule3.scheduleId, schedule3.movieId, schedule3.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule four.
+        params = [schedule4.scheduleId, schedule4.movieId, schedule4.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule five.
+        params = [schedule5.scheduleId, schedule5.movieId, schedule5.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule six.
+        params = [schedule6.scheduleId, schedule6.movieId, schedule6.date];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule seven.
+        params = [schedule7.scheduleId, schedule7.movieId, schedule7.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule eight.
+        params = [schedule8.scheduleId, schedule8.movieId, schedule8.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule nine.
+        params = [schedule9.scheduleId, schedule9.movieId, schedule9.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule ten.
+        params = [schedule10.scheduleId, schedule10.movieId, schedule10.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });        
+        // schedule eleven.
+        params = [schedule11.scheduleId, schedule11.movieId, schedule11.date];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twelve.
+        params = [schedule12.scheduleId, schedule12.movieId, schedule12.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule thirteen.
+        params = [schedule13.scheduleId, schedule13.movieId, schedule13.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule fourteen.
+        params = [schedule14.scheduleId, schedule14.movieId, schedule14.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
     });
 
     // query
@@ -486,3 +646,32 @@ db.close((err) => {
     }
     console.log("database connection is closed...");
 });
+
+    // // actor table
+    // db.run(`CREATE TABLE IF NOT EXISTS actor (
+    //     artist_id   INTEGER       NOT NULL ,
+    //     movie       VARCHAR(255)  NOT NULL ,
+    //     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
+    // )`, (err) => {
+    //     if (err) { console.error(err); }
+    // });
+    // // director table
+    // db.run(`CREATE TABLE IF NOT EXISTS director (
+    //     artist_id   INTEGER       NOT NULL ,
+    //     movie       VARCHAR(255)  NOT NULL ,
+    //     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
+    // )`, (err) => {
+    //     if (err) { console.error(err); }
+    // });
+    // // writer table
+    // db.run(`CREATE TABLE IF NOT EXISTS writer (
+    //     artist_id   INTEGER       NOT NULL ,
+    //     book        VARCHAR(255)           ,
+    //     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
+    // )`, (err) => {
+    //     if (err) { 
+    //         console.error(err); 
+    //     } else {
+    //         console.log("table role created");
+    //     }
+    // });

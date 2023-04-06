@@ -9,3 +9,12 @@ loginBtn.addEventListener('click', () => {
   const password = document.getElementById('password').value;
 });
 
+
+let isLoggedIn = false;
+function canBuyTicket(isLoggedIn) {
+  if (isLoggedIn) {
+    return true;
+  } else {
+    return false;
+  }
+}
