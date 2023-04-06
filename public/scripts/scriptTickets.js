@@ -1,5 +1,6 @@
 //Javascript
 
+const checkLogin = true;
 const movieID = ejsMovieID;
 const date = ejsDate.split('-');
 const time = ejsTime.split('-');
