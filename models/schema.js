@@ -56,6 +56,26 @@ const schedule11 = require('./tables/schedule/schedule11');
 const schedule12 = require('./tables/schedule/schedule12');
 const schedule13 = require('./tables/schedule/schedule13');
 const schedule14 = require('./tables/schedule/schedule14');
+const schedule15 = require('./tables/schedule/schedule15');
+const schedule16 = require('./tables/schedule/schedule16');
+const schedule17 = require('./tables/schedule/schedule17');
+const schedule18 = require('./tables/schedule/schedule18');
+const schedule19 = require('./tables/schedule/schedule19');
+const schedule20 = require('./tables/schedule/schedule20');
+const schedule21 = require('./tables/schedule/schedule21');
+const schedule22 = require('./tables/schedule/schedule22');
+const schedule23 = require('./tables/schedule/schedule23');
+const schedule24 = require('./tables/schedule/schedule24');
+const schedule25 = require('./tables/schedule/schedule25');
+const schedule26 = require('./tables/schedule/schedule26');
+const schedule27 = require('./tables/schedule/schedule27');
+const schedule28 = require('./tables/schedule/schedule28');
+const schedule29 = require('./tables/schedule/schedule29');
+const schedule30 = require('./tables/schedule/schedule30');
+const schedule31 = require('./tables/schedule/schedule31');
+const schedule32 = require('./tables/schedule/schedule32');
+const schedule33 = require('./tables/schedule/schedule33');
+const schedule34 = require('./tables/schedule/schedule34');
 
 // artists
 
@@ -90,8 +110,8 @@ db.serialize(() => {
         /* constraints */
         UNIQUE(poster, trailer, link, plot, about)
     )`, (err) => {
-        if (err) { 
-            console.error(err); 
+        if (err) {
+            console.error(err);
         } else {
             console.log("table movie created...");
         }
@@ -104,8 +124,8 @@ db.serialize(() => {
         /* constraints */
         FOREIGN KEY (movie_id) REFERENCES movie (movie_id) ON UPDATE CASCADE ON DELETE CASCADE
     )`, (err) => {
-        if (err) { 
-            console.error(err); 
+        if (err) {
+            console.error(err);
         } else {
             console.log("table schedule created...");
         }
@@ -121,8 +141,8 @@ db.serialize(() => {
         credit_card      CHAR(18)       NOT NULL        ,
         registered_date  TEXT           NOT NULL
     )`, (err) => {
-        if (err) { 
-            console.error(err); 
+        if (err) {
+            console.error(err);
         } else {
             console.log("table user created...");
         }
@@ -138,8 +158,8 @@ db.serialize(() => {
         FOREIGN KEY (user_id)  REFERENCES user(user_id)   ON UPDATE CASCADE ON DELETE CASCADE ,
         FOREIGN KEY (movie_id) REFERENCES movie(movie_id) ON UPDATE CASCADE ON DELETE CASCADE
     )`, (err) => {
-        if (err) { 
-            console.error(err); 
+        if (err) {
+            console.error(err);
         } else {
             console.log("table ordering created...");
         }
@@ -154,14 +174,14 @@ db.serialize(() => {
         information VARCHAR(255)   NOT NULL UNIQUE  ,
         about       TEXT           NOT NULL         
     )`, (err) => {
-        if (err) { 
-            console.error(err); 
+        if (err) {
+            console.error(err);
         } else {
             console.log("table artist created...");
         }
     });
     // table role created
-    db.run (`CREATE TABLE IF NOT EXISTS role (
+    db.run(`CREATE TABLE IF NOT EXISTS role (
         role_id   INTEGER           PRIMARY KEY AUTOINCREMENT  ,
         artist_id INTEGER           NOT NULL                   ,
         movie_id  INTEGER           NOT NULL                   ,
@@ -590,7 +610,7 @@ db.serialize(() => {
             } else {
                 console.log(`A row has been inserted to the schedule table...`);
             }
-        });        
+        });
         // schedule eleven.
         params = [schedule11.scheduleId, schedule11.movieId, schedule11.date];
         placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
@@ -621,6 +641,188 @@ db.serialize(() => {
         });
         // schedule fourteen.
         params = [schedule14.scheduleId, schedule14.movieId, schedule14.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule fifteen.
+        params = [schedule15.scheduleId, schedule15.movieId, schedule15.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule sixteen.
+        params = [schedule16.scheduleId, schedule16.movieId, schedule16.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule seventeen.
+        params = [schedule17.scheduleId, schedule17.movieId, schedule17.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule eighteen.
+        params = [schedule18.scheduleId, schedule18.movieId, schedule18.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule nineteen.
+        params = [schedule19.scheduleId, schedule19.movieId, schedule19.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty.
+        params = [schedule20.scheduleId, schedule20.movieId, schedule20.date];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-one.
+        params = [schedule21.scheduleId, schedule21.movieId, schedule21.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-two.
+        params = [schedule22.scheduleId, schedule22.movieId, schedule22.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-three.
+        params = [schedule23.scheduleId, schedule23.movieId, schedule23.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-four.
+        params = [schedule24.scheduleId, schedule24.movieId, schedule24.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-five.
+        params = [schedule25.scheduleId, schedule25.movieId, schedule25.date];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-six.
+        params = [schedule26.scheduleId, schedule26.movieId, schedule26.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-seven.
+        params = [schedule27.scheduleId, schedule27.movieId, schedule27.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-eight.
+        params = [schedule28.scheduleId, schedule28.movieId, schedule28.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule twenty-nine.
+        params = [schedule29.scheduleId, schedule29.movieId, schedule29.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule thirty.
+        params = [schedule30.scheduleId, schedule30.movieId, schedule30.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule thirty-one.
+        params = [schedule31.scheduleId, schedule31.movieId, schedule31.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule thirty-two.
+        params = [schedule32.scheduleId, schedule32.movieId, schedule32.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule thirty-three.
+        params = [schedule33.scheduleId, schedule33.movieId, schedule33.date];
+        db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the schedule table...`);
+            }
+        });
+        // schedule thirty-four.
+        params = [schedule34.scheduleId, schedule34.movieId, schedule34.date];
         db.run('INSERT INTO schedule VALUES' + placeholders, params, (err) => {
             if (err) {
                 console.error(err.message);
@@ -669,8 +871,8 @@ db.close((err) => {
     //     book        VARCHAR(255)           ,
     //     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
     // )`, (err) => {
-    //     if (err) { 
-    //         console.error(err); 
+    //     if (err) {
+    //         console.error(err);
     //     } else {
     //         console.log("table role created");
     //     }

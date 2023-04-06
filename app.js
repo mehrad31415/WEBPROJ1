@@ -190,8 +190,7 @@ app.get('/info', async (req, res) => {
     movieID = req.query.id;
     const movie = await getMovieByID(db, movieID);
     const artists = await getArtistsByID(db,movieID);
-    const schedule = "WhyUNoWork";
-    //const schedule = await getScheduleDateTime(db,movieID);
+    const schedule = await getScheduleDateTime(db,movieID);
 
     res.render('info', {
         ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
@@ -262,18 +261,18 @@ async function getAllMovies(db) {
     return movieAll;
 }
 
-// async function getScheduleDateTime(db, id) {
-//     let schedule = [];
-//     schedule = new Promise((resolve, reject) => {
-//         let arr = [];
-//         db.each("SELECT * "
-//         + "FROM Schedule "
-//         + "WHERE movie_id=" + id, (err, row) => { 
-//             arr.push(row);
-//             if (err) reject(err);
-//             resolve(arr);
-//         });
+async function getScheduleDateTime(db, id) {
+    let schedule = [];
+    try {schedule = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT * "
+        + "FROM Schedule "
+        + "WHERE movie_id= ?", id, (err, row) => { 
+            arr.push(row);
+            if (err) reject(err);
+            resolve(arr);
+        });
         
-//     });
-//     return movieAll;
-// }
+    })} catch (error) { console.log(error); return null;}
+    return schedule;
+}

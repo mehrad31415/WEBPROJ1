@@ -16,33 +16,17 @@ class Movie {
     addAllToPage() {
         //Add purchase options
             //if logged in...
-        const dayDropdown = document.createElement('select');
-        const timeDropdown = document.createElement('select');
-        const purchaseBtn = document.createElement('button');
-        elementDropdown.classList.add('select-dropdown');
-        styleDropdown.classList.add('select-dropdown');
+
         const container = document.getElementsByClassName("body__container")[0];
         const article = document.createElement("article");
-        article.append(document.createTextNode('Purchase your tickets for ' + this.movieName + ' now:  '), dayDropdown, timeDropdown, purchaseBtn);
-        
-        const dayDropdownPlaceholder = document.createElement('option');
-        dayDropdownPlaceholder.append('Select a day');
-        dayDropdownPlaceholder.setAttribute('value', '');
-        dayDropdownPlaceholder.setAttribute('disabled', 'true');
-        dayDropdownPlaceholder.setAttribute('selected', 'true');
-        dayDropdown.append(dayDropdownPlaceholder);
+        article.append(document.createTextNode('Purchase your tickets for ' + this.movieName + ' now:  '));
+        for (let i = 0; i < this.movieSchedule.length; i++){
+            const purchaseBtn = document.createElement('button');
+            purchaseBtn.append(document.createTextNode(this.movieSchedule[i].date.slice(0, this.movieSchedule[i].date.length - 7)));
+            article.append(purchaseBtn);
+            purchaseBtn.addEventListener("click", this.goToTickets.bind(null, this.movieID, this.movieSchedule[i].date));
+        }
 
-        const timeDropdownPlaceholder = document.createElement('option');
-        timeDropdownPlaceholder.append('Select a time');
-        timeDropdownPlaceholder.setAttribute('value', '');
-        timeDropdownPlaceholder.setAttribute('disabled', 'true');
-        timeDropdownPlaceholder.setAttribute('selected', 'true');
-        timeDropdown.append(timeDropdownPlaceholder);
-
-        timeDropdown.setAttribute('placeholder', 'Select a time');
-        purchaseBtn.append(document.createTextNode('GO!'));
-
-        purchaseBtn.addEventListener("click", this.goToTickets.bind(null, this.movieID, dayDropdown.value, timeDropdown.value));
             //else: "please log in to purchase movietickets"
 
 
@@ -158,11 +142,11 @@ class Movie {
 
     }
 
-    goToTickets(id, day, time) {
+    goToTickets(id, dayTime) {
         window.location =   'tickets' + 
                             '?id=' + id +
-                            '&day=' + day +
-                            '&time=' + time;
+                            '&day=' + dayTime.slice(0, dayTime.length - 13) +
+                            '&time=' + dayTime.slice(11, dayTime.length - 7);
     }
 
 }
