@@ -157,14 +157,14 @@ const db = new sqlite3.Database(path.resolve(__dirname, 'database/movie.db'), (e
 
 // its safe to nest the serialize.
 db.serialize(() => {
-    // these lines have to be dropped when the database is finished.
-    db.run(`DROP TABLE movie`);
-    db.run(`DROP TABLE user`);
-    db.run(`DROP TABLE ordering`);
-    db.run(`DROP TABLE schedule`);
-    db.run(`DROP TABLE artist`);
-    db.run(`DROP TABLE role`);
-    //
+    // if you already have any of these tables in your database uncomment the following lines and drop them.
+    // db.run(`DROP TABLE movie`);
+    // db.run(`DROP TABLE user`);
+    // db.run(`DROP TABLE ordering`);
+    // db.run(`DROP TABLE schedule`);
+    // db.run(`DROP TABLE artist`);
+    // db.run(`DROP TABLE role`);
+
     // creating tables based on the schema in the database_model file.
     // table movie created
     db.run(`CREATE TABLE IF NOT EXISTS movie (
@@ -1512,50 +1512,678 @@ db.serialize(() => {
                 console.log(`A row has been inserted to the role table...`);
             }
         });
+        // role four.
+        params = [role4.artistId, role4.movieId, role4.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role five.
+        params = [role5.artistId, role5.movieId, role5.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role six.
+        params = [role6.artistId, role6.movieId, role6.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role seven.
+        params = [role7.artistId, role7.movieId, role7.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role eight.
+        params = [role8.artistId, role8.movieId, role8.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role nine.
+        params = [role9.artistId, role9.movieId, role9.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role ten.
+        params = [role10.artistId, role10.movieId, role10.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role eleven.
+        params = [role11.artistId, role11.movieId, role11.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twelve.
+        params = [role12.artistId, role12.movieId, role12.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirteen.
+        params = [role13.artistId, role13.movieId, role13.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fourteen.
+        params = [role14.artistId, role14.movieId, role14.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifteen.
+        params = [role15.artistId, role15.movieId, role15.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixteen.
+        params = [role16.artistId, role16.movieId, role16.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role seventeen.
+        params = [role17.artistId, role17.movieId, role17.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role eighteen.
+        params = [role18.artistId, role18.movieId, role18.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role nineteen.
+        params = [role19.artistId, role19.movieId, role19.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty.
+        params = [role20.artistId, role20.movieId, role20.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-one.
+        params = [role21.artistId, role21.movieId, role21.role];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-two.
+        params = [role22.artistId, role22.movieId, role22.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-three.
+        params = [role23.artistId, role23.movieId, role23.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-four.
+        params = [role24.artistId, role24.movieId, role24.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-five.
+        params = [role25.artistId, role25.movieId, role25.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-six.
+        params = [role26.artistId, role26.movieId, role26.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-seven.
+        params = [role27.artistId, role27.movieId, role27.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-eight.
+        params = [role28.artistId, role28.movieId, role28.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role twenty-nine.
+        params = [role29.artistId, role29.movieId, role29.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty.
+        params = [role30.artistId, role30.movieId, role30.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-one.
+        params = [role31.artistId, role31.movieId, role31.role];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-two.
+        params = [role32.artistId, role32.movieId, role32.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-three.
+        params = [role33.artistId, role33.movieId, role33.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-four.
+        params = [role34.artistId, role34.movieId, role34.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-five.
+        params = [role35.artistId, role35.movieId, role35.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-six.
+        params = [role36.artistId, role36.movieId, role36.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-seven.
+        params = [role37.artistId, role37.movieId, role37.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-eight.
+        params = [role38.artistId, role38.movieId, role38.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role thirty-nine.
+        params = [role39.artistId, role39.movieId, role39.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty.
+        params = [role40.artistId, role40.movieId, role40.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-one.
+        params = [role41.artistId, role41.movieId, role41.role];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-two.
+        params = [role42.artistId, role42.movieId, role42.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-three.
+        params = [role43.artistId, role43.movieId, role43.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-four.
+        params = [role44.artistId, role44.movieId, role44.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-five.
+        params = [role45.artistId, role45.movieId, role45.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-six.
+        params = [role46.artistId, role46.movieId, role46.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-seven.
+        params = [role47.artistId, role47.movieId, role47.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-eight.
+        params = [role48.artistId, role48.movieId, role48.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role forty-nine.
+        params = [role49.artistId, role49.movieId, role49.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty
+        params = [role50.artistId, role50.movieId, role50.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-one.
+        params = [role51.artistId, role51.movieId, role51.role];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-two.
+        params = [role52.artistId, role52.movieId, role52.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-three.
+        params = [role53.artistId, role53.movieId, role53.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-four.
+        params = [role54.artistId, role54.movieId, role54.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-five.
+        params = [role55.artistId, role55.movieId, role55.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-six.
+        params = [role56.artistId, role56.movieId, role56.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-seven.
+        params = [role57.artistId, role57.movieId, role57.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-eight.
+        params = [role58.artistId, role58.movieId, role58.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role fifty-nine.
+        params = [role59.artistId, role59.movieId, role59.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty.
+        params = [role60.artistId, role60.movieId, role60.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-one.
+        params = [role61.artistId, role61.movieId, role61.role];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-two.
+        params = [role62.artistId, role62.movieId, role62.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-three.
+        params = [role63.artistId, role63.movieId, role63.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-four.
+        params = [role64.artistId, role64.movieId, role64.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-five.
+        params = [role65.artistId, role65.movieId, role65.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-six.
+        params = [role66.artistId, role66.movieId, role66.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-seven.
+        params = [role67.artistId, role67.movieId, role67.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-eight.
+        params = [role68.artistId, role68.movieId, role68.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role sixty-nine.
+        params = [role69.artistId, role69.movieId, role69.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role seventy.
+        params = [role70.artistId, role70.movieId, role70.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role seventy-one
+        params = [role71.artistId, role71.movieId, role71.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role seventy-two.
+        params = [role72.artistId, role72.movieId, role72.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
     });
-    // query
-    const sql = `SELECT * FROM movie`;
-    db.get(sql, (err, row) => {
-        if (err) {
-            console.error(err.message);
-        }
-        return row ? console.log("row found") : console.log("not found");
-    });
+    // an example query:
+    // const sql = `SELECT * FROM movie`;
+    // db.get(sql, (err, row) => {
+    //     if (err) {
+    //         console.error(err.message);
+    //     }
+    //     return row ? console.log("row found") : console.log("not found");
+    // });
 });
 
-// db.close((err) => {
-//     if (err) {
-//         return console.error(err.message);
-//     }
-//     console.log("database connection is closed...");
+db.close((err) => {
+    if (err) {
+        return console.error(err.message);
+    }
+    console.log("database connection is closed...");
+});
+
+// the below tables were part of our initial schema where we divided the artist table into three tables
+// but we did not have a role table. This way our schema was still not in 3nf. So we added a role table
+// and got rid of these tables. I have pu them at the end just for reference.
+// // actor table
+// db.run(`CREATE TABLE IF NOT EXISTS actor (
+//     artist_id   INTEGER       NOT NULL ,
+//     movie       VARCHAR(255)  NOT NULL ,
+//     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
+// )`, (err) => {
+//     if (err) { console.error(err); }
 // });
-
-
-    // // actor table
-    // db.run(`CREATE TABLE IF NOT EXISTS actor (
-    //     artist_id   INTEGER       NOT NULL ,
-    //     movie       VARCHAR(255)  NOT NULL ,
-    //     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
-    // )`, (err) => {
-    //     if (err) { console.error(err); }
-    // });
-    // // director table
-    // db.run(`CREATE TABLE IF NOT EXISTS director (
-    //     artist_id   INTEGER       NOT NULL ,
-    //     movie       VARCHAR(255)  NOT NULL ,
-    //     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
-    // )`, (err) => {
-    //     if (err) { console.error(err); }
-    // });
-    // // writer table
-    // db.run(`CREATE TABLE IF NOT EXISTS writer (
-    //     artist_id   INTEGER       NOT NULL ,
-    //     book        VARCHAR(255)           ,
-    //     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
-    // )`, (err) => {
-    //     if (err) {
-    //         console.error(err);
-    //     } else {
-    //         console.log("table role created");
-    //     }
-    // });
+// // director table
+// db.run(`CREATE TABLE IF NOT EXISTS director (
+//     artist_id   INTEGER       NOT NULL ,
+//     movie       VARCHAR(255)  NOT NULL ,
+//     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
+// )`, (err) => {
+//     if (err) { console.error(err); }
+// });
+// // writer table
+// db.run(`CREATE TABLE IF NOT EXISTS writer (
+//     artist_id   INTEGER       NOT NULL ,
+//     book        VARCHAR(255)           ,
+//     FOREIGN KEY (artist_id) REFERENCES artist(artist_id) ON UPDATE CASCADE ON DELETE SET NULL
+// )`, (err) => {
+//     if (err) {
+//         console.error(err);
+//     } else {
+//         console.log("table role created");
+//     }
+// });
