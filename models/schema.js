@@ -1,5 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('node:path');
+const fs = require('node:fs');
+
 // movies
 const angryMen = require('./tables/movies/12AngryMen');
 const blackFish = require('./tables/movies/blackfish');
@@ -76,9 +78,75 @@ const schedule31 = require('./tables/schedule/schedule31');
 const schedule32 = require('./tables/schedule/schedule32');
 const schedule33 = require('./tables/schedule/schedule33');
 const schedule34 = require('./tables/schedule/schedule34');
-
 // artists
-
+const artist1 = require('./tables/artists/unforgiven/actor');
+const artist2 = require('./tables/artists/unforgiven/writer');
+const artist3 = require('./tables/artists/toyStory/director');
+const artist4 = require('./tables/artists/theoryOfEverything/actor');
+const artist5 = require('./tables/artists/theoryOfEverything/director');
+const artist6 = require('./tables/artists/theoryOfEverything/writer');
+const artist7 = require('./tables/artists/terminator/actor');
+const artist8 = require('./tables/artists/terminator/director');
+const artist9 = require('./tables/artists/silenceLambs/actor');
+const artist10 = require('./tables/artists/silenceLambs/director');
+const artist11 = require('./tables/artists/silenceLambs/writer');
+const artist12 = require('./tables/artists/shining/actor');
+const artist13 = require('./tables/artists/shining/director');
+const artist14 = require('./tables/artists/shawshankRedemption/actor');
+const artist15 = require('./tables/artists/shawshankRedemption/director');
+const artist16 = require('./tables/artists/shawshankRedemption/writer');
+const artist17 = require('./tables/artists/schindlerList/actor');
+const artist18 = require('./tables/artists/schindlerList/writer');
+const artist19 = require('./tables/artists/rocky/actor');
+const artist20 = require('./tables/artists/rocky/director');
+const artist21 = require('./tables/artists/privateRyan/actor');
+const artist22 = require('./tables/artists/privateRyan/writer');
+const artist23 = require('./tables/artists/notebook/actor');
+const artist24 = require('./tables/artists/notebook/director');
+const artist25 = require('./tables/artists/notebook/writer');
+const artist26 = require('./tables/artists/lordRings/actor');
+const artist27 = require('./tables/artists/lordRings/director');
+const artist28 = require('./tables/artists/lordRings/writer');
+const artist29 = require('./tables/artists/laLaLand/actor');
+const artist30 = require('./tables/artists/laLaLand/director');
+const artist31 = require('./tables/artists/indianaJones/actor');
+const artist32 = require('./tables/artists/indianaJones/director');
+const artist33 = require('./tables/artists/indianaJones/writer');
+const artist34 = require('./tables/artists/hangover/actor');
+const artist35 = require('./tables/artists/hangover/director');
+const artist36 = require('./tables/artists/hangover/writer');
+const artist37 = require('./tables/artists/godFather/actor');
+const artist38 = require('./tables/artists/godFather/director');
+const artist39 = require('./tables/artists/godFather/writer');
+const artist40 = require('./tables/artists/dragonTatoo/actor');
+const artist41 = require('./tables/artists/dragonTatoo/director');
+const artist42 = require('./tables/artists/dragonTatoo/writer');
+const artist43 = require('./tables/artists/bladeRunner/actor');
+const artist44 = require('./tables/artists/bladeRunner/director');
+const artist45 = require('./tables/artists/blackfish/actor');
+const artist46 = require('./tables/artists/angryMen/director');
+const artist47 = require('./tables/artists/angryMen/writer');
+const artist48 = require('./tables/artists/angryMen/actors/JohnFiedler.js');
+const artist49 = require('./tables/artists/angryMen/actors/LeeJCobb.js');
+const artist50 = require('./tables/artists/angryMen/actors/eGMarshall.js');
+const artist51 = require('./tables/artists/angryMen/actors/edBegley.js');
+const artist52 = require('./tables/artists/angryMen/actors/edwardBinns.js');
+const artist53 = require('./tables/artists/angryMen/actors/georgeVoskovec.js');
+const artist54 = require('./tables/artists/angryMen/actors/henryFonda.js');
+const artist55 = require('./tables/artists/angryMen/actors/jackKlugman.js');
+const artist56 = require('./tables/artists/angryMen/actors/jackWarden.js');
+const artist57 = require('./tables/artists/angryMen/actors/josephSweeney.js');
+const artist58 = require('./tables/artists/angryMen/actors/martinBalsam.js');
+const artist59 = require('./tables/artists/angryMen/actors/robertWebber.js');
+const artist60 = require('./tables/artists/angryMen/actors/rudyBond.js');
+// roles
+const roles = [];
+for (let i = 1; i <= 72; i++) {
+    const roleName = `role${i.toString().padStart(2, '0')}`;
+    roles.push(require(`./tables/role/${roleName}`));
+}
+const [role1, role2, role3, role4, role5, role6, role7, role8, role9, role10, role11, role12, role13, role14, role15, role16, role17, role18, role19, role20, role21, role22, role23, role24, role25, role26, role27, role28, role29, role30, role31, role32, role33, role34, role35, role36, role37, role38, role39, role40, role41, role42, role43, role44, role45, role46, role47, role48, role49, role50, role51, role52, role53, role54, role55, role56, role57, role58, role59, role60, role61, role62, role63, role64, role65, role66, role67, role68, role69, role70, role71, role72] =
+    roles;
 // creating the database connection.
 const db = new sqlite3.Database(path.resolve(__dirname, 'database/movie.db'), (err) => {
     if (err) {
@@ -94,6 +162,8 @@ db.serialize(() => {
     db.run(`DROP TABLE user`);
     db.run(`DROP TABLE ordering`);
     db.run(`DROP TABLE schedule`);
+    db.run(`DROP TABLE artist`);
+    db.run(`DROP TABLE role`);
     //
     // creating tables based on the schema in the database_model file.
     // table movie created
@@ -830,8 +900,619 @@ db.serialize(() => {
                 console.log(`A row has been inserted to the schedule table...`);
             }
         });
-    });
+        // inserting values into the artist table
+        // artist one.
+        params = [artist1.artistId, artist1.name, artist1.birth, artist1.death, artist1.link, artist1.information, artist1.about];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the artist table...`);
+            }
+        });
+        // artist two.
+        params = [artist2.artistId, artist2.name, artist2.birth, artist2.death, artist2.link, artist2.information, artist2.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the artist table...`);
+            }
+        });
+        // artist three.
+        params = [artist3.artistId, artist3.name, artist3.birth, artist3.death, artist3.link, artist3.information, artist3.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the artist table...`);
+            }
+        });
+        // artist four.
+        params = [artist4.artistId, artist4.name, artist4.birth, artist4.death, artist4.link, artist4.information, artist4.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the artist table...`);
+            }
+        });
+        // artist five.
+        params = [artist5.artistId, artist5.name, artist5.birth, artist5.death, artist5.link, artist5.information, artist5.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the artist table...`);
+            }
+        });
+        // artist six.
+        params = [artist6.artistId, artist6.name, artist6.birth, artist6.death, artist6.link, artist6.information, artist6.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the artist table...`);
+            }
+        });
+        // artist seven.
+        params = [artist7.artistId, artist7.name, artist7.birth, artist7.death, artist7.link, artist7.information, artist7.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist eight.
+        params = [artist8.artistId, artist8.name, artist8.birth, artist8.death, artist8.link, artist8.information, artist8.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist nine.
+        params = [artist9.artistId, artist9.name, artist9.birth, artist9.death, artist9.link, artist9.information, artist9.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist ten.
+        params = [artist10.artistId, artist10.name, artist10.birth, artist10.death, artist10.link, artist10.information, artist10.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
 
+        // artist eleven.
+        params = [artist11.artistId, artist11.name, artist11.birth, artist11.death, artist11.link, artist11.information, artist11.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twelve.
+        params = [artist12.artistId, artist12.name, artist12.birth, artist12.death, artist12.link, artist12.information, artist12.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist thirteen.
+        params = [artist13.artistId, artist13.name, artist13.birth, artist13.death, artist13.link, artist13.information, artist13.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fourteen.
+        params = [artist14.artistId, artist14.name, artist14.birth, artist14.death, artist14.link, artist14.information, artist14.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifteen.
+        params = [artist15.artistId, artist15.name, artist15.birth, artist15.death, artist15.link, artist15.information, artist15.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist sixteen.
+        params = [artist16.artistId, artist16.name, artist16.birth, artist16.death, artist16.link, artist16.information, artist16.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist seventeen.
+        params = [artist17.artistId, artist17.name, artist17.birth, artist17.death, artist17.link, artist17.information, artist17.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist eighteen.
+        params = [artist18.artistId, artist18.name, artist18.birth, artist18.death, artist18.link, artist18.information, artist18.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist nineteen.
+        params = [artist19.artistId, artist19.name, artist19.birth, artist19.death, artist19.link, artist19.information, artist19.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twenty.
+        params = [artist20.artistId, artist20.name, artist20.birth, artist20.death, artist20.link, artist20.information, artist20.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twenty-one.
+        params = [artist21.artistId, artist21.name, artist21.birth, artist21.death, artist21.link, artist21.information, artist21.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twenty-two.
+        params = [artist22.artistId, artist22.name, artist22.birth, artist22.death, artist22.link, artist22.information, artist22.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twenty-three.
+        params = [artist23.artistId, artist23.name, artist23.birth, artist23.death, artist23.link, artist23.information, artist23.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twenty-four.
+        params = [artist24.artistId, artist24.name, artist24.birth, artist24.death, artist24.link, artist24.information, artist24.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twenty-five.
+        params = [artist25.artistId, artist25.name, artist25.birth, artist25.death, artist25.link, artist25.information, artist25.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist twenty-six.
+        params = [artist26.artistId, artist26.name, artist26.birth, artist26.death, artist26.link, artist26.information, artist26.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist twenty-seven.
+        params = [artist27.artistId, artist27.name, artist27.birth, artist27.death, artist27.link, artist27.information, artist27.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twenty-eight.
+        params = [artist28.artistId, artist28.name, artist28.birth, artist28.death, artist28.link, artist28.information, artist28.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist twenty-nine.
+        params = [artist29.artistId, artist29.name, artist29.birth, artist29.death, artist29.link, artist29.information, artist29.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist thirty.
+        params = [artist30.artistId, artist30.name, artist30.birth, artist30.death, artist30.link, artist30.information, artist30.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist thirty-one.
+        params = [artist31.artistId, artist31.name, artist31.birth, artist31.death, artist31.link, artist31.information, artist31.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist thirty-two.
+        params = [artist32.artistId, artist32.name, artist32.birth, artist32.death, artist32.link, artist32.information, artist32.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist thirty-three.
+        params = [artist33.artistId, artist33.name, artist33.birth, artist33.death, artist33.link, artist33.information, artist33.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist thirty-four.
+        params = [artist34.artistId, artist34.name, artist34.birth, artist34.death, artist34.link, artist34.information, artist34.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist thirty-five.
+        params = [artist35.artistId, artist35.name, artist35.birth, artist35.death, artist35.link, artist35.information, artist35.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the artist table...`);
+            }
+        });
+        // artist thirty-six.
+        params = [artist36.artistId, artist36.name, artist36.birth, artist36.death, artist36.link, artist36.information, artist36.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the artist table...`);
+            }
+        });
+        // artist thirty-seven.
+        params = [artist37.artistId, artist37.name, artist37.birth, artist37.death, artist37.link, artist37.information, artist37.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist thirty-eight.
+        params = [artist38.artistId, artist38.name, artist38.birth, artist38.death, artist38.link, artist38.information, artist38.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist thirty-nine.
+        params = [artist39.artistId, artist39.name, artist39.birth, artist39.death, artist39.link, artist39.information, artist39.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist forty.
+        params = [artist40.artistId, artist40.name, artist40.birth, artist40.death, artist40.link, artist40.information, artist40.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-one.
+        params = [artist41.artistId, artist41.name, artist41.birth, artist41.death, artist41.link, artist41.information, artist41.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-two.
+        params = [artist42.artistId, artist42.name, artist42.birth, artist42.death, artist42.link, artist42.information, artist42.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-three.
+        params = [artist43.artistId, artist43.name, artist43.birth, artist43.death, artist43.link, artist43.information, artist43.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-four.
+        params = [artist44.artistId, artist44.name, artist44.birth, artist44.death, artist44.link, artist44.information, artist44.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-five.
+        params = [artist45.artistId, artist45.name, artist45.birth, artist45.death, artist45.link, artist45.information, artist45.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-six.
+        params = [artist46.artistId, artist46.name, artist46.birth, artist46.death, artist46.link, artist46.information, artist46.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-seven.
+        params = [artist47.artistId, artist47.name, artist47.birth, artist47.death, artist47.link, artist47.information, artist47.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-eight.
+        params = [artist48.artistId, artist48.name, artist48.birth, artist48.death, artist48.link, artist48.information, artist48.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist forty-nine.
+        params = [artist49.artistId, artist49.name, artist49.birth, artist49.death, artist49.link, artist49.information, artist49.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifty.
+        params = [artist50.artistId, artist50.name, artist50.birth, artist50.death, artist50.link, artist50.information, artist50.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifty-one.
+        params = [artist51.artistId, artist51.name, artist51.birth, artist51.death, artist51.link, artist51.information, artist51.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifty-two.
+        params = [artist52.artistId, artist52.name, artist52.birth, artist52.death, artist52.link, artist52.information, artist52.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifty-three.
+        params = [artist53.artistId, artist53.name, artist53.birth, artist53.death, artist53.link, artist53.information, artist53.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifty-four.
+        params = [artist54.artistId, artist54.name, artist54.birth, artist54.death, artist54.link, artist54.information, artist54.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifty-five.
+        params = [artist55.artistId, artist55.name, artist55.birth, artist55.death, artist55.link, artist55.information, artist55.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist fifty-six.
+        params = [artist56.artistId, artist56.name, artist56.birth, artist56.death, artist56.link, artist56.information, artist56.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // artist fifty-seven.
+        params = [artist57.artistId, artist57.name, artist57.birth, artist57.death, artist57.link, artist57.information, artist57.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifty-eight.
+        params = [artist58.artistId, artist58.name, artist58.birth, artist58.death, artist58.link, artist58.information, artist58.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist fifty-nine.
+        params = [artist59.artistId, artist59.name, artist59.birth, artist59.death, artist59.link, artist59.information, artist59.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+
+        // artist sixty.
+        params = [artist60.artistId, artist60.name, artist60.birth, artist60.death, artist60.link, artist60.information, artist60.about];
+        db.run('INSERT INTO artist VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log("A row has been inserted to the artist table...");
+            }
+        });
+        // inserting values into the role table
+        // role one.
+        params = [role1.artistId, role1.movieId, role1.role];
+        placeholders = '(' + params.map((param) => { return '?'; }).join(',') + ')';
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role two.
+        params = [role2.artistId, role2.movieId, role2.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+        // role three.
+        params = [role3.artistId, role3.movieId, role3.role];
+        db.run('INSERT INTO role(artist_id, movie_id, role) VALUES' + placeholders, params, (err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`A row has been inserted to the role table...`);
+            }
+        });
+    });
     // query
     const sql = `SELECT * FROM movie`;
     db.get(sql, (err, row) => {
@@ -842,12 +1523,13 @@ db.serialize(() => {
     });
 });
 
-db.close((err) => {
-    if (err) {
-        return console.error(err.message);
-    }
-    console.log("database connection is closed...");
-});
+// db.close((err) => {
+//     if (err) {
+//         return console.error(err.message);
+//     }
+//     console.log("database connection is closed...");
+// });
+
 
     // // actor table
     // db.run(`CREATE TABLE IF NOT EXISTS actor (

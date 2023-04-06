@@ -1,4 +1,4 @@
-const artistId = 121;
+const artistId = 101;
 const role = "Director";
 const movieId = 14;
 
