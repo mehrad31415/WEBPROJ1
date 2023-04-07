@@ -5,6 +5,7 @@
     clear: both;
     height: fit-content;
     min-height: 100vh;
+    min-width: 100vw;
 }
 
 .body--background-color {
@@ -142,8 +143,6 @@
     min-height: 100px;
     min-width: 100%;
     padding: 0.5% 0 1%;
-    white-space: nowrap;
-    width: fit-content;
 }
 
 .footer--background-colour {
@@ -371,6 +370,20 @@
 
 .nav-list {
     margin: 0;
+}
+
+.purchase-item__button {
+    margin: 8px;
+    height: 15vh;
+    border-radius: 15px;
+    padding: 8px;
+    border-radius: 15px;
+    border: 3px solid #054D69;
+    background-color: transparent;
+    font-size: inherit;
+    width: 100%;
+    cursor: pointer;
+    display: block;
 }
 
 /* PAGINATION */

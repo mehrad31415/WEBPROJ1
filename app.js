@@ -71,20 +71,24 @@ app.get('/info', async (req, res) => {
     });
 });
 app.get('/tickets', async (req, res) =>{
-    const movieID = req.query.id;
+    movieID = req.query.id;
     const date = req.query.date;
     const time = req.query.time;
+    
+    const movie = await getMovieByID(db, movieID);
     const schedule = await getScheduleDateTime(db,movieID);
+    const orderAll = await getAllOrders(db);
 
     res.render('tickets', {
-        ejsMovieID: movieID,
+        ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
         ejsDate: date,
         ejsTime: time,
-        ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@')
+        ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
+        ejsOrderAll: JSON.stringify(orderAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
     });
 });
-app.get('/acount', (req, res) =>{
-    res.render('acount');
+app.get('/account', async (req, res) =>{
+    res.render('account')
 });
 app.get('/redirect', (req, res) =>{
     const url = req.query.url;
@@ -168,4 +172,19 @@ async function getScheduleDateTime(db, id) {
         
     })} catch (error) { console.log(error); return null;}
     return schedule;
+}
+
+async function getAllOrders(db) {
+    let orderAll = [];
+    orderAll = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT order_id AS orderID "
+        + "FROM Ordering", (err, row) => { 
+            arr.push(row);
+            if (err) reject(err);
+            resolve(arr);
+        });
+        
+    });
+    return orderAll;
 }

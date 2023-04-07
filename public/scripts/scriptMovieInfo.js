@@ -8,6 +8,7 @@ const schedule = [];
 for (let i = 0; i < stringSchedule.length; i++){
     schedule.push(new Date(stringSchedule[i].date.replace(' ', 'T')));
 }
+const checkLogin = true;
 
 
 //console.log(artists);
@@ -17,7 +18,6 @@ const currentMovie = new Movie(movie.movieID, movie.movieName, movie.movieYear, 
 currentMovie.movieLink = movie.movieLink;
 currentMovie.posterLink = movie.posterLink;
 currentMovie.trailerLink = movie.trailerLink;
-currentMovie.movieSchedule = schedule;
 currentMovie.movieAbout.push(movie.movieAbout.replaceAll('???', '"').replaceAll('@@@', '\n'));
 currentMovie.moviePlot.push(movie.moviePlot.replaceAll('???', '"').replaceAll('@@@', '\n'));
 
@@ -40,17 +40,33 @@ for (let i = 0; i < artists.length; i++){
     artistTemp.toTooltip();
 }
 
-movieArray.push(currentMovie);
-
-if (page == "info") {
-    let movie = movieArray.find(obj => {
-        return obj.movieID == id;
-    });
-    movie.addAllToPage();
-} 
+//Add purchase options
+const container = document.getElementsByClassName("body__container")[0];
+const article = document.createElement("article");
+container.appendChild(article);
+article.setAttribute("class", "article-block");
+if (!checkLogin){
+    article.append(document.createTextNode('You are unable to purchase tickets for ' + currentMovie.movieName + '. Please log in with the button above.'));
+} else {
+    article.append(document.createTextNode('Purchase your tickets for ' + currentMovie.movieName + ' now:  '));
+    for (let i = 0; i < schedule.length; i++){
+        const purchaseBtn = document.createElement('button');
+        purchaseBtn.append(document.createTextNode(schedule[i].toLocaleString()));
+        article.append(purchaseBtn);
+        purchaseBtn.addEventListener("click", goToTickets.bind(null, currentMovie.movieID, schedule[i]));
+    }
+}
+currentMovie.addAllToPage();
 
 if (id == 0) {
     const infoScript = document.createElement('script');
     infoScript.setAttribute('src', '../scripts/scriptAngryMen.js');
     body.append(infoScript);
+}
+
+function goToTickets(id, dayTime) {
+    window.location =   'tickets' + 
+                        '?id=' + id +
+                        '&date=' + dayTime.getFullYear() + '-' + (dayTime.getMonth()+1) + '-' + dayTime.getDate() +
+                        '&time=' + dayTime.getHours() + '-' + dayTime.getMinutes() + '-' + dayTime.getSeconds();
 }

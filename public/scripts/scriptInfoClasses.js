@@ -10,28 +10,10 @@ class Movie {
         this.movieAbout = [];
         this.moviePlot = [];
         this.artistArray = [];
-        this.movieSchedule = [];
     }
 
     addAllToPage() {
-        //Add purchase options
-            //if logged in...
-
-        const container = document.getElementsByClassName("body__container")[0];
-        const article = document.createElement("article");
-        article.append(document.createTextNode('Purchase your tickets for ' + this.movieName + ' now:  '));
-        for (let i = 0; i < this.movieSchedule.length; i++){
-            const purchaseBtn = document.createElement('button');
-            purchaseBtn.append(document.createTextNode(this.movieSchedule[i].toLocaleString()));
-            article.append(purchaseBtn);
-            purchaseBtn.addEventListener("click", this.goToTickets.bind(null, this.movieID, this.movieSchedule[i]));
-        }
-
-            //else: "please log in to purchase movietickets"
-
-
-        container.appendChild(article);
-        article.setAttribute("class", "article-block");
+        const article = document.getElementsByClassName("article-block")[0];
         const heading = document.createElement("h2");
         article.appendChild(heading);
         heading.setAttribute("class", "h2--position h2--text-attributes line--width-full");
@@ -139,16 +121,7 @@ class Movie {
                 this.artistArray[i].createArtistInfo(this.artistArray[i], artistsSection);
             }
         }
-
     }
-
-    goToTickets(id, dayTime) {
-        window.location =   'tickets' + 
-                            '?id=' + id +
-                            '&date=' + dayTime.getFullYear() + '-' + (dayTime.getMonth()+1) + '-' + dayTime.getDate() +
-                            '&time=' + dayTime.getHours() + '-' + dayTime.getMinutes() + '-' + dayTime.getSeconds();
-    }
-
 }
 
 //artist
