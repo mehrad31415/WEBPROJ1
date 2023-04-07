@@ -7,14 +7,27 @@ const url       = require('url');
 const { json } = require('body-parser');
 const file      = "models/database/movie.db"; 
 const exists    = fs.existsSync(file);
+
 if(!exists) {
     fs.openSync(file, "w"); 
 }
 const sqlite3   = require("sqlite3").verbose(); 
 const db        = new sqlite3.Database(file);
 // logger added
-const morgan = require('morgan')
+const morgan = require('morgan');
 app.use(morgan('dev'));
+
+// body-parser
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// session
+const session = require('express-session')
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
 let movieID = null;
 let movieArray = [];
@@ -87,9 +100,57 @@ app.get('/tickets', async (req, res) =>{
         ejsOrderAll: JSON.stringify(orderAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
     });
 });
+
+// Login stuff
 app.get('/account', async (req, res) =>{
-    res.render('account')
+    res.render('account');
 });
+
+// Login stuff
+// http://localhost:3000/auth
+app.post('/auth', async (req, res) => {
+	// Capture the input fields
+	let username = req.body.username;
+	let password = req.body.password;
+
+	// Ensure the input fields exists and are not empty
+	if (username && password) {
+        let query = 
+        "SELECT * FROM user WHERE username = ? AND password = ?";
+        
+        // Query the database
+        db.all(query, [username, password], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        // Do something with the rows of data
+        console.log(rows);
+
+        // If the user exists
+        if (rows.length > 0) {
+            // Set the session
+
+            // TODO - set the session
+            req.session.loggedin = true;
+            req.session.username = username;
+
+            // Redirect to the home page
+            res.redirect('/home');
+        } else {
+            // Redirect to the login page
+            res.send('Incorrect Username and/or Password!');
+        }
+        });
+
+	} else {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
+});
+
+// END of login stuff
+
+
 app.get('/redirect', (req, res) =>{
     const url = req.query.url;
     res.status(301).redirect(url);
