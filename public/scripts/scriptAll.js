@@ -80,7 +80,43 @@ let nav2 = null;
     } else {
         h1.append(document.createTextNode('MovieHouse - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1)));
     }
-    header.append(imgLink, h1);
+
+    //LOGIN
+    const formLogIn = document.createElement('form');
+    formLogIn.method = "post";
+    formLogIn.action = "/auth";
+    const divLoginHeader = document.createElement('div');
+    divLoginHeader.classList = 'header';
+    const divLogInForm = document.createElement('div');
+    divLogInForm.classList = 'login-form';
+    divLogInForm.id = 'login-form';
+    divLoginHeader.append(divLogInForm);
+    const inputUname = document.createElement('input');
+    const inputPword = document.createElement('input');
+    inputUname.type = 'text';
+    inputUname.id = 'username';
+    inputUname.name = 'username';
+    inputUname. placeholder = 'Username';
+    inputPword.type = 'password';
+    inputPword.id = 'password';
+    inputPword.name = 'password';
+    inputPword. placeholder = 'Password';
+    const btnSubmit = document.createElement('button');
+    btnSubmit.type = 'submit';
+    btnSubmit.id = 'login-btn';
+    btnSubmit.append(document.createTextNode('Login'));
+    divLogInForm.append(inputUname, inputPword, btnSubmit);
+    formLogIn.append(divLoginHeader);
+
+    header.append(imgLink, h1, formLogIn);
+
+    // <form method="post" action="/auth">
+    //     <div class="header">
+    //         <div id="login-form" class="login-form">
+    //     <input type="text" id="username" name="username" placeholder="Username">
+    //     <input type="password" id="password" name="password" placeholder="Password">
+    //     <button type="submit" id="login-btn">Login</button>
+    // </form>
 
     //NAVIGATION
     const navList = document.createElement('ul');

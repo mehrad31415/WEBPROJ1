@@ -5,7 +5,7 @@ const date = ejsDate.split('-');
 const time = ejsTime.split('-');
 const dateTime = new Date(date[0], date[1]-1, date[2], time[0], time[1], time[2]);
 const stringSchedule = JSON.parse(ejsSchedule);
-const newOrderID = JSON.parse(ejsOrderAll).lenght;
+const newOrderID = JSON.parse(ejsOrderAll);
 const schedule = [];
 for (let i = 0; i < stringSchedule.length; i++){
     schedule.push({movieID: stringSchedule[i].movie_id, date: new Date(stringSchedule[i].date.replace(' ', 'T'))});
@@ -31,7 +31,7 @@ if (!checkSchedule){
         article.append(document.createTextNode('You are unable to purchase tickets for ' + movie.movieName + '. Please log in with the button above.'));
     } else {
         //get user_id:
-            userID = 0;
+            userID = 4;
 
         const par = document.createElement('p');
         article.append(par);
@@ -45,10 +45,10 @@ if (!checkSchedule){
         par.append(document.createTextNode('You are about to purchase tickets for the movie \'' + movie.movieName + '\' for ' + dateTime.toLocaleString() + '. Are you certain this is what you want? You should be aware of our prices. The price for the selected movie at the selected timeslot is: €0,00. If this is in conflict with what you believe in, please '), strongLink, document.createTextNode('. If you do want to purchase these tickets for this price, enter the ammount of tickets you want and click the button below:'));
         
         const ammount = document.createElement('input');
-        ammount.placeholder = 'ammount between 1 & 5';
+        ammount.placeholder = 'ammount between 1 & 9';
         ammount.type = 'number';
         ammount.addEventListener('change', function () {
-            if (ammount.value > 5) ammount.value = 5;
+            if (ammount.value > 9) ammount.value = 9;
             if (ammount.value < 1) ammount.value = 1;
         });
         
@@ -58,15 +58,16 @@ if (!checkSchedule){
         btnPur.append(document.createTextNode("Purchase tickets for '" + movie.movieName + " ("+ movie.movieYear +")' at " + dateTime.toLocaleString() + " local time."));
         btnPur.addEventListener("click", function () {
             if (ammount.value > 0){
-                window.location = 'account';
+                window.location = 'pur';
+                newOrder = {
+                    order_id: newOrderID,
+                    user_id: userID,
+                    movie_id: movie.movieID, 
+                    date: dateTime.toString(),
+                    ammount: ammount.value,
+                }
                 document.cookie = 
-                    'newOrder={'
-                    + 'order_id:' + newOrderID 
-                    + 'user_id:' + userID 
-                    + 'movie_id:' + movie.movieID 
-                    + 'date:' + dateTime.toString()
-                    + 'ammount:' + ammount.value
-                    + '; path=/account';
+                    'newOrder=' + JSON.stringify(newOrder) + '; path=/pur';
             }
         });
     }

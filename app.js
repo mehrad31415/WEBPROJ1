@@ -21,6 +21,10 @@ app.use(morgan('dev'));
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 
+//cookieparser
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 // session
 const session = require('express-session')
 app.use(session({
@@ -90,20 +94,35 @@ app.get('/tickets', async (req, res) =>{
     
     const movie = await getMovieByID(db, movieID);
     const schedule = await getScheduleDateTime(db,movieID);
-    const orderAll = await getAllOrders(db);
+    const orderAll = await getNrOfOrders(db);
 
     res.render('tickets', {
         ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
         ejsDate: date,
         ejsTime: time,
         ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
-        ejsOrderAll: JSON.stringify(orderAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
+        ejsOrderAll: JSON.stringify(orderAll.count)
     });
 });
 
 // Login stuff
 app.get('/account', async (req, res) =>{
+    //TODO get userid from session
+    const userID = 4;
+    if (userID != null){
+        const orders = await getOrdersByUser(db, userID);
+        res.cookie('orders', JSON.stringify(orders).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
+    }
     res.render('account');
+});
+app.get('/pur', (req, res) => {
+    if (req.cookies.newOrder){
+        order = JSON.parse(req.cookies.newOrder);
+        db.run('INSERT INTO Ordering (order_id, user_id, movie_id, date, num_of_tickets) VALUES(?, ?, ?, ?, ?)', [order.order_id, order.user_id, order.movie_id, order.date, order.ammount])
+        res.clearCookie("newOrder");
+    }
+
+    res.redirect('/account');
 });
 
 // Login stuff
@@ -135,7 +154,7 @@ app.post('/auth', async (req, res) => {
             req.session.username = username;
 
             // Redirect to the home page
-            res.redirect('/home');
+            res.redirect('/account');
         } else {
             // Redirect to the login page
             res.send('Incorrect Username and/or Password!');
@@ -235,17 +254,35 @@ async function getScheduleDateTime(db, id) {
     return schedule;
 }
 
-async function getAllOrders(db) {
+async function getNrOfOrders(db) {
     let orderAll = [];
     orderAll = new Promise((resolve, reject) => {
-        let arr = [];
-        db.each("SELECT order_id AS orderID "
+        let nr;
+        db.each("SELECT COUNT(order_id) AS count "
         + "FROM Ordering", (err, row) => { 
+            nr = row;
+            if (err) reject(err);
+            resolve(nr);
+        });
+        
+    });
+    return orderAll;
+}
+
+async function getOrdersByUser(db, id) {
+    let userOrders = [];
+    userOrders = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT date, num_of_tickets, title "
+        + "FROM ("
+        + "Ordering JOIN Movie "
+        + "ON Ordering.movie_id = Movie.movie_id) "
+        + "WHERE user_id = ?", id, (err, row) => { 
             arr.push(row);
             if (err) reject(err);
             resolve(arr);
         });
         
     });
-    return orderAll;
+    return userOrders;
 }

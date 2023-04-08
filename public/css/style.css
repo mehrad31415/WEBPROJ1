@@ -445,6 +445,10 @@
     cursor: pointer;
 }
 
+.ammount-input {
+    width: fit-content;
+}
+
 @media only screen and (max-width:659px) {
     .table--width-large {
         display: none;
