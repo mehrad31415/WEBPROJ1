@@ -63,7 +63,7 @@ if (!checkSchedule){
                     order_id: newOrderID,
                     user_id: userID,
                     movie_id: movie.movieID, 
-                    date: dateTime.toString(),
+                    date: dateTime.toISOString(),
                     ammount: ammount.value,
                 }
                 document.cookie = 

@@ -36,21 +36,22 @@ if (checkLogIn){
 
 //get orders from cookies
 let orders;
-
 for (let i = 0; i < cookies.length; i++){
     if (cookies[i].substring(0, 6) == "orders") {
         orders = [];
         orders = JSON.parse(decodeURI(cookies[i].slice(7)).replaceAll('%3A', ':').replaceAll('%2C', ','));
     }
 }
+console.log(orders);
 
 if (orders) {
 // display orders
     for (let i = 0; i < orders.length; i++){
         const p = document.createElement('p');
+        const date = orders[i].date.replaceAll('T', ' ').replaceAll('Z', '');
         p.append(
-            document.createTextNode('Order placed on ' + orders[i].date + '.'), document.createElement('br'),
-            document.createTextNode('- movie: \'' + orders[i].title + '\''), document.createElement('br'),
+            document.createTextNode('Order for the movie \'' + orders[i].title + '\'.'), document.createElement('br'),
+            document.createTextNode('- date and time of the movie: ' + date.substring(0, 16)), document.createElement('br'),
             document.createTextNode('- number of tickets: ' + orders[i].num_of_tickets), document.createElement('br'), document.createElement('br')
         );
         userOrders.append(p);
