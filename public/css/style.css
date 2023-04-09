@@ -539,11 +539,10 @@
 
 .login-form {
     position: absolute;
-    top: 10;
-    right:0;
+    float: right;
+    top: 1vh;
+    right: 1vw;
     display: flex;
-    margin-right: 0px;
-    margin-top: 5.9em;
   }
   
   .login-form button{

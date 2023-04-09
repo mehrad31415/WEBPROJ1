@@ -8,7 +8,6 @@ const schedule = [];
 for (let i = 0; i < stringSchedule.length; i++){
     schedule.push(new Date(stringSchedule[i].date.replace(' ', 'T')));
 }
-const checkLogin = true;
 
 
 //console.log(artists);
@@ -45,7 +44,7 @@ const container = document.getElementsByClassName("body__container")[0];
 const article = document.createElement("article");
 container.appendChild(article);
 article.setAttribute("class", "article-block");
-if (!checkLogin){
+if (!checkLogIn){
     article.append(document.createTextNode('You are unable to purchase tickets for ' + currentMovie.movieName + '. Please log in with the button above.'));
 } else {
     article.append(document.createTextNode('Purchase your tickets for ' + currentMovie.movieName + ' now:  '));

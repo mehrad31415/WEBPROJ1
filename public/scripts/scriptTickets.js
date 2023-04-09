@@ -13,7 +13,6 @@ for (let i = 0; i < stringSchedule.length; i++){
 const article = document.getElementsByClassName("article-block")[0];
 
 //!!checks!!
-const checkLogin = true; //This should be replaced with the actual code to check for login
 const checkSchedule = (function() {
     const filter = {movieID: movie.movieID, date: dateTime}
     for (let i =0; i < schedule.length; i++){
@@ -27,7 +26,7 @@ console.log(checkSchedule);
 if (!checkSchedule){
     article.append(document.createTextNode('The selected timeslot does not correspond with the movie ' + movie.movieName + '. Please try again'));
 } else {
-    if (!checkLogin){
+    if (!checkLogIn){
         article.append(document.createTextNode('You are unable to purchase tickets for ' + movie.movieName + '. Please log in with the button above.'));
     } else {
         //get user_id:

@@ -1,5 +1,21 @@
 //Javascript
 
+const cookies = document.cookie.split('; ');
+let userID = null;
+for (let i = 0; i < cookies.length; i++){
+    if (cookies[i].substring(0, 6) == "userID") {
+        userIDTemp = cookies[i].replace('userID=', '');
+        if (userIDTemp != 'undefined') {
+            userID = userIDTemp;
+        }
+    }
+}
+let checkLogIn = false;
+
+if (userID != null){
+    checkLogIn = true;
+}
+
 const path = window.location.pathname;
 const page = path.split("/").pop();
 let tooltipArray = [];
@@ -84,39 +100,45 @@ let nav2 = null;
     //LOGIN
     const formLogIn = document.createElement('form');
     formLogIn.method = "post";
-    formLogIn.action = "/auth";
     const divLoginHeader = document.createElement('div');
     divLoginHeader.classList = 'header';
     const divLogInForm = document.createElement('div');
     divLogInForm.classList = 'login-form';
     divLogInForm.id = 'login-form';
     divLoginHeader.append(divLogInForm);
-    const inputUname = document.createElement('input');
-    const inputPword = document.createElement('input');
-    inputUname.type = 'text';
-    inputUname.id = 'username';
-    inputUname.name = 'username';
-    inputUname. placeholder = 'Username';
-    inputPword.type = 'password';
-    inputPword.id = 'password';
-    inputPword.name = 'password';
-    inputPword. placeholder = 'Password';
     const btnSubmit = document.createElement('button');
     btnSubmit.type = 'submit';
     btnSubmit.id = 'login-btn';
-    btnSubmit.append(document.createTextNode('Login'));
-    divLogInForm.append(inputUname, inputPword, btnSubmit);
+    if (!checkLogIn){
+        formLogIn.action = "/auth?log=in";
+        btnSubmit.append(document.createTextNode('Login'));
+        const inputUname = document.createElement('input');
+        const inputPword = document.createElement('input');
+        inputUname.type = 'text';
+        inputUname.id = 'username';
+        inputUname.name = 'username';
+        inputUname.placeholder = 'Username';
+        inputPword.type = 'password';
+        inputPword.id = 'password';
+        inputPword.name = 'password';
+        inputPword.placeholder = 'Password';
+        divLogInForm.append(inputUname, inputPword);
+    } else {
+        btnSubmit.append(document.createTextNode('Log Out'));
+        formLogIn.action = "/auth?log=out";
+        const btnAccount = document.createElement('button');
+        btnAccount.type = 'button';
+        btnAccount.id = 'login-btn';
+        btnAccount.append(document.createTextNode('My Account'));
+        btnAccount.onclick = function(){
+            window.location = 'account'
+        };
+        divLogInForm.append(btnAccount);
+    }
+    divLogInForm.append(btnSubmit);
     formLogIn.append(divLoginHeader);
 
     header.append(imgLink, h1, formLogIn);
-
-    // <form method="post" action="/auth">
-    //     <div class="header">
-    //         <div id="login-form" class="login-form">
-    //     <input type="text" id="username" name="username" placeholder="Username">
-    //     <input type="password" id="password" name="password" placeholder="Password">
-    //     <button type="submit" id="login-btn">Login</button>
-    // </form>
 
     //NAVIGATION
     const navList = document.createElement('ul');

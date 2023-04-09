@@ -34,8 +34,6 @@ app.use(session({
 }));
 
 let movieID = null;
-let movieArray = [];
-let artistArray = [];
 
 //LINK EJS PAGES
 app.set('view engine', 'ejs');
@@ -106,14 +104,21 @@ app.get('/tickets', async (req, res) =>{
 });
 
 // Login stuff
-app.get('/account', async (req, res) =>{
+app.route('/account')
+.get(async (req, res) =>{
     //TODO get userid from session
-    const userID = 4;
+    const userID = req.session.userID;
+    res.cookie('userID', userID, { httpOnly: false });
+    const user = await getMovieByID(db, userID);
     if (userID != null){
         const orders = await getOrdersByUser(db, userID);
         res.cookie('orders', JSON.stringify(orders).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
+        res.cookie('user', JSON.stringify(user).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
     }
     res.render('account');
+})
+.post(async (req, res) =>{
+    res.redirect('/account');
 });
 app.get('/pur', (req, res) => {
     if (req.cookies.newOrder){
@@ -128,43 +133,54 @@ app.get('/pur', (req, res) => {
 // Login stuff
 // http://localhost:3000/auth
 app.post('/auth', async (req, res) => {
-	// Capture the input fields
-	let username = req.body.username;
-	let password = req.body.password;
+	const log = req.query.log;
+    if (log == 'in'){
+        // Capture the input fields
+        console.log(req.body);
+        let username = req.body.username;
+        let password = req.body.password;
 
-	// Ensure the input fields exists and are not empty
-	if (username && password) {
-        let query = 
-        "SELECT * FROM user WHERE username = ? AND password = ?";
-        
-        // Query the database
-        db.all(query, [username, password], (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        // Do something with the rows of data
-        console.log(rows);
+        // Ensure the input fields exists and are not empty
+        if (username && password) {
+            let query = 
+            "SELECT * FROM user WHERE username = ? AND password = ?";
+            
+            // Query the database
+            db.get(query, [username, password], (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                // Do something with the rows of data
+                console.log(rows);
 
-        // If the user exists
-        if (rows.length > 0) {
-            // Set the session
+                // If the user exists
+                if (rows) {
+                    // Set the session
 
-            // TODO - set the session
-            req.session.loggedin = true;
-            req.session.username = username;
+                    // TODO - set the session
+                    req.session.loggedin = true;
+                    req.session.userID = rows.user_id;
+                    // Redirect to the account page
+                    res.redirect('/account');
+                } else {
+                    // Redirect to the login page
+                    res.send('Incorrect Username and/or Password!');
+                }
+            });
 
-            // Redirect to the home page
-            res.redirect('/account');
         } else {
-            // Redirect to the login page
-            res.send('Incorrect Username and/or Password!');
+            res.send('Please enter Username and Password!');
+            res.end();
         }
-        });
+    }
+    if (log == 'out'){
+        //logging out does not work
 
-	} else {
-		res.send('Please enter Username and Password!');
-		res.end();
-	}
+        req.session.loggedin = false;
+        req.session.userID = null;
+        // Redirect to the home page
+        res.redirect('/home');
+    }
 });
 
 // END of login stuff
@@ -180,8 +196,6 @@ app.all("*", (req,res) => {
 app.listen(PORT=5500, HOSTNAME='127.0.0.1', (req, res) => {
     console.log(`server is running on port ${PORT}...`);
 });
-
-async (db) => { await db.close();};
 
 async function getMovieByID(db, id) {
     const movie =  new Promise((resolve, reject) => {
@@ -285,4 +299,16 @@ async function getOrdersByUser(db, id) {
         
     });
     return userOrders;
+}
+
+async function getMovieByID(db, id) {
+    const movie =  new Promise((resolve, reject) => {
+        
+        db.get("SELECT * "
+        + "FROM User WHERE user_id= ?", id, (err, row) => {
+            if (err) reject(err);
+            resolve(row);
+        });
+    });
+    return movie;
 }
