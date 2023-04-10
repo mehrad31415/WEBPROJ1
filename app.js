@@ -133,8 +133,8 @@ app.get('/pur', (req, res) => {
 // Login stuff
 // http://localhost:3000/auth
 app.post('/auth', async (req, res) => {
-	const log = req.query.log;
-    if (log == 'in'){
+    const log = req.query.log;
+    if (log == 'in') {
         // Capture the input fields
         console.log(req.body);
         let username = req.body.username;
@@ -142,9 +142,8 @@ app.post('/auth', async (req, res) => {
 
         // Ensure the input fields exists and are not empty
         if (username && password) {
-            let query = 
-            "SELECT * FROM user WHERE username = ? AND password = ?";
-            
+            let query = "SELECT * FROM user WHERE username = ? AND password = ?";
+
             // Query the database
             db.get(query, [username, password], (err, rows) => {
                 if (err) {
@@ -156,8 +155,6 @@ app.post('/auth', async (req, res) => {
                 // If the user exists
                 if (rows) {
                     // Set the session
-
-                    // TODO - set the session
                     req.session.loggedin = true;
                     req.session.userID = rows.user_id;
                     // Redirect to the account page
@@ -167,20 +164,21 @@ app.post('/auth', async (req, res) => {
                     res.send('Incorrect Username and/or Password!');
                 }
             });
-
         } else {
             res.send('Please enter Username and Password!');
             res.end();
         }
-    }
-    if (log == 'out'){
-        //logging out does not work
-
-        req.session.loggedin = false;
-        req.session.userID = null;
-        // Redirect to the home page
-        res.redirect('/home');
-    }
+    } if (log == 'out') {
+        // Destroy the session
+        req.session.destroy((err) => {
+          if (err) {
+            throw err;
+          }
+          // Redirect to the home page
+          res.redirect('/home');
+        });
+      }
+      
 });
 
 // END of login stuff
