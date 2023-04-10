@@ -149,9 +149,6 @@ app.post('/auth', async (req, res) => {
                 if (err) {
                     throw err;
                 }
-                // Do something with the rows of data
-                console.log(rows);
-
                 // If the user exists
                 if (rows) {
                     // Set the session
@@ -177,8 +174,8 @@ app.post('/auth', async (req, res) => {
           // Redirect to the home page
           res.redirect('/home');
         });
-      }
-      
+     }
+    
 });
 
 // END of login stuff
