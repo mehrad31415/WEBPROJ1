@@ -233,21 +233,21 @@ form.action = "/auth?log=in";
 form.className = "form-container";
 
 const heading = document.createElement("h1");
-heading.textContent = "Login";
+heading.textContent = "Log In";
 
 const usernameLabel = document.createElement("label");
-usernameLabel.textContent = "username";
-usernameLabel.setAttribute("for", "username");
+usernameLabel.textContent = "login";
+usernameLabel.setAttribute("for", "login");
 
 const passwordLabel = document.createElement("label");
 passwordLabel.textContent = "password";
 passwordLabel.setAttribute("for", "password");
 
-// Create the input elements for email and password
+// Create the input elements for login and password
 const emailInput = document.createElement("input");
 emailInput.setAttribute("type", "text");
-emailInput.setAttribute("placeholder", "Enter Username");
-emailInput.setAttribute("name", "username");
+emailInput.setAttribute("placeholder", "Enter Login");
+emailInput.setAttribute("name", "login");
 emailInput.setAttribute("required", "");
 
 const passwordInput = document.createElement("input");

@@ -137,15 +137,15 @@ app.post('/auth', async (req, res) => {
     switch (log) {
         case 'in':
             // Capture the input fields
-            let username = req.body.username;
+            let login = req.body.login;
             let password = req.body.password;
     
             // Ensure the input fields exists and are not empty
-            if (username && password) {
-                let query = "SELECT * FROM user WHERE username = ? AND password = ?";
+            if (login && password) {
+                let query = "SELECT * FROM user WHERE login = ? AND password = ?";
     
                 // Query the database
-                db.get(query, [username, password], (err, rows) => {
+                db.get(query, [login, password], (err, rows) => {
                     if (err) {
                         throw err;
                     }
