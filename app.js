@@ -106,11 +106,12 @@ app.get('/tickets', async (req, res) =>{
 // Login stuff
 app.route('/account')
 .get(async (req, res) =>{
-    const userID = req.session.userID;
-    console.log(req.session.userID);
+    let userID = null;
+    if (req.session.userID) userID = JSON.parse(req.session.userID);
     res.cookie('userID', userID, { httpOnly: false });
     const user = await getUserByID(db, userID);
     const nrOrders = await getNrOfOrdersByUser(db, userID);
+    console.log(nrOrders);
     if (userID != null){
         let orders = null;
         if (nrOrders > 0) orders = await getOrdersByUser(db, userID);
@@ -177,7 +178,7 @@ app.post('/auth', async (req, res) => {
             });
             break;
         case 'sign':
-            const signUserID = parseInt(await getNrOfUsers(db));
+            const signUserID = await getNrOfUsers(db);
             const signUsername = req.body.username;
             const signEmail = req.body.email;
             const signLogin = req.body.login;
@@ -200,7 +201,6 @@ app.post('/auth', async (req, res) => {
             // Set the session
             req.session.loggedin = true;
             req.session.userID = signUserID;
-            console.log('UserID = '+ req.session.userID);
             // Redirect to the account page
             res.redirect('/account');
             break;
@@ -303,7 +303,7 @@ async function getNrOfOrders(db) {
         + "FROM Ordering", (err, row) => { 
             nr = row;
             if (err) reject(err);
-            resolve(nr);
+            resolve(nr.count);
         });
         
     });
@@ -317,7 +317,7 @@ async function getNrOfOrdersByUser(db, id) {
         + "FROM ordering WHERE user_id = ?", id, (err, row) => { 
             nr = row;
             if (err) reject(err);
-            resolve(nr);
+            resolve(nr.count);
         });
         
     });
@@ -331,7 +331,7 @@ async function getNrOfUsers(db) {
         + "FROM user", (err, row) => { 
             nr = row;
             if (err) reject(err);
-            resolve(nr);
+            resolve(nr.count);
         });
         
     });
@@ -342,7 +342,7 @@ async function getOrdersByUser(db, id) {
     let userOrders = [];
     userOrders = new Promise((resolve, reject) => {
         let arr = [];
-        db.each("SELECT date, num_of_tickets, title, COUNT(*) as count "
+        db.each("SELECT date, num_of_tickets, title "
         + "FROM ("
         + "Ordering JOIN Movie "
         + "ON Ordering.movie_id = Movie.movie_id) "
@@ -352,8 +352,6 @@ async function getOrdersByUser(db, id) {
             } else {
                 arr = null;
             }
-            console.log('arr:');
-            console.log(arr)
             if (err) reject(err);
             resolve(arr);            
         });

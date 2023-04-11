@@ -13,18 +13,19 @@ for (let i = 0; i < cookies.length; i++){
         delete_cookie('user');
     }
 }
-console.log(user);
 
 const arrayList = ['Username', 'E-mail', 'Address', 'Date of registration', 'Creditcard'];
 let infoArray = [];
-if (user != null) infoArray = [user.username, user.email, user.address, user.registered_date, user.credit_card]
-console.log(infoArray);
+if (user != null) {
+    date = new Date(user.registered_date).toDateString();
+    infoArray = [user.username, user.email, user.address, date, user.credit_card]
+}
 
 //display user information
 if (checkLogIn){
     for (let i = 0; i < arrayList.length; i++){
         const p = document.createElement('p');
-        p.append(document.createTextNode(arrayList[i] + ': ' + infoArray[i]));
+        p.append(document.createTextNode(arrayList[i] + ': ' + infoArray[i] + '.'));
         userInformation.append(p);    
     }
 } else {

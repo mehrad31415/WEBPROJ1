@@ -4,14 +4,12 @@ const cookies = document.cookie.split('; ');
 let userID = null;
 for (let i = 0; i < cookies.length; i++){
     if (cookies[i].substring(0, 6) == "userID") {
-        console.log(cookies[i]);
         userIDTemp = cookies[i].replace('userID=', '');
         if (userIDTemp != 'undefined') {
-            userID = userIDTemp;
+            userID = JSON.parse(userIDTemp.replace('j%3A', ''));
         }
     }
 }
-console.log(userID);
 let checkLogIn = false;
 
 if (userID != null){
@@ -100,64 +98,6 @@ let nav2 = null;
     }
 
 header.append(imgLink, h1);
-
-    //LOGIN POPUP
-//     <div class="form-popup" id="myForm">
-//   <form action="/action_page.php" class="form-container">
-//     <h1>Login</h1>
-
-//     <label for="email"><b>Email</b></label>
-//     <input type="text" placeholder="Enter Email" name="email" required>
-
-//     <label for="psw"><b>Password</b></label>
-//     <input type="password" placeholder="Enter Password" name="psw" required>
-
-//     <button type="submit" class="btn">Login</button>
-//     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-//   </form>
-// </div>
-
-
-// const formLogIn = document.createElement('form');
-//     formLogIn.method = "post";
-//     const divLoginHeader = document.createElement('div');
-//     divLoginHeader.classList = 'header';
-//     const divLogInForm = document.createElement('div');
-//     divLogInForm.classList = 'login-form';
-//     divLogInForm.id = 'login-form';
-//     divLoginHeader.append(divLogInForm);
-//     const btnSubmit = document.createElement('button');
-//     btnSubmit.type = 'submit';
-//     btnSubmit.id = 'login-btn';
-//     if (!checkLogIn){
-//         formLogIn.action = "/auth?log=in";
-//         btnSubmit.append(document.createTextNode('Login'));
-//         const inputUname = document.createElement('input');
-//         const inputPword = document.createElement('input');
-//         inputUname.type = 'text';
-//         inputUname.id = 'username';
-//         inputUname.name = 'username';
-//         inputUname.placeholder = 'Username';
-//         inputPword.type = 'password';
-//         inputPword.id = 'password';
-//         inputPword.name = 'password';
-//         inputPword.placeholder = 'Password';
-//         divLogInForm.append(inputUname, inputPword);
-//     } else {
-//         btnSubmit.append(document.createTextNode('Log Out'));
-//         formLogIn.action = "/auth?log=out";
-//         const btnAccount = document.createElement('button');
-//         btnAccount.type = 'button';
-//         btnAccount.id = 'login-btn';
-//         btnAccount.append(document.createTextNode('My Account'));
-//         btnAccount.onclick = function(){
-//             window.location = 'account'
-//         };
-//         divLogInForm.append(btnAccount);
-//     }
-//     divLogInForm.append(btnSubmit);
-//     formLogIn.append(divLoginHeader);
-
 
     //NAVIGATION
     const navList = document.createElement('ul');
