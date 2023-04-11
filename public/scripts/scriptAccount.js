@@ -9,13 +9,15 @@ for (let i = 0; i < cookies.length; i++){
     if (cookies[i].substring(0, 5) == "user=") {
         user = [];
         user = JSON.parse(decodeURI(cookies[i].slice(5)).replaceAll('%3A', ':').replaceAll('%2C', ','));
-        user.email = user.email.replace('%40', '@')
+        user.email = user.email.replace('%40', '@');
+        delete_cookie('user');
     }
 }
 console.log(user);
 
 const arrayList = ['Username', 'E-mail', 'Address', 'Date of registration', 'Creditcard'];
-const infoArray = [user.username, user.email, user.address, user.registeredDate, user.creditCard]
+let infoArray = [];
+if (user != null) infoArray = [user.username, user.email, user.address, user.registeredDate, user.creditCard]
 
 //display user information
 if (checkLogIn){
@@ -36,6 +38,7 @@ for (let i = 0; i < cookies.length; i++){
     if (cookies[i].substring(0, 6) == "orders") {
         orders = [];
         orders = JSON.parse(decodeURI(cookies[i].slice(7)).replaceAll('%3A', ':').replaceAll('%2C', ','));
+        delete_cookie('orders');
     }
 }
 
@@ -56,3 +59,4 @@ if (orders) {
     p.append(document.createTextNode('No orders to be displayed.'));
     userOrders.append(p);
 }
+

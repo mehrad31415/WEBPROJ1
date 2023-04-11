@@ -4,12 +4,14 @@ const cookies = document.cookie.split('; ');
 let userID = null;
 for (let i = 0; i < cookies.length; i++){
     if (cookies[i].substring(0, 6) == "userID") {
+        console.log(cookies[i]);
         userIDTemp = cookies[i].replace('userID=', '');
         if (userIDTemp != 'undefined') {
             userID = userIDTemp;
         }
     }
 }
+console.log(userID);
 let checkLogIn = false;
 
 if (userID != null){
@@ -203,110 +205,7 @@ colorInput.type = 'color';
 footer.appendChild(elementDropdown);
 footer.appendChild(styleDropdown);
 
-//Log in Menu
-
-// !!!!!FROM CHATGPT:!!!!!
-
-// // //serverside:
-
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
-// const bcrypt = require('bcrypt');
-// const db = require('./db'); // assuming you have a separate file for your database connection
-
-// const app = express();
-
-// app.use(bodyParser.json());
-// app.use(cookieParser());
-
-// app.post('/api/login', (req, res) => {
-//   const { email, password } = req.body;
-
-//   // Query the database to check if the user exists
-//   db.query('SELECT * FROM users WHERE email = ?', [email], (error, results) => {
-//     if (error) {
-//       console.error('Error checking if user exists:', error);
-//       return res.status(500).json({ success: false, message: 'An error occurred while checking if the user exists.' });
-//     }
-
-//     if (results.length === 0) {
-//       // User does not exist
-//       return res.status(401).json({ success: false, message: 'Invalid email or password.' });
-//     }
-
-//     // Compare the user's password hash with the provided password
-//     const user = results[0];
-//     bcrypt.compare(password, user.passwordHash, (error, isMatch) => {
-//       if (error) {
-//         console.error('Error comparing passwords:', error);
-//         return res.status(500).json({ success: false, message: 'An error occurred while authenticating the user.' });
-//       }
-
-//       if (isMatch) {
-//         // Passwords match, login successful
-
-//         // Set a cookie to keep track of the user's email
-//         res.cookie('email', email, { sameSite: 'strict' });
-
-//         // Set a cookie to keep track of the user's login status
-//         res.cookie('loggedIn', true, { sameSite: 'strict' });
-
-//         return res.status(200).json({ success: true, message: 'Login successful.' });
-//       } else {
-//         // Passwords do not match
-//         return res.status(401).json({ success: false, message: 'Invalid email or password.' });
-//       }
-//     });
-//   });
-// });
-
-// app.listen(3000, () => {
-//   console.log('Server started on port 3000');
-// });
-
-// // // html
-// <!DOCTYPE html>
-// <html>
-// <head>
-//   <title>Login</title>
-// </head>
-// <body>
-//   <h1>Login</h1>
-//   <form id="login-form">
-//     <label for="email">Email:</label>
-//     <input type="email" id="email" name="email" required>
-
-//     <br><br>
-
-//     <label for="password">Password:</label>
-//     <input type="password" id="password" name="password" required>
-
-//     <br><br>
-
-//     <button type="submit">Login</button>
-//   </form>
-
-//   <script src="login.js"></script>
-// </body>
-// </html>
-
-// userside javascript
-
-// // Assume you have a login form in your HTML with input fields with ids "email" and "password"
-// const emailInput = document.getElementById('email');
-// const passwordInput = document.getElementById('password');
-
-// // Add an event listener to your login form submit button
-// const loginForm = document.getElementById('login-form');
-// loginForm.addEventListener('submit', (event) => {
-//   event.preventDefault(); // Prevent the form from submitting
-
-//   const email = emailInput.value;
-//   const password = passwordInput.value;
-
-//   // Perform validation on the email and password fields if needed
-
-//   // Send a login request to your server with the email and password
-//   fetch('/api/login', {
-//     method: 'POST
+//functions
+function delete_cookie(name) {
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }

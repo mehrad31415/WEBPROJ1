@@ -1,7 +1,6 @@
 //Javascript
 let movieAll = [];
 movieAll = JSON.parse(ejsMovies);
-console.log(movieAll);
 const paginatedList = document.getElementById("paginated-list");
 
 for (let i = 0; i < movieAll.length; i++){

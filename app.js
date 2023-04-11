@@ -81,7 +81,7 @@ app.get('/info', async (req, res) => {
     const schedule = await getScheduleDateTime(db,movieID);
     res.render('info', {
         ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
-        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[1\]|\[2\]|\[3\]|\[4\]||\[5\]|\[6\]|\[7\]|\[8\]|\[9\]/g, ''),
+        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[1\]|\[2\]|\[3\]|\[4\]|\[5\]|\[6\]|\[7\]|\[8\]|\[9\]/g, ''),
         ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@')
     });
 });
@@ -109,7 +109,7 @@ app.route('/account')
     //TODO get userid from session
     const userID = req.session.userID;
     res.cookie('userID', userID, { httpOnly: false });
-    const user = await getMovieByID(db, userID);
+    const user = await getUserByID(db, userID);
     if (userID != null){
         const orders = await getOrdersByUser(db, userID);
         res.cookie('orders', JSON.stringify(orders).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
@@ -136,7 +136,6 @@ app.post('/auth', async (req, res) => {
     const log = req.query.log;
     if (log == 'in') {
         // Capture the input fields
-        console.log(req.body);
         let username = req.body.username;
         let password = req.body.password;
 
@@ -171,6 +170,7 @@ app.post('/auth', async (req, res) => {
           if (err) {
             throw err;
           }
+          res.clearCookie("userID");
           // Redirect to the home page
           res.redirect('/home');
         });
@@ -194,7 +194,6 @@ app.listen(PORT=5500, HOSTNAME='127.0.0.1', (req, res) => {
 
 async function getMovieByID(db, id) {
     const movie =  new Promise((resolve, reject) => {
-        
         db.get("SELECT movie_id AS movieID, title AS movieName, year AS movieYear, genre AS movieGenre, link AS movieLink, poster AS posterLink, trailer AS trailerLink, about AS movieAbout, plot AS moviePlot "
         + "FROM Movie WHERE MovieID= ?", id, (err, row) => {
             if (err) reject(err);
@@ -296,7 +295,7 @@ async function getOrdersByUser(db, id) {
     return userOrders;
 }
 
-async function getMovieByID(db, id) {
+async function getUserByID(db, id) {
     const movie =  new Promise((resolve, reject) => {
         
         db.get("SELECT * "
