@@ -17,7 +17,8 @@ console.log(user);
 
 const arrayList = ['Username', 'E-mail', 'Address', 'Date of registration', 'Creditcard'];
 let infoArray = [];
-if (user != null) infoArray = [user.username, user.email, user.address, user.registeredDate, user.creditCard]
+if (user != null) infoArray = [user.username, user.email, user.address, user.registered_date, user.credit_card]
+console.log(infoArray);
 
 //display user information
 if (checkLogIn){
