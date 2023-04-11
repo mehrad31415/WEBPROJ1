@@ -99,48 +99,65 @@ let nav2 = null;
         h1.append(document.createTextNode('MovieHouse - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1)));
     }
 
-    //LOGIN
-    const formLogIn = document.createElement('form');
-    formLogIn.method = "post";
-    const divLoginHeader = document.createElement('div');
-    divLoginHeader.classList = 'header';
-    const divLogInForm = document.createElement('div');
-    divLogInForm.classList = 'login-form';
-    divLogInForm.id = 'login-form';
-    divLoginHeader.append(divLogInForm);
-    const btnSubmit = document.createElement('button');
-    btnSubmit.type = 'submit';
-    btnSubmit.id = 'login-btn';
-    if (!checkLogIn){
-        formLogIn.action = "/auth?log=in";
-        btnSubmit.append(document.createTextNode('Login'));
-        const inputUname = document.createElement('input');
-        const inputPword = document.createElement('input');
-        inputUname.type = 'text';
-        inputUname.id = 'username';
-        inputUname.name = 'username';
-        inputUname.placeholder = 'Username';
-        inputPword.type = 'password';
-        inputPword.id = 'password';
-        inputPword.name = 'password';
-        inputPword.placeholder = 'Password';
-        divLogInForm.append(inputUname, inputPword);
-    } else {
-        btnSubmit.append(document.createTextNode('Log Out'));
-        formLogIn.action = "/auth?log=out";
-        const btnAccount = document.createElement('button');
-        btnAccount.type = 'button';
-        btnAccount.id = 'login-btn';
-        btnAccount.append(document.createTextNode('My Account'));
-        btnAccount.onclick = function(){
-            window.location = 'account'
-        };
-        divLogInForm.append(btnAccount);
-    }
-    divLogInForm.append(btnSubmit);
-    formLogIn.append(divLoginHeader);
+header.append(imgLink, h1);
 
-    header.append(imgLink, h1, formLogIn);
+    //LOGIN POPUP
+//     <div class="form-popup" id="myForm">
+//   <form action="/action_page.php" class="form-container">
+//     <h1>Login</h1>
+
+//     <label for="email"><b>Email</b></label>
+//     <input type="text" placeholder="Enter Email" name="email" required>
+
+//     <label for="psw"><b>Password</b></label>
+//     <input type="password" placeholder="Enter Password" name="psw" required>
+
+//     <button type="submit" class="btn">Login</button>
+//     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+//   </form>
+// </div>
+
+
+// const formLogIn = document.createElement('form');
+//     formLogIn.method = "post";
+//     const divLoginHeader = document.createElement('div');
+//     divLoginHeader.classList = 'header';
+//     const divLogInForm = document.createElement('div');
+//     divLogInForm.classList = 'login-form';
+//     divLogInForm.id = 'login-form';
+//     divLoginHeader.append(divLogInForm);
+//     const btnSubmit = document.createElement('button');
+//     btnSubmit.type = 'submit';
+//     btnSubmit.id = 'login-btn';
+//     if (!checkLogIn){
+//         formLogIn.action = "/auth?log=in";
+//         btnSubmit.append(document.createTextNode('Login'));
+//         const inputUname = document.createElement('input');
+//         const inputPword = document.createElement('input');
+//         inputUname.type = 'text';
+//         inputUname.id = 'username';
+//         inputUname.name = 'username';
+//         inputUname.placeholder = 'Username';
+//         inputPword.type = 'password';
+//         inputPword.id = 'password';
+//         inputPword.name = 'password';
+//         inputPword.placeholder = 'Password';
+//         divLogInForm.append(inputUname, inputPword);
+//     } else {
+//         btnSubmit.append(document.createTextNode('Log Out'));
+//         formLogIn.action = "/auth?log=out";
+//         const btnAccount = document.createElement('button');
+//         btnAccount.type = 'button';
+//         btnAccount.id = 'login-btn';
+//         btnAccount.append(document.createTextNode('My Account'));
+//         btnAccount.onclick = function(){
+//             window.location = 'account'
+//         };
+//         divLogInForm.append(btnAccount);
+//     }
+//     divLogInForm.append(btnSubmit);
+//     formLogIn.append(divLoginHeader);
+
 
     //NAVIGATION
     const navList = document.createElement('ul');
@@ -205,7 +222,108 @@ colorInput.type = 'color';
 footer.appendChild(elementDropdown);
 footer.appendChild(styleDropdown);
 
+// LOGIN
+const formPopup = document.createElement("div");
+formPopup.className = "form-popup";
+formPopup.id = "LogInPopUp";
+
+const form = document.createElement("form");
+form.method = 'post'
+form.action = "/auth?log=in";
+form.className = "form-container";
+
+const heading = document.createElement("h1");
+heading.textContent = "Login";
+
+const usernameLabel = document.createElement("label");
+usernameLabel.textContent = "username";
+usernameLabel.setAttribute("for", "username");
+
+const passwordLabel = document.createElement("label");
+passwordLabel.textContent = "password";
+passwordLabel.setAttribute("for", "password");
+
+// Create the input elements for email and password
+const emailInput = document.createElement("input");
+emailInput.setAttribute("type", "text");
+emailInput.setAttribute("placeholder", "Enter Username");
+emailInput.setAttribute("name", "username");
+emailInput.setAttribute("required", "");
+
+const passwordInput = document.createElement("input");
+passwordInput.setAttribute("type", "password");
+passwordInput.setAttribute("placeholder", "Enter Password");
+passwordInput.setAttribute("name", "password");
+passwordInput.setAttribute("required", "");
+
+// Create the login button element
+const loginButton = document.createElement("button");
+loginButton.setAttribute("type", "submit");
+loginButton.className = "btn";
+loginButton.textContent = "Login";
+
+// Create the close button element with onclick attribute
+const closeButton = document.createElement("button");
+closeButton.setAttribute("type", "button");
+closeButton.className = "btn cancel";
+closeButton.textContent = "Close";
+closeButton.setAttribute("onclick", "closeForm()");
+
+// Add the elements to the form container
+form.appendChild(heading);
+form.appendChild(usernameLabel);
+form.appendChild(emailInput);
+form.appendChild(passwordLabel);
+form.appendChild(passwordInput);
+form.appendChild(loginButton);
+form.appendChild(closeButton);
+
+formPopup.appendChild(form);
+body.appendChild(formPopup);
+
+//LOGIN Header Buttons
+const divLogIn = document.createElement('div');
+divLogIn.classList = 'login-div';
+const btnLog = document.createElement('button');
+if (!checkLogIn){
+    btnLog.type = 'button';
+    btnLog.onclick = openForm;
+    btnLog.append(document.createTextNode('Log In'));
+    const btnSignIn = document.createElement('button');
+    btnSignIn.type = 'button';
+    btnSignIn.id = 'login-btn';
+    btnSignIn.append(document.createTextNode('Sign In'));
+    btnSignIn.onclick = function(){
+        window.location = 'sign'
+    }
+    divLogIn.append(btnLog, btnSignIn);
+} else {
+    const formLogOut = document.createElement('form');
+    formLogOut.method = "post";
+    formLogOut.action = "/auth?log=out";
+    btnLog.type = 'submit';
+    btnLog.append(document.createTextNode('Log Out'));
+    const btnAccount = document.createElement('button');
+    btnAccount.type = 'button';
+    btnAccount.id = 'login-btn';
+    btnAccount.append(document.createTextNode('My Account'));
+    btnAccount.onclick = function(){
+        window.location = 'account'
+    };
+    formLogOut.append(btnLog);
+    divLogIn.append(formLogOut, btnAccount);
+}
+header.append(divLogIn)
+
 //functions
 function delete_cookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-  }
+}
+
+function openForm() {
+    document.getElementById("LogInPopUp").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("LogInPopUp").style.display = "none";
+}

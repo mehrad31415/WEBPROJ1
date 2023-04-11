@@ -123,7 +123,7 @@ app.route('/account')
 app.get('/pur', (req, res) => {
     if (req.cookies.newOrder){
         order = JSON.parse(req.cookies.newOrder);
-        db.run('INSERT INTO Ordering (order_id, user_id, movie_id, date, num_of_tickets) VALUES(?, ?, ?, ?, ?)', [order.order_id, order.user_id, order.movie_id, order.date, order.ammount])
+        db.run('INSERT INTO Ordering (order_id, user_id, movie_id, date, num_of_tickets) VALUES(?, ?, ?, ?, ?)', [order.order_id, order.user_id, order.movie_id, order.date, order.ammount]);
         res.clearCookie("newOrder");
     }
 
@@ -134,50 +134,83 @@ app.get('/pur', (req, res) => {
 // http://localhost:3000/auth
 app.post('/auth', async (req, res) => {
     const log = req.query.log;
-    if (log == 'in') {
-        // Capture the input fields
-        let username = req.body.username;
-        let password = req.body.password;
-
-        // Ensure the input fields exists and are not empty
-        if (username && password) {
-            let query = "SELECT * FROM user WHERE username = ? AND password = ?";
-
-            // Query the database
-            db.get(query, [username, password], (err, rows) => {
-                if (err) {
-                    throw err;
-                }
-                // If the user exists
-                if (rows) {
-                    // Set the session
-                    req.session.loggedin = true;
-                    req.session.userID = rows.user_id;
-                    // Redirect to the account page
-                    res.redirect('/account');
-                } else {
-                    // Redirect to the login page
-                    res.send('Incorrect Username and/or Password!');
+    switch (log) {
+        case 'in':
+            // Capture the input fields
+            let username = req.body.username;
+            let password = req.body.password;
+    
+            // Ensure the input fields exists and are not empty
+            if (username && password) {
+                let query = "SELECT * FROM user WHERE username = ? AND password = ?";
+    
+                // Query the database
+                db.get(query, [username, password], (err, rows) => {
+                    if (err) {
+                        throw err;
+                    }
+                    // If the user exists
+                    if (rows) {
+                        // Set the session
+                        req.session.loggedin = true;
+                        req.session.userID = rows.user_id;
+                        // Redirect to the account page
+                        res.redirect('/account');
+                    } else {
+                        // Redirect to the login page
+                        res.send('Incorrect Username and/or Password!');
+                    }
+                });
+            } else {
+                res.send('Please enter Username and Password!');
+                res.end();
+            }
+            break;
+        case 'out':
+            // Destroy the session
+            req.session.destroy((err) => {
+              if (err) {
+                throw err;
+              }
+              res.clearCookie("userID");
+              // Redirect to the home page
+              res.redirect('/home');
+            });
+            break;
+        case 'sign':
+            let signUserID = parseInt(await getNrOfUsers(db));
+            let signUsername = req.body.username;
+            let signEmail = req.body.email;
+            let signLogin = req.body.login;
+            let signPassword = req.body.password;
+            let signAddress = req.body.address;
+            let signCredit = req.body.creditcard;
+            let signDate = new Date();
+            db.run('INSERT INTO user '
+            + '(user_id, username, email, login, password, address, credit_card, registered_date) '
+            + 'VALUES(?, ?, ?, ?, ?, ?, ?, ?)', [
+                signUserID,
+                signUsername,
+                signEmail,
+                signLogin,
+                signPassword,
+                signAddress,
+                signCredit,
+                signDate.toISOString()
+            ], function (err) {
+                if (err){
+                    res.send('The information you entered is not compatible, please check your information')
                 }
             });
-        } else {
-            res.send('Please enter Username and Password!');
-            res.end();
-        }
-    } if (log == 'out') {
-        // Destroy the session
-        req.session.destroy((err) => {
-          if (err) {
-            throw err;
-          }
-          res.clearCookie("userID");
-          // Redirect to the home page
-          res.redirect('/home');
-        });
-     }
-    
+            res.redirect('/account');
+            break;
+        default:
+            res.redirect('/home');
+    }
 });
-
+app.get('/sign', (req, res) =>{
+    res.render('sign In')
+});
 // END of login stuff
 
 
@@ -275,6 +308,21 @@ async function getNrOfOrders(db) {
         
     });
     return orderAll;
+}
+
+async function getNrOfUsers(db) {
+    let userAll = [];
+    userAll = new Promise((resolve, reject) => {
+        let nr;
+        db.each("SELECT COUNT(user_id) AS count "
+        + "FROM user", (err, row) => { 
+            nr = row;
+            if (err) reject(err);
+            resolve(nr);
+        });
+        
+    });
+    return userAll;
 }
 
 async function getOrdersByUser(db, id) {

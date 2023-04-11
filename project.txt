@@ -1,24 +1,6 @@
-1 - website of a movie theatre that can sell tickets.
-
-7 - we should support registered users (RU) and anonymous users (AU).
-
-8 - Until logging in an AU should be able to browse through all pages.
-but cannot buy a ticket. 
-
 11 - Additional movies should be retrieved from the server using AJAX.
 
 12 - An AU should be able to register and login.
-
-13 - After logging in, a RU can buy a ticket to a movie.
-This procedure should include at least three steps: 
-selecting a movie, selecting a date/time, confirming the order.
-When the user confirms the order, the website should display 
-all chosen tickets and allow the user to make changes 
-(if necessary) and confirm the final selection. 
-
-14 - Once the purchase is finished, the website should 
-acknowledge it, and add the order to this RU's order history.
-RUs should be able to browse through their order history.
 
 15 - When a RU makes a selection (chooses a movie), 
 this should be communicated to the server using AJAX,
@@ -35,10 +17,6 @@ This page should provide access to the user information
 (name, email, login, password, address, credit card, order history). 
 When an AU registers, s/he has to fill-in this information 
 (naturally, except for the order history).
-
-18 - The list of available movies, dates and times when 
-they are available, movie descriptions, users and their 
-information and order history should be stored in a database.
 
 Technical:
 
@@ -92,9 +70,6 @@ terminate JavaScript statements with a ";"
 Process:
 
 1 - refactoring the code to model-view-controller style, MVC configuration.
-2 - creating the folders and inserting data.
-12 - add at least 20 movies, create at least 5 registered users, 
-and at least 10 existing orders (overall, not per user)
 8 - all files and variables should have comments.
 
 Done Tasks:
@@ -134,3 +109,16 @@ stars - array of Actors
 (you do not have to specify the entire cast), 
 poster (link to an image), trailer (link to a video), 
 plot (String).
+1 - website of a movie theatre that can sell tickets.
+14 - Once the purchase is finished, the website should 
+acknowledge it, and add the order to this RU's order history.
+RUs should be able to browse through their order history.
+18 - The list of available movies, dates and times when 
+they are available, movie descriptions, users and their 
+information and order history should be stored in a database.
+2 - creating the folders and inserting data.
+12 - add at least 20 movies, create at least 5 registered users, 
+and at least 10 existing orders (overall, not per user)
+7 - we should support registered users (RU) and anonymous users (AU).
+8 - Until logging in an AU should be able to browse through all pages.
+but cannot buy a ticket. 

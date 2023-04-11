@@ -445,9 +445,98 @@
     cursor: pointer;
 }
 
-.ammount-input {
-    width: fit-content;
+/* Log and Sign */
+.login-div{
+    top: 0px;
+    right: 5px;
+    position: fixed;
+    z-index: 999999;
+    display:inline-flex;
+    flex-direction: column;
 }
+
+.login-div button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    opacity: 0.8;
+    width: 100px;
+  }
+  
+  .form-popup {
+    display: none;
+    position: fixed;
+    bottom: 5px;
+    right: 15px;
+    border: 3px solid #054D69;
+    z-index: 9;
+  }
+  
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: #c5dceb;
+  }
+  
+  .form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  .form-container input[type=text]:focus, .form-container input[type=password]:focus,
+  .sign-form input:focus {
+    background-color: #dddddd;
+    outline: none;
+  }
+  
+  .form-container .btn, .sign-form .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+  
+  .form-container .cancel {
+    background-color: rgb(205, 30, 30);
+  }
+
+  .form-container .btn:hover, .sign-form .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+
+  .sign-form {
+    display:inline-flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  /* .login-form {
+    position: absolute;
+    float: right;
+    top: 1vh;
+    right: 1vw;
+    display: flex;
+  }
+  
+  .login-form button{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }  */
 
 @media only screen and (max-width:659px) {
     .table--width-large {
@@ -533,25 +622,5 @@
         bottom: 5vh !important;
     }
 }
-
-/* Login */
-
-
-.login-form {
-    position: absolute;
-    float: right;
-    top: 1vh;
-    right: 1vw;
-    display: flex;
-  }
-  
-  .login-form button{
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  } 
 
    

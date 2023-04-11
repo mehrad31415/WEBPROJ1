@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+    <head>
+    </head>
+
+    <body>
+        <div>
+            <header>
+            </header>
+            <nav>
+                
+            </nav>
+            <article class="article-block row">
+                <h2 class="h2--position h2--text-attributes line--width-full">Sign In</h2>
+                <section class="row">
+                    <h3 class="h3--attributes line--width-full">Fill in your information below</h3>
+                    <form class = 'sign-form' action="/auth?log=sign" method="POST">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    
+                        <label for="login">Login:</label>
+                        <input type="text" id="login" name="login" required>
+                    
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    
+                        <label for="address">Address:</label>
+                        <textarea id="address" name="address" required></textarea>
+                    
+                        <label for="creditcard">Credit Card:</label>
+                        <input type="text" id="creditcard" name="creditcard" required>
+                    
+                        <button class="btn" type="submit">Submit</button>
+                    </form>
+                </section>
+            </article>
+        </div>
+        <footer>
+        </footer>
+        
+        <script src="./scripts/scriptAll.js"></script>
+        <script src="./scripts/scriptTooltip.js"></script>
+    </body>
+
+</html>
