@@ -106,8 +106,8 @@ app.get('/tickets', async (req, res) =>{
 // Login stuff
 app.route('/account')
 .get(async (req, res) =>{
-    //TODO get userid from session
     const userID = req.session.userID;
+    console.log(req.session.userID);
     res.cookie('userID', userID, { httpOnly: false });
     const user = await getUserByID(db, userID);
     if (userID != null){
@@ -178,14 +178,14 @@ app.post('/auth', async (req, res) => {
             });
             break;
         case 'sign':
-            let signUserID = parseInt(await getNrOfUsers(db));
-            let signUsername = req.body.username;
-            let signEmail = req.body.email;
-            let signLogin = req.body.login;
-            let signPassword = req.body.password;
-            let signAddress = req.body.address;
-            let signCredit = req.body.creditcard;
-            let signDate = new Date();
+            const signUserID = parseInt(await getNrOfUsers(db));
+            const signUsername = req.body.username;
+            const signEmail = req.body.email;
+            const signLogin = req.body.login;
+            const signPassword = req.body.password;
+            const signAddress = req.body.address;
+            const signCredit = req.body.creditcard;
+            const signDate = new Date();
             db.run('INSERT INTO user '
             + '(user_id, username, email, login, password, address, credit_card, registered_date) '
             + 'VALUES(?, ?, ?, ?, ?, ?, ?, ?)', [
@@ -196,12 +196,13 @@ app.post('/auth', async (req, res) => {
                 signPassword,
                 signAddress,
                 signCredit,
-                signDate.toISOString()
-            ], function (err) {
-                if (err){
-                    res.send('The information you entered is not compatible, please check your information')
-                }
-            });
+                signDate.toISOString().replace('T', ' ').replace('Z', '')
+            ]);
+            // Set the session
+            req.session.loggedin = true;
+            req.session.userID = signUserID;
+            console.log('UserID = '+ req.session.userID);
+            // Redirect to the account page
             res.redirect('/account');
             break;
         default:
@@ -334,9 +335,15 @@ async function getOrdersByUser(db, id) {
         + "Ordering JOIN Movie "
         + "ON Ordering.movie_id = Movie.movie_id) "
         + "WHERE user_id = ?", id, (err, row) => { 
-            arr.push(row);
+            if(row){
+                arr.push(row);
+            } else {
+                arr = null;
+            }
+            console.log('arr:');
+            console.log(arr)
             if (err) reject(err);
-            resolve(arr);
+            resolve(arr);            
         });
         
     });
