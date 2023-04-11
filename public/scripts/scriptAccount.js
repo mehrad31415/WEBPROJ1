@@ -43,6 +43,7 @@ for (let i = 0; i < cookies.length; i++){
         delete_cookie('orders');
     }
 }
+console.log(orders);
 
 if (orders) {
 // display orders

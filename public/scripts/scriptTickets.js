@@ -1,5 +1,18 @@
 //Javascript
 
+//Confirmation basics
+const summaryForm = document.getElementsByClassName('movie-summary')[0];
+const movieSel = document.getElementById('movie-title');
+const dateTimeSel = document.getElementById('timeslot');
+const ticketsSel = document.getElementById('num-tickets');
+const movieNew = document.getElementsByName('movieTitle')[0];
+const dateTimeNew = document.getElementsByName('timeslot')[0];
+const ticketsNew = document.getElementsByName('numTickets')[0];
+const btnConfirm = document.getElementsByName("confirm")[0];
+const btnCancel = document.getElementsByName("cancel")[0];
+
+
+//base-page
 const movie = JSON.parse(ejsMovie);
 const date = ejsDate.split('-');
 const time = ejsTime.split('-');
@@ -29,9 +42,6 @@ if (!checkSchedule){
     if (!checkLogIn){
         article.append(document.createTextNode('You are unable to purchase tickets for ' + movie.movieName + '. Please log in with the button above.'));
     } else {
-        //get user_id:
-            userID = 4;
-
         const par = document.createElement('p');
         article.append(par);
         const strongLink = document.createElement('STRONG');
@@ -49,6 +59,8 @@ if (!checkSchedule){
         ammount.addEventListener('change', function () {
             if (ammount.value > 9) ammount.value = 9;
             if (ammount.value < 1) ammount.value = 1;
+            ticketsSel.append(document.createTextNode(ammount.value));
+            ticketsNew.value = ammount.value;
         });
         
         const btnPur = document.createElement("button");
@@ -57,17 +69,93 @@ if (!checkSchedule){
         btnPur.append(document.createTextNode("Purchase tickets for '" + movie.movieName + " ("+ movie.movieYear +")' at " + dateTime.toLocaleString() + " local time."));
         btnPur.addEventListener("click", function () {
             if (ammount.value > 0){
-                window.location = 'pur';
-                newOrder = {
-                    order_id: newOrderID,
-                    user_id: userID,
-                    movie_id: movie.movieID, 
-                    date: dateTime.toISOString(),
-                    ammount: ammount.value,
-                }
-                document.cookie = 
-                    'newOrder=' + JSON.stringify(newOrder) + '; path=/pur';
+                summaryForm.style.display = "block";
             }
         });
     }
 }
+
+//confirmation
+movieSel.append(document.createTextNode(movie.movieName));
+dateTimeSel.append(document.createTextNode(dateTime.toLocaleString()));
+ticketsNew.addEventListener('change', function () {
+    if (ticketsnew.value > 9) ticketsnew.value = 9;
+    if (ticketsnew.value < 1) ticketsnew.value = 1;
+});
+//movie options
+//get movies from cookies
+let movies = [];
+for (let i = 0; i < cookies.length; i++){
+    if (cookies[i].substring(0, 6) == "movies") {
+        movies = JSON.parse(decodeURI(cookies[i].slice(7)).replaceAll('%3A', ':').replaceAll('%2C', ','));
+        delete_cookie('movies');
+    }
+}
+
+//add movies to options
+for (i = 0; i < movies.length; i++) {
+    const option =  document.createElement('option');
+    option.value = movies[i].movieID;
+    if (movies[i].movieName == movie.movieName) option.selected = true;
+    option.append(document.createTextNode(movies[i].movieName));
+    movieNew.append(option);
+}
+
+//timeslot options
+//get schedule from cookies
+let scheduleAll = [];
+for (let i = 0; i < cookies.length; i++){
+    if (cookies[i].substring(0, 8) == "schedule") {
+        scheduleAll = JSON.parse(decodeURI(cookies[i].slice(9)).replaceAll('%3A', ':').replaceAll('%2C', ','));
+        delete_cookie('schedule');
+    }
+}
+
+
+//add timeslots to options
+getSchedule(movieNew.value)
+
+movieNew.onchange = function(){
+    getSchedule(movieNew.value)
+};
+
+function getSchedule(currentMovie) {
+    while (dateTimeNew.firstChild) {
+        dateTimeNew.removeChild(dateTimeNew.firstChild);
+    }
+
+    let timeslots = [];
+    for (i = 0; i < scheduleAll.length; i++) {
+        if (scheduleAll[i].movie_id == currentMovie) timeslots.push(scheduleAll[i]);
+    }
+
+    for (i = 0; i < timeslots.length; i++) {
+        const option =  document.createElement('option');
+        const date = new Date(timeslots[i].date);
+        option.value = date.toISOString();
+        if (timeslots[i].date == dateTime) option.selected = true;
+        option.append(document.createTextNode(date.toLocaleString()));
+        dateTimeNew.append(option);
+    }
+}
+
+//make buttons work
+btnConfirm.addEventListener("click", function () {
+    if (ticketsNew.value > 0){
+        window.location.href = 'pur';
+        newOrder = {
+            order_id: newOrderID,
+            user_id: userID,
+            movie_id: movieNew.value, 
+            date: dateTimeNew.value,
+            ammount: ticketsNew.value,
+        }
+        console.log(JSON.stringify(newOrder));
+        document.cookie = 'newOrder=' + JSON.stringify(newOrder) + '; path=/pur';
+    }
+    return false;
+});
+
+btnCancel.addEventListener("click", function () {
+    summaryForm.style.display = "none";
+});

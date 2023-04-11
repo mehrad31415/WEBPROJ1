@@ -521,22 +521,68 @@
     width: 100%;
   }
 
-  /* .login-form {
-    position: absolute;
-    float: right;
-    top: 1vh;
-    right: 1vw;
-    display: flex;
+/* Tickets confirmation */
+.movie-summary {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    max-width: 400px;
+    text-align: left;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    width: 50%;
+    max-width: 90vw;
   }
   
-  .login-form button{
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
+  .movie-summary h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .movie-summary p {
+    margin-bottom: 10px;
+  }
+  
+  .movie-summary strong {
+    font-weight: bold;
+  }
+  
+  .movie-summary label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .movie-summary input,
+  .movie-summary select {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+  }
+  
+  .movie-summary button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
     cursor: pointer;
-  }  */
+    transition: background-color 0.2s ease;
+  }
+  
+  .movie-summary button:hover {
+    background-color: #005fa3;
+  }  
 
 @media only screen and (max-width:659px) {
     .table--width-large {

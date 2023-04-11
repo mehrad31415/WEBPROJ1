@@ -93,13 +93,18 @@ app.get('/tickets', async (req, res) =>{
     const movie = await getMovieByID(db, movieID);
     const schedule = await getScheduleDateTime(db,movieID);
     const orderAll = await getNrOfOrders(db);
+    
+    let timeslots = await getScheduleAll(db);
+    res.cookie('schedule', JSON.stringify(timeslots).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
+    let movies = await getAllMovies(db);
+    res.cookie('movies', JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
 
     res.render('tickets', {
         ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
         ejsDate: date,
         ejsTime: time,
         ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
-        ejsOrderAll: JSON.stringify(orderAll.count)
+        ejsOrderAll: JSON.stringify(orderAll)
     });
 });
 
@@ -111,7 +116,6 @@ app.route('/account')
     res.cookie('userID', userID, { httpOnly: false });
     const user = await getUserByID(db, userID);
     const nrOrders = await getNrOfOrdersByUser(db, userID);
-    console.log(nrOrders);
     if (userID != null){
         let orders = null;
         if (nrOrders > 0) orders = await getOrdersByUser(db, userID);
@@ -121,6 +125,7 @@ app.route('/account')
     res.render('account');
 })
 app.get('/pur', (req, res) => {
+    // console.log('routed to /pur')
     if (req.cookies.newOrder){
         order = JSON.parse(req.cookies.newOrder);
         db.run('INSERT INTO Ordering (order_id, user_id, movie_id, date, num_of_tickets) VALUES(?, ?, ?, ?, ?)', [order.order_id, order.user_id, order.movie_id, order.date, order.ammount]);
@@ -286,6 +291,21 @@ async function getScheduleDateTime(db, id) {
         db.each("SELECT * "
         + "FROM Schedule "
         + "WHERE movie_id= ?", id, (err, row) => { 
+            arr.push(row);
+            if (err) reject(err);
+            resolve(arr);
+        });
+        
+    })} catch (error) { console.log(error); return null;}
+    return schedule;
+}
+
+async function getScheduleAll(db) {
+    let schedule = [];
+    try {schedule = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT * "
+        + "FROM Schedule ", (err, row) => { 
             arr.push(row);
             if (err) reject(err);
             resolve(arr);

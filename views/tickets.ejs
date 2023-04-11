@@ -18,6 +18,46 @@
         </div>
         <footer>
         </footer>
+
+        <form class="movie-summary">
+            <h2>Purchase Summary</h2>
+            <p>
+              <strong>Movie:</strong>
+              <span id="movie-title"></span>
+            </p>
+            <p>
+              <strong>Timeslot:</strong>
+              <span id="timeslot"></span>
+            </p>
+            <p>
+              <strong>Tickets:</strong>
+              <span id="num-tickets"></span>
+            </p>
+            <p>
+                Do you want to make any changes to your order?
+            </p>
+
+            <label>
+              Change Movie:
+              <select name="movieTitle">
+
+              </select>
+            </label>
+            <label>
+              Change Timeslot:
+              <select name="timeslot">
+                
+              </select>
+            </label>
+            <label>
+              Change Ammount:
+              <input type="number" name="numTickets">
+            </label>
+            <button name="confirm">Confirm</button>
+            <button name="cancel">Cancel</button>
+          </form>
+          
+
         <script> 
             let ejsMovie = '<%- ejsMovie %>';
             let ejsDate = '<%- ejsDate %>';
