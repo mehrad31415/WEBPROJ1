@@ -71,6 +71,12 @@ Process:
 
 1 - refactoring the code to model-view-controller style, MVC configuration.
 8 - all files and variables should have comments.
+13 - After logging in, a RU can buy a ticket to a movie.
+This procedure should include at least three steps: 
+selecting a movie, selecting a date/time, confirming the order.
+When the user confirms the order, the website should display 
+all chosen tickets and allow the user to make changes 
+(if necessary) and confirm the final selection.
 
 Done Tasks:
 
