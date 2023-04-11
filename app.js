@@ -110,16 +110,15 @@ app.route('/account')
     console.log(req.session.userID);
     res.cookie('userID', userID, { httpOnly: false });
     const user = await getUserByID(db, userID);
+    const nrOrders = await getNrOfOrdersByUser(db, userID);
     if (userID != null){
-        const orders = await getOrdersByUser(db, userID);
+        let orders = null;
+        if (nrOrders > 0) orders = await getOrdersByUser(db, userID);
         res.cookie('orders', JSON.stringify(orders).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
         res.cookie('user', JSON.stringify(user).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
     }
     res.render('account');
 })
-.post(async (req, res) =>{
-    res.redirect('/account');
-});
 app.get('/pur', (req, res) => {
     if (req.cookies.newOrder){
         order = JSON.parse(req.cookies.newOrder);
@@ -297,7 +296,7 @@ async function getScheduleDateTime(db, id) {
 }
 
 async function getNrOfOrders(db) {
-    let orderAll = [];
+    let orderAll;
     orderAll = new Promise((resolve, reject) => {
         let nr;
         db.each("SELECT COUNT(order_id) AS count "
@@ -310,7 +309,20 @@ async function getNrOfOrders(db) {
     });
     return orderAll;
 }
-
+async function getNrOfOrdersByUser(db, id) {
+    let orderCount;
+    orderCount = new Promise((resolve, reject) => {
+        let nr;
+        db.each("SELECT COUNT(order_id) AS count "
+        + "FROM ordering WHERE user_id = ?", id, (err, row) => { 
+            nr = row;
+            if (err) reject(err);
+            resolve(nr);
+        });
+        
+    });
+    return orderCount;
+}
 async function getNrOfUsers(db) {
     let userAll = [];
     userAll = new Promise((resolve, reject) => {
@@ -330,7 +342,7 @@ async function getOrdersByUser(db, id) {
     let userOrders = [];
     userOrders = new Promise((resolve, reject) => {
         let arr = [];
-        db.each("SELECT date, num_of_tickets, title "
+        db.each("SELECT date, num_of_tickets, title, COUNT(*) as count "
         + "FROM ("
         + "Ordering JOIN Movie "
         + "ON Ordering.movie_id = Movie.movie_id) "
