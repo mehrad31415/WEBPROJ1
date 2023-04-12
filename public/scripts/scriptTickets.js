@@ -103,10 +103,10 @@ for (i = 0; i < movies.length; i++) {
 
 
 //add timeslots to options
-getSchedule(movieNew.value, addTimeslots)
+getSchedule(movieNew.value)
 
 movieNew.onchange = function(){
-    getSchedule(movieNew.value, addTimeslots)
+    getSchedule(movieNew.value)
 };
 
 function getSchedule(currentMovie, callback) {
@@ -125,8 +125,7 @@ function getSchedule(currentMovie, callback) {
     if (xhr.status === 200) {
       const timeslots = JSON.parse(xhr.responseText);
 
-      if (arguments.length == 2) callback(timeslots);
-      else return timeslots;
+      addTimeslots(timeslots);
       console.log(timeslots);
     } else {
       console.error('Failed to retrieve timeslots');

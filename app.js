@@ -225,10 +225,9 @@ app.get('/api/timeslots', async (req, res) => {
     const MovieIDTemp = req.query.movieId;
     
     const schedule = await getScheduleDateTime(db,MovieIDTemp);
-    const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'"); //.replaceAll('\\"', '???').replaceAll('\\n', '@@@');
+    const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'");
     res.json(JSON.parse(scheduleString));
 });
-
 app.all("*", (req,res) => {
     res.status(404).send("resource not found ... ");
 });
