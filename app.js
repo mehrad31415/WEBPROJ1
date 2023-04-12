@@ -62,7 +62,7 @@ app.get('/awards-AM', (req, res) =>{
 app.get('/cast-AM', async (req, res) =>{
     const artists = await getArtistsByID(db,0);
     res.render('cast-members', {
-        ejsArtists: JSON.stringify(artists)
+        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[1\]|\[2\]|\[3\]|\[4\]|\[5\]|\[6\]|\[7\]|\[8\]|\[9\]/g, '')
     })
 });
 app.get('/contact', (req, res) =>{
@@ -265,7 +265,6 @@ async function getArtistsByID(db, id) {
             resolve(arr);
         });
     });
-
     return artists;
 }
 

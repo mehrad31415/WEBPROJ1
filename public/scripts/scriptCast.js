@@ -7,8 +7,8 @@ for (let i = 0; i < artists.length; i++){
         artists[i].artistYearBirth,
         artists[i].artistYearDeath,
         artists[i].artistLink);
-    artistTemp.role = artists[i].artistRole;
-    artistTemp.info = artists[i].artistInfo;
+        artistTemp.role = artists[i].artistRole.toLowerCase();
+        artistTemp.info = artists[i].artistInfo.replaceAll('???', '"').replaceAll('@@@', '\n');    
     arrayTemp = artists[i].artistArray.split(',');
     for (let j = 0; j < arrayTemp.length; j++){
         artistTemp.infoArray.push(arrayTemp[j]);
