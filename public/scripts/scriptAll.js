@@ -262,8 +262,10 @@ function delete_cookie(name) {
 
 function openForm() {
     document.getElementById("LogInPopUp").style.display = "block";
+    divLogIn.style.display = 'none';
 }
 
 function closeForm() {
     document.getElementById("LogInPopUp").style.display = "none";
+    divLogIn.style.display = 'inline-flex';
 }

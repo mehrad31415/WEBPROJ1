@@ -1,7 +1,5 @@
 11 - Additional movies should be retrieved from the server using AJAX.
 
-12 - An AU should be able to register and login.
-
 15 - When a RU makes a selection (chooses a movie), 
 this should be communicated to the server using AJAX,
 and a list of available dates/timeslots should be 
@@ -11,12 +9,6 @@ communicated back and displayed to the user.
 the unfinished order (orders) at all times and should
 be able to restore it if the user navigates away 
 from a selected movie mid-order and then returns to it.
-
-17 - A user profile page needs to be implemented. 
-This page should provide access to the user information 
-(name, email, login, password, address, credit card, order history). 
-When an AU registers, s/he has to fill-in this information 
-(naturally, except for the order history).
 
 Technical:
 
@@ -71,12 +63,6 @@ Process:
 
 1 - refactoring the code to model-view-controller style, MVC configuration.
 8 - all files and variables should have comments.
-13 - After logging in, a RU can buy a ticket to a movie.
-This procedure should include at least three steps: 
-selecting a movie, selecting a date/time, confirming the order.
-When the user confirms the order, the website should display 
-all chosen tickets and allow the user to make changes 
-(if necessary) and confirm the final selection.
 
 Done Tasks:
 
@@ -127,4 +113,16 @@ information and order history should be stored in a database.
 and at least 10 existing orders (overall, not per user)
 7 - we should support registered users (RU) and anonymous users (AU).
 8 - Until logging in an AU should be able to browse through all pages.
-but cannot buy a ticket. 
+but cannot buy a ticket.
+13 - After logging in, a RU can buy a ticket to a movie.
+This procedure should include at least three steps: 
+selecting a movie, selecting a date/time, confirming the order.
+When the user confirms the order, the website should display 
+all chosen tickets and allow the user to make changes 
+(if necessary) and confirm the final selection.
+12 - An AU should be able to register and login.
+17 - A user profile page needs to be implemented. 
+This page should provide access to the user information 
+(name, email, login, password, address, credit card, order history). 
+When an AU registers, s/he has to fill-in this information 
+(naturally, except for the order history).

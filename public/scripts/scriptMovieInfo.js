@@ -50,6 +50,7 @@ if (!checkLogIn){
     article.append(document.createTextNode('Purchase your tickets for ' + currentMovie.movieName + ' now:  '));
     for (let i = 0; i < schedule.length; i++){
         const purchaseBtn = document.createElement('button');
+        purchaseBtn.classList = "purchase-button";
         purchaseBtn.append(document.createTextNode(schedule[i].toLocaleString()));
         article.append(purchaseBtn);
         purchaseBtn.addEventListener("click", goToTickets.bind(null, currentMovie.movieID, schedule[i]));
