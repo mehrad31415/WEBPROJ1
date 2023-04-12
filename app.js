@@ -94,8 +94,6 @@ app.get('/tickets', async (req, res) =>{
     const schedule = await getScheduleDateTime(db,movieID);
     const orderAll = await getNrOfOrders(db);
     
-    let timeslots = await getScheduleAll(db);
-    res.cookie('schedule', JSON.stringify(timeslots).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
     let movies = await getAllMovies(db);
     res.cookie('movies', JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
 
@@ -133,6 +131,13 @@ app.get('/pur', (req, res) => {
     }
 
     res.redirect('/account');
+});
+app.get('/api/timeslots', async (req, res) => {
+    const MovieIDTemp = req.query.movieId;
+    
+    const schedule = await getScheduleDateTime(db,MovieIDTemp);
+    const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@');
+    res.json(JSON.parse(scheduleString));
 });
 
 // Login stuff

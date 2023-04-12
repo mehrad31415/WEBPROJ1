@@ -17,11 +17,11 @@ const movie = JSON.parse(ejsMovie);
 const date = ejsDate.split('-');
 const time = ejsTime.split('-');
 const dateTime = new Date(date[0], date[1]-1, date[2], time[0], time[1], time[2]);
-const stringSchedule = JSON.parse(ejsSchedule);
+const currentSchedule = JSON.parse(ejsSchedule);
 const newOrderID = JSON.parse(ejsOrderAll);
 const schedule = [];
-for (let i = 0; i < stringSchedule.length; i++){
-    schedule.push({movieID: stringSchedule[i].movie_id, date: new Date(stringSchedule[i].date.replace(' ', 'T'))});
+for (let i = 0; i < currentSchedule.length; i++){
+    schedule.push({movieID: currentSchedule[i].movie_id, date: new Date(currentSchedule[i].date.replace(' ', 'T'))});
 }
 const article = document.getElementsByClassName("article-block")[0];
 
@@ -101,34 +101,42 @@ for (i = 0; i < movies.length; i++) {
     movieNew.append(option);
 }
 
-//timeslot options
-//get schedule from cookies
-let scheduleAll = [];
-for (let i = 0; i < cookies.length; i++){
-    if (cookies[i].substring(0, 8) == "schedule") {
-        scheduleAll = JSON.parse(decodeURI(cookies[i].slice(9)).replaceAll('%3A', ':').replaceAll('%2C', ','));
-        delete_cookie('schedule');
-    }
-}
-
 
 //add timeslots to options
-getSchedule(movieNew.value)
+getSchedule(movieNew.value, addTimeslots)
 
 movieNew.onchange = function(){
-    getSchedule(movieNew.value)
+    getSchedule(movieNew.value, addTimeslots)
 };
 
-function getSchedule(currentMovie) {
+function getSchedule(currentMovie, callback) {
     while (dateTimeNew.firstChild) {
         dateTimeNew.removeChild(dateTimeNew.firstChild);
     }
 
-    let timeslots = [];
-    for (i = 0; i < scheduleAll.length; i++) {
-        if (scheduleAll[i].movie_id == currentMovie) timeslots.push(scheduleAll[i]);
-    }
+  // Get the selected movie ID
+  const movieId = currentMovie;
 
+  // Send an AJAX request to retrieve the available timeslots
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `/api/timeslots?movieId=${movieId}`, true);
+
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      const timeslots = JSON.parse(xhr.responseText);
+
+      if (arguments.length == 2) callback(timeslots);
+      else return timeslots;
+      console.log(timeslots);
+    } else {
+      console.error('Failed to retrieve timeslots');
+    }
+  };
+
+  xhr.send();
+}
+
+function addTimeslots(timeslots){
     for (i = 0; i < timeslots.length; i++) {
         const option =  document.createElement('option');
         const date = new Date(timeslots[i].date);
