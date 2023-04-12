@@ -1,10 +1,5 @@
 11 - Additional movies should be retrieved from the server using AJAX.
 
-15 - When a RU makes a selection (chooses a movie), 
-this should be communicated to the server using AJAX,
-and a list of available dates/timeslots should be 
-communicated back and displayed to the user.
-
 16 - The server should be aware of the current state of 
 the unfinished order (orders) at all times and should
 be able to restore it if the user navigates away 
@@ -126,3 +121,7 @@ This page should provide access to the user information
 (name, email, login, password, address, credit card, order history). 
 When an AU registers, s/he has to fill-in this information 
 (naturally, except for the order history).
+15 - When a RU makes a selection (chooses a movie), 
+this should be communicated to the server using AJAX,
+and a list of available dates/timeslots should be 
+communicated back and displayed to the user.

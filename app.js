@@ -132,13 +132,6 @@ app.get('/pur', (req, res) => {
 
     res.redirect('/account');
 });
-app.get('/api/timeslots', async (req, res) => {
-    const MovieIDTemp = req.query.movieId;
-    
-    const schedule = await getScheduleDateTime(db,MovieIDTemp);
-    const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@');
-    res.json(JSON.parse(scheduleString));
-});
 
 // Login stuff
 // http://localhost:3000/auth
@@ -228,6 +221,14 @@ app.get('/redirect', (req, res) =>{
     const url = req.query.url;
     res.status(301).redirect(url);
 });
+app.get('/api/timeslots', async (req, res) => {
+    const MovieIDTemp = req.query.movieId;
+    
+    const schedule = await getScheduleDateTime(db,MovieIDTemp);
+    const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'"); //.replaceAll('\\"', '???').replaceAll('\\n', '@@@');
+    res.json(JSON.parse(scheduleString));
+});
+
 app.all("*", (req,res) => {
     res.status(404).send("resource not found ... ");
 });
