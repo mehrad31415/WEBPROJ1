@@ -38,17 +38,11 @@ let movieID = null;
 //LINK EJS PAGES
 app.set('view engine', 'ejs');
 app.use(express.static("./public"));
-app.get(('/'), async (req, res) =>{
-    const movieAll = await getAllMovies(db);
-    res.render('index', {
-        ejsMovieAll: JSON.stringify(movieAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
-    })
+app.get(('/'), (req, res) =>{
+    res.render('index',)
 });
-app.get('/home', async (req, res) =>{
-    const movieAll = await getAllMovies(db);
-    res.render('index', {
-        ejsMovieAll: JSON.stringify(movieAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
-    })
+app.get('/home', (req, res) =>{
+    res.render('index',)
 });
 app.get('/adaptations-AM', (req, res) =>{
 res.render('adaptations-and-parodies')
@@ -228,6 +222,21 @@ app.get('/api/timeslots', async (req, res) => {
     const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'");
     res.json(JSON.parse(scheduleString));
 });
+app.get('/api/movies', async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const startIndex = (page - 1) * pageSize;
+    const movies = await getMoviesByAmmount(db, startIndex, pageSize);
+    const moviesString = JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???')
+  
+    res.json(JSON.parse(moviesString));
+
+    
+    // const movieAll = await getAllMovies(db);
+    // res.render('index', {
+    //     ejsMovieAll: JSON.stringify(movieAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
+    // })
+  });
 app.all("*", (req,res) => {
     res.status(404).send("resource not found ... ");
 });
@@ -288,6 +297,21 @@ async function getAllMovies(db) {
     return movieAll;
 }
 
+async function getMoviesByAmmount(db, start, size){
+    let movieAll = [];
+    movieAll = new Promise((resolve, reject) => {
+        let arr = [];
+        db.each("SELECT movie_id AS movieID, title AS movieName, year AS movieYear "
+        + "FROM Movie LIMIT ?, ?", [start, size], (err, row) => { 
+            arr.push(row);
+            if (err) reject(err);
+            resolve(arr);
+        });
+        
+    });
+    return movieAll;
+}
+
 async function getScheduleDateTime(db, id) {
     let schedule = [];
     try {schedule = new Promise((resolve, reject) => {
@@ -295,21 +319,6 @@ async function getScheduleDateTime(db, id) {
         db.each("SELECT * "
         + "FROM Schedule "
         + "WHERE movie_id= ?", id, (err, row) => { 
-            arr.push(row);
-            if (err) reject(err);
-            resolve(arr);
-        });
-        
-    })} catch (error) { console.log(error); return null;}
-    return schedule;
-}
-
-async function getScheduleAll(db) {
-    let schedule = [];
-    try {schedule = new Promise((resolve, reject) => {
-        let arr = [];
-        db.each("SELECT * "
-        + "FROM Schedule ", (err, row) => { 
             arr.push(row);
             if (err) reject(err);
             resolve(arr);
