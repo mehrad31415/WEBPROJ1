@@ -5,8 +5,7 @@
     clear: both;
     height: fit-content;
     min-height: 100vh;
-    width: fit-content;
-    max-width: 100vw;
+    width: 100vw;
 }
 
 .body--background-color {
