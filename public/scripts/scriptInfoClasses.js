@@ -25,7 +25,7 @@ class Movie {
         about.appendChild(strongLink);
         const link = document.createElement('a');
         link.setAttribute("class", "link--decoration");
-        link.setAttribute("href", "redirect?url=" + this.movieLink);
+        link.setAttribute("href", this.movieLink); //"redirect?url=" + 
         link.setAttribute("target", "_blank");
         strongLink.appendChild(link);
         link.append(document.createTextNode(this.movieName));

@@ -213,11 +213,11 @@ app.get('/sign', (req, res) => {
 });
 // END of login stuff
 
-
 app.get('/redirect', (req, res) => {
     const url = req.query.url;
     res.status(301).redirect(url);
 });
+
 app.get('/ajax/timeslots', async (req, res) => {
     const movieIDTemp = req.query.movieId;
 
@@ -225,6 +225,7 @@ app.get('/ajax/timeslots', async (req, res) => {
     const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'");
     res.json(JSON.parse(scheduleString));
 });
+
 app.get('/ajax/movies', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.pageSize) || 10;
@@ -404,8 +405,4 @@ async function getUserByID(id) {
             });
     });
     return movie;
-}
-
-
-// session the secret needs to be .env
-// /home render needs to be changed.
+};

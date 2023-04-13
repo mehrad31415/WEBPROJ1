@@ -106,9 +106,10 @@ for (i = 0; i < movies.length; i++) {
 //add timeslots to options
 getSchedule(movieNew.value)
 
-movieNew.onchange = function(){
-    getSchedule(movieNew.value)
-};
+movieNew.addEventListener('change', () => {
+    console.log("movie changed");
+    getSchedule(movieNew.value);
+});
 
 function getSchedule(currentMovie) {
     while (dateTimeNew.firstChild) {
@@ -120,7 +121,7 @@ function getSchedule(currentMovie) {
 
   // Send an AJAX request to retrieve the available timeslots
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `/api/timeslots?movieId=${movieId}`, true);
+  xhr.open('GET', `/ajax/timeslots?movieId=${movieId}`, true);
 
   xhr.onload = () => {
     if (xhr.status === 200) {
