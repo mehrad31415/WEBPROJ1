@@ -1,3 +1,10 @@
+// const ejsArtists = '<%- ejsArtists %>';
+// const ejsSchedule = '<%- ejsSchedule %>';
+// const ejsMovie = '<%- ejsMovie %>';
+// const ejsDate = '<%- ejsDate %>';
+// const ejsTime = '<%- ejsTime %>';
+// const ejsOrderAll = '<%- ejsOrderAll %>';
+
 const fs = require('node:fs');
 const express = require('express');
 const path = require('node:path');
