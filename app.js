@@ -213,14 +213,8 @@ app.get('/sign', (req, res) => {
 });
 // END of login stuff
 
-app.get('/redirect', (req, res) => {
-    const url = req.query.url;
-    res.status(301).redirect(url);
-});
-
 app.get('/ajax/timeslots', async (req, res) => {
     const movieIDTemp = req.query.movieId;
-
     const schedule = await getScheduleDateTime(movieIDTemp);
     const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'");
     res.json(JSON.parse(scheduleString));
@@ -232,7 +226,6 @@ app.get('/ajax/movies', async (req, res) => {
     const startIndex = (page - 1) * pageSize;
     const movies = await getMoviesByAmmount(startIndex, pageSize);
     const moviesString = JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???');
-
     res.json(JSON.parse(moviesString));
 });
 

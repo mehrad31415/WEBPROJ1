@@ -25,7 +25,7 @@ class Movie {
         about.appendChild(strongLink);
         const link = document.createElement('a');
         link.setAttribute("class", "link--decoration");
-        link.setAttribute("href", this.movieLink); //"redirect?url=" + 
+        link.setAttribute("href", this.movieLink);
         link.setAttribute("target", "_blank");
         strongLink.appendChild(link);
         link.append(document.createTextNode(this.movieName));
@@ -35,7 +35,7 @@ class Movie {
         about.appendChild(underlineLinkPoster);
         const posterLinkTemp = document.createElement('a');
         posterLinkTemp.setAttribute("class", "link--decoration");
-        posterLinkTemp.setAttribute("href", "redirect?url=" + this.posterLink);
+        posterLinkTemp.setAttribute("href", this.posterLink);
         posterLinkTemp.setAttribute("target", "_blank");
         underlineLinkPoster.appendChild(posterLinkTemp);
         posterLinkTemp.append(document.createTextNode(this.posterLink.split('.')[1]));
@@ -56,7 +56,7 @@ class Movie {
         about.appendChild(underlineLinkTrailer);
         const trailerLinkTemp = document.createElement('a');
         trailerLinkTemp.setAttribute("class", "link--decoration");
-        trailerLinkTemp.setAttribute("href", "redirect?url=" + this.trailerLink);
+        trailerLinkTemp.setAttribute("href", this.trailerLink);
         trailerLinkTemp.setAttribute("target", "_blank");
         underlineLinkTrailer.appendChild(trailerLinkTemp);
         trailerLinkTemp.append(document.createTextNode(this.trailerLink.split('.')[1]));
@@ -161,7 +161,7 @@ class Artists {
 
         let linkTempPic = document.createElement('a');
         linkTempPic.setAttribute("class", "link--decoration");
-        linkTempPic.setAttribute("href", "redirect?url=" + item.link);
+        linkTempPic.setAttribute("href", item.link);
         linkTempPic.setAttribute("target", "_blank");
         let image = document.createElement('img');
         image.setAttribute('src', item.picture);
@@ -175,7 +175,7 @@ class Artists {
         container.append(linkTempPic, strongTemp);
         let linkTemp = document.createElement('a');
         linkTemp.setAttribute("class", "link--decoration");
-        linkTemp.setAttribute("href", "redirect?url=" + item.link);
+        linkTemp.setAttribute("href", item.link);
         linkTemp.setAttribute("target", "_blank");
         strongTemp.appendChild(linkTemp);
         let imageBreak = document.createElement('br');
