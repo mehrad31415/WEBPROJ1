@@ -18,7 +18,7 @@ const date = ejsDate.split('-');
 const time = ejsTime.split('-');
 const dateTime = new Date(date[0], date[1]-1, date[2], time[0], time[1], time[2]);
 const currentSchedule = JSON.parse(ejsSchedule);
-const newOrderID = JSON.parse(ejsOrderAll);
+let newOrderID = JSON.parse(ejsOrderAll);
 const schedule = [];
 for (let i = 0; i < currentSchedule.length; i++){
     schedule.push({movieID: currentSchedule[i].movie_id, date: new Date(currentSchedule[i].date.replace(' ', 'T'))});
@@ -61,6 +61,7 @@ if (!checkSchedule){
             if (ammount.value < 1) ammount.value = 1;
             ticketsSel.append(document.createTextNode(ammount.value));
             ticketsNew.value = ammount.value;
+            changeOrderCookie();
         });
         
         const btnPur = document.createElement("button");
@@ -79,8 +80,8 @@ if (!checkSchedule){
 movieSel.append(document.createTextNode(movie.movieName));
 dateTimeSel.append(document.createTextNode(dateTime.toLocaleString()));
 ticketsNew.addEventListener('change', function () {
-    if (ticketsnew.value > 9) ticketsnew.value = 9;
-    if (ticketsnew.value < 1) ticketsnew.value = 1;
+    if (ticketsNew.value > 9) ticketsNew.value = 9;
+    if (ticketsNew.value < 1) ticketsNew.value = 1;
 });
 //movie options
 //get movies from cookies
@@ -109,7 +110,7 @@ movieNew.onchange = function(){
     getSchedule(movieNew.value)
 };
 
-function getSchedule(currentMovie, callback) {
+function getSchedule(currentMovie) {
     while (dateTimeNew.firstChild) {
         dateTimeNew.removeChild(dateTimeNew.firstChild);
     }
@@ -166,3 +167,39 @@ btnConfirm.addEventListener("click", function () {
 btnCancel.addEventListener("click", function () {
     summaryForm.style.display = "none";
 });
+
+//check for unfinished order
+if (newOrder != null) {
+    newOrderID = newOrder.order_id;
+    movieNew.value = newOrder.movie_id; 
+    dateTimeNew.value = newOrder.date;
+    ticketsNew.value = newOrder.ammount;
+    summaryForm.style.display = "block";
+} else {
+    newOrder = {
+        order_id: newOrderID,
+        user_id: userID,
+        movie_id: movieNew.value, 
+        date: dateTime.toISOString(),
+        ammount: 2
+    }
+    document.cookie = 'newOrder=' + JSON.stringify(newOrder) + '; path=/';
+}
+
+
+
+movieNew.onchange = function (){changeOrderCookie()};
+dateTimeNew.onchange = function (){changeOrderCookie()};
+ticketsNew.onchange = function (){changeOrderCookie()};
+
+function changeOrderCookie() {
+    delete_cookie(newOrder);
+    newOrder = {
+        order_id: newOrderID,
+        user_id: userID,
+        movie_id: movieNew.value, 
+        date: dateTimeNew.value,
+        ammount: ticketsNew.value
+    }
+    document.cookie = 'newOrder=' + JSON.stringify(newOrder) + '; path=/';
+}

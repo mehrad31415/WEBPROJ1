@@ -62,4 +62,3 @@ if (orders) {
     p.append(document.createTextNode('No orders to be displayed.'));
     userOrders.append(p);
 }
-

@@ -2,14 +2,24 @@
 
 const cookies = document.cookie.split('; ');
 let userID = null;
+let newOrder = null;
 for (let i = 0; i < cookies.length; i++){
-    if (cookies[i].substring(0, 6) == "userID") {
+    if (cookies[i].substring(0, 7) == "userID=") {
         userIDTemp = cookies[i].replace('userID=', '');
         if (userIDTemp != 'undefined') {
             userID = JSON.parse(userIDTemp.replace('j%3A', ''));
         }
     }
+    if (cookies[i].substring(0, 9) == "newOrder=") {
+        newOrderTemp = cookies[i].replace('newOrder=', '');
+        if (newOrderTemp != 'undefined') {
+            newOrder = JSON.parse(newOrderTemp);
+        }
+    }
 }
+console.log('newOrder = ');
+console.log(newOrder);
+
 let checkLogIn = false;
 
 if (userID != null){
@@ -221,10 +231,28 @@ form.appendChild(closeButton);
 formPopup.appendChild(form);
 body.appendChild(formPopup);
 
-//LOGIN Header Buttons
+//LOGIN Bottom Buttons
 const divLogIn = document.createElement('div');
 divLogIn.classList = 'login-div';
 const btnLog = document.createElement('button');
+if (newOrder != null) {
+    const btnOrder = document.createElement('button');
+    btnOrder.type = 'button';
+    btnOrder.id = 'tickets-btn';
+    btnOrder.append(document.createTextNode('Unfinished Order'));
+    btnOrder.onclick = function(){
+    dayTime = new Date(newOrder.date);
+    console.log(newOrder);
+    // movieNew.value = newOrder.movie_id; 
+    // dateTimeNew.value = newOrder.date;
+    // ticketsNew.value = newOrder.ammount;
+    window.location =   'tickets' + 
+                        '?id=' + newOrder.movie_id +
+                        '&date=' + dayTime.getFullYear() + '-' + (dayTime.getMonth()+1) + '-' + dayTime.getDate() +
+                        '&time=' + dayTime.getHours() + '-' + dayTime.getMinutes() + '-' + dayTime.getSeconds();
+    };
+    divLogIn.append(btnOrder);
+}
 if (!checkLogIn){
     btnLog.type = 'button';
     btnLog.onclick = openForm;

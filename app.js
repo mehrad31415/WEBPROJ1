@@ -50,6 +50,9 @@ let movieID = null;
 app.get(('/'), (req, res) => {
     res.render('index');
 });
+app.get(('/home'), (req, res) => {
+    res.render('index');
+});
 app.get('/adaptations-AM', (req, res) => {
     res.render('adaptations-and-parodies');
 });
