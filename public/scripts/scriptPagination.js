@@ -10,14 +10,14 @@ function loadMovies() {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `/ajax/movies?page=${pageNumber}&pageSize=${pageSize}`);
   xhr.onload = function() {
-    if (xhr.status === 200) {
+    if (xhr.status === 200 && xhr.readyState == 4) {
       const movies = JSON.parse(xhr.responseText);
       renderMovies(movies);
       pageNumber++;
     }
   };
   xhr.send();
-}
+};
 
 function renderMovies(movies) {
   for (let i = 0; i < movies.length; i++) {
