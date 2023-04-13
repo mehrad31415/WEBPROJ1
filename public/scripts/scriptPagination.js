@@ -8,7 +8,7 @@ loadMovies();
 
 function loadMovies() {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `/api/movies?page=${pageNumber}&pageSize=${pageSize}`);
+  xhr.open('GET', `/ajax/movies?page=${pageNumber}&pageSize=${pageSize}`);
   xhr.onload = function() {
     if (xhr.status === 200) {
       const movies = JSON.parse(xhr.responseText);
