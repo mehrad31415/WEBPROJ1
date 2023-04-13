@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
-const path = require('node:path');
-const fs = require('node:fs');
+const path    = require('node:path');
+const fs      = require('node:fs');
 
 // movies
 const angryMen = require('./tables/movies/12AngryMen');
@@ -78,6 +78,7 @@ const schedule31 = require('./tables/schedule/schedule31');
 const schedule32 = require('./tables/schedule/schedule32');
 const schedule33 = require('./tables/schedule/schedule33');
 const schedule34 = require('./tables/schedule/schedule34');
+
 // artists
 const artist1 = require('./tables/artists/unforgiven/actor');
 const artist2 = require('./tables/artists/unforgiven/writer');
@@ -139,6 +140,7 @@ const artist57 = require('./tables/artists/angryMen/actors/josephSweeney.js');
 const artist58 = require('./tables/artists/angryMen/actors/martinBalsam.js');
 const artist59 = require('./tables/artists/angryMen/actors/robertWebber.js');
 const artist60 = require('./tables/artists/angryMen/actors/rudyBond.js');
+
 // roles
 const roles = [];
 for (let i = 1; i <= 72; i++) {
@@ -2158,7 +2160,7 @@ db.close((err) => {
 
 // the below tables were part of our initial schema where we divided the artist table into three tables
 // but we did not have a role table. This way our schema was still not in 3nf. So we added a role table
-// and got rid of these tables. I have pu them at the end just for reference.
+// and got rid of these tables. I have put them at the end just for reference.
 // // actor table
 // db.run(`CREATE TABLE IF NOT EXISTS actor (
 //     artist_id   INTEGER       NOT NULL ,

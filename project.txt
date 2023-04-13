@@ -54,6 +54,10 @@ use indentation when writing your JavaScript code
 use meaningful comments
 terminate JavaScript statements with a ";"
 
+PROBLEMS:
+
+304 statusCodes
+
 Process:
 
 1 - refactoring the code to model-view-controller style, MVC configuration.
@@ -62,26 +66,12 @@ Process:
 Done Tasks:
 
 1 - gitignore added + package.json fixed.
+
 9 - Use a logger recording all HTTP requests to your website.
+
 2 - creating the model which will be the database based
 on functional dependencies ...
-3 - The list of movies should be retrieved from the database, 
-not hardcoded into the HTML source of the page.
-2 - starting page is the schedule of the movies that the theatre 
-is currently showing
-6 - The information describing the movies should be retrieved 
-from the database as well.
-10 - In order to browse through the entire list, pagination
-should be implemented.
-5 - The movie description pages should be generated the same way
-the info.html was generated.
-that is we need to write it in the javascript.
-(not document.write(), not .innerHTML).
-such elements as <nav>,< header>, <footer> and <aside> 
-can still be a part of the file info.html, 
-but all the actual content of the page has to be 
-produced by JavaScript on the fly when the page is loaded.
-9 - The list of movies should display up to 10 movies at once.
+
 7 - SQLITE:
 movies, users, orders, should be stored in an SQLite database 
 and accessed with the Node.JS using sqlite3 module. 
@@ -96,31 +86,65 @@ stars - array of Actors
 (you do not have to specify the entire cast), 
 poster (link to an image), trailer (link to a video), 
 plot (String).
+
+3 - The list of movies should be retrieved from the database, 
+not hardcoded into the HTML source of the page.
+
+2 - starting page is the schedule of the movies that the theatre 
+is currently showing
+
+6 - The information describing the movies should be retrieved 
+from the database as well.
+
+10 - In order to browse through the entire list, pagination
+should be implemented.
+
+5 - The movie description pages should be generated the same way
+the info.html was generated.
+that is we need to write it in the javascript.
+(not document.write(), not .innerHTML).
+such elements as <nav>,< header>, <footer> and <aside> 
+can still be a part of the file info.html, 
+but all the actual content of the page has to be 
+produced by JavaScript on the fly when the page is loaded.
+
+9 - The list of movies should display up to 10 movies at once.
+
 1 - website of a movie theatre that can sell tickets.
+
 14 - Once the purchase is finished, the website should 
 acknowledge it, and add the order to this RU's order history.
 RUs should be able to browse through their order history.
+
 18 - The list of available movies, dates and times when 
 they are available, movie descriptions, users and their 
 information and order history should be stored in a database.
+
 2 - creating the folders and inserting data.
+
 12 - add at least 20 movies, create at least 5 registered users, 
 and at least 10 existing orders (overall, not per user)
+
 7 - we should support registered users (RU) and anonymous users (AU).
+
 8 - Until logging in an AU should be able to browse through all pages.
 but cannot buy a ticket.
+
 13 - After logging in, a RU can buy a ticket to a movie.
 This procedure should include at least three steps: 
 selecting a movie, selecting a date/time, confirming the order.
 When the user confirms the order, the website should display 
 all chosen tickets and allow the user to make changes 
 (if necessary) and confirm the final selection.
+
 12 - An AU should be able to register and login.
+
 17 - A user profile page needs to be implemented. 
 This page should provide access to the user information 
 (name, email, login, password, address, credit card, order history). 
 When an AU registers, s/he has to fill-in this information 
 (naturally, except for the order history).
+
 15 - When a RU makes a selection (chooses a movie), 
 this should be communicated to the server using AJAX,
 and a list of available dates/timeslots should be 

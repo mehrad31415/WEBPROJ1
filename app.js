@@ -1,93 +1,99 @@
-#!/usr/bin nodejs
-const http      = require('node:http');
-const fs        = require('node:fs');
-const express   = require ('express');
-const app       = express();
-const url       = require('url');
-const { json } = require('body-parser');
-const file      = "models/database/movie.db"; 
-const exists    = fs.existsSync(file);
+const fs = require('node:fs');
+const express = require('express');
+const path = require('node:path');
+const file = "models/database/movie.db";
+const exists = fs.existsSync(file);
+const app = express();
 
-if(!exists) {
-    fs.openSync(file, "w"); 
-}
-const sqlite3   = require("sqlite3").verbose(); 
-const db        = new sqlite3.Database(file);
-// logger added
+// if database does not exist, create new one with write option.
+if (!exists) {
+    fs.openSync(file, "w");
+};
+
+// connection to the database.
+const sqlite3 = require("sqlite3").verbose();
+const db = new sqlite3.Database(file);
+
+// logger added. first middleware is a logger.
 const morgan = require('morgan');
 app.use(morgan('dev'));
 
 // body-parser
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }))
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
 
+// according to https://www.npmjs.com/package/express-session the cookie parser does not need to be installed from 1.5.0 of express-session.
 //cookieparser
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+// const cookieParser = require('cookie-parser');
+// app.use(cookieParser());
 
-// session
-const session = require('express-session')
+// session. second middleware are the session and presentation.
+const session = require('express-session');
 app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
 }));
 
-let movieID = null;
+// static files (presentation).
+app.use(express.static(path.join(__dirname, 'public'), {
+    etag: false
+}));
 
-//LINK EJS PAGES
+// LINK EJS PAGES. The template engine we used is EJS.
+// the views are in the views folder. Using EJS it automatically searches for a views folder.
+// However it is safe to include the following line.
+app.set("views", path.resolve(__dirname, "./views"));
 app.set('view engine', 'ejs');
-app.use(express.static("./public"));
-app.get(('/'), (req, res) =>{
-    res.render('index',)
+
+let movieID = null;
+app.get(('/'), (req, res) => {
+    res.render('index');
 });
-app.get('/home', (req, res) =>{
-    res.render('index',)
+app.get('/adaptations-AM', (req, res) => {
+    res.render('adaptations-and-parodies');
 });
-app.get('/adaptations-AM', (req, res) =>{
-res.render('adaptations-and-parodies')
+app.get('/plot-AM', (req, res) => {
+    res.render('angry-men-home');
 });
-app.get('/plot-AM', (req, res) =>{
-    res.render('angry-men-home')
+app.get('/awards-AM', (req, res) => {
+    res.render('awards');
 });
-app.get('/awards-AM', (req, res) =>{
-    res.render('awards')
-});
-app.get('/cast-AM', async (req, res) =>{
-    const artists = await getArtistsByID(db,0);
+app.get('/cast-AM', async (req, res) => {
+    const artists = await getArtistsByID(db, 0);
     res.render('cast-members', {
         ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[1\]|\[2\]|\[3\]|\[4\]|\[5\]|\[6\]|\[7\]|\[8\]|\[9\]/g, '')
-    })
+    });
 });
-app.get('/contact', (req, res) =>{
-res.render('contact')
+app.get('/contact', (req, res) => {
+    res.render('contact');
 });
-app.get('/reviews-AM', (req, res) =>{
-    res.render('reviews')
+app.get('/reviews-AM', (req, res) => {
+    res.render('reviews');
 });
-app.get('/transcripts-AM', (req, res) =>{
-    res.render('transcripts')
+app.get('/transcripts-AM', (req, res) => {
+    res.render('transcripts');
 });
 app.get('/info', async (req, res) => {
     movieID = req.query.id;
     const movie = await getMovieByID(db, movieID);
-    const artists = await getArtistsByID(db,movieID);
-    const schedule = await getScheduleDateTime(db,movieID);
+    const artists = await getArtistsByID(db, movieID);
+    const schedule = await getScheduleDateTime(db, movieID);
     res.render('info', {
         ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
         ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[1\]|\[2\]|\[3\]|\[4\]|\[5\]|\[6\]|\[7\]|\[8\]|\[9\]/g, ''),
         ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@')
     });
 });
-app.get('/tickets', async (req, res) =>{
+app.get('/tickets', async (req, res) => {
     movieID = req.query.id;
     const date = req.query.date;
     const time = req.query.time;
-    
+
     const movie = await getMovieByID(db, movieID);
-    const schedule = await getScheduleDateTime(db,movieID);
+    const schedule = await getScheduleDateTime(db, movieID);
     const orderAll = await getNrOfOrders(db);
-    
+
     let movies = await getAllMovies(db);
     res.cookie('movies', JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
 
@@ -102,23 +108,23 @@ app.get('/tickets', async (req, res) =>{
 
 // Login stuff
 app.route('/account')
-.get(async (req, res) =>{
-    let userID = null;
-    if (req.session.userID) userID = JSON.parse(req.session.userID);
-    res.cookie('userID', userID, { httpOnly: false });
-    const user = await getUserByID(db, userID);
-    const nrOrders = await getNrOfOrdersByUser(db, userID);
-    if (userID != null){
-        let orders = null;
-        if (nrOrders > 0) orders = await getOrdersByUser(db, userID);
-        res.cookie('orders', JSON.stringify(orders).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
-        res.cookie('user', JSON.stringify(user).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
-    }
-    res.render('account');
-})
+    .get(async (req, res) => {
+        let userID = null;
+        if (req.session.userID) userID = JSON.parse(req.session.userID);
+        res.cookie('userID', userID, { httpOnly: false });
+        const user = await getUserByID(db, userID);
+        const nrOrders = await getNrOfOrdersByUser(db, userID);
+        if (userID != null) {
+            let orders = null;
+            if (nrOrders > 0) orders = await getOrdersByUser(db, userID);
+            res.cookie('orders', JSON.stringify(orders).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
+            res.cookie('user', JSON.stringify(user).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
+        }
+        res.render('account');
+    })
 app.get('/pur', (req, res) => {
     // console.log('routed to /pur')
-    if (req.cookies.newOrder){
+    if (req.cookies.newOrder) {
         order = JSON.parse(req.cookies.newOrder);
         db.run('INSERT INTO Ordering (order_id, user_id, movie_id, date, num_of_tickets) VALUES(?, ?, ?, ?, ?)', [order.order_id, order.user_id, order.movie_id, order.date, order.ammount]);
         res.clearCookie("newOrder");
@@ -136,11 +142,11 @@ app.post('/auth', async (req, res) => {
             // Capture the input fields
             let login = req.body.login;
             let password = req.body.password;
-    
+
             // Ensure the input fields exists and are not empty
             if (login && password) {
                 let query = "SELECT * FROM user WHERE login = ? AND password = ?";
-    
+
                 // Query the database
                 db.get(query, [login, password], (err, rows) => {
                     if (err) {
@@ -166,12 +172,12 @@ app.post('/auth', async (req, res) => {
         case 'out':
             // Destroy the session
             req.session.destroy((err) => {
-              if (err) {
-                throw err;
-              }
-              res.clearCookie("userID");
-              // Redirect to the home page
-              res.redirect('/home');
+                if (err) {
+                    throw err;
+                }
+                res.clearCookie("userID");
+                // Redirect to the home page
+                res.redirect('/home');
             });
             break;
         case 'sign':
@@ -184,8 +190,8 @@ app.post('/auth', async (req, res) => {
             const signCredit = req.body.creditcard;
             const signDate = new Date();
             db.run('INSERT INTO user '
-            + '(user_id, username, email, login, password, address, credit_card, registered_date) '
-            + 'VALUES(?, ?, ?, ?, ?, ?, ?, ?)', [
+                + '(user_id, username, email, login, password, address, credit_card, registered_date) '
+                + 'VALUES(?, ?, ?, ?, ?, ?, ?, ?)', [
                 signUserID,
                 signUsername,
                 signEmail,
@@ -205,20 +211,20 @@ app.post('/auth', async (req, res) => {
             res.redirect('/home');
     }
 });
-app.get('/sign', (req, res) =>{
+app.get('/sign', (req, res) => {
     res.render('sign In')
 });
 // END of login stuff
 
 
-app.get('/redirect', (req, res) =>{
+app.get('/redirect', (req, res) => {
     const url = req.query.url;
     res.status(301).redirect(url);
 });
 app.get('/api/timeslots', async (req, res) => {
     const MovieIDTemp = req.query.movieId;
-    
-    const schedule = await getScheduleDateTime(db,MovieIDTemp);
+
+    const schedule = await getScheduleDateTime(db, MovieIDTemp);
     const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'");
     res.json(JSON.parse(scheduleString));
 });
@@ -228,29 +234,31 @@ app.get('/api/movies', async (req, res) => {
     const startIndex = (page - 1) * pageSize;
     const movies = await getMoviesByAmmount(db, startIndex, pageSize);
     const moviesString = JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???')
-  
+
     res.json(JSON.parse(moviesString));
 
-    
+
     // const movieAll = await getAllMovies(db);
     // res.render('index', {
     //     ejsMovieAll: JSON.stringify(movieAll).replace(/'/g, "\\'").replaceAll('\\"', '???')
     // })
-  });
-app.all("*", (req,res) => {
+});
+
+app.all("*", (req, res) => {
     res.status(404).send("resource not found ... ");
 });
-app.listen(PORT=5500, HOSTNAME='127.0.0.1', (req, res) => {
+
+app.listen(PORT = 5500, HOSTNAME = '127.0.0.1', (req, res) => {
     console.log(`server is running on port ${PORT}...`);
 });
 
 async function getMovieByID(db, id) {
-    const movie =  new Promise((resolve, reject) => {
+    const movie = new Promise((resolve, reject) => {
         db.get("SELECT movie_id AS movieID, title AS movieName, year AS movieYear, genre AS movieGenre, link AS movieLink, poster AS posterLink, trailer AS trailerLink, about AS movieAbout, plot AS moviePlot "
-        + "FROM Movie WHERE MovieID= ?", id, (err, row) => {
-            if (err) reject(err);
-            resolve(row);
-        });
+            + "FROM Movie WHERE MovieID= ?", id, (err, row) => {
+                if (err) reject(err);
+                resolve(row);
+            });
     });
     return movie;
 }
@@ -261,23 +269,23 @@ async function getArtistsByID(db, id) {
         let arr = [];
         db.each(
             "SELECT Artist.artist_id AS artistID, "
-          + "movie_id AS artistMovie, "
-          + "role AS artistRole, "
-          + "name AS artistName, "
-          + "birth AS artistYearBirth, "
-          + "death AS artistYearDeath, "
-          + "link AS artistLink, "
-          + "information AS artistArray, "
-          + "about AS artistInfo "
-          + "FROM Artist "
-          + "JOIN Role "
-          + "ON Artist.artist_id = Role.artist_id "
-          + "WHERE artistMovie= ?"
+            + "movie_id AS artistMovie, "
+            + "role AS artistRole, "
+            + "name AS artistName, "
+            + "birth AS artistYearBirth, "
+            + "death AS artistYearDeath, "
+            + "link AS artistLink, "
+            + "information AS artistArray, "
+            + "about AS artistInfo "
+            + "FROM Artist "
+            + "JOIN Role "
+            + "ON Artist.artist_id = Role.artist_id "
+            + "WHERE artistMovie= ?"
             , id, (err, row) => {
-            arr.push(row);
-            if (err) reject(err);
-            resolve(arr);
-        });
+                arr.push(row);
+                if (err) reject(err);
+                resolve(arr);
+            });
     });
     return artists;
 }
@@ -287,44 +295,46 @@ async function getAllMovies(db) {
     movieAll = new Promise((resolve, reject) => {
         let arr = [];
         db.each("SELECT movie_id AS movieID, title AS movieName, year AS movieYear "
-        + "FROM Movie", (err, row) => { 
-            arr.push(row);
-            if (err) reject(err);
-            resolve(arr);
-        });
-        
+            + "FROM Movie", (err, row) => {
+                arr.push(row);
+                if (err) reject(err);
+                resolve(arr);
+            });
+
     });
     return movieAll;
 }
 
-async function getMoviesByAmmount(db, start, size){
+async function getMoviesByAmmount(db, start, size) {
     let movieAll = [];
     movieAll = new Promise((resolve, reject) => {
         let arr = [];
         db.each("SELECT movie_id AS movieID, title AS movieName, year AS movieYear "
-        + "FROM Movie LIMIT ?, ?", [start, size], (err, row) => { 
-            arr.push(row);
-            if (err) reject(err);
-            resolve(arr);
-        });
-        
+            + "FROM Movie LIMIT ?, ?", [start, size], (err, row) => {
+                arr.push(row);
+                if (err) reject(err);
+                resolve(arr);
+            });
+
     });
     return movieAll;
 }
 
 async function getScheduleDateTime(db, id) {
     let schedule = [];
-    try {schedule = new Promise((resolve, reject) => {
-        let arr = [];
-        db.each("SELECT * "
-        + "FROM Schedule "
-        + "WHERE movie_id= ?", id, (err, row) => { 
-            arr.push(row);
-            if (err) reject(err);
-            resolve(arr);
-        });
-        
-    })} catch (error) { console.log(error); return null;}
+    try {
+        schedule = new Promise((resolve, reject) => {
+            let arr = [];
+            db.each("SELECT * "
+                + "FROM Schedule "
+                + "WHERE movie_id= ?", id, (err, row) => {
+                    arr.push(row);
+                    if (err) reject(err);
+                    resolve(arr);
+                });
+
+        })
+    } catch (error) { console.log(error); return null; }
     return schedule;
 }
 
@@ -333,12 +343,12 @@ async function getNrOfOrders(db) {
     orderAll = new Promise((resolve, reject) => {
         let nr;
         db.each("SELECT COUNT(order_id) AS count "
-        + "FROM Ordering", (err, row) => { 
-            nr = row;
-            if (err) reject(err);
-            resolve(nr.count);
-        });
-        
+            + "FROM Ordering", (err, row) => {
+                nr = row;
+                if (err) reject(err);
+                resolve(nr.count);
+            });
+
     });
     return orderAll;
 }
@@ -347,12 +357,12 @@ async function getNrOfOrdersByUser(db, id) {
     orderCount = new Promise((resolve, reject) => {
         let nr;
         db.each("SELECT COUNT(order_id) AS count "
-        + "FROM ordering WHERE user_id = ?", id, (err, row) => { 
-            nr = row;
-            if (err) reject(err);
-            resolve(nr.count);
-        });
-        
+            + "FROM ordering WHERE user_id = ?", id, (err, row) => {
+                nr = row;
+                if (err) reject(err);
+                resolve(nr.count);
+            });
+
     });
     return orderCount;
 }
@@ -361,12 +371,12 @@ async function getNrOfUsers(db) {
     userAll = new Promise((resolve, reject) => {
         let nr;
         db.each("SELECT COUNT(user_id) AS count "
-        + "FROM user", (err, row) => { 
-            nr = row;
-            if (err) reject(err);
-            resolve(nr.count);
-        });
-        
+            + "FROM user", (err, row) => {
+                nr = row;
+                if (err) reject(err);
+                resolve(nr.count);
+            });
+
     });
     return userAll;
 }
@@ -376,31 +386,31 @@ async function getOrdersByUser(db, id) {
     userOrders = new Promise((resolve, reject) => {
         let arr = [];
         db.each("SELECT date, num_of_tickets, title "
-        + "FROM ("
-        + "Ordering JOIN Movie "
-        + "ON Ordering.movie_id = Movie.movie_id) "
-        + "WHERE user_id = ?", id, (err, row) => { 
-            if(row){
-                arr.push(row);
-            } else {
-                arr = null;
-            }
-            if (err) reject(err);
-            resolve(arr);            
-        });
-        
+            + "FROM ("
+            + "Ordering JOIN Movie "
+            + "ON Ordering.movie_id = Movie.movie_id) "
+            + "WHERE user_id = ?", id, (err, row) => {
+                if (row) {
+                    arr.push(row);
+                } else {
+                    arr = null;
+                }
+                if (err) reject(err);
+                resolve(arr);
+            });
+
     });
     return userOrders;
 }
 
 async function getUserByID(db, id) {
-    const movie =  new Promise((resolve, reject) => {
-        
+    const movie = new Promise((resolve, reject) => {
+
         db.get("SELECT * "
-        + "FROM User WHERE user_id= ?", id, (err, row) => {
-            if (err) reject(err);
-            resolve(row);
-        });
+            + "FROM User WHERE user_id= ?", id, (err, row) => {
+                if (err) reject(err);
+                resolve(row);
+            });
     });
     return movie;
 }
