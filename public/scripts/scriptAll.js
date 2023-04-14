@@ -124,7 +124,7 @@ header.append(imgLink, h1);
     contList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
     const contLink = document.createElement('a');
     contLink.setAttribute('class', 'link');
-    contLink.setAttribute('href', 'contact');
+    contLink.setAttribute('href', './contact');
     contList.append(contLink);
     contLink.append(document.createTextNode('Contact'));
 
@@ -140,7 +140,7 @@ header.append(imgLink, h1);
     parFooter.append(document.createTextNode('Should you have any enquiries please '));
     const contact = document.createElement('a');
     contact.setAttribute('class', 'footer__contact-link--no-colour-change');
-    contact.setAttribute('href', 'contact.html');
+    contact.setAttribute('href', './contact');
     contact.append(document.createTextNode('contact us'));
     parFooter.append(contact, document.createTextNode('.'));
     const spanFooter = document.createElement('span');

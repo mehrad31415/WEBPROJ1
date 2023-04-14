@@ -30,7 +30,7 @@ function renderMovies(movies) {
     paginatedList.appendChild(itemPag);
     let location;
     if (movies[i].movieID === 0) {
-      location = 'plot-AM';
+      location = './angry-men';
     } else {
       location = `info?id=${movies[i].movieID}`;
     }

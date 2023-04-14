@@ -47,7 +47,7 @@ class Movie {
             about.appendChild(underlineLinkHomePage);
             const homePageLinkTemp = document.createElement('a');
             homePageLinkTemp.setAttribute("class", "link--decoration");
-            homePageLinkTemp.setAttribute("href", 'plot-AM');
+            homePageLinkTemp.setAttribute("href", './angry-men');
             underlineLinkHomePage.appendChild(homePageLinkTemp);
             homePageLinkTemp.append(document.createTextNode('home page'));
             about.append(document.createTextNode(' of this website or on '));

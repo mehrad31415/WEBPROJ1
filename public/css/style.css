@@ -386,6 +386,12 @@
     display: block;
 }
 
+.resource-not-found {
+    text-align: center;
+    margin: 0 auto;
+    word-wrap: break-word;
+}
+
 /* PAGINATION */
 
 .pagination-list{

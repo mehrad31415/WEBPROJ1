@@ -47,7 +47,7 @@ if (!checkSchedule){
         const strongLink = document.createElement('STRONG');
         const link = document.createElement('a');
         link.setAttribute("class", "link--decoration");
-        link.setAttribute("href", "contact");
+        link.setAttribute("href", "./contact");
         link.setAttribute("target", "_blank");
         strongLink.appendChild(link);
         link.append(document.createTextNode('contact us'));
