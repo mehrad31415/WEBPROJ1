@@ -1,8 +1,3 @@
-16 - The server should be aware of the current state of 
-the unfinished order (orders) at all times and should
-be able to restore it if the user navigates away 
-from a selected movie mid-order and then returns to it.
-
 Technical:
 
 1 - css and html validators for proof checking.
@@ -17,10 +12,6 @@ It should be possible for several users to be logged-in at the
 same time. You do not have to use persistent sessions 
 (i.e. an unfinished order can "die" once a user logs-out), 
 but you're welcome to do so.
-
-5 - use AJAX/Fetch At least two mandatory places for it are: 
-displaying a large list of movies for all users and 
-processing a RU's order in progress.
 
 6 - JSON to exchange information
 
@@ -149,3 +140,12 @@ and a list of available dates/timeslots should be
 communicated back and displayed to the user.
 
 11 - Additional movies should be retrieved from the server using AJAX.
+
+16 - The server should be aware of the current state of 
+the unfinished order (orders) at all times and should
+be able to restore it if the user navigates away 
+from a selected movie mid-order and then returns to it.
+
+5 - use AJAX/Fetch At least two mandatory places for it are: 
+displaying a large list of movies for all users and 
+processing a RU's order in progress.
