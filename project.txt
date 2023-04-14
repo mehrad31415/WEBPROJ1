@@ -1,5 +1,3 @@
-11 - Additional movies should be retrieved from the server using AJAX.
-
 16 - The server should be aware of the current state of 
 the unfinished order (orders) at all times and should
 be able to restore it if the user navigates away 
@@ -149,3 +147,5 @@ When an AU registers, s/he has to fill-in this information
 this should be communicated to the server using AJAX,
 and a list of available dates/timeslots should be 
 communicated back and displayed to the user.
+
+11 - Additional movies should be retrieved from the server using AJAX.
