@@ -21,6 +21,9 @@ http://webtech.science.uu.nl/group15
 
 # brief explanation of our web-site
 
+We made a website for a movie theater. You can find different kind of movies and buy tickets when you are logged in. 
+
+# Structure of the application : 
 
 
 

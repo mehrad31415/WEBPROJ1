@@ -17,8 +17,8 @@ app.use(express.urlencoded({ extended: false }));
 
 // according to https://www.npmjs.com/package/express-session the cookie parser does not need to be installed from 1.5.0 of express-session.
 // cookieparser
-// const cookieParser = require('cookie-parser');
-// app.use(cookieParser());
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 // session. second middleware are the session and presentation.
 const session = require('express-session');
@@ -76,8 +76,10 @@ app.get('/tickets', async (req, res) => {
     const movieID = req.query.id;
     const date = req.query.date;
     const time = req.query.time;
+    let amount = null;
+    if (req.query.amount) amount = req.query.amount;
     const movie = await getMovieByID(movieID);
-    const schedule = await getSchedule(movieID);
+    const schedule = await getScheduleDateTime(movieID);
     const orderAll = await getNrOfOrders();
 
     let movies = await getAllMovies();
@@ -87,9 +89,13 @@ app.get('/tickets', async (req, res) => {
         ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
         ejsDate: date,
         ejsTime: time,
+        ejsAmount: amount,
         ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
         ejsOrderAll: JSON.stringify(orderAll)
     });
+});
+app.get('/ordersUF', (req, res) => {
+    res.render('OrdersUF');
 });
 
 // Login stuff
@@ -108,12 +114,13 @@ app.get('/account', async (req, res) => {
     res.render('account');
 });
 app.get('/pur', (req, res) => {
-    // console.log('routed to /pur')
-    if (req.cookies.newOrder) {
+    console.log(req.cookies);
+    if (req.cookies.newOrder){
         order = JSON.parse(req.cookies.newOrder);
-        db.run('INSERT INTO Ordering (order_id, user_id, movie_id, date, num_of_tickets) VALUES(?, ?, ?, ?, ?)', [order.order_id, order.user_id, order.movie_id, order.date, order.ammount]);
+        db.run('INSERT INTO Ordering (order_id, user_id, movie_id, date, num_of_tickets) VALUES(?, ?, ?, ?, ?)', [order.order_id, order.user_id, order.movie_id, order.date, order.amount]);
         res.clearCookie("newOrder");
     }
+
     res.redirect('/account');
 });
 

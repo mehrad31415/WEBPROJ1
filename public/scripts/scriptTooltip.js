@@ -15,7 +15,7 @@ function tooltipshow(event) {
         if (nav2 == null) return false;
         return nav2.contains(event.target);
     }
-    if (!footer.contains(event.target) && !nav.contains(event.target) && !checkNav2() ) {
+    if (!footer.contains(event.target) && !nav.contains(event.target) && !header.contains(event.target) && !checkNav2() ) {
         body.insertBefore(container, body.firstChild);
 
         let nodesTemp = [];
@@ -23,7 +23,6 @@ function tooltipshow(event) {
         let yearBirthTemp = null;
         let yearDeathTemp = null;
         let urlTemp = event.target.closest('a').getAttribute("href");
-        if (urlTemp.slice(0, -(urlTemp.length-13)) == 'redirect?url=') urlTemp = urlTemp.substring(13);
         if (urlTemp.split('.')[1] == 'html') urlTemp = urlTemp.split("-")[0].split(".")[0].charAt(0).toUpperCase() + urlTemp.split("-")[0].split(".")[0].slice(1);
         if (urlTemp == 'Index') urlTemp = 'Home';
 
