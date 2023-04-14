@@ -12,7 +12,7 @@ class Movie {
         this.artistArray = [];
     }
 
-    addAllToPage() {
+    addAllToPage(id) {
         const article = document.getElementsByClassName("article-block")[0];
         const heading = document.createElement("h2");
         article.appendChild(heading);

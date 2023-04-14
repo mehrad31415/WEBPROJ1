@@ -46,6 +46,7 @@ terminate JavaScript statements with a ";"
 PROBLEMS:
 
 304 statusCodes
+Destroy unfinished order cookies on log out does not work (app.js line 158)
 
 Process:
 

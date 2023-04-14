@@ -64,17 +64,20 @@ app.get('/contact', (req, res) => {
     res.render('contact');
 });
 app.get('/info', async (req, res) => {
+    res.render('info');
+});
+app.get('/info-fetch', async (req, res) => {
     const movieID = req.query.id;
     const movie = await getMovieByID(movieID);
     const artists = await getArtistsByMovieID(movieID);
     const schedule = await getSchedule(movieID);
-    res.render('info', {
-        ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
-        ejsArtists: JSON.stringify(artists).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[1\]|\[2\]|\[3\]|\[4\]|\[5\]|\[6\]|\[7\]|\[8\]|\[9\]/g, ''),
-        ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@')
-    });
+    res.json({ movie, artists, schedule });
 });
 app.get('/tickets', async (req, res) => {
+    res.render('tickets');
+});
+app.get('/tickets-fetch', async (req, res) => {
+    const allMovies = await getAllMovies();
     const movieID = req.query.id;
     const date = req.query.date;
     const time = req.query.time;
@@ -83,18 +86,7 @@ app.get('/tickets', async (req, res) => {
     const movie = await getMovieByID(movieID);
     const schedule = await getScheduleDateTime(movieID);
     const orderAll = await getNrOfOrders();
-
-    let movies = await getAllMovies();
-    res.cookie('movies', JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???'), { httpOnly: false });
-
-    res.render('tickets', {
-        ejsMovie: JSON.stringify(movie).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@').replaceAll(/\[.*?\]/g, ''),
-        ejsDate: date,
-        ejsTime: time,
-        ejsAmount: amount,
-        ejsSchedule: JSON.stringify(schedule).replace(/'/g, "\\'").replaceAll('\\"', '???').replaceAll('\\n', '@@@'),
-        ejsOrderAll: JSON.stringify(orderAll)
-    });
+    res.json({ allMovies, movie, schedule, orderAll, date, time, amount});
 });
 app.get('/ordersUF', (req, res) => {
     res.render('OrdersUF');
@@ -163,6 +155,12 @@ app.post('/auth', async (req, res) => {
             }
             break;
         case 'out':
+            //Destroy all unfinished order cookies: DOES NOT WORK YET
+            Object.keys(req.cookies).forEach(function(cookieName) {
+                if (cookieName.startsWith('ordersUnf')) {
+                    res.clearCookie(cookieName);
+                }
+            });
             // Destroy the session
             req.session.destroy((err) => {
                 if (err) {
