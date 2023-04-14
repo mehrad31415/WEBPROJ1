@@ -39,6 +39,7 @@ app.set('view engine', 'ejs');
 
 // controllers
 const {
+    db,
     getMovieByID,
     getArtistsByMovieID,
     getAllMovies,
@@ -48,7 +49,8 @@ const {
     getNrOfOrdersByUser,
     getNrOfUsers,
     getOrdersByUser,
-    getUserByID
+    getUserByID,
+    getScheduleDateTime
 } = require('./controllers/queries');
 
 // routers

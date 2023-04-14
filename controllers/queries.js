@@ -210,8 +210,27 @@ const getUserByID = (id) => {
         return null;
     };
 };
+//get timeslots for movieID
+async function getScheduleDateTime(id) {
+    let schedule = [];
+    try {
+        schedule = new Promise((resolve, reject) => {
+            let arr = [];
+            db.each("SELECT * "
+                + "FROM Schedule "
+                + "WHERE movie_id= ?", id, (err, row) => {
+                    arr.push(row);
+                    if (err) reject(err);
+                    resolve(arr);
+                });
+
+        })
+    } catch (error) { console.log(error); return null; }
+    return schedule;
+};
 
 module.exports = {
+    db,
     getMovieByID,
     getArtistsByMovieID,
     getAllMovies,
@@ -221,5 +240,6 @@ module.exports = {
     getNrOfOrdersByUser,
     getNrOfUsers,
     getOrdersByUser,
-    getUserByID
+    getUserByID,
+    getScheduleDateTime
 };
