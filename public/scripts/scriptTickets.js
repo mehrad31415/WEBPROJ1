@@ -19,6 +19,7 @@ const time = ejsTime.split('-');
 const dateTime = new Date(date[0], date[1]-1, date[2], time[0], time[1], time[2]);
 const currentSchedule = JSON.parse(ejsSchedule);
 let newOrderID = JSON.parse(ejsOrderAll);
+let newOrder = null;
 const schedule = [];
 for (let i = 0; i < currentSchedule.length; i++){
     schedule.push({movieID: currentSchedule[i].movie_id, date: new Date(currentSchedule[i].date.replace(' ', 'T'))});
@@ -47,29 +48,32 @@ if (!checkSchedule){
         const strongLink = document.createElement('STRONG');
         const link = document.createElement('a');
         link.setAttribute("class", "link--decoration");
-        link.setAttribute("href", "./contact");
+        link.setAttribute("href", "contact");
         link.setAttribute("target", "_blank");
         strongLink.appendChild(link);
         link.append(document.createTextNode('contact us'));
-        par.append(document.createTextNode('You are about to purchase tickets for the movie \'' + movie.movieName + '\' for ' + dateTime.toLocaleString() + '. Are you certain this is what you want? You should be aware of our prices. The price for the selected movie at the selected timeslot is: €0,00. If this is in conflict with what you believe in, please '), strongLink, document.createTextNode('. If you do want to purchase these tickets for this price, enter the ammount of tickets you want and click the button below:'));
+        par.append(document.createTextNode('You are about to purchase tickets for the movie \'' + movie.movieName + '\' for ' + dateTime.toLocaleString() + '. Are you certain this is what you want? You should be aware of our prices. The price for the selected movie at the selected timeslot is: €0,00. If this is in conflict with what you believe in, please '), strongLink, document.createTextNode('. If you do want to purchase these tickets for this price, enter the amount of tickets you want and click the button below:'));
         
-        const ammount = document.createElement('input');
-        ammount.placeholder = 'ammount between 1 & 9';
-        ammount.type = 'number';
-        ammount.addEventListener('change', function () {
-            if (ammount.value > 9) ammount.value = 9;
-            if (ammount.value < 1) ammount.value = 1;
-            ticketsSel.append(document.createTextNode(ammount.value));
-            ticketsNew.value = ammount.value;
-            changeOrderCookie();
+        const amount = document.createElement('input');
+        amount.placeholder = 'amount between 1 & 9';
+        amount.type = 'number';
+        if (ejsAmount != null) {
+            amount.value = ejsAmount;
+        }
+        amount.addEventListener('change', function () {
+            if (amount.value > 9) amount.value = 9;
+            if (amount.value < 1) amount.value = 1;
+            ticketsSel.append(document.createTextNode(amount.value));
+            ticketsNew.value = amount.value;
         });
         
         const btnPur = document.createElement("button");
-        article.append(ammount, btnPur);
+        article.append(amount, btnPur);
         btnPur.setAttribute('class', 'purchase-item__button');
         btnPur.append(document.createTextNode("Purchase tickets for '" + movie.movieName + " ("+ movie.movieYear +")' at " + dateTime.toLocaleString() + " local time."));
         btnPur.addEventListener("click", function () {
-            if (ammount.value > 0){
+            if (amount.value > 0){
+                ticketsNew.value = amount.value;
                 summaryForm.style.display = "block";
             }
         });
@@ -96,7 +100,7 @@ for (let i = 0; i < cookies.length; i++){
 //add movies to options
 for (i = 0; i < movies.length; i++) {
     const option =  document.createElement('option');
-    option.value = movies[i].movieID;
+    option.value = movies[i].movieID+ ';;' + movies[i].movieName;
     if (movies[i].movieName == movie.movieName) option.selected = true;
     option.append(document.createTextNode(movies[i].movieName));
     movieNew.append(option);
@@ -104,11 +108,11 @@ for (i = 0; i < movies.length; i++) {
 
 
 //add timeslots to options
-getSchedule(movieNew.value);
+getSchedule(movieNew.value.split(';;')[0]);
 
 movieNew.addEventListener('change', () => {
     console.log("movie changed");
-    getSchedule(movieNew.value);
+    getSchedule(movieNew.value.split(';;')[0]);
 });
 
 function getSchedule(currentMovie) {
@@ -123,7 +127,7 @@ function getSchedule(currentMovie) {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `/ajax/timeslots?movieId=${movieId}`, true);
   xhr.onload = () => {
-    if (xhr.status === 200 && xhr.readyState===4) {
+    if (xhr.status === 200 && xhr.readyState === 4) {
       const timeslots = JSON.parse(xhr.responseText);
 
       addTimeslots(timeslots);
@@ -153,9 +157,9 @@ btnConfirm.addEventListener("click", function () {
         newOrder = {
             order_id: newOrderID,
             user_id: userID,
-            movie_id: movieNew.value, 
+            movie_id: movieNew.value.split(';;')[0], 
             date: dateTimeNew.value,
-            ammount: ticketsNew.value,
+            amount: ticketsNew.value,
         }
         console.log(JSON.stringify(newOrder));
         document.cookie = 'newOrder=' + JSON.stringify(newOrder) + '; path=/pur';
@@ -167,38 +171,30 @@ btnCancel.addEventListener("click", function () {
     summaryForm.style.display = "none";
 });
 
-//check for unfinished order
-if (newOrder != null) {
-    newOrderID = newOrder.order_id;
-    movieNew.value = newOrder.movie_id; 
-    dateTimeNew.value = newOrder.date;
-    ticketsNew.value = newOrder.ammount;
-    summaryForm.style.display = "block";
-} else {
-    newOrder = {
-        order_id: newOrderID,
-        user_id: userID,
-        movie_id: movieNew.value, 
-        date: dateTime.toISOString(),
-        ammount: 2
+const orderUnfCookies = cookies.filter(cookie => cookie.startsWith('orderUnf'));
+
+// Determine the index of the next orderUnf cookie
+const nextIndex = orderUnfCookies.length + 1;
+
+// Set up beforeunload event listener to delete any empty orderUnf cookies
+window.addEventListener('beforeunload', () => {
+// Create orderUnf cookie
+const orderUnfCookieName = `orderUnf${nextIndex}`;
+const orderUnfCookieValue = {
+  order_id: newOrderID,
+  user_id: userID,
+  movie_id: movieNew.value ? movieNew.value : movie.movieName,
+  date: dateTimeNew.value ? dateTimeNew.value : dateTime.toISOString(),
+  amount: ticketsNew.value ? ticketsNew.value : 2
+};
+const orderUnfCookieString = `${orderUnfCookieName}=${encodeURIComponent(JSON.stringify(orderUnfCookieValue))}`;
+document.cookie = orderUnfCookieString;
+  cookies.forEach(cookie => {
+    if (cookie.startsWith('orderUnf')) {
+      const order = JSON.parse(decodeURIComponent(cookie.split('=')[1]));
+      if (!order.movie_id || !order.date || !order.amount) {
+        delete_cookie(cookie);
+      }
     }
-    document.cookie = 'newOrder=' + JSON.stringify(newOrder) + '; path=/';
-}
-
-
-
-movieNew.onchange = function (){changeOrderCookie()};
-dateTimeNew.onchange = function (){changeOrderCookie()};
-ticketsNew.onchange = function (){changeOrderCookie()};
-
-function changeOrderCookie() {
-    delete_cookie(newOrder);
-    newOrder = {
-        order_id: newOrderID,
-        user_id: userID,
-        movie_id: movieNew.value, 
-        date: dateTimeNew.value,
-        ammount: ticketsNew.value
-    }
-    document.cookie = 'newOrder=' + JSON.stringify(newOrder) + '; path=/';
-}
+  });
+});
