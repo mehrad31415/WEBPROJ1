@@ -5,24 +5,24 @@
                     <h3 class="h3--attributes line--width-full">Fill in your information below</h3>
                     <form class = 'sign-form' action="/auth?log=sign" method="POST">
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" required>
+                        <input type="text" id="username" name="username" class="sign-in__input" required autofocus>
                     
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" class="sign-in__input" required>
                     
                         <label for="login">Login:</label>
-                        <input type="text" id="login" name="login" required>
+                        <input type="text" id="login" name="login" class="sign-in__input" required>
                     
                         <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" class="sign-in__input" required>
                     
                         <label for="address">Address:</label>
-                        <textarea id="address" name="address" required></textarea>
+                        <textarea id="address" name="address" class="sign-in__input" required></textarea>
                     
                         <label for="creditcard">Credit Card:</label>
-                        <input type="text" id="creditcard" name="creditcard" required>
+                        <input type="text" id="creditcard" name="creditcard" class="sign-in__input" required>
                     
-                        <button class="btn" type="submit">Submit</button>
+                        <button class="submit-btn" type="submit">Submit</button>
                     </form>
                 </section>
             </article>

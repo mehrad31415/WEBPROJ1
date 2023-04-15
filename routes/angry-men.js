@@ -4,7 +4,7 @@ const express = require('express');
 const router  = express.Router();
 // home page of 12 angry men.
 router.get('/', (req, res) => {
-    res.render('angry-men');
+    res.status(200).render('angry-men');
 });
 // for the sub directories (awards, adaptations...), we have used a route parameter.
 // although express takes care of status codes efficiently, we have explicitly mentioned them just to be safe.
@@ -33,6 +33,6 @@ router.get('/:p', async (req,res) => {
         default:
             res.status(404).render('resource-not-found', {resource : req.url})
             break;
-    }
+    };
 });
 module.exports = router;
