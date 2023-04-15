@@ -463,27 +463,24 @@
     bottom: 5px;
     right: 5px;
     position: fixed;
-    z-index: 999999;
+    z-index: 1000;
     display: inline-flex;
     flex-direction: column;
 }
 
 .login-div button {
-    display: block;
     background-color: #0077cc;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    padding: 16px 20px;
     border: none;
-    margin: 5px;
+    color: #fff;
     cursor: pointer;
+    display: block;
+    font-size: 18px;
+    margin: 5px;
     opacity: 0.8;
+    padding: 16px 20px;
+    transition: background-color 0.2s ease;
     width: 100px;
 }
-
 
 .form-container {
     max-width: 300px;
@@ -510,14 +507,7 @@
     z-index: 9;
 }
 
-.form-container input:focus,
-.sign-form input:focus {
-    background-color: #dddddd;
-    outline: none;
-}
-
-.form-container .btn,
-.sign-form .btn {
+.login--button {
     background-color: #0077cc;
     color: #fff;
     border-radius: 5px;
@@ -535,19 +525,22 @@
     background-color: rgb(205, 30, 30);
 }
 
-.form-container .btn:hover,
-.sign-form .btn:hover,
-.open-button:hover {
-    opacity: 1;
-}
-
-.sign-form {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 10px;
+.sign-in__input {
+    height: 4rem;
     width: 100%;
+    max-width: 100%;
+    font-size: 16pt;
 }
 
+.submit-btn{
+    color: white;
+    cursor: pointer;
+    height: 4rem;
+    width: 200%;
+    max-width: 100%;
+    opacity: 0.8;
+    background-color: #4CAF50;
+}
 /* Tickets options */
 .purchase-button {
     display: inline-block;

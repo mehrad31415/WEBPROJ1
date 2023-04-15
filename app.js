@@ -54,7 +54,7 @@ app.use('/', ticketsRouter);
 const infoRouter = require('./routes/info');
 app.use('/', infoRouter);
 
-const loginRouter = require('./routes/info');
+const loginRouter = require('./routes/login');
 app.use('/', loginRouter);
 
 // further express methods.

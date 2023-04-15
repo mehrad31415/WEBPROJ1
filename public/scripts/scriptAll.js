@@ -205,13 +205,13 @@ passwordInput.setAttribute("required", "");
 // Create the login button element
 const loginButton = document.createElement("button");
 loginButton.setAttribute("type", "submit");
-loginButton.className = "btn";
+loginButton.className = "login--button";
 loginButton.textContent = "Login";
 
 // Create the close button element with onclick attribute
 const closeButton = document.createElement("button");
 closeButton.setAttribute("type", "button");
-closeButton.className = "btn cancel";
+closeButton.className = "login--button cancel";
 closeButton.textContent = "Close";
 closeButton.setAttribute("onclick", "closeForm()");
 

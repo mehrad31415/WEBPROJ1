@@ -35,7 +35,7 @@ const plotList = document.createElement('li');
 plotList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
 const plotLink = document.createElement('a');
 plotLink.setAttribute('class', 'link');
-plotLink.setAttribute('href', './angry-men');
+plotLink.setAttribute('href', '/angry-men');
 plotList.append(plotLink);
 plotLink.append(document.createTextNode('Plot'));
 const castList = document.createElement('li');
