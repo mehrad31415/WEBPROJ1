@@ -1,6 +1,6 @@
 //Javascript
 
-fetch('/tickets-fetch' + window.location.search)
+fetch('/tickets/fetch' + window.location.search)
   .then(response => response.json())
   .then(data => {
     console.log(data);

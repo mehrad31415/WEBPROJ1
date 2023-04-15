@@ -3,7 +3,7 @@
 //let movie = null;// = JSON.parse(ejsMovie);
 
 
-fetch('/info-fetch' + window.location.search)
+fetch('/info/fetch' + window.location.search)
   .then(response => response.json())
   .then(data => {
     console.log(data);
