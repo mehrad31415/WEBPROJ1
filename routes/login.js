@@ -19,11 +19,25 @@ router.get('/account', async (req, res) => {
     res.status(200).render('account');
 });
 router.get('/pur', (req, res) => {
-    console.log(req.cookies);
+    // console.log(req.cookies);
     if (req.cookies.newOrder){
         order = JSON.parse(req.cookies.newOrder);
         db.run('INSERT INTO Ordering (order_id, user_id, movie_id, date, num_of_tickets) VALUES(?, ?, ?, ?, ?)', [order.order_id, order.user_id, order.movie_id, order.date, order.amount]);
         res.clearCookie("newOrder");
+
+        const cookies = req.cookies;
+        for (let cookieName in cookies) {
+            if (cookieName.startsWith('orderUnf')) {
+                const cookieValue = JSON.parse(cookies[cookieName]);
+                console.log(cookieValue);
+                console.log(cookieValue.order_id);
+                if (cookieValue.order_id == order.order_id) {
+                    res.clearCookie(cookieName);
+                }
+            }
+
+        }
+
     }
 
     res.redirect('/account');
