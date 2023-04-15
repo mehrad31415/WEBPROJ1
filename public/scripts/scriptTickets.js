@@ -112,15 +112,6 @@ function constructConfirmationWindow(movie, dateTime, movieSel, dateTimeSel, dat
         if (ticketsNew.value > 9) ticketsNew.value = 9;
         if (ticketsNew.value < 1) ticketsNew.value = 1;
     });
-    //movie options
-    //get movies from cookies
-    // let movies = [];
-    // for (let i = 0; i < cookies.length; i++){
-    //     if (cookies[i].substring(0, 6) == "movies") {
-    //         movies = JSON.parse(decodeURI(cookies[i].slice(7)).replaceAll('%3A', ':').replaceAll('%2C', ','));
-    //         delete_cookie('movies');
-    //     }
-    // }
 
     //add movies to options
     for (i = 0; i < allMovies.length; i++) {
