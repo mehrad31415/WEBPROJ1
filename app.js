@@ -13,6 +13,7 @@ app.use(morgan('dev'));
 
 // body-parser: from version 4 of express has a built in body-parser urlencoded.
 // const bodyParser = require('body-parser');
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 
 // according to https://www.npmjs.com/package/express-session the cookie parser does not need to be installed from 1.5.0 of express-session.
@@ -39,18 +40,16 @@ app.set('view engine', 'ejs');
 
 // controllers
 const {
-    db,
     getMovieByID,
     getArtistsByMovieID,
     getAllMovies,
     getMoviesByAmount,
-    getSchedule,
+    getScheduleDate,
     getNrOfOrders,
     getNrOfOrdersByUser,
     getNrOfUsers,
     getOrdersByUser,
-    getUserByID,
-    getScheduleDateTime
+    getUserByID
 } = require('./controllers/queries');
 
 // routers
@@ -70,7 +69,7 @@ app.get('/info-fetch', async (req, res) => {
     const movieID = req.query.id;
     const movie = await getMovieByID(movieID);
     const artists = await getArtistsByMovieID(movieID);
-    const schedule = await getSchedule(movieID);
+    const schedule = await getScheduleDate(movieID);
     res.json({ movie, artists, schedule });
 });
 app.get('/tickets', async (req, res) => {
@@ -84,12 +83,12 @@ app.get('/tickets-fetch', async (req, res) => {
     let amount = null;
     if (req.query.amount) amount = req.query.amount;
     const movie = await getMovieByID(movieID);
-    const schedule = await getScheduleDateTime(movieID);
+    const schedule = await getScheduleDate(movieID);
     const orderAll = await getNrOfOrders();
     res.json({ allMovies, movie, schedule, orderAll, date, time, amount});
 });
-app.get('/ordersUF', (req, res) => {
-    res.render('OrdersUF');
+app.get('/order-unf', (req, res) => {
+    res.render('order-unf');
 });
 
 // Login stuff
@@ -203,13 +202,13 @@ app.post('/auth', async (req, res) => {
     }
 });
 app.get('/sign', (req, res) => {
-    res.render('sign In');
+    res.render('sign-in');
 });
 // END of login stuff
 
 app.get('/ajax/timeslots', async (req, res) => {
     const movieIDTemp = req.query.movieId;
-    const schedule = await getSchedule(movieIDTemp);
+    const schedule = await getScheduleDate(movieIDTemp);
     const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'");
     res.json(JSON.parse(scheduleString));
 });
@@ -234,3 +233,10 @@ app.all("*", (req, res) => {
 app.listen(PORT = 5500, HOSTNAME = '127.0.0.1', (req, res) => {
     console.log(`server is running on port ${PORT}...`);
 });
+
+
+
+
+// db needs to be separated in the controller and imported.
+// the coockie parser needs to be removed.
+// 

@@ -237,7 +237,7 @@ if (orderUnF == true && checkLogIn == true) {
     btnOrder.id = 'tickets-btn';
     btnOrder.append(document.createTextNode('Unfinished Order'));
     btnOrder.onclick = function(){
-    window.location.href = 'ordersUF';
+    window.location.href = 'order-unf';
     };
     divLogIn.append(btnOrder);
 }

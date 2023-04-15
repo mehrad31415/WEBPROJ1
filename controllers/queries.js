@@ -109,7 +109,7 @@ const getMoviesByAmount = async (start, size) => {
 };
 
 // getting the schedule of a movie.
-const getSchedule = async (id) => {
+const getScheduleDate = async (id) => {
     try {
         const schedule = new Promise((resolve, reject) => {
             db.all("SELECT * "
@@ -210,36 +210,15 @@ const getUserByID = (id) => {
         return null;
     };
 };
-//get timeslots for movieID
-async function getScheduleDateTime(id) {
-    let schedule = [];
-    try {
-        schedule = new Promise((resolve, reject) => {
-            let arr = [];
-            db.each("SELECT * "
-                + "FROM Schedule "
-                + "WHERE movie_id= ?", id, (err, row) => {
-                    arr.push(row);
-                    if (err) reject(err);
-                    resolve(arr);
-                });
-
-        })
-    } catch (error) { console.log(error); return null; }
-    return schedule;
-};
-
 module.exports = {
-    db,
     getMovieByID,
     getArtistsByMovieID,
     getAllMovies,
     getMoviesByAmount,
-    getSchedule,
+    getScheduleDate,
     getNrOfOrders,
     getNrOfOrdersByUser,
     getNrOfUsers,
     getOrdersByUser,
-    getUserByID,
-    getScheduleDateTime
+    getUserByID
 };
