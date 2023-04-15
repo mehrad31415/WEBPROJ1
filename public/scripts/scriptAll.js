@@ -88,7 +88,7 @@ let nav2 = null;
 
     //HEADER
     const imgLink = document.createElement('a');
-    imgLink.setAttribute('href', './');
+    imgLink.setAttribute('href', '/');
     imgLink.setAttribute('class', 'film-frame--width');
     const img = document.createElement('img');
     img.setAttribute('src', '../files/images/film-frame.png');
@@ -113,14 +113,14 @@ header.append(imgLink, h1);
     homeList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
     const homeLink = document.createElement('a');
     homeLink.setAttribute('class', 'link');
-    homeLink.setAttribute('href', './');
+    homeLink.setAttribute('href', '/');
     homeList.append(homeLink);
     homeLink.append(document.createTextNode('Home'));
     const contList = document.createElement('li');
     contList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
     const contLink = document.createElement('a');
     contLink.setAttribute('class', 'link');
-    contLink.setAttribute('href', './contact');
+    contLink.setAttribute('href', '/contact');
     contList.append(contLink);
     contLink.append(document.createTextNode('Contact'));
 

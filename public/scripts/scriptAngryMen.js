@@ -77,7 +77,7 @@ const infoList = document.createElement('li');
 infoList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
 const infoLink = document.createElement('a');
 infoLink.setAttribute('class', 'link');
-infoLink.setAttribute('href', './info?id=0');
+infoLink.setAttribute('href', '/info?id=0');
 infoList.append(infoLink);
 infoLink.append(document.createTextNode('Info'));
 
