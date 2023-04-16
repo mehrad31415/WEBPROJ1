@@ -97,7 +97,7 @@ router.post('/auth', async (req, res) => {
             });
             break;
         case 'sign':
-            const signUserID   = await getNrOfUsers();
+            const signUserID   = (await getNrOfUsers()) + 1;
             const signUsername = req.body.username;
             const signEmail    = req.body.email;
             const signLogin    = req.body.login;
