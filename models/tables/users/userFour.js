@@ -7,7 +7,7 @@ const email = "kevin66@gmail.com";
 
 const login = "kevin123";
 
-const password = "kevin321";
+const password = "Kevin321";
 
 const address = `7335 JE, Vlietweg 189, Apeldoorn, Gelderland`;
 

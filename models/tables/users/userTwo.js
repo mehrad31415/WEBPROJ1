@@ -7,7 +7,7 @@ const email = "rick95@gmail.com";
 
 const login = "rick123";
 
-const password = "rick321";
+const password = "Rick4321";
 
 const address = `3772 GM, Violenstraat 185, Barneveld, Gelderland`;
 

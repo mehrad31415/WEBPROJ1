@@ -98,15 +98,15 @@ router.post('/auth', async (req, res) => {
             break;
         case 'sign':
             swtch = 0;
-            const signUserID   = (await getNrOfUsers()) + 1;
+            const signUserID = (await getNrOfUsers()) + 1;
             const signUsername = req.body.username;
-            const signEmail    = req.body.email;
-            const signLogin    = req.body.login;
+            const signEmail = req.body.email;
+            const signLogin = req.body.login;
             const signPassword = req.body.password;
-            const signAddress  = req.body.address;
-            const signCredit   = req.body.creditcard;
-            const signDate     = new Date();
-            const allUsers     = await getAllUsers();
+            const signAddress = req.body.address;
+            const signCredit = req.body.creditcard;
+            const signDate = new Date();
+            const allUsers = await getAllUsers();
             // console.log(allUsers);
             for (let i = 0; i < await allUsers.length; i++) {
                 const elem = allUsers[i];
@@ -155,7 +155,6 @@ router.get('/sign', (req, res) => {
         swtch = req.cookies.swtch;
         res.clearCookie('swtch');
     }
-    res.status(200).render('sign-in', {swtch : swtch});
+    res.status(200).render('sign-in', { swtch: swtch });
 });
-
 module.exports = router;

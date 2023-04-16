@@ -1,6 +1,10 @@
-if (swtch === 1){
-  alert('this account already exists');
-} 
+
+
+setTimeout(function () {
+  if (swtch == 1){
+    alert('this account already exists');
+}
+}, 1);
 
 document.querySelector('.sign-form').addEventListener('submit', (event) => {
   event.preventDefault();
@@ -14,12 +18,3 @@ document.querySelector('.sign-form').addEventListener('submit', (event) => {
     alert("your passwords should match!");
   }
 });
-// fetch('/message')
-// .then(data => { return data.json(); })
-// .then(res => {
-//   if (res.msg === "user already exists"){
-//     alert("please provide a unique login, username, and email");
-//   } else {
-//     event.target.submit();
-//   }
-// });

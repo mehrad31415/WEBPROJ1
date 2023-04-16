@@ -7,7 +7,7 @@ const email = "stijn.vos@hotmail.com";
 
 const login = "stijn123";
 
-const password = "stijn321";
+const password = "Stijn321";
 
 const address = `7946 AE. Dominee A.C. van Raalteweg 169, Wanneperveen, Overijssel`;
 

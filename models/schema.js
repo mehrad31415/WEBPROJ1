@@ -160,12 +160,12 @@ const db = new sqlite3.Database(path.resolve(__dirname, 'database/movie.db'), (e
 // its safe to nest the serialize.
 db.serialize(() => {
     // if you already have any of these tables in your database uncomment the following lines and drop them.
-    db.run(`DROP TABLE movie`);
-    db.run(`DROP TABLE user`);
-    db.run(`DROP TABLE ordering`);
-    db.run(`DROP TABLE schedule`);
-    db.run(`DROP TABLE artist`);
-    db.run(`DROP TABLE role`);
+    // db.run(`DROP TABLE movie`);
+    // db.run(`DROP TABLE user`);
+    // db.run(`DROP TABLE ordering`);
+    // db.run(`DROP TABLE schedule`);
+    // db.run(`DROP TABLE artist`);
+    // db.run(`DROP TABLE role`);
 
     // creating tables based on the schema in the database_model file.
     // table movie created

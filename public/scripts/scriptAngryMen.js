@@ -8,7 +8,7 @@ if (page == 'angry-men-home.html' || page == '') {
 }
 descr.setAttribute('content', contentString);
 
-if (page == 'angry-men-home.html' || page == '') {
+if (page == 'angry-men.html' || page == '') {
 	title.firstChild.replaceWith(document.createTextNode('12 ANGRY MEN | HOME'));
 } else {
 	title.firstChild.replaceWith(document.createTextNode('12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase()));

@@ -7,7 +7,7 @@ const email = "niels58@yahoo.com";
 
 const login = "niels123";
 
-const password = "niels321";
+const password = "Niels321";
 
 const address = `5046 MA, Graaf Arnoldstraat 55, Tilburg, Noord-Brabant`;
 

@@ -7,7 +7,7 @@ const email = "nick.bosch@gmail.com";
 
 const login = "nick123";
 
-const password = "nick321";
+const password = "Nick4321";
 
 const address = `9512 SB, Bareveld 63, Nieuwediep, Drenthe`;
 
