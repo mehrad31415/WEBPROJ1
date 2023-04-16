@@ -10,10 +10,10 @@ router.get('/timeslots', async (req, res) => {
     const scheduleString = JSON.stringify(schedule).replace(/'/g, "\\'");
     res.status(200).json(JSON.parse(scheduleString));
 });
-
+// this is the movie API and is used for pagination.
 router.get('/movies', async (req, res) => {
-    const page         = parseInt(req.query.page) || 1;
-    const pageSize     = parseInt(req.query.pageSize) || 10;
+    const page         = parseInt(req.query.page) || 1; // if query not defined gives the first page by default.
+    const pageSize     = parseInt(req.query.pageSize) || 10; // if query not defined gives 10 movies by page by default.
     const startIndex   = (page - 1) * pageSize;
     const movies       = await getMoviesByAmount(startIndex, pageSize);
     const moviesString = JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???');
