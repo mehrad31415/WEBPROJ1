@@ -76,8 +76,8 @@ app.all("*", (req, res) => {
     res.status(404).render('resource-not-found', {resource : req.url});
 });
 
-// the following allows the server to run on 127.0.0.1:5500 (alternatively it can run on localhost:5500).
-const server = app.listen(PORT = 5501, HOSTNAME = '127.0.0.1', (req, res) => {
+// the following allows the server to run on localhost:8015
+const server = app.listen(PORT = 8015, 'localhost', (req, res) => {
     console.log(`server is running on port ${PORT}...`);
 });
 
