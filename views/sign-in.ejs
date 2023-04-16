@@ -14,13 +14,16 @@
                         <input type="text" id="login" name="login" class="sign-in__input" required>
                     
                         <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" class="sign-in__input" required>
+                        <input type="password" id="password" name="password" class="sign-in__input" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+
+                        <label for="confirm-password">Confirm Password:</label>
+                        <input type="password" id="confirmation" name="confirmation" class="sign-in__input" required autocomplete="off" minlength="8">
                     
                         <label for="address">Address:</label>
-                        <textarea id="address" name="address" class="sign-in__input" required></textarea>
+                        <textarea id="address" name="address" class="sign-in__input"></textarea>
                     
                         <label for="creditcard">Credit Card:</label>
-                        <input type="text" id="creditcard" name="creditcard" class="sign-in__input" required>
+                        <input type="text" id="creditcard" name="creditcard" class="sign-in__input" required minlength="18" maxlength="18" pattern="[0-9]+" title="enter 18 digits only" placeholder="enter 18 digits only">
                     
                         <button class="submit-btn" type="submit">Submit</button>
                     </form>
@@ -29,9 +32,9 @@
         </div>
         <footer>
         </footer>
-        
         <script src="/scripts/scriptAll.js"></script>
         <script src="/scripts/scriptTooltip.js"></script>
+        <script src="/scripts/scriptSignUp.js"></script>
     </body>
 
 </html>

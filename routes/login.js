@@ -78,12 +78,14 @@ router.post('/auth', async (req, res) => {
             }
             break;
         case 'out':
-            //Destroy all unfinished order cookies: DOES NOT WORK YET
-            Object.keys(req.cookies).forEach(function(cookieName) {
-                if (cookieName.startsWith('ordersUnf')) {
+            //Destroy all unfinished order cookies
+            const cookies = req.cookies;
+            for (let cookieName in cookies) {
+                if (cookieName.startsWith('orderUnf')) {
                     res.clearCookie(cookieName);
                 }
-            });
+    
+            };
             // Destroy the session
             req.session.destroy((err) => {
                 if (err) {
@@ -95,14 +97,14 @@ router.post('/auth', async (req, res) => {
             });
             break;
         case 'sign':
-            const signUserID = await getNrOfUsers();
+            const signUserID   = await getNrOfUsers();
             const signUsername = req.body.username;
-            const signEmail = req.body.email;
-            const signLogin = req.body.login;
+            const signEmail    = req.body.email;
+            const signLogin    = req.body.login;
             const signPassword = req.body.password;
-            const signAddress = req.body.address;
-            const signCredit = req.body.creditcard;
-            const signDate = new Date();
+            const signAddress  = req.body.address;
+            const signCredit   = req.body.creditcard;
+            const signDate     = new Date();
             db.run('INSERT INTO user '
                 + '(user_id, username, email, login, password, address, credit_card, registered_date) '
                 + 'VALUES(?, ?, ?, ?, ?, ?, ?, ?)', [

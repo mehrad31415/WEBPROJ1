@@ -77,7 +77,7 @@ app.all("*", (req, res) => {
 });
 
 // the following allows the server to run on 127.0.0.1:5500 (alternatively it can run on localhost:5500).
-const server = app.listen(PORT = 5500, HOSTNAME = '127.0.0.1', (req, res) => {
+const server = app.listen(PORT = 5501, HOSTNAME = '127.0.0.1', (req, res) => {
     console.log(`server is running on port ${PORT}...`);
 });
 

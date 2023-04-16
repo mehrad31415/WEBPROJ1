@@ -471,6 +471,7 @@
 .login-div button {
     background-color: #0077cc;
     border: none;
+    border-radius: 20px;
     color: #fff;
     cursor: pointer;
     display: block;
@@ -479,7 +480,7 @@
     opacity: 0.8;
     padding: 16px 20px;
     transition: background-color 0.2s ease;
-    width: 100px;
+    width: 140px;
 }
 
 .form-container {
@@ -532,7 +533,7 @@
     font-size: 16pt;
 }
 
-.submit-btn{
+.submit-btn {
     color: white;
     cursor: pointer;
     height: 4rem;
@@ -540,7 +541,9 @@
     max-width: 100%;
     opacity: 0.8;
     background-color: #4CAF50;
+    font-size: 1.6em;
 }
+
 /* Tickets options */
 .purchase-button {
     display: inline-block;
@@ -624,6 +627,19 @@
 .movie-summary button:hover {
     background-color: #005fa3;
 }
+
+.sign-in__input:invalid {
+    border: 2px solid red;
+}
+
+.sign-in__input:valid {
+    border: 2px solid black;
+}
+
+.sign-in__input {
+    background-image: linear-gradient(to right, white, grey);
+}
+
 
 @media only screen and (max-width:659px) {
     .table--width-large {

@@ -24,17 +24,18 @@ orderUnfCookies.forEach(cookie => {
         delete_cookie(cookie);
         container.removeChild(orderElement);
     });
-        orderElement.appendChild(cancelButton);
-        const goToOrderButton = document.createElement('button');
-        goToOrderButton.classList = "purchase-button";
-        goToOrderButton.textContent = 'Go to Order';
-        goToOrderButton.addEventListener('click', () => {
-            const dayTime = new Date(order.date);
-            window.location.href =  'tickets' + 
-                                    '?id=' + order.movie_id.split(';;')[0] +
-                                    '&date=' + dayTime.getFullYear() + '-' + (dayTime.getMonth()+1) + '-' + dayTime.getDate() +
-                                    '&time=' + dayTime.getHours() + '-' + dayTime.getMinutes() + '-' + dayTime.getSeconds() +
-                                    '&amount=' + order.amount;
+    orderElement.appendChild(cancelButton);
+    const goToOrderButton = document.createElement('button');
+    goToOrderButton.classList = "purchase-button";
+    goToOrderButton.textContent = 'Go to Order';
+    goToOrderButton.addEventListener('click', () => {
+        delete_cookie(cookie);
+        const dayTime = new Date(order.date);
+        window.location.href =  'tickets' + 
+                                '?id=' + order.movie_id.split(';;')[0] +
+                                '&date=' + dayTime.getFullYear() + '-' + (dayTime.getMonth()+1) + '-' + dayTime.getDate() +
+                                '&time=' + dayTime.getHours() + '-' + dayTime.getMinutes() + '-' + dayTime.getSeconds() +
+                                '&amount=' + order.amount;
     });
     orderElement.appendChild(goToOrderButton);
     container.appendChild(orderElement);
