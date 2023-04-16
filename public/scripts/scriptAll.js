@@ -136,7 +136,7 @@ header.append(imgLink, h1);
     parFooter.append(document.createTextNode('Should you have any enquiries please '));
     const contact = document.createElement('a');
     contact.setAttribute('class', 'footer__contact-link--no-colour-change');
-    contact.setAttribute('href', './contact');
+    contact.setAttribute('href', '/contact');
     contact.append(document.createTextNode('contact us'));
     parFooter.append(contact, document.createTextNode('.'));
     const spanFooter = document.createElement('span');
