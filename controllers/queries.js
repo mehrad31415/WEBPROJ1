@@ -22,7 +22,7 @@ const getMovieByID = async (id) => {
         return movie;
     } catch (error) {
         console.error(error);
-        return null;
+        return;
     };
 };
 
@@ -52,7 +52,7 @@ const getArtistsByMovieID = async (id) => {
         return artists;
     } catch (error) {
         console.error(error);
-        return null;
+        return;
     };
 };
 
@@ -70,7 +70,7 @@ const getAllMovies = async () => {
         return movieAll;
     } catch (error) {
         console.error(error);
-        return null;
+        return;
     };
 };
 
@@ -89,7 +89,7 @@ const getScheduleDate = async (id) => {
         return schedule;
     } catch (error) {
         console.error(error);
-        return null;
+        return;
     };
 };
 
@@ -106,7 +106,7 @@ const getNrOfOrders = async () => {
         return orderAll;
     } catch (error) {
         console.error(error);
-        return null;
+        return;
     };
 };
 
@@ -123,7 +123,7 @@ const getNrOfUsers = async () => {
         return userAll;
     } catch (error) {
         console.error(error);
-        return null;
+        return;
     };
 };
 // getting all the orders from a user.
@@ -141,23 +141,38 @@ const getOrdersByUser = async (id) => {
         return userOrders;
     } catch (error) {
         console.error(error);
-        return null;
+        return;
     };
 };
 // getting all the information of a user using their ID.
 const getUserByID = (id) => {
     try {
-        const movie = new Promise((resolve, reject) => {
+        const user = new Promise((resolve, reject) => {
             db.get("SELECT * "
-                + "FROM User WHERE user_id= ?", [id], (err, row) => {
+                + "FROM user WHERE user_id= ?", [id], (err, row) => {
                     if (err) reject(err);
                     resolve(row);
                 });
         });
-        return movie;
+        return user;
     } catch (error) {
         console.error(error);
-        return null;
+        return;
+    };
+};
+// getting all the users.
+const getAllUsers = () => {
+    try {
+        const user = new Promise ((resolve, reject) => {
+            db.all(`SELECT username, email, login FROM user`, (err, rows) => {
+                if (err) reject (err);
+                resolve(rows);
+            });
+        });
+        return user;
+    } catch (error) {
+        console.error(error);
+        return;
     };
 };
 module.exports = {
@@ -168,7 +183,8 @@ module.exports = {
     getNrOfOrders,
     getNrOfUsers,
     getOrdersByUser,
-    getUserByID
+    getUserByID,
+    getAllUsers
 };
 
 // The below queries were originally used. But we limited the number of querying
@@ -191,7 +207,7 @@ module.exports = {
 //         return movieAll;
 //     } catch (error) {
 //         console.error(error);
-//         return null;
+//         return;
 //     };
 // };
 
@@ -209,6 +225,6 @@ module.exports = {
 //         return orderCount;
 //     } catch (error) {
 //         console.error(error);
-//         return null;
+//         return;
 //     };
 // };

@@ -25,7 +25,31 @@ We made a website for a movie theater. You can find different kind of movies and
 
 # Structure of the application : 
 
-
+Folders marked as bold.
+|WEBPROJ1/ 
+|- Controllers/
+|---- Database
+|- Models/
+|---- Database/
+|---- Schema_model/
+|---- tables/
+|-------- artists
+|-------- movies
+|-------- orders
+|-------- role
+|-------- schedule
+|-------- users
+|- Public/
+|---- css/
+|---- files/
+|-------- documents
+|-------- icon
+|-------- images
+|---- scripts/
+|-Routes/
+|-Views/
+|-Scripts/
+|- app
 
 
 # Logins & Passwords
@@ -46,3 +70,5 @@ Username = nick123
 Password = nick321
 
 # SQL definition of your database
+
+CREATE TABLE

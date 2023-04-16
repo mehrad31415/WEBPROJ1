@@ -3,7 +3,7 @@
 fetch('/tickets/fetch' + window.location.search)
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    // console.log(data);
     if (!data) {
       throw new Error('Movie data not found in server response');
     }
@@ -15,7 +15,7 @@ fetch('/tickets/fetch' + window.location.search)
         schedule.push({movieID: currentSchedule[i].movie_id, date: new Date(currentSchedule[i].date.replace(' ', 'T'))});
     }
     const orderAll = data.orderAll;
-    console.log(data.date);
+    // console.log(data.date);
     const dateTemp = data.date;
     const date = dateTemp.split('-');
     const timeTemp = data.time;
@@ -127,7 +127,7 @@ function constructConfirmationWindow(movie, dateTime, movieSel, dateTimeSel, dat
     getSchedule(movieNew.value.split(';;')[0], dateTimeNew, dateTime);
 
     movieNew.addEventListener('change', () => {
-        console.log("movie changed");
+        // console.log("movie changed");
         getSchedule(movieNew.value.split(';;')[0], dateTimeNew, dateTime);
     });
 }
@@ -148,7 +148,7 @@ function getSchedule(currentMovie, dateTimeNew, dateTime) {
       const timeslots = JSON.parse(xhr.responseText);
 
       addTimeslots(timeslots, dateTime, dateTimeNew);
-      console.log(timeslots);
+    //   console.log(timeslots);
     } else {
       console.error('Failed to retrieve timeslots');
     }
@@ -178,7 +178,7 @@ function EventListeners (btnConfirm, btnCancel, newOrderID, userID, movieNew, da
                 date: dateTimeNew.value,
                 amount: ticketsNew.value,
             };
-            console.log(JSON.stringify(newOrder));
+            // console.log(JSON.stringify(newOrder));
             document.cookie = 'newOrder=' + JSON.stringify(newOrder) + '; path=/pur';
         }
         return false;

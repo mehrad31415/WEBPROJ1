@@ -3,7 +3,7 @@
 fetch('/info/fetch' + window.location.search)
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    // console.log(data);
     if (!data) {
       throw new Error('Movie data not found in server response');
     }
@@ -17,7 +17,7 @@ fetch('/info/fetch' + window.location.search)
         schedule.push(new Date(stringSchedule[i].date.replace(' ', 'T')));
     }
 
-    console.log(movie);
+    // console.log(movie);
     constructMovieInfo(movie, artists, schedule);
 
   })
@@ -27,7 +27,7 @@ fetch('/info/fetch' + window.location.search)
 
 
 function constructMovieInfo (movie, artists, schedule){
-    console.log('construct movie method');
+    // console.log('construct movie method');
     let id = movie.movieID;
 
     const currentMovie = new Movie(movie.movieID, movie.movieName, movie.movieYear, movie.movieGenre);
@@ -57,7 +57,7 @@ function constructArtists (movie, artists){
         for (let j = 0; j < arrayTemp.length; j++){
             artistTemp.infoArray.push(arrayTemp[j]);
         }
-        console.log("artist added to movie...");
+        // console.log("artist added to movie...");
         artistTemp.addToMovie(movie);
         artistTemp.toTooltip();
     }

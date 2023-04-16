@@ -69,6 +69,9 @@ app.get('/order-unf', (req, res) => {
     res.render('order-unf');
 });
 
+app.get('/message', (req,res) => {
+    res.status(200).json({"msg":""});
+});
 // for the resource not found, we have created a simple page with the message 'resource not found'.
 // but the styling is not plane and it is somewhat like our website for aesthetic matters. 
 // Also the user is guided to to get back to the root page.

@@ -6,7 +6,7 @@ let orderUnF = false;
 for (let i = 0; i < cookies.length; i++){
     if (cookies[i].substring(0, 7) == "userID=") {
         userIDTemp = cookies[i].replace('userID=', '');
-        if (userIDTemp != 'undefined') {
+        if (userIDTemp !== 'undefined') {
             userID = JSON.parse(userIDTemp.replace('j%3A', ''));
         }
     }

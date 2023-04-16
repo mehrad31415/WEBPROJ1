@@ -1,13 +1,25 @@
-document.querySelector('.submit-btn').addEventListener('submit', (event) => {
+if (swtch === 1){
+  alert('this account already exists');
+} 
+
+document.querySelector('.sign-form').addEventListener('submit', (event) => {
   event.preventDefault();
   const pass = document.querySelector('#password').value;
   const confirm = document.querySelector('#confirmation').value;
-  console.log(pass)
-  console.log(confirm)
+  // console.log(pass)
+  // console.log(confirm)
   if (pass === confirm) {
-    form.submit();
-    //document.querySelector('.submit-btn').disabled = false;
+    event.target.submit();
   } else {
     alert("your passwords should match!");
   }
 });
+// fetch('/message')
+// .then(data => { return data.json(); })
+// .then(res => {
+//   if (res.msg === "user already exists"){
+//     alert("please provide a unique login, username, and email");
+//   } else {
+//     event.target.submit();
+//   }
+// });
