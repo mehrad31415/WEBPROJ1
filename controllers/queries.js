@@ -74,23 +74,6 @@ const getAllMovies = async () => {
     };
 };
 
-// get a limited number of movies.
-const getMoviesByAmount = async (start, size) => {
-    try {
-        const movieAll = new Promise((resolve, reject) => {
-            db.all("SELECT movie_id AS movieID, title AS movieName, year AS movieYear "
-                + "FROM movie LIMIT ? OFFSET ?;", [size, start], (err, rows) => {
-                    if (err) reject(err);
-                    resolve(rows);
-                });
-        });
-        return movieAll;
-    } catch (error) {
-        console.error(error);
-        return null;
-    };
-};
-
 // getting the schedule of a movie.
 const getScheduleDate = async (id) => {
     try {
@@ -126,23 +109,7 @@ const getNrOfOrders = async () => {
         return null;
     };
 };
-// total number of orders from a user.
-const getNrOfOrdersByUser = async (id) => {
-    try {
-        const orderCount = new Promise((resolve, reject) => {
-            db.get("SELECT COUNT(order_id) AS count "
-                  + "FROM ordering WHERE user_id = ?;", [id], (err, row) => {
-                    if (err) reject(err);
-                    resolve(row.count);
-                });
-    
-        });
-        return orderCount;
-    } catch (error) {
-        console.error(error);
-        return null;
-    };
-};
+
 // getting the total number of users in total.
 const getNrOfUsers = async () => {
     try {
@@ -197,11 +164,51 @@ module.exports = {
     getMovieByID,
     getArtistsByMovieID,
     getAllMovies,
-    getMoviesByAmount,
     getScheduleDate,
     getNrOfOrders,
-    getNrOfOrdersByUser,
     getNrOfUsers,
     getOrdersByUser,
     getUserByID
 };
+
+// The below queries were originally used. But we limited the number of querying
+// in our dataset and handled the API in the front-end js to reduce the number of searching &
+// accessing the dataset.
+// move could have been done for example, getMovieByID() could have been replaced by using
+// getAllMovies() and then getting the movie with the ID in the front-end. However, given
+// the size of the database, we have written most of them as queries.
+
+// // get a limited number of movies.
+// const getMoviesByAmount = async (start, size) => {
+//     try {
+//         const movieAll = new Promise((resolve, reject) => {
+//             db.all("SELECT movie_id AS movieID, title AS movieName, year AS movieYear "
+//                 + "FROM movie LIMIT ? OFFSET ?;", [size, start], (err, rows) => {
+//                     if (err) reject(err);
+//                     resolve(rows);
+//                 });
+//         });
+//         return movieAll;
+//     } catch (error) {
+//         console.error(error);
+//         return null;
+//     };
+// };
+
+// // total number of orders from a user.
+// const getNrOfOrdersByUser = async (id) => {
+//     try {
+//         const orderCount = new Promise((resolve, reject) => {
+//             db.get("SELECT COUNT(order_id) AS count "
+//                   + "FROM ordering WHERE user_id = ?;", [id], (err, row) => {
+//                     if (err) reject(err);
+//                     resolve(row.count);
+//                 });
+    
+//         });
+//         return orderCount;
+//     } catch (error) {
+//         console.error(error);
+//         return null;
+//     };
+// };

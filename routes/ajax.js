@@ -1,4 +1,4 @@
-const {getScheduleDate, getMoviesByAmount} = require ('../controllers/queries');
+const {getScheduleDate, getAllMovies} = require ('../controllers/queries');
 const express = require('express');
 const router  = express.Router();
 
@@ -15,7 +15,7 @@ router.get('/movies', async (req, res) => {
     const page         = parseInt(req.query.page) || 1; // if query not defined gives the first page by default.
     const pageSize     = parseInt(req.query.pageSize) || 10; // if query not defined gives 10 movies by page by default.
     const startIndex   = (page - 1) * pageSize;
-    const movies       = await getMoviesByAmount(startIndex, pageSize);
+    const movies       = (await getAllMovies()).slice(startIndex, startIndex+pageSize);
     const moviesString = JSON.stringify(movies).replace(/'/g, "\\'").replaceAll('\\"', '???');
     res.status(200).json(JSON.parse(moviesString));
 });

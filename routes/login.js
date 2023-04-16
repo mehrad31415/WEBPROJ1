@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const {getUserByID, getNrOfOrdersByUser, getOrdersByUser, getNrOfUsers} = require ('../controllers/queries');
+const {getUserByID, getOrdersByUser, getNrOfUsers} = require ('../controllers/queries');
 
 const {db} = require ('../controllers/db');
 
@@ -9,7 +9,7 @@ router.get('/account', async (req, res) => {
     if (req.session.userID) userID = JSON.parse(req.session.userID);
     res.cookie('userID', userID, { httpOnly: false });
     const user = await getUserByID(userID);
-    const nrOrders = await getNrOfOrdersByUser(userID);
+    const nrOrders = (await getOrdersByUser(userID)).length;
     if (userID != null) {
         let orders = null;
         if (nrOrders > 0) orders = await getOrdersByUser(userID);
