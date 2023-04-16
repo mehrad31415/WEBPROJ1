@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 // requiring the db so that when the server closes we close the database access.
 const {db} = require('./controllers/db');
 
-// body-parser: from version 4 of express has a built in body-parser urlencoded.
+// body-parser: from version 4 of express, it has a built in body-parser urlencoded.
 // const bodyParser = require('body-parser');
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // LINK EJS PAGES. The template engine we used is EJS.
 // the views are in the views folder. Using EJS it automatically searches for a views folder.
-// However it is safe to manually write the path.
+// it is safe to manually write the path.
 app.set("views", path.resolve(__dirname, "./views"));
 app.set('view engine', 'ejs');
 
@@ -49,10 +49,10 @@ const ajaxRouter = require('./routes/ajax');
 app.use('/ajax', ajaxRouter);
 
 const ticketsRouter = require('./routes/tickets');
-app.use('/', ticketsRouter);
+app.use('/tickets', ticketsRouter);
 
 const infoRouter = require('./routes/info');
-app.use('/', infoRouter);
+app.use('/info', infoRouter);
 
 const loginRouter = require('./routes/login');
 app.use('/', loginRouter);

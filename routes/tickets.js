@@ -1,10 +1,10 @@
 const express = require('express');
 const router  = express.Router();
 const {getScheduleDate, getMovieByID, getAllMovies, getNrOfOrders} = require ('../controllers/queries');
-router.get('/tickets', async (req, res) => {
+router.get('/', async (req, res) => {
     res.status(200).render('tickets');
 });
-router.get('/tickets-fetch', async (req, res) => {
+router.get('/fetch', async (req, res) => {
     const allMovies = await getAllMovies();
     const movieID = req.query.id;
     const date = req.query.date;
