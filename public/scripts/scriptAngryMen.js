@@ -2,33 +2,33 @@
 
 //HEAD
 if (page == 'angry-men-home.html' || page == '') {
-    contentString = "Home webpage of the movie '12 Angry Men'";
+	contentString = "Home webpage of the movie '12 Angry Men'";
 } else {
-    contentString = page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1) + " webpage of the movie '12 Angry Men'";
+	contentString = page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1) + " webpage of the movie '12 Angry Men'";
 }
 descr.setAttribute('content', contentString);
 
 if (page == 'angry-men-home.html' || page == '') {
-    title.firstChild.replaceWith(document.createTextNode('12 ANGRY MEN | HOME'));
+	title.firstChild.replaceWith(document.createTextNode('12 ANGRY MEN | HOME'));
 } else {
-    title.firstChild.replaceWith(document.createTextNode('12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase()));
+	title.firstChild.replaceWith(document.createTextNode('12 ANGRY MEN | ' + page.split("-")[0].split(".")[0].toUpperCase()));
 }
 
 //HEADER
-h1.innerHTML= "";
+h1.innerHTML = "";
 if (page == 'angry-men-home.html' || page == '') {
-    h1.append(document.createTextNode('12 Angry Men'));
+	h1.append(document.createTextNode('12 Angry Men'));
 } else {
-    h1.append(document.createTextNode('12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1)));
+	h1.append(document.createTextNode('12 Angry Men - ' + page.split("-")[0].split(".")[0].charAt(0).toUpperCase() + page.split("-")[0].split(".")[0].slice(1)));
 }
 
 //NAVIGATION
-nav.setAttribute('class', 'nav nav__no-margin row');    
+nav.setAttribute('class', 'nav nav__no-margin row');
 nav2 = document.createElement('nav');
 body.children[0].insertBefore(nav2, nav.nextSibling);
 nav2.setAttribute('class', 'nav row');
 const nav2List = document.createElement('ul');
-nav2List.setAttribute('class', 'nav-list')
+nav2List.setAttribute('class', 'nav-list');
 nav2.append(nav2List);
 
 const plotList = document.createElement('li');
@@ -81,4 +81,10 @@ infoLink.setAttribute('href', '/info?id=0');
 infoList.append(infoLink);
 infoLink.append(document.createTextNode('Info'));
 
-nav2List.append(plotList, castList, adapList, awarList, tranList, reviList, infoList,);
+nav2List.append(plotList);
+nav2List.append(castList);
+nav2List.append(adapList);
+nav2List.append(awarList);
+nav2List.append(tranList);
+nav2List.append(reviList);
+nav2List.append(infoList);

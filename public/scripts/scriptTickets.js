@@ -22,9 +22,9 @@ fetch('/tickets/fetch' + window.location.search)
     const time = timeTemp.split('-');
     const amountFetch = data.amount;
     const dateTime = new Date(date[0], date[1]-1, date[2], time[0], time[1], time[2]);
-    const allMovies = data.allMovies
+    const allMovies = data.allMovies;
 
-    constructPage(allMovies, movie, schedule, orderAll, dateTime, amountFetch)
+    constructPage(allMovies, movie, schedule, orderAll, dateTime, amountFetch);
 
   })
   .catch(error => {
@@ -43,11 +43,11 @@ const ticketsNew = document.getElementsByName('numTickets')[0];
 const btnConfirm = document.getElementsByName("confirm")[0];
 const btnCancel = document.getElementsByName("cancel")[0];
 const article = document.getElementsByClassName("article-block")[0];
-let newOrderID = orderAll
+let newOrderID = orderAll;
 let newOrder = null;
 //!!checks!!
 const checkSchedule = (function() {
-    const filter = {movieID: movie.movieID, date: dateTime}
+    const filter = {movieID: movie.movieID, date: dateTime};
     for (let i =0; i < schedule.length; i++){
         if (schedule[i].movieID == filter.movieID && schedule[i].date.toString() == filter.date.toString()) return true;
     }
@@ -114,7 +114,7 @@ function constructConfirmationWindow(movie, dateTime, movieSel, dateTimeSel, dat
     });
 
     //add movies to options
-    for (i = 0; i < allMovies.length; i++) {
+    for (let i = 0; i < allMovies.length; i++) {
         const option =  document.createElement('option');
         option.value = allMovies[i].movieID+ ';;' + allMovies[i].movieName;
         if (allMovies[i].movieName == movie.movieName) option.selected = true;
@@ -157,7 +157,7 @@ function getSchedule(currentMovie, dateTimeNew, dateTime) {
 }
 
 function addTimeslots(timeslots, dateTime, dateTimeNew){
-    for (i = 0; i < timeslots.length; i++) {
+    for (let i = 0; i < timeslots.length; i++) {
         const option =  document.createElement('option');
         const date = new Date(timeslots[i].date);
         option.value = date.toISOString();
@@ -177,7 +177,7 @@ function EventListeners (btnConfirm, btnCancel, newOrderID, userID, movieNew, da
                 movie_id: movieNew.value.split(';;')[0], 
                 date: dateTimeNew.value,
                 amount: ticketsNew.value,
-            }
+            };
             console.log(JSON.stringify(newOrder));
             document.cookie = 'newOrder=' + JSON.stringify(newOrder) + '; path=/pur';
         }

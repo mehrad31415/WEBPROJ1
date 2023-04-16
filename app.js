@@ -73,7 +73,7 @@ app.get('/order-unf', (req, res) => {
 // but the styling is not plane and it is somewhat like our website for aesthetic matters. 
 // Also the user is guided to to get back to the root page.
 app.all("*", (req, res) => {
-    res.status(404).render('resource-not-found', {resource : req.url})
+    res.status(404).render('resource-not-found', {resource : req.url});
 });
 
 // the following allows the server to run on 127.0.0.1:5500 (alternatively it can run on localhost:5500).

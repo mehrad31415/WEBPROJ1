@@ -1,7 +1,7 @@
 //Javascript
 
 const userInformation = document.getElementsByName('user-information')[0];
-const userOrders = document.getElementsByName('user-orders')[0];
+const userOrders      = document.getElementsByName('user-orders')[0];
 
 //get user information from cookies
 let user;
@@ -18,7 +18,7 @@ const arrayList = ['Username', 'E-mail', 'Address', 'Date of registration', 'Cre
 let infoArray = [];
 if (user != null) {
     date = new Date(user.registered_date).toDateString();
-    infoArray = [user.username, user.email, user.address, date, user.credit_card]
+    infoArray = [user.username, user.email, user.address, date, user.credit_card];
 }
 
 //display user information

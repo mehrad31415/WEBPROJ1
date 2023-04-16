@@ -12,7 +12,7 @@ for (let i = 0; i < cookies.length; i++){
     }
     cookieParsed = decodeURIComponent(cookies[i]);
     if (cookieParsed.startsWith("orderUnf")) {
-        orderUnF = true
+        orderUnF = true;
     }
 }
 
@@ -107,7 +107,7 @@ header.append(imgLink, h1);
 
     //NAVIGATION
     const navList = document.createElement('ul');
-    navList.setAttribute('class', 'nav-list')
+    navList.setAttribute('class', 'nav-list');
     nav.append(navList);
     const homeList = document.createElement('li');
     homeList.setAttribute('class', 'nav__field navigation-list--two-row navigation-list--one-row');
@@ -174,7 +174,7 @@ formPopup.className = "form-popup";
 formPopup.id = "LogInPopUp";
 
 const form = document.createElement("form");
-form.method = 'post'
+form.method = 'post';
 form.action = "/auth?log=in";
 form.className = "form-container";
 
@@ -250,8 +250,8 @@ if (!checkLogIn){
     btnSignIn.id = 'login-btn';
     btnSignIn.append(document.createTextNode('Sign In'));
     btnSignIn.onclick = function(){
-        window.location = 'sign'
-    }
+        window.location = 'sign';
+    };
     divLogIn.append(btnLog, btnSignIn);
 } else {
     const formLogOut = document.createElement('form');
@@ -264,12 +264,12 @@ if (!checkLogIn){
     btnAccount.id = 'login-btn';
     btnAccount.append(document.createTextNode('My Account'));
     btnAccount.onclick = function(){
-        window.location = 'account'
+        window.location = 'account';
     };
     formLogOut.append(btnLog);
     divLogIn.append(formLogOut, btnAccount);
 }
-header.append(divLogIn)
+header.append(divLogIn);
 
 //functions
 function delete_cookie(name) {
