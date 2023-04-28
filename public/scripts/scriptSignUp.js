@@ -1,10 +1,9 @@
 
-
-setTimeout(function () {
-  if (swtch == 1){
+if (swtch == 1){
+  setTimeout(function () {
     alert('this account already exists');
+  }, 10);
 }
-}, 1);
 
 document.querySelector('.sign-form').addEventListener('submit', (event) => {
   event.preventDefault();
